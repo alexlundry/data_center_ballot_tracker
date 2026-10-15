@@ -14,7 +14,7 @@ RUNBOOK.md       what to do on election night
 ## How it fits together
 
 1. **`data/races.csv`** is the master list: one row per measure with jurisdiction, county, level, type, whether a YES vote restricts or allows data centers (`yes_means`), the ballot text, status, coordinates and links. `R/build_races.R` turns it into `site/data/races.json`.
-2. **`data/sources.csv`** says where each race's live numbers come from: an adapter name (`clarity`, `json_generic`, `html_table`, `ohio_sos`, `pdf`, `sheet`, `manual`), the page URL people click through to, the machine endpoint, a regex that identifies the contest, and optional yes/no label regexes. Several rows per race are fine; they are tried in `priority` order.
+2. **`data/sources.csv`** says where each race's live numbers come from: an adapter name (`clarity`, `json_generic`, `csv_generic`, `html_table`, `ohio_sos`, `pdf`, `sheet`, `manual`), the page URL people click through to, the machine endpoint, a regex that identifies the contest, and optional yes/no label regexes. Several rows per race are fine; they are tried in `priority` order.
 3. **`R/fetch_results.R`** runs every adapter, standardizes everything to yes/no votes + precincts, applies manual overrides, appends to `data/history.csv`, and writes `site/data/results.json`. If a feed fails the previous numbers are kept and flagged stale.
 4. **`site/index.html`** reads the two JSON files, refreshes every minute, and does all aggregation in the browser. It also has a **Simulate returns** button that fills the page with made-up numbers (loudly labeled) so you can see how the layout behaves before any real results exist.
 5. **`.github/workflows/update-results.yml`** runs step 3 on a 5-minute cron and commits the JSON; **`deploy-pages.yml`** publishes `site/` to GitHub Pages. `netlify.toml` does the same for Netlify. `R/watch.R` is a laptop loop for nights when GitHub's cron lags.
@@ -41,7 +41,7 @@ Every question is mapped to **Restrict** (the anti-data-center outcome) and **Al
 
 | | Measures on Nov 3 | Notes |
 |---|---|---|
-| Ohio | 19 in 16 jurisdictions | 9 use the Conserve Ohio 25 MW charter template; Hubbard is a full ban; Wilmington has 4 rezoning referendums (YES = allow); Ashville is a referendum on an EdgeConneX agreement (YES = allow); Monroeville is advisory (YES = allow) |
+| Ohio | 20 in 17 jurisdictions | 9 use the Conserve Ohio 25 MW charter template; Hubbard is a full ban; Perry Village (Issue 16) requires a 31-year bond from hyperscale developers seeking tax breaks; Wilmington has 4 rezoning referendums (YES = allow); Ashville is a referendum on an EdgeConneX agreement (YES = allow); Monroeville is advisory (YES = allow) |
 | Illinois | 7, all advisory | Bloomington and Morgan County (YES = restrict); Joliet Township and four Madison County townships (YES = allow) |
 | Kansas | 3 | Emporia, El Dorado, Ottawa (initiated ordinances; Emporia and Ottawa have court questions pending) |
 | Wisconsin | 1 | Janesville GM/JATCO $450M voter-approval question |
@@ -51,7 +51,22 @@ Every question is mapped to **Restrict** (the anti-data-center outcome) and **Al
 
 Decided earlier in 2026: Port Washington WI (Apr 7, passed), Georgia party-primary advisory questions (May 19), Monterey Park CA (June 2, passed 88%), Augusta Township MI (Aug 4, rezoning repealed 90% to 10%), Wrightstown WI (Aug 11, advisory rejected 87% to 13%). Not on the ballot: Piqua OH (Feb 2027), Frederick County MD (blocked in court), Weld County CO (pending), statewide Ohio (2027) and Massachusetts (2028). See `docs/research/`.
 
-Ballotpedia counted 34–35 November measures; this registry has 33. East Whiteland Township, PA's board-expansion question (born of a data center fight but not about data centers on its face) is deliberately excluded. The likely gap is one more Ohio jurisdiction (and Piqua, which moved to February). Issue numbers and verbatim text are still missing for most Ohio measures; the Ohio SOS "Local Questions and Issues" spreadsheet for Nov 3 resolves both.
+Ballotpedia's count of 21 Ohio measures in 18 jurisdictions reconciles exactly with this registry once Piqua (moved to Feb 2027) is set aside; the registry has 34 November measures nationally. East Whiteland Township, PA's board-expansion question (born of a data center fight but not about data centers on its face) is deliberately excluded. The likely gap is one more Ohio jurisdiction (and Piqua, which moved to February). Issue numbers are confirmed only for Conneaut (10), Perry (16), Trenton (17) and Grove City (28); the Ohio SOS "Local Questions and Issues" spreadsheet for Nov 3 resolves the rest. Ballot wording is verbatim or near-verbatim for about half the measures and summarized for the rest (flagged on each card).
+
+## What the results sources look like (verified Oct 15, 2026)
+
+| Feed type | Counties | Adapter | Status |
+|---|---|---|---|
+| Scytl/Clarity JSON + CSV | Will County IL (probable) | `clarity` | election ID needed on the night |
+| LA County JSON feed | Los Angeles County (Alhambra) | `json_generic` | endpoint pattern verified; Nov 3 election ID not yet listed |
+| Ohio ENR platform (HTML index with CSV/XML exports) | Butler, Franklin, Lucas | `html_table`, `csv_generic` | instance ID increments per election |
+| VR Systems ENR (HTML + CSV report) | Volusia FL | `html_table`, `csv_generic` | election ID needed |
+| GBS results portal (HTML) | Morgan County IL | `html_table` | election ID needed |
+| Static HTML by date | Rock County WI | `html_table` | pattern verified |
+| County ENR / SOS HTML | Clark NV | `html_table` | verified |
+| PDF summary reports | the other 12 Ohio counties, all 3 Kansas counties, Bloomington Election Commission, Madison County IL | `pdf` | best effort; manual entry is the backstop |
+
+Ohio's Secretary of State live site reports statewide contests and State Issue 3 only (Directives 2026-22 and 2026-48), so every Ohio measure is read from its county board.
 
 ## Adding or fixing a race
 

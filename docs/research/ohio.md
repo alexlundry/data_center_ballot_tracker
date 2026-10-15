@@ -1,4 +1,4 @@
-# Research notes: Ohio (19 measures in 16 jurisdictions on Nov 3, 2026)
+# Research notes: Ohio (20 measures in 17 jurisdictions on Nov 3, 2026)
 
 Compiled 2026-10-15 from web search summaries. Official issue numbers are only confirmed for Conneaut (10), Trenton (17) and Grove City (28); the Ohio SOS "November 3, 2026 General Election – Local Questions and Issues (XLSX)" linked from https://www.ohiosos.gov/elections resolves the rest. Nine measures use the Conserve Ohio template (charter amendment banning data centers with aggregate monthly demand or peak load over 25 MW): Conneaut, Defiance, Granville, Oregon, Pataskala, Sunbury, Trenton, Upper Sandusky, plus Piqua (now Feb 2027). Urbana uses a 7.5 MW variant.
 
@@ -39,3 +39,33 @@ Direction: YES = anti-data-center in 13 (Hubbard, Urbana, Sunbury, Conneaut, Def
 - Trumbull (Hubbard): https://boe.co.trumbull.oh.gov/ (posts PDFs)
 - Adams (Sprigg, Monroe): https://lookup.boe.ohio.gov/vtrapp/adams/
 - Unverified, likely SOS-hosted template https://www.boe.ohio.gov/<county>/: Champaign, Ashtabula, Defiance, Lucas (lucascountyohiovotes.gov), Pickaway, Clinton.
+
+## Second pass (Oct 15, 2026): the missing jurisdiction, wording, and results pages
+
+**Perry Village, Lake County — Issue 16.** Citizen-initiated ordinance (300 signatures; 76 needed) requiring any hyperscale data center developer (over 10,000 sq ft, over 5,000 servers, or over 50 MW) seeking a tax abatement, PILOT or special tax designation to first deposit a bond or escrow equal to at least the projected tax revenue over the project's 31-year life plus projected salaries for 200 full-time employees, with make-whole payments and environmental/property-value assessments, plus a 50 dB day / 45 dB night noise guarantee. YES = restrict (conditions the deal). The village had already declined Province Group's abatement request in July. Sources: https://hoodline.com/2026/10/perry-village-voters-face-issue-16-which-would-require-tax-incentive-seeking-data-center-developers-to-post-31-year-bonds/ · https://www.yahoo.com/news/politics/articles/election-2026-perry-village-vote-035900197.html · Lake County BOE https://www.lakecountyohio.gov/boe/. 41.760, -81.143.
+
+Reconciliation: Ballotpedia (via Newsweek and NBC4) counts 21 measures in 18 jurisdictions; Stateline says 21 measures across 16 counties. Our 19 / 16 / 14 plus Perry and Piqua (which Ballotpedia still counted when its tally was taken; Piqua's commission moved its measures to Feb 2, 2027 on Oct 6) gives 21 / 18 / 16, an exact match. Ruled out in a statewide sweep: Lordstown, Marysville, Hilliard, Circleville, Heath (new petition, 2027 at the earliest), Sidney (special election), Geauga County, Johnstown, a fifth Wilmington question (Supreme Court denied mandamus Sept 18).
+
+**Wording found this pass.** Urbana: "Shall Article VIII of the Charter of the City of Urbana be amended to add Section 8.07, to read as follows?" (sample ballot https://lookup.boe.ohio.gov/vtrapp/champaign/ballotlist.aspx?prsid=0005__1). Sunbury: "Shall Article XI, Section 11.05 of the Charter of the City of Sunbury be adopted?" with the section titled Prohibition of Construction of a Data Center (sample ballot https://lookup.boe.ohio.gov/vtrapp/delaware/getballot.aspx?elect=20261103g_webeix0&prsid=161___3&bpty=X). Conneaut adds Article XVI, Conservation of Natural Resources. Defiance adds Section 1.12 to Article I ("the construction of a data center is hereby prohibited"). Ashville: "Shall the resolution enacting approval of a development and supply agreement term summary with EdgeConneX be approved?"; council's Resolution 16-2026 to repeal the agreement could pull the question under R.C. 731.34, though October coverage treats the vote as proceeding. Wilmington parcels: 119.373 ac on SR 730 (O-26-04, adopted Feb 19, 2026); 191.12 ac McGuinn Road (O-26-06); 170.11 ac US 68 South (O-26-07); 65.29 ac at 1957 SR 730 (ordinance number not legible); sample ballot https://www.boe.ohio.gov/clinton/c/upload/Election_SampleBallots.pdf. Sample-ballot lookups follow https://lookup.boe.ohio.gov/vtrapp/<county>/getballot.aspx?elect=20261103g_webeix0&prsid=... and could not be read through search; the SOS Local Questions and Issues XLSX remains the master list for issue numbers.
+
+**County results pages (verified unless noted).**
+
+| County | Results page | Format | Machine-readable |
+|---|---|---|---|
+| Trumbull (Hubbard) | https://boe.co.trumbull.oh.gov/boe_results.html | PDF list | none |
+| Champaign (Urbana) | https://www.boe.ohio.gov/champaign/c/elecres/YYYYMMDDresults.pdf (20251104results.pdf seen) | PDF | none |
+| Delaware (Sunbury) | https://vote.delawarecountyohio.gov/ ; PDFs under /wp-content/uploads/YYYY/MM/ (Hart Election Summary Report); archive /data/pastresults/ | PDF | none |
+| Ashtabula (Conneaut) | https://www.boe.ohio.gov/ashtabula/election-info/election-results ; /c/elecres/20260505results.pdf seen | PDF | none |
+| Defiance | https://www.boe.ohio.gov/defiance/election-info/election-night-results/ | PDF | none |
+| Butler (Trenton) | https://liveresults.boe.ohio.gov/ENR/butlerohenr/<id>/en/Index_<id>.html (May 2026 = 23, Nov 2025 = 22) | ENR HTML | CSV + XML export links |
+| Franklin (Grove City) | https://liveresults.franklincountyohio.gov/enr/franklinohenr/<id>/en/index_<id>.html ; https://vote.franklincountyohio.gov/election-info/2026 | ENR HTML | CSV/XML; XLSX post-canvass |
+| Licking (Pataskala, Granville) | https://www.boe.ohio.gov/licking/election-info/election-results/ (inferred) | PDF | none |
+| Lucas (Oregon) | https://liveresults.boe.ohio.gov/ENR/lucasohenr/<id>/en/Index_<id>.html (Nov 2025 = 21) | ENR HTML | CSV/XML |
+| Wyandot (Upper Sandusky) | https://www.boe.ohio.gov/wyandot/election-info/election-results | PDF | none |
+| Huron (Monroeville) | https://www.huron.boe.ohio.gov/ (Nov 3, 2026 placeholder links already posted) | PDF | none |
+| Adams (Sprigg, Monroe) | https://www.boe.ohio.gov/adams/election-info/election-results/ | PDF | none |
+| Pickaway (Ashville) | https://www.boe.ohio.gov/pickaway/election-info/election-results/ | PDF | none |
+| Clinton (Wilmington) | https://www.boe.ohio.gov/clinton/election-info/election-results/ | PDF | none |
+| Lake (Perry) | https://www.lakecountyohio.gov/boe/election-results/ ; https://webapps.lakecountyohio.gov/boe/web1.pdf (timestamped summary) | PDF | none |
+
+**Ohio SOS live site does not carry local issues.** The Nov 14, 2025 SOS Week in Review said the Nov 4, 2025 election had no statewide contests and pointed readers to county boards for results (https://www.ohiosos.gov/media-center/week-in-review-archive/2025-11-14/). Directive 2026-22 limits election-night uploads to statewide and legislative contests; Directive 2026-48 (Oct 2, 2026) adds only State Issue 3 (https://www.ohiosos.gov/assets/dir2026-48-canvass-and-certification-of-the-november-3-2026-general-election.pdf). Plan on the 15 county pages above.

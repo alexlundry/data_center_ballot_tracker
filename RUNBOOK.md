@@ -1,7 +1,7 @@
 # Election night runbook · November 3, 2026
 
 ## The week before
-- [ ] Confirm every Nov 3 row in `data/races.csv` is still on the ballot (Emporia and Ottawa have court dates; Upper Sandusky and Monroeville are the least-confirmed Ohio entries). Set `status = removed` for anything pulled.
+- [ ] Confirm every Nov 3 row in `data/races.csv` is still on the ballot. Watch items: Ottawa KS (Oct 20 hearing on whether the ordinance is legislative), Emporia KS (declaratory judgment pending), Ashville OH (council's repeal Resolution 16-2026 could pull the referendum), Upper Sandusky OH (confirmed only via secondary sources; call Wyandot BOE 419-294-1226). Set `status = removed` for anything pulled.
 - [ ] Download the Ohio SOS "November 3, 2026 General Election – Local Questions and Issues (XLSX)" from https://www.ohiosos.gov/elections. Fill in `measure_label` (issue numbers) and paste the certified `ballot_text` for the 19 Ohio rows; set `ballot_text_verbatim = TRUE`.
 - [ ] For each county in `data/sources.csv` marked `unverified` or `pattern`, open the county's results page from the most recent election and record: the URL pattern, whether it is HTML, PDF or an ENR vendor, and (for Scytl/Clarity or ENR sites) the JSON path visible in the browser's network tab. Update `adapter`, `api_url`, `contest_pattern`. Mark `source_status = verified`.
 - [ ] Decide hosting: enable GitHub Pages (Settings > Pages > Source: GitHub Actions) or connect the repo to Netlify. Push once and confirm the site loads.
@@ -20,7 +20,8 @@
 - Use the **Copy summary** button for a plain-text update to paste into email or Slack.
 
 ## Known soft spots
-- Ohio SOS `liveresults.ohiosos.gov` probably does not carry local issues on election night; the `ohio_sos` rows are disabled unless that turns out to be wrong.
+- Ohio SOS `liveresults.ohiosos.gov` carries statewide contests and State Issue 3 only (Directives 2026-22 and 2026-48; the Nov 2025 SOS review sent readers to county sites for local results). All 20 Ohio measures come from 15 county boards: Butler, Franklin and Lucas run an ENR site whose instance ID changes each election (read it off the index page at 7:30 pm); the other 12 post PDFs.
+- Election IDs to collect on the night, each a placeholder `ELECTION_ID` in `data/sources.csv`: Butler OH ENR, Franklin OH ENR, Lucas OH ENR, Will County IL (Clarity), LA County (JSON), Volusia FL (VR Systems), Morgan County IL (GBS portal). Replace them with sed or a quick edit, then `make fetch`.
 - Illinois: Bloomington's numbers come from the Bloomington Election Commission, not McLean County.
 - Wisconsin: Janesville absentee ballots are counted centrally and may post separately from in-person totals.
 - Kansas counties post PDFs; the `pdf` adapter is best-effort. Plan on manual entry for Emporia, El Dorado and Ottawa.

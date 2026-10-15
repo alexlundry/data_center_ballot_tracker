@@ -3,6 +3,7 @@ ADAPTERS <- list(
   clarity      = function(src, ctx) adapter_clarity(src),
   html_table   = function(src, ctx) adapter_html_table(src),
   json_generic = function(src, ctx) adapter_json_generic(src),
+  csv_generic  = function(src, ctx) adapter_csv_generic(src),
   ohio_sos     = function(src, ctx) adapter_ohio_sos(src, ctx$ohio_cache),
   pdf          = function(src, ctx) adapter_pdf(src),
   sheet        = function(src, ctx) adapter_sheet(src),
