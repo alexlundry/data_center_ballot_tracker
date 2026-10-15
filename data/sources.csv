@@ -1,0 +1,39 @@
+race_id,priority,adapter,results_url,api_url,contest_pattern,yes_pattern,no_pattern,extra_json,enabled,source_status,notes
+oh-trenton,1,json_generic,https://liveresults.boe.ohio.gov/ENR/butlerohenr/,https://liveresults.boe.ohio.gov/ENR/butlerohenr/ELECTION_ID/json/en/summary.json,Trenton.*(charter|9\.06|data center),,,,true,pattern,Replace ELECTION_ID once the Nov 3 election appears (May 2026 primary was 23). Confirm the JSON path in the browser's network tab.
+oh-trenton,2,html_table,https://liveresults.boe.ohio.gov/ENR/butlerohenr/,,Trenton.*(charter|data center),,,,true,pattern,Fallback: scrape the summary HTML page.
+oh-grove-city,1,json_generic,https://vote.franklincountyohio.gov/elections,https://liveresults.franklincountyohio.gov/enr/franklinohenr/ELECTION_ID/json/en/summary.json,Grove City.*(charter|consent|Issue 28),,,,true,pattern,Replace ELECTION_ID; confirm path on the night.
+oh-sunbury,1,html_table,https://vote.delawarecountyohio.gov/,,Sunbury.*(charter|11\.05|data center),,,,true,unverified,Results page URL to confirm.
+oh-pataskala,1,html_table,https://www.boe.ohio.gov/licking/,,Pataskala.*(charter|11\.09|data center),,,,true,unverified,Licking BOE likely posts PDF/HTML; switch adapter to pdf if needed.
+oh-granville,1,html_table,https://www.boe.ohio.gov/licking/,,Granville.*(charter|10\.12|data center),,,,true,unverified,
+oh-hubbard,1,pdf,https://boe.co.trumbull.oh.gov/,,Hubbard.*(ordinance|data center),,,,true,unverified,Trumbull posts PDFs; set api_url to the night-of PDF.
+oh-urbana,1,html_table,https://www.boe.ohio.gov/champaign/,,Urbana.*(charter|8\.07|data center),,,,true,unverified,
+oh-conneaut,1,html_table,https://www.boe.ohio.gov/ashtabula/,,Conneaut.*(Issue 10|charter|data center),,,,true,unverified,
+oh-defiance,1,html_table,https://www.boe.ohio.gov/defiance/,,Defiance.*(charter|1\.12|data center),,,,true,unverified,
+oh-oregon,1,html_table,https://www.lucascountyohiovotes.gov/,,Oregon.*(charter|data center),,,,true,unverified,
+oh-upper-sandusky,1,html_table,https://www.boe.ohio.gov/wyandot/,,Upper Sandusky.*(charter|data center),,,,true,unverified,
+oh-monroeville,1,html_table,https://www.huron.boe.ohio.gov/,,Monroeville.*(advisory|data center),,,,true,unverified,
+oh-sprigg-twp,1,html_table,https://www.boe.ohio.gov/adams/,,Sprigg.*(zoning),,,,true,unverified,
+oh-monroe-twp,1,html_table,https://www.boe.ohio.gov/adams/,,Monroe Twp.*(zoning)|Monroe Township.*(zoning),,,,true,unverified,
+oh-ashville,1,html_table,https://www.boe.ohio.gov/pickaway/,,Ashville.*(referendum|06-2026|resolution),^(yes|for),^(no|against),,true,unverified,Ballot choices are FOR / AGAINST the resolution.
+oh-wilmington-1,1,html_table,https://www.boe.ohio.gov/clinton/,,Wilmington.*(referendum|ordinance).*1,,,,true,unverified,Four questions; tighten each contest_pattern to its ordinance number once the sample ballot is out.
+oh-wilmington-2,1,html_table,https://www.boe.ohio.gov/clinton/,,Wilmington.*(referendum|ordinance).*2,,,,true,unverified,
+oh-wilmington-3,1,html_table,https://www.boe.ohio.gov/clinton/,,Wilmington.*(referendum|ordinance).*3,,,,true,unverified,
+oh-wilmington-4,1,html_table,https://www.boe.ohio.gov/clinton/,,Wilmington.*(referendum|ordinance).*4,,,,true,unverified,
+oh-hubbard,5,ohio_sos,https://liveresults.ohiosos.gov/,https://www.ohiosos.gov/globalassets/elections/2026/gen/localissues.xlsx,Hubbard.*data center,,,"{""county"":""Trumbull""}",false,unverified,Enable only if the SOS night-of file reports local issue votes.
+ks-emporia,1,pdf,https://lyoncountyks.gov,,Question.*2|High Impact Data,,,,true,pattern,Set api_url to the night-of PDF (2026 primary pattern: /DocumentCenter/View/...).
+ks-el-dorado,1,pdf,https://www.bucoks.com/,,El Dorado.*(data center|ordinance),,,,true,unverified,Results page unverified.
+ks-ottawa,1,pdf,https://www.franklincoks.org/,,Ottawa.*(data center|ordinance),,,,true,unverified,Results page unverified.
+il-bloomington,1,html_table,https://www.becvote.org/,,moratorium|data center,,,,true,unverified,"Bloomington Election Commission, not the county clerk."
+il-joliet-twp,1,html_table,https://www.willcountyclerk.gov/,,Joliet Township.*(data center),,,,true,unverified,Will County updates every ~15 minutes after 7 pm.
+il-chouteau-twp,1,html_table,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,,Chouteau.*(data center),,,,true,unverified,
+il-granite-city-twp,1,html_table,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,,Granite City.*(data center),,,,true,unverified,
+il-nameoki-twp,1,html_table,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,,Nameoki.*(data center),,,,true,unverified,
+il-venice-twp,1,html_table,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,,Venice.*(data center),,,,true,unverified,
+il-morgan-county,1,html_table,https://morgancounty-il.com/,,data center,,,,true,unverified,Results page URL unverified.
+wi-janesville,1,html_table,https://elections.co.rock.wi.us/20261103.html,,Janesville.*(GM|JATCO|450|referendum),,,,true,pattern,URL follows the county's YYYYMMDD pattern; confirm on the night.
+ca-alhambra,1,json_generic,https://results.lavote.gov/,https://results.lavote.gov/electionresults/json/ELECTION_ID,Alhambra.*(DB|data center),,,"{""contests_path"":""Contests"",""name_key"":""Title"",""choice_rows_key"":""Candidates"",""choice_name_key"":""Name"",""choice_votes_key"":""Votes""}",true,pattern,Get the file URL from lavote.gov results file downloads; adjust keys to the schema.
+ca-alhambra,2,html_table,https://results.lavote.gov/text-results/ELECTION_ID,,Alhambra.*(DB|data center),,,,true,pattern,Text results page fallback.
+nv-boulder-city,1,html_table,https://elections.clarkcountynv.gov/ElectionResultsTV/ENR.aspx,,Boulder City.*(Question 1|data center),,,,true,unverified,
+nv-boulder-city,2,html_table,https://www.nvsos.gov/SOSelectionPages/results/2026StateWideGeneral/Clark.aspx,,Boulder City.*(Question 1|data center),,,,true,pattern,NV SOS county page pattern from prior cycles.
+fl-edgewater,1,html_table,https://vrcdn.electionsfl.org/StaticPages/volusia.html,,Edgewater.*(Charter Amendment 4|data center),,,,true,unverified,VR Systems ENR; check for downloadable summary files.
+ALL,9,sheet,,https://docs.google.com/spreadsheets/d/SHEET_ID/export?format=csv&gid=0,,,,,false,unverified,Manual-entry mirror for the whole team on election night.

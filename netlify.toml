@@ -1,0 +1,11 @@
+# Netlify: deploy the static site/ folder. Results commits pushed by the
+# GitHub Action (or R/watch.R) trigger a redeploy. results.json must never be
+# cached by the CDN for more than a minute.
+[build]
+  publish = "site"
+  command = ""
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=30, must-revalidate"
