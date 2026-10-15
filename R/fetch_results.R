@@ -115,8 +115,17 @@ results <- purrr::map_dfr(seq_len(nrow(races)), function(i) {
 })
 
 # ---- history -----------------------------------------------------------------
+prev_counts <- if (!is.null(prev) && all(c("race_id", "yes_votes", "no_votes", "precincts_reporting") %in% names(prev))) {
+  as_tibble(prev) |> transmute(race_id, p_yes = as.integer(yes_votes), p_no = as.integer(no_votes),
+                               p_prec = as.integer(precincts_reporting))
+} else tibble(race_id = character(), p_yes = integer(), p_no = integer(), p_prec = integer())
 hist_rows <- results |>
   filter(!is.na(total_votes)) |>
+  left_join(prev_counts, by = "race_id") |>
+  # log a row only when the count moved (or the race is new), so history.csv
+  # and the dashboard's update log reflect real changes, not every poll
+  filter(is.na(p_yes) | p_yes != yes_votes | p_no != no_votes |
+           coalesce(p_prec != precincts_reporting, FALSE)) |>
   transmute(race_id, fetched_at = now_iso(), yes_votes, no_votes, total_votes,
             precincts_reporting, precincts_total, pct_reporting, adapter)
 if (!DRY_RUN && nrow(hist_rows) > 0) {
