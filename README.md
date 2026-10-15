@@ -76,7 +76,7 @@ Ohio's Secretary of State live site reports statewide contests and State Issue 3
 
 ## Manual entry on election night
 
-Put numbers in `data/manual_results.csv` (or the Google Sheet mirrored by the `sheet` row in `sources.csv`): `race_id, yes_votes, no_votes, precincts_reporting, precincts_total, status (final when complete), as_of, source_url, override (TRUE to beat the automated feed), entered_by, note`. The next pipeline pass picks it up.
+Put numbers in the Google Sheet "Data Center Ballot Tracker — Election Night Manual Entry" (its `manual_results` tab is pre-filled with one row per November measure and is read by the `sheet` row in `sources.csv`; it must be shared as Anyone with the link > Viewer or published to the web) or in `data/manual_results.csv`: `race_id, yes_votes, no_votes, precincts_reporting, precincts_total, status (final when complete), as_of, source_url, override (TRUE to beat the automated feed), entered_by, note`. The next pipeline pass picks it up.
 
 ## Design
 
