@@ -138,11 +138,13 @@ table.t tr.clickable { cursor: pointer; } table.t tr.clickable:hover td { backgr
 .minibar span { display: block; height: 100%; }
 
 /* Filters */
-.filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; box-shadow: var(--shadow-sm); margin-bottom: 16px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 96px); z-index: 20; }
+.filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; box-shadow: var(--shadow-sm); margin-bottom: 16px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 96px); z-index: 20; }
+.filters select, .filters input, .filters .starfilter { height: 32px; box-sizing: border-box; }
 .filters select, .filters input { font-family: var(--sans); font-size: 13px; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--paper); color: var(--fg); min-width: 0; }
-.filters input[type=search] { flex: 1 1 160px; }
-.filters label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-faint); font-weight: 700; display: flex; flex-direction: column; gap: 3px; }
-.filters .count { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--fg-mid); letter-spacing: 0.04em; text-transform: uppercase; }
+.filters .grow { flex: 1 1 180px; }
+.filters .grow input[type=search] { width: 100%; }
+.filters label, .filters .field { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-faint); font-weight: 700; display: flex; flex-direction: column; gap: 3px; }
+.filters .count { margin-left: auto; align-self: flex-end; padding-bottom: 8px; font-family: var(--mono); font-size: 11px; color: var(--fg-mid); letter-spacing: 0.04em; text-transform: uppercase; }
 .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); overflow: hidden; }
 .seg button { border: none; background: transparent; padding: 6px 10px; font-size: 12px; color: var(--fg-mid); cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--primary); color: #fff; }
@@ -153,6 +155,9 @@ table.t tr.clickable { cursor: pointer; } table.t tr.clickable:hover td { backgr
 .map-wrap .tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--fg-on-dark); padding: 7px 10px; border-radius: var(--radius-sm); font-size: 12px; line-height: 1.4; box-shadow: var(--shadow-lg); max-width: 260px; display: none; z-index: 5; }
 .map-wrap .tip b { color: #fff; }
 .map-wrap .tip .m { font-family: var(--mono); font-size: 11px; color: rgba(245,241,232,0.8); }
+.gtip { position: fixed; z-index: 200; pointer-events: none; background: var(--fg); color: var(--fg-on-dark); padding: 7px 10px; border-radius: var(--radius-sm); font-family: var(--sans); font-size: 12px; line-height: 1.4; box-shadow: var(--shadow-lg); max-width: 280px; display: none; }
+[data-tip] { cursor: default; }
+.bar > span[data-tip], .minibar > span[data-tip], .meter > span[data-tip] { cursor: help; }
 .state { fill: var(--panel-cream); stroke: var(--line-strong); stroke-width: 0.7; }
 .state.has { fill: var(--primary-bg); stroke: var(--line-strong); }
 .dot { stroke: #fff; stroke-width: 1.5; cursor: pointer; transition: r .15s ease; }
@@ -179,7 +184,7 @@ table.t tr.clickable { cursor: pointer; } table.t tr.clickable:hover td { backgr
 .star:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
 .race.starred { box-shadow: inset 3px 0 0 var(--primary), var(--shadow-sm); }
 .race.starred:hover { box-shadow: inset 3px 0 0 var(--primary), var(--shadow); }
-.starfilter { background: transparent; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 6px 10px; font-size: 12.5px; color: var(--fg-mid); cursor: pointer; transition: all .15s ease; white-space: nowrap; }
+.starfilter { background: transparent; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 6px 10px; font-size: 13px; line-height: normal; font-family: var(--sans); color: var(--fg-mid); cursor: pointer; transition: all .15s ease; white-space: nowrap; }
 .starfilter:hover { color: var(--primary); border-color: var(--primary); }
 .starfilter[aria-pressed="true"] { background: var(--primary); color: #fff; border-color: var(--primary); }
 .yn { display: grid; grid-template-columns: 1fr 1fr; font-size: 12px; margin-top: 4px; }
@@ -360,8 +365,8 @@ footer.site p { margin: 4px 0 0; font-size: 12px; color: var(--fg-faint); }
       <label>Status <select id="fStatus"><option value="">All</option><option value="reporting">Reporting</option><option value="none">No results yet</option><option value="tooclose">Too close</option><option value="final">Final</option></select></label>
       <label>Binding <select id="fBind"><option value="">All</option><option value="binding">Binding</option><option value="advisory">Advisory</option></select></label>
       <label>Sort <select id="fSort"><option value="state">State, then name</option><option value="margin">Closest margin</option><option value="reporting">Most reported</option><option value="updated">Recently updated</option><option value="votes">Most votes</option></select></label>
-      <input type="search" id="fSearch" placeholder="Search city, county, project, company…" aria-label="Search measures">
-      <button type="button" id="fStar" class="starfilter" aria-pressed="false" title="Show only the measures you have starred">☆ Starred</button>
+      <label class="grow">Search <input type="search" id="fSearch" placeholder="City, county, project, company…"></label>
+      <div class="field">Show <button type="button" id="fStar" class="starfilter" aria-pressed="false" title="Show only the measures you have starred">☆ Starred</button></div>
       <span class="count" id="fCount"></span>
     </div>
     <div class="races" id="raceGrid"></div>
@@ -636,12 +641,14 @@ function renderHero(A) {
     sub = `${n - rep} of ${n} measures have no results yet. ${A.finals} ${A.finals === 1 ? 'count is' : 'counts are'} complete. Pooled across every vote counted, Restrict has ${pct1(A.pooledR)}.`;
   }
   $('#headline').innerHTML = h; $('#heroSub').textContent = sub;
-  const stat = (v, l, cls) => `<div class="stat"><div class="n ${cls || ''}">${v}</div><div class="l">${l}</div></div>`;
+  const stat = (v, l, cls, tip) => `<div class="stat"${tip ? ` data-tip="${esc(tip)}"` : ''}><div class="n ${cls || ''}">${v}</div><div class="l">${l}</div></div>`;
   $('#heroStats').innerHTML = [
-    stat(n, 'Measures on Nov 3'), stat(A.states.length, 'States'),
-    stat(`${rep}<small>/ ${n}</small>`, 'Reporting'),
-    stat(A.rLead, 'Restrict ahead', 'r'), stat(A.aLead, 'Allow ahead', 'a'),
-    stat(fmt(A.votes), 'Votes counted')
+    stat(n, 'Measures on Nov 3', '', `${n} data center measures on the November 3 ballot: ${A.binding} binding, ${n - A.binding} advisory`),
+    stat(A.states.length, 'States', '', A.byState.map((s) => `${s.name} ${s.n}`).join(' · ')),
+    stat(`${rep}<small>/ ${n}</small>`, 'Reporting', '', `${rep} of ${n} measures have at least one vote counted; ${n - rep} have no results yet`),
+    stat(A.rLead, 'Restrict ahead', 'r', `Measures where the anti-data-center side leads by 2 points or more, or has won`),
+    stat(A.aLead, 'Allow ahead', 'a', `Measures where the pro-data-center side leads by 2 points or more, or has won`),
+    stat(fmt(A.votes), 'Votes counted', '', `YES plus NO votes counted so far across the ${rep} measures reporting${A.precTot ? `; ${fmt(A.precRep)} of ${fmt(A.precTot)} precincts in` : ''}`)
   ].join('');
 }
 function renderScore(A) {
@@ -650,23 +657,23 @@ function renderScore(A) {
   const decided = A.rLead + A.aLead;
   const against = decided ? 100 * A.rLead / decided : null;
   $('#scorecard').innerHTML = `<h4>Scorecard · ${n} measures</h4>
-    <div class="bar"><span class="r" style="width:${w(A.rLead)}"></span><span class="a" style="width:${w(A.aLead)}"></span><span class="t" style="width:${w(A.tc)}"></span><span class="n" style="width:${w(none)}"></span></div>
+    <div class="bar" data-tip="${n} measures: ${A.rLead} restrict ahead, ${A.aLead} allow ahead, ${A.tc} too close, ${none} without results"><span class="r" style="width:${w(A.rLead)}" data-tip="Restrict ahead or won: ${A.rLead} of ${n} measures (${pct0(100 * A.rLead / n)})"></span><span class="a" style="width:${w(A.aLead)}" data-tip="Allow ahead or won: ${A.aLead} of ${n} measures (${pct0(100 * A.aLead / n)})"></span><span class="t" style="width:${w(A.tc)}" data-tip="Too close to call (under 2 points): ${A.tc} of ${n}"></span><span class="n" style="width:${w(none)}" data-tip="No results yet: ${none} of ${n}"></span></div>
     <table class="t"><tr><td><i class="legend"><i class="r"></i></i>Restrict ahead or won</td><td class="n">${A.rLead}</td></tr>
     <tr><td><i class="legend"><i class="a"></i></i>Allow ahead or won</td><td class="n">${A.aLead}</td></tr>
     <tr><td><i class="legend"><i class="t"></i></i>Too close to call</td><td class="n">${A.tc}</td></tr>
     <tr><td><i class="legend"><i class="n"></i></i>No results yet</td><td class="n">${none}</td></tr></table>
     <div class="lbl" style="margin-top:12px">Measures going against data centers</div>
-    <div class="meter"><span style="width:${against == null ? 0 : against}%"></span></div>
+    <div class="meter" data-tip="${decided ? `${A.rLead} of ${decided} measures with a clear leader are going against data centers (${pct0(against)})` : 'No measure has a clear leader yet'}"><span style="width:${against == null ? 0 : against}%"></span></div>
     <div class="small muted">${decided ? `<b class="num">${A.rLead} of ${decided}</b> with a clear leader (${pct0(against)})` : 'Waiting for the first results.'}</div>
     <div class="small muted" style="margin-top:10px"><b class="num">${A.binding}</b> binding · <b class="num">${n - A.binding}</b> advisory. In <b class="num">${A.nov.filter((v) => v.race.yes_means === 'allow').length}</b> measures a YES vote is the pro-data-center side; the tracker flips those so Restrict and Allow always mean the same thing.</div>`;
   $('#avgcard').innerHTML = `<h4>Average share across measures reporting</h4>
     <div class="pair"><div><div class="big r">${pct1(A.meanR)}</div><div class="lbl">Restrict (anti-data-center)</div></div>
     <div style="text-align:right"><div class="big a">${pct1(A.meanA)}</div><div class="lbl">Allow (pro-data-center)</div></div></div>
-    <div class="bar"><span class="r" style="width:${A.meanR ?? 0}%"></span><span class="a" style="width:${A.meanA ?? 0}%"></span></div>
+    <div class="bar" data-tip="${A.rep.length ? `Across ${A.rep.length} measures reporting: Restrict averages ${pct1(A.meanR)}, Allow averages ${pct1(A.meanA)}` : 'No results yet'}"><span class="r" style="width:${A.meanR ?? 0}%" data-tip="Restrict: ${pct1(A.meanR)} average share across ${A.rep.length} measures reporting (pooled by votes: ${pct1(A.pooledR)})"></span><span class="a" style="width:${A.meanA ?? 0}%" data-tip="Allow: ${pct1(A.meanA)} average share across ${A.rep.length} measures reporting (pooled by votes: ${pct1(A.pooledR == null ? null : 100 - A.pooledR)})"></span></div>
     <div class="small muted">Unweighted mean of each side's percentage in the <b class="num">${A.rep.length}</b> measures with votes, so every town counts once. Pooled by raw votes: Restrict <b class="num">${pct1(A.pooledR)}</b> of <b class="num">${fmt(A.votes)}</b> counted${A.precTot ? `; <b class="num">${fmt(A.precRep)}</b> of <b class="num">${fmt(A.precTot)}</b> precincts in` : ''}.</div>`;
 }
 function renderStateTable(A) {
-  const rows = A.byState.map((g) => `<tr class="clickable" data-state="${g.key}"><td><b>${esc(g.name)}</b></td><td class="n">${g.n}</td><td class="n">${g.rep}</td><td><span class="minibar"><span style="width:${g.n ? 100 * g.r / g.n : 0}%;background:var(--restrict)"></span><span style="width:${g.n ? 100 * g.a / g.n : 0}%;background:var(--allow)"></span><span style="width:${g.n ? 100 * g.t / g.n : 0}%;background:var(--neutral)"></span></span></td><td class="n" style="color:var(--restrict-deep)">${g.r}</td><td class="n" style="color:var(--allow-deep)">${g.a}</td></tr>`).join('');
+  const rows = A.byState.map((g) => `<tr class="clickable" data-state="${g.key}"><td><b>${esc(g.name)}</b></td><td class="n">${g.n}</td><td class="n">${g.rep}</td><td><span class="minibar" data-tip="${esc(g.name)}: ${g.n} measures, ${g.r} restrict ahead, ${g.a} allow ahead, ${g.t} too close, ${g.n - g.r - g.a - g.t} without results"><span style="width:${g.n ? 100 * g.r / g.n : 0}%;background:var(--restrict)" data-tip="${esc(g.name)}: Restrict ahead in ${g.r} of ${g.n}"></span><span style="width:${g.n ? 100 * g.a / g.n : 0}%;background:var(--allow)" data-tip="${esc(g.name)}: Allow ahead in ${g.a} of ${g.n}"></span><span style="width:${g.n ? 100 * g.t / g.n : 0}%;background:var(--neutral)" data-tip="${esc(g.name)}: too close in ${g.t} of ${g.n}"></span></span></td><td class="n" style="color:var(--restrict-deep)">${g.r}</td><td class="n" style="color:var(--allow-deep)">${g.a}</td></tr>`).join('');
   $('#stateTable').innerHTML = `<table class="t"><tr><th>State</th><th class="n">Measures</th><th class="n">Reporting</th><th>Leaning</th><th class="n">Restrict</th><th class="n">Allow</th></tr>${rows}</table><p class="small muted" style="margin:10px 0 0">Click a state to filter the race list.</p>`;
   $('#stateTable').querySelectorAll('tr.clickable').forEach((tr) => tr.addEventListener('click', () => { filters.state = tr.dataset.state; $('#fState').value = filters.state; renderRaces(); location.hash = 'races'; }));
 }
@@ -745,12 +752,12 @@ function raceCard(v) {
   const yesW = v.has ? v.yesPct : 0, noW = v.has ? v.noPct : 0;
   const where = `${r.state} · ${r.county ? esc(r.county) + ' County · ' : ''}${JT_LABEL[r.jurisdiction_type] || esc(r.level)}`;
   const chips = `<span class="pill ${yesCls}">YES = ${r.yes_means}</span>${v.adv ? '<span class="pill adv">Advisory</span>' : ''}${r.scope === 'adjacent' ? '<span class="pill adv">Related</span>' : ''}${r.status === 'pending_litigation' ? '<span class="pill n">In court</span>' : ''}${statusPill(v)}`;
-  const prec = v.precRep != null && v.precTot ? `<div class="prec"><span>${v.precRep} of ${v.precTot} precincts</span><div class="meter"><span style="width:${v.pctRep}%"></span></div><span>${pct0(v.pctRep)}</span></div>` : (v.has ? `<div class="prec"><span>${fmt(v.total)} votes counted · precinct count not reported</span></div>` : '');
+  const prec = v.precRep != null && v.precTot ? `<div class="prec"><span>${v.precRep} of ${v.precTot} precincts</span><div class="meter" data-tip="${v.precRep} of ${v.precTot} precincts reporting (${pct0(v.pctRep)})${v.est != null && v.est > 0 ? `; roughly ${fmt(v.est)} votes still out` : ''}"><span style="width:${v.pctRep}%"></span></div><span>${pct0(v.pctRep)}</span></div>` : (v.has ? `<div class="prec"><span>${fmt(v.total)} votes counted · precinct count not reported</span></div>` : '');
   const est = v.est != null && v.est > 0 && v.status !== 'final' ? `<div class="small muted">Roughly <b class="num">${fmt(v.est)}</b> votes still out (estimate)</div>` : '';
   return `<article class="race lead-${cc}${starred.has(r.race_id) ? ' starred' : ''}" data-id="${r.race_id}" tabindex="0" role="button" aria-label="${esc(r.jurisdiction)} details">
     <div class="top"><div style="min-width:0"><div class="where">${where}</div><p class="name">${esc(r.jurisdiction)}</p><p class="title">${r.measure_label ? '<b>' + esc(r.measure_label) + '</b> · ' : ''}${esc(r.title)}</p></div><div class="chips">${starBtn(v)}${chips}</div></div>
     <div class="call ${cc === 'n' ? '' : cc}">${esc(callText(v))}</div>
-    <div class="bar"><span class="${yesCls}" style="width:${yesW}%"></span><span class="${noCls}" style="width:${noW}%"></span></div>
+    <div class="bar" data-tip="${v.has ? `YES ${pct1(v.yesPct)} (${fmt(v.yes)}) · NO ${pct1(v.noPct)} (${fmt(v.no)}) · ${fmt(v.total)} votes counted` : 'No results yet'}"><span class="${yesCls}" style="width:${yesW}%" data-tip="YES: ${fmt(v.yes)} votes, ${pct1(v.yesPct)} · ${r.yes_means === 'restrict' ? 'restricts' : 'allows'} data centers"></span><span class="${noCls}" style="width:${noW}%" data-tip="NO: ${fmt(v.no)} votes, ${pct1(v.noPct)} · ${r.yes_means === 'restrict' ? 'allows' : 'restricts'} data centers"></span></div>
     <div class="yn"><div class="side"><span class="pct ${v.has ? yesCls : 'none'}">${pct1(v.yesPct)}</span><span class="what"><b>YES</b> · ${r.yes_means === 'restrict' ? 'restricts' : 'allows'} data centers</span><span class="votes">${v.has ? fmt(v.yes) + ' votes' : '—'}</span></div>
     <div class="side right"><span class="pct ${v.has ? noCls : 'none'}">${pct1(v.noPct)}</span><span class="what"><b>NO</b> · ${r.yes_means === 'restrict' ? 'allows' : 'restricts'} data centers</span><span class="votes">${v.has ? fmt(v.no) + ' votes' : '—'}</span></div></div>
     ${prec}${est}
@@ -809,7 +816,7 @@ function openModal(v) {
     .filter((x) => x[1]).map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join('');
   const links = [[r.results_page_url, 'Live results page'], [r.ballot_text_url, 'Official ballot text'], [r.ballotpedia_url, 'Ballotpedia'], [r.news_url, 'News coverage']].filter((x) => x[0]).map(([u, l]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${l}</a>`).join('');
   const resHTML = v.has ? `<div class="call ${callClass(v) === 'n' ? '' : callClass(v)}" style="font-weight:600">${esc(callText(v))}</div>
-      <div class="bar" style="height:14px"><span class="${yesCls}" style="width:${v.yesPct}%"></span><span class="${noCls}" style="width:${v.noPct}%"></span></div>
+      <div class="bar" style="height:14px" data-tip="YES ${pct1(v.yesPct)} (${fmt(v.yes)}) · NO ${pct1(v.noPct)} (${fmt(v.no)}) · ${fmt(v.total)} votes counted"><span class="${yesCls}" style="width:${v.yesPct}%" data-tip="YES: ${fmt(v.yes)} votes, ${pct1(v.yesPct)} · ${r.yes_means === 'restrict' ? 'restricts' : 'allows'} data centers"></span><span class="${noCls}" style="width:${v.noPct}%" data-tip="NO: ${fmt(v.no)} votes, ${pct1(v.noPct)} · ${r.yes_means === 'restrict' ? 'allows' : 'restricts'} data centers"></span></div>
       <div class="yn"><div class="side"><span class="pct ${yesCls}">${pct1(v.yesPct)}</span><span class="what"><b>YES</b> · ${fmt(v.yes)}</span></div><div class="side right"><span class="pct ${noCls}">${pct1(v.noPct)}</span><span class="what"><b>NO</b> · ${fmt(v.no)}</span></div></div>
       <dl style="margin-top:10px"><dt>Precincts</dt><dd>${v.precRep != null && v.precTot ? `${v.precRep} of ${v.precTot} (${pct0(v.pctRep)})` : 'not reported'}</dd><dt>Votes counted</dt><dd>${fmt(v.total)}${v.res.ballots_cast ? ' · ballots cast ' + fmt(v.res.ballots_cast) : ''}${v.res.registered_voters ? ' · registered ' + fmt(v.res.registered_voters) : ''}</dd>${v.est != null && v.est > 0 && v.status !== 'final' ? `<dt>Still out</dt><dd>about ${fmt(v.est)} votes (rough estimate)</dd>` : ''}<dt>As of</dt><dd>${fmtET(v.asOf, !isToday(v.asOf))}</dd><dt>Feed</dt><dd>${esc(v.res.adapter || '')}${v.res.note ? ' · ' + esc(v.res.note) : ''}${v.stale ? ' · last fetch failed, showing previous count' : ''}</dd></dl>`
     : `<p class="empty">No results yet.${r.poll_close_et ? ' Polls close ' + closeLabel(r.poll_close_et) + '.' : ''}</p>`;
@@ -839,6 +846,12 @@ function drawSpark(v) {
   svg.append('circle').attr('cx', x(last.t)).attr('cy', y(last.rp)).attr('r', 4).attr('fill', '#3273a3').attr('stroke', '#fff').attr('stroke-width', 2);
   svg.append('text').attr('x', x(last.t) + 7).attr('y', y(last.rp) + 4).attr('font-size', 11).attr('font-weight', 600).attr('fill', '#205373').attr('font-family', 'IBM Plex Sans, sans-serif').text(pct1(last.rp));
   svg.append('text').attr('x', m.l).attr('y', H - 6).attr('font-size', 10).attr('fill', '#8e8088').attr('font-family', 'IBM Plex Mono, monospace').text('Restrict share over time · ' + fmtET(pts[0].t) + ' to ' + fmtET(last.t));
+  // Hover layer: nearest point in time, with a marker and the global tooltip
+  const marker = svg.append('circle').attr('r', 5).attr('fill', '#fff').attr('stroke', '#3273a3').attr('stroke-width', 2).style('display', 'none');
+  const bisect = d3.bisector((d) => d.t).center;
+  svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.r - m.l).attr('height', H).attr('fill', 'transparent').style('cursor', 'crosshair')
+    .on('mousemove', (ev) => { const [mx] = d3.pointer(ev); const i = bisect(pts, x.invert(mx)); const d = pts[i]; if (!d) return; marker.style('display', null).attr('cx', x(d.t)).attr('cy', y(d.rp)); tipAt(`${fmtET(d.t)}: Restrict ${pct1(d.rp)} · ${fmt(d.tot)} votes counted`, ev.clientX, ev.clientY); })
+    .on('mouseleave', () => { marker.style('display', 'none'); hideTip(); });
 }
 
 // ---------- copy summary ----------
@@ -858,6 +871,17 @@ async function copySummary() {
   catch (e) { const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); btn.textContent = 'Copied'; } catch (e2) { btn.textContent = 'Select & copy'; window.prompt && window.prompt('Copy the summary:', text); } document.body.removeChild(ta); }
   setTimeout(() => { btn.textContent = 'Copy summary'; }, 1800);
 }
+
+// ---------- hover tooltips (every bar, meter and stat on the page) ----------
+const tipEl = document.createElement('div'); tipEl.className = 'gtip'; tipEl.setAttribute('role', 'tooltip'); document.body.appendChild(tipEl);
+function tipAt(text, x, y) { tipEl.innerHTML = esc(text).replace(/\n/g, '<br>'); tipEl.style.display = 'block'; moveTip(x, y); }
+function moveTip(x, y) { const w = tipEl.offsetWidth, h = tipEl.offsetHeight; let left = x + 14, top = y + 16; if (left + w > window.innerWidth - 8) left = x - w - 14; if (top + h > window.innerHeight - 8) top = y - h - 14; tipEl.style.left = Math.max(8, left) + 'px'; tipEl.style.top = Math.max(8, top) + 'px'; }
+function hideTip() { tipEl.style.display = 'none'; }
+document.addEventListener('mouseover', (e) => { const t = e.target.closest && e.target.closest('[data-tip]'); if (t) tipAt(t.getAttribute('data-tip'), e.clientX, e.clientY); else if (!e.target.closest || !e.target.closest('#spark')) hideTip(); });
+document.addEventListener('mousemove', (e) => { if (tipEl.style.display !== 'block') return; const t = e.target.closest && e.target.closest('[data-tip]'); if (t) moveTip(e.clientX, e.clientY); });
+document.addEventListener('focusin', (e) => { const t = e.target.closest && e.target.closest('[data-tip]'); if (t) { const r = t.getBoundingClientRect(); tipAt(t.getAttribute('data-tip'), r.left, r.bottom); } });
+document.addEventListener('focusout', hideTip);
+window.addEventListener('scroll', hideTip, { passive: true });
 
 // ---------- wiring ----------
 function wire() {
