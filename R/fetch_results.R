@@ -176,4 +176,5 @@ if (DRY_RUN) {
   jsonlite::write_json(out, RESULTS_PATH, auto_unbox = TRUE, na = "null", pretty = TRUE, digits = NA)
   write_results_csv(results, races)
   log_msg("wrote ", RESULTS_PATH, " and site/data/results.csv (", nrow(results), " races, ", summary$with_results, " with results)")
+  source("R/write_sheet.R"); push_results_to_sheet()
 }

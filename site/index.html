@@ -112,6 +112,7 @@ nav.tabs a:hover, nav.tabs a.active { color: var(--fg); border-bottom-color: var
 .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 18px 20px; min-width: 0; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .grid-2 { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 16px; }
+.grid-2.eq { grid-template-columns: 1fr 1fr; }
 .card h4 { margin: 0 0 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: var(--fg-faint); }
 .big { font-family: var(--sans); font-size: 34px; font-weight: 600; line-height: 1; letter-spacing: -0.02em; }
 .big.r { color: var(--restrict-deep); } .big.a { color: var(--allow-deep); }
@@ -171,7 +172,16 @@ table.t tr.clickable { cursor: pointer; } table.t tr.clickable:hover td { backgr
 .pill.r { background: var(--restrict-soft); color: var(--restrict-deep); } .pill.a { background: var(--allow-soft); color: var(--allow-deep); }
 .pill.t { background: var(--neutral-soft); color: var(--fg-soft); } .pill.n { background: var(--panel-soft); color: var(--fg-mid); border: 1px solid var(--line); }
 .pill.final { background: var(--fg); color: var(--fg-on-dark); } .pill.stale { background: #f7e1e1; color: var(--danger); } .pill.adv { background: var(--panel-soft); color: var(--fg-mid); border: 1px dashed var(--line-strong); }
-.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.star { background: transparent; border: 1px solid var(--line-strong); border-radius: 999px; width: 26px; height: 26px; padding: 0; line-height: 1; font-size: 15px; color: var(--fg-faint); cursor: pointer; transition: all .15s ease; flex: none; }
+.star:hover { color: var(--primary); border-color: var(--primary); }
+.star.on { color: var(--primary); border-color: var(--primary); background: var(--primary-bg); }
+.star:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.race.starred { box-shadow: inset 3px 0 0 var(--primary), var(--shadow-sm); }
+.race.starred:hover { box-shadow: inset 3px 0 0 var(--primary), var(--shadow); }
+.starfilter { background: transparent; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); padding: 6px 10px; font-size: 12.5px; color: var(--fg-mid); cursor: pointer; transition: all .15s ease; white-space: nowrap; }
+.starfilter:hover { color: var(--primary); border-color: var(--primary); }
+.starfilter[aria-pressed="true"] { background: var(--primary); color: #fff; border-color: var(--primary); }
 .yn { display: grid; grid-template-columns: 1fr 1fr; font-size: 12px; margin-top: 4px; }
 .yn .side { display: flex; flex-direction: column; }
 .yn .side.right { text-align: right; }
@@ -317,10 +327,9 @@ footer.site p { margin: 4px 0 0; font-size: 12px; color: var(--fg-faint); }
     <div class="section-head">
       <div><h2>How the night is <em>going</em></h2><p>Every measure is mapped to the same two sides so results add up across differently worded questions: <b>Restrict</b> (the anti-data-center outcome) and <b>Allow</b> (the pro-data-center outcome).</p></div>
     </div>
-    <div class="grid-3">
+    <div class="grid-2 eq">
       <div class="card" id="scorecard"></div>
       <div class="card" id="avgcard"></div>
-      <div class="card" id="levelcard"></div>
     </div>
   </div>
 </section>
@@ -341,7 +350,7 @@ footer.site p { margin: 4px 0 0; font-size: 12px; color: var(--fg-faint); }
 <section class="block" id="races">
   <div class="wrap">
     <div class="section-head">
-      <div><h2>Every <em>measure</em></h2><p>Bars show YES on the left and NO on the right, colored by what a YES vote means for data centers. The center tick is 50 percent.</p></div>
+      <div><h2>Every <em>measure</em></h2><p>Bars show YES on the left and NO on the right, colored by what a YES vote means for data centers. The center tick is 50 percent. Star a measure to pin it to the top of this list; stars are saved in your browser.</p></div>
       <div class="seg" role="group" aria-label="View"><button type="button" id="viewCards" aria-pressed="true">Cards</button><button type="button" id="viewTable" aria-pressed="false">Table</button></div>
     </div>
     <div class="filters" id="filters">
@@ -352,6 +361,7 @@ footer.site p { margin: 4px 0 0; font-size: 12px; color: var(--fg-faint); }
       <label>Binding <select id="fBind"><option value="">All</option><option value="binding">Binding</option><option value="advisory">Advisory</option></select></label>
       <label>Sort <select id="fSort"><option value="state">State, then name</option><option value="margin">Closest margin</option><option value="reporting">Most reported</option><option value="updated">Recently updated</option><option value="votes">Most votes</option></select></label>
       <input type="search" id="fSearch" placeholder="Search city, county, project, company…" aria-label="Search measures">
+      <button type="button" id="fStar" class="starfilter" aria-pressed="false" title="Show only the measures you have starred">☆ Starred</button>
       <span class="count" id="fCount"></span>
     </div>
     <div class="races" id="raceGrid"></div>
@@ -442,7 +452,22 @@ const FIPS = {'01':'AL','02':'AK','04':'AZ','05':'AR','06':'CA','08':'CO','09':'
 
 let races = [], results = null, notOnBallot = [], views = [], topo = null;
 let sim = false, simStage = 0.55, lastFetch = null, fetchErr = null, timer = null;
-const filters = { state: '', level: '', dir: '', status: '', bind: '', sort: 'state', q: '' };
+const filters = { state: '', level: '', dir: '', status: '', bind: '', sort: 'state', q: '', star: false };
+let starred = new Set();
+try { starred = new Set(JSON.parse(localStorage.getItem('dcbt_starred') || '[]')); } catch (e) { starred = new Set(); }
+function saveStars() { try { localStorage.setItem('dcbt_starred', JSON.stringify([...starred])); } catch (e) { /* storage unavailable: stars last for this visit only */ } }
+function toggleStar(id) { if (starred.has(id)) starred.delete(id); else starred.add(id); saveStars(); renderStarFilter(); renderRaces(); }
+function starBtn(v) {
+  if (!v.isNov) return '';
+  const on = starred.has(v.race.race_id);
+  return `<button type="button" class="star${on ? ' on' : ''}" data-star="${v.race.race_id}" aria-pressed="${on}" aria-label="${on ? 'Unstar' : 'Star'} ${esc(v.race.jurisdiction)}" title="${on ? 'Unstar' : 'Star this measure'}">${on ? '\u2605' : '\u2606'}</button>`;
+}
+function renderStarFilter() {
+  const b = $('#fStar'); if (!b) return;
+  const n = [...starred].filter((id) => races.some((r) => r.race_id === id && r.election_date === ELECTION)).length;
+  b.textContent = (filters.star ? '\u2605' : '\u2606') + ' Starred' + (n ? ` (${n})` : '');
+  b.setAttribute('aria-pressed', String(filters.star));
+}
 let viewMode = 'cards';
 
 // ---------- time helpers ----------
@@ -584,7 +609,7 @@ function aggregates() {
 function render() {
   buildViews();
   const A = aggregates();
-  renderStatus(); renderHero(A); renderScore(A); renderMapDots(); renderStateTable(A); renderRaces(); renderTimeline(A); renderDecided();
+  renderStatus(); renderHero(A); renderScore(A); renderMapDots(); renderStateTable(A); renderStarFilter(); renderRaces(); renderTimeline(A); renderDecided();
 }
 function renderStatus() {
   const dot = $('#liveDot'), lab = $('#liveLabel');
@@ -632,18 +657,13 @@ function renderScore(A) {
     <tr><td><i class="legend"><i class="n"></i></i>No results yet</td><td class="n">${none}</td></tr></table>
     <div class="lbl" style="margin-top:12px">Measures going against data centers</div>
     <div class="meter"><span style="width:${against == null ? 0 : against}%"></span></div>
-    <div class="small muted">${decided ? `<b class="num">${A.rLead} of ${decided}</b> with a clear leader (${pct0(against)})` : 'Waiting for the first results.'}</div>`;
+    <div class="small muted">${decided ? `<b class="num">${A.rLead} of ${decided}</b> with a clear leader (${pct0(against)})` : 'Waiting for the first results.'}</div>
+    <div class="small muted" style="margin-top:10px"><b class="num">${A.binding}</b> binding · <b class="num">${n - A.binding}</b> advisory. In <b class="num">${A.nov.filter((v) => v.race.yes_means === 'allow').length}</b> measures a YES vote is the pro-data-center side; the tracker flips those so Restrict and Allow always mean the same thing.</div>`;
   $('#avgcard').innerHTML = `<h4>Average share across measures reporting</h4>
     <div class="pair"><div><div class="big r">${pct1(A.meanR)}</div><div class="lbl">Restrict (anti-data-center)</div></div>
     <div style="text-align:right"><div class="big a">${pct1(A.meanA)}</div><div class="lbl">Allow (pro-data-center)</div></div></div>
     <div class="bar"><span class="r" style="width:${A.meanR ?? 0}%"></span><span class="a" style="width:${A.meanA ?? 0}%"></span></div>
     <div class="small muted">Unweighted mean of each side's percentage in the <b class="num">${A.rep.length}</b> measures with votes, so every town counts once. Pooled by raw votes: Restrict <b class="num">${pct1(A.pooledR)}</b> of <b class="num">${fmt(A.votes)}</b> counted${A.precTot ? `; <b class="num">${fmt(A.precRep)}</b> of <b class="num">${fmt(A.precTot)}</b> precincts in` : ''}.</div>`;
-  const row = (g, label) => `<tr><td>${label}</td><td class="n">${g.n}</td><td class="n">${g.rep}</td><td class="n" style="color:var(--restrict-deep)">${g.r}</td><td class="n" style="color:var(--allow-deep)">${g.a}</td></tr>`;
-  const order = ['municipal', 'county', 'state'];
-  const lv = order.map((k) => A.byLevel.find((g) => g.key === k) || { key: k, n: 0, rep: 0, r: 0, a: 0 });
-  $('#levelcard').innerHTML = `<h4>By level of government</h4><div class="tscroll"><table class="t"><tr><th>Level</th><th class="n">Measures</th><th class="n">Reporting</th><th class="n">Restrict</th><th class="n">Allow</th></tr>
-    ${lv.map((g) => row(g, LEVEL_LABEL[g.key])).join('')}</table></div>
-    <div class="small muted" style="margin-top:10px"><b class="num">${A.binding}</b> binding · <b class="num">${n - A.binding}</b> advisory. In <b class="num">${A.nov.filter((v) => v.race.yes_means === 'allow').length}</b> measures a YES vote is the pro-data-center side; the tracker flips those so the two columns always mean the same thing.</div>`;
 }
 function renderStateTable(A) {
   const rows = A.byState.map((g) => `<tr class="clickable" data-state="${g.key}"><td><b>${esc(g.name)}</b></td><td class="n">${g.n}</td><td class="n">${g.rep}</td><td><span class="minibar"><span style="width:${g.n ? 100 * g.r / g.n : 0}%;background:var(--restrict)"></span><span style="width:${g.n ? 100 * g.a / g.n : 0}%;background:var(--allow)"></span><span style="width:${g.n ? 100 * g.t / g.n : 0}%;background:var(--neutral)"></span></span></td><td class="n" style="color:var(--restrict-deep)">${g.r}</td><td class="n" style="color:var(--allow-deep)">${g.a}</td></tr>`).join('');
@@ -705,6 +725,7 @@ function filtered() {
   if (filters.status === 'none') list = list.filter((v) => !v.has);
   if (filters.status === 'tooclose') list = list.filter((v) => v.call === 'tooclose');
   if (filters.status === 'final') list = list.filter((v) => v.status === 'final' || v.status === 'all_precincts');
+  if (filters.star) list = list.filter((v) => starred.has(v.race.race_id));
   if (q) list = list.filter((v) => [v.race.jurisdiction, v.race.county, v.race.state_name, v.race.title, v.race.target_project, v.race.summary, v.race.measure_label, v.race.proponents].join(' ').toLowerCase().includes(q));
   const byName = (a, b) => a.race.state.localeCompare(b.race.state) || a.race.jurisdiction.localeCompare(b.race.jurisdiction);
   const sorters = {
@@ -714,7 +735,9 @@ function filtered() {
     updated: (a, b) => ((b.asOf?.getTime() ?? 0) - (a.asOf?.getTime() ?? 0)) || byName(a, b),
     votes: (a, b) => ((b.total ?? -1) - (a.total ?? -1)) || byName(a, b)
   };
-  return list.sort(sorters[filters.sort] || byName);
+  list.sort(sorters[filters.sort] || byName);
+  // Starred measures float to the top; the sort is stable, so the chosen order holds within each group.
+  return list.sort((a, b) => (starred.has(b.race.race_id) ? 1 : 0) - (starred.has(a.race.race_id) ? 1 : 0));
 }
 function raceCard(v) {
   const r = v.race, cc = callClass(v);
@@ -724,8 +747,8 @@ function raceCard(v) {
   const chips = `<span class="pill ${yesCls}">YES = ${r.yes_means}</span>${v.adv ? '<span class="pill adv">Advisory</span>' : ''}${r.scope === 'adjacent' ? '<span class="pill adv">Related</span>' : ''}${r.status === 'pending_litigation' ? '<span class="pill n">In court</span>' : ''}${statusPill(v)}`;
   const prec = v.precRep != null && v.precTot ? `<div class="prec"><span>${v.precRep} of ${v.precTot} precincts</span><div class="meter"><span style="width:${v.pctRep}%"></span></div><span>${pct0(v.pctRep)}</span></div>` : (v.has ? `<div class="prec"><span>${fmt(v.total)} votes counted · precinct count not reported</span></div>` : '');
   const est = v.est != null && v.est > 0 && v.status !== 'final' ? `<div class="small muted">Roughly <b class="num">${fmt(v.est)}</b> votes still out (estimate)</div>` : '';
-  return `<article class="race lead-${cc}" data-id="${r.race_id}" tabindex="0" role="button" aria-label="${esc(r.jurisdiction)} details">
-    <div class="top"><div style="min-width:0"><div class="where">${where}</div><p class="name">${esc(r.jurisdiction)}</p><p class="title">${r.measure_label ? '<b>' + esc(r.measure_label) + '</b> · ' : ''}${esc(r.title)}</p></div><div class="chips">${chips}</div></div>
+  return `<article class="race lead-${cc}${starred.has(r.race_id) ? ' starred' : ''}" data-id="${r.race_id}" tabindex="0" role="button" aria-label="${esc(r.jurisdiction)} details">
+    <div class="top"><div style="min-width:0"><div class="where">${where}</div><p class="name">${esc(r.jurisdiction)}</p><p class="title">${r.measure_label ? '<b>' + esc(r.measure_label) + '</b> · ' : ''}${esc(r.title)}</p></div><div class="chips">${starBtn(v)}${chips}</div></div>
     <div class="call ${cc === 'n' ? '' : cc}">${esc(callText(v))}</div>
     <div class="bar"><span class="${yesCls}" style="width:${yesW}%"></span><span class="${noCls}" style="width:${noW}%"></span></div>
     <div class="yn"><div class="side"><span class="pct ${v.has ? yesCls : 'none'}">${pct1(v.yesPct)}</span><span class="what"><b>YES</b> · ${r.yes_means === 'restrict' ? 'restricts' : 'allows'} data centers</span><span class="votes">${v.has ? fmt(v.yes) + ' votes' : '—'}</span></div>
@@ -743,8 +766,8 @@ function renderRaces() {
   if (viewMode === 'cards') {
     grid.innerHTML = list.length ? list.map(raceCard).join('') : '<p class="empty">No measures match these filters.</p>';
   } else {
-    tbl.innerHTML = `<table class="t"><tr><th>State</th><th>Jurisdiction</th><th>Measure</th><th>YES means</th><th class="n">Yes</th><th class="n">No</th><th class="n">Yes %</th><th class="n">Restrict %</th><th class="n">Precincts</th><th>Status</th><th>Updated</th><th>Source</th></tr>
-      ${list.map((v) => { const r = v.race; return `<tr class="clickable" data-id="${r.race_id}"><td>${r.state}</td><td><b>${esc(r.jurisdiction)}</b><br><span class="small muted">${esc(r.county || '')}${r.county ? ' County' : ''}</span></td><td>${r.measure_label ? esc(r.measure_label) + ' · ' : ''}${esc(r.title)}${v.adv ? ' <span class="pill adv">Advisory</span>' : ''}</td><td><span class="pill ${r.yes_means === 'restrict' ? 'r' : 'a'}">${r.yes_means}</span></td><td class="n">${fmt(v.yes)}</td><td class="n">${fmt(v.no)}</td><td class="n">${pct1(v.yesPct)}</td><td class="n">${pct1(v.rPct)}</td><td class="n">${v.precRep != null && v.precTot ? v.precRep + '/' + v.precTot : '—'}</td><td>${esc(callText(v))}</td><td class="n">${v.has ? fmtET(v.asOf, !isToday(v.asOf)) : '—'}</td><td>${r.results_page_url ? `<a href="${esc(r.results_page_url)}" target="_blank" rel="noopener">Source ›</a>` : ''}</td></tr>`; }).join('')}</table>`;
+    tbl.innerHTML = `<table class="t"><tr><th></th><th>State</th><th>Jurisdiction</th><th>Measure</th><th>YES means</th><th class="n">Yes</th><th class="n">No</th><th class="n">Yes %</th><th class="n">Restrict %</th><th class="n">Precincts</th><th>Status</th><th>Updated</th><th>Source</th></tr>
+      ${list.map((v) => { const r = v.race; return `<tr class="clickable${starred.has(r.race_id) ? ' starred' : ''}" data-id="${r.race_id}"><td>${starBtn(v)}</td><td>${r.state}</td><td><b>${esc(r.jurisdiction)}</b><br><span class="small muted">${esc(r.county || '')}${r.county ? ' County' : ''}</span></td><td>${r.measure_label ? esc(r.measure_label) + ' · ' : ''}${esc(r.title)}${v.adv ? ' <span class="pill adv">Advisory</span>' : ''}</td><td><span class="pill ${r.yes_means === 'restrict' ? 'r' : 'a'}">${r.yes_means}</span></td><td class="n">${fmt(v.yes)}</td><td class="n">${fmt(v.no)}</td><td class="n">${pct1(v.yesPct)}</td><td class="n">${pct1(v.rPct)}</td><td class="n">${v.precRep != null && v.precTot ? v.precRep + '/' + v.precTot : '—'}</td><td>${esc(callText(v))}</td><td class="n">${v.has ? fmtET(v.asOf, !isToday(v.asOf)) : '—'}</td><td>${r.results_page_url ? `<a href="${esc(r.results_page_url)}" target="_blank" rel="noopener">Source ›</a>` : ''}</td></tr>`; }).join('')}</table>`;
   }
 }
 
@@ -847,7 +870,9 @@ function wire() {
   $('#viewCards').addEventListener('click', () => { viewMode = 'cards'; $('#viewCards').setAttribute('aria-pressed', 'true'); $('#viewTable').setAttribute('aria-pressed', 'false'); renderRaces(); });
   $('#viewTable').addEventListener('click', () => { viewMode = 'table'; $('#viewCards').setAttribute('aria-pressed', 'false'); $('#viewTable').setAttribute('aria-pressed', 'true'); renderRaces(); });
   const openFrom = (el) => { const id = el.dataset.open || el.dataset.id; const v = views.find((x) => x.race.race_id === id); if (v) openModal(v); };
+  $('#fStar').addEventListener('click', () => { filters.star = !filters.star; renderStarFilter(); renderRaces(); });
   document.addEventListener('click', (e) => {
+    const sb = e.target.closest('button[data-star]'); if (sb) { e.stopPropagation(); toggleStar(sb.dataset.star); return; }
     const a = e.target.closest('a[data-open]'); if (a) { e.preventDefault(); openFrom(a); return; }
     if (e.target.closest('a')) return;
     const card = e.target.closest('.race, tr.clickable[data-id]'); if (card && card.dataset.id) openFrom(card);

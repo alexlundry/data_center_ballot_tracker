@@ -40,7 +40,13 @@ jobs:
             any::glue
             any::cli
             any::pdftools
+            any::googlesheets4
       - name: Rebuild registry and fetch results
+        env:
+          # Optional: lets the pipeline write live numbers straight into the
+          # election-night Google Sheet. See RUNBOOK.md.
+          GOOGLE_SA_JSON: ${{ secrets.GOOGLE_SA_JSON }}
+          RESULTS_SHEET_ID: ${{ secrets.RESULTS_SHEET_ID }}
         run: |
           Rscript R/build_races.R
           Rscript R/fetch_results.R
