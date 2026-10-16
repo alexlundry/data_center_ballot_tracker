@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T14:39:06-0400",
+  "generated_at": "2026-10-16T14:42:49-0400",
   "count": 44,
   "races": [
     {
@@ -1056,7 +1056,7 @@
       "level": "municipal",
       "scope": "direct",
       "election_date": "2026-11-03",
-      "measure_label": null,
+      "measure_label": "GM/JATCO Site Development Referendum",
       "title": "Voter approval required for projects over $450M at the GM/JATCO site",
       "measure_type": "direct_legislation",
       "binding": "binding",
@@ -1067,18 +1067,18 @@
       "proponents": "Citizen petition (3,927 certified signatures)",
       "opponents": "Grow Janesville Responsibly; Badger Institute",
       "summary": "Direct legislation under Wis. Stat. 9.20 requiring that development agreements, projects, sales and leases at the city-owned GM/JATCO sites (1000 General Motors Dr. and 544 Kellogg Ave. plus adjacent parcels in the same development) involving more than $450 million in project costs be approved by a majority of Janesville electors; phased projects aggregate toward the threshold. The question does not mention data centers but was written to stop the Viridian campus; the city also has a separate data center moratorium.",
-      "ballot_text": "Should approval of development agreements, development projects, sales, and leases at the GM/JATCO sites for projects over $450 million be decided by a majority vote of the electors? (Reconstructed from verbatim fragments reported by WMTV, the Gazette and the Badger Institute; the full sentence as printed was not retrieved. The ordinance covers 1000 General Motors Drive and 544 Kellogg Ave. plus adjacent properties in the same development, treats phased developments as one project, and does not use the words data center.)",
-      "ballot_text_verbatim": "FALSE",
+      "ballot_text": "City of Janesville Direct Legislation Petition on GM/JATCO Site Development Referendum. Vote for one. Should approval of proposed development agreements, development projects, sales, and leases of the GM/JATCO sites for projects exceeding $450 million in project costs be decided by a majority vote of the electors? Yes / No.",
+      "ballot_text_verbatim": "TRUE",
       "status": "on_ballot",
       "lat": 42.6828,
       "lon": -89.0187,
-      "ballot_text_url": "https://news.ballotpedia.org/2026/02/12/janesville-wisconsin-voters-to-decide-nov-3-2026-initiative-requiring-approval-for-development-projects-exceeding-450-million-at-gm-jatco-site-such-as-proposed-data-center/",
+      "ballot_text_url": "https://myvote.wi.gov/",
       "ballotpedia_url": null,
       "news_url": "https://www.wmtv15news.com/2026/08/24/janesville-referendum-decide-vote-requirement-gmjatco-site-projects/",
       "results_page_url": "https://elections.co.rock.wi.us/20261103.html",
       "poll_close_et": "21:00",
       "result_note": null,
-      "notes": "Polls close 8 pm Central. Janesville absentee ballots are counted centrally and reported separately.",
+      "notes": "Polls close 8 pm Central. Janesville absentee ballots are counted centrally and reported separately. Question verbatim from the MyVote Wisconsin sample ballot for City of Janesville Ward 26 (generated Oct 16, 2026; docs/source-docs/myvote-wi-sample-ballot-janesville-ward-26.pdf). The ballot heading is \"City of Janesville Direct Legislation Petition on GM/JATCO Site Development Referendum\"; the question does not mention data centers.",
       "adapters": "html_table",
       "source_status": "pattern"
     },
