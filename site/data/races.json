@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T14:44:00-0400",
+  "generated_at": "2026-10-16T14:47:58-0400",
   "count": 44,
   "races": [
     {
@@ -516,7 +516,7 @@
       "level": "municipal",
       "scope": "direct",
       "election_date": "2026-11-03",
-      "measure_label": null,
+      "measure_label": "Referendum on Resolution (By Petition)",
       "title": "Referendum on Resolution 06-2026 (EdgeConneX development agreement)",
       "measure_type": "referendum",
       "binding": "binding",
@@ -527,7 +527,7 @@
       "proponents": "Teays Valley Community Alliance (petition, 669 valid signatures)",
       "opponents": "Village council majority; EdgeConneX",
       "summary": "Referendum on the council's April resolution approving a development and supply agreement term summary with EdgeConneX. The Ohio Supreme Court ordered the petition certified (State ex rel. McNamara-Smith v. Grube, 2026-Ohio-3035). A YES vote upholds the agreement; a NO vote rejects it (though it does not by itself stop construction). EdgeConneX paid the village $3.5M in October.",
-      "ballot_text": "Referendum (By Petition), Village of Ashville: Shall the resolution enacting approval of a development and supply agreement term summary with EdgeConneX be approved? Voting YES is voting FOR Resolution 06-2026; voting NO is voting AGAINST it. (Question as quoted from the Pickaway County ballot proofs by the Circleville Herald and Scioto Post.)",
+      "ballot_text": "Referendum on Resolution (By Petition), Village of Ashville. A majority affirmative vote is necessary for passage. WHEREAS, EdgeConneX intends to obtain permits through the Village of Ashville to construct and operate two data center buildings with ancillary buildings and infrastructure on certain property within the Village (currently Pickaway County Parcel Number D1300350000100 consisting of approximately 195.368 acres); and WHEREAS, EdgeConneX, through an affiliate, also intends to develop and obtain permits through the Ohio Power Siting Board for authority to construct and operate a natural gas behind-the-meter power generating facility at the property; and WHEREAS, the Village of Ashville and EdgeConneX want to memorialize a framework and timeline, for disclosure of Energy Center parameters, studies, and EdgeConneX's paid support to the Village, the Township, and the School District, through a Term Summary; and WHEREAS, using this Term Summary, the Village of Ashville and EdgeConneX will negotiate and agree to a Development and Supply Agreement that must be approved by Council for the Village of Ashville; and WHEREAS, Council for the Village of Ashville now wants to kick off this project by approving the Term Summary. NOW, THEREFORE, BE IT RESOLVED by the Council of the Village of Ashville, County of Pickaway, State of Ohio: Section One. Council for the Village of Ashville hereby approves the Development and Supply Agreement Term Summary attached hereto as Exhibit A. Section Two. It is hereby found and determined that all formal actions of this Council concerning and relating to the passage of this resolution were adopted in an open meeting of Council and all deliberations of Council and any of the decision-making bodies of the Village of Ashville which resulted in such formal actions were taken in meetings open to the public in compliance with all legal requirements of the State of Ohio. Section Three. All prior legislation, or any parts thereof, which is/are inconsistent with this Resolution is/are hereby repealed as to the inconsistent parts thereof. Section Four. Council declares this to be an emergency measure immediately necessary for the preservation of the public peace, health, and safety of this municipality and for the further reason that Council needs to accept these terms as soon as possible so that this project is not unnecessarily delayed. Wherefore, provided this Resolution receives the required affirmative votes of Council, this Resolution shall take effect and be in force immediately upon passage by Council. Shall the resolution enacting approval of a development and supply agreement term summary with EdgeConneX be approved? Yes / No.",
       "ballot_text_verbatim": "TRUE",
       "status": "on_ballot",
       "lat": 39.7156,
@@ -538,7 +538,7 @@
       "results_page_url": "https://www.boe.ohio.gov/pickaway/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "A YES vote is the pro-data-center side. Council's attempt to repeal the agreement (Resolution 16-2026) failed at its third reading on Oct 5, 2026, so the referendum stays on the ballot. Village electors only. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file with the same question wording.",
+      "notes": "A YES vote is the pro-data-center side. Ballot choices are Yes / No (not For / Against), per the Pickaway County ballot proof for precinct 17 Ashville-East (docs/source-docs/pickaway-county-ballot-proof-ashville-east-p2.webp), which prints the full resolution text above the question. Council's attempt to repeal the agreement (Resolution 16-2026) failed at its third reading on Oct 5, 2026, so the referendum stays on the ballot. Village electors only. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file with the same question wording. No issue number is printed.",
       "adapters": "pdf",
       "source_status": "verified"
     },

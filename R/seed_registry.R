@@ -217,7 +217,7 @@ sources <- tribble(
   "oh-monroeville",1,"html_table","https://www.huron.boe.ohio.gov/",NA,"Monroeville.*(advisory|data center)",NA,NA,NA,"true","unverified",NA,
   "oh-sprigg-twp",1,"html_table","https://www.boe.ohio.gov/adams/",NA,"Sprigg.*(zoning)",NA,NA,NA,"true","unverified",NA,
   "oh-monroe-twp",1,"html_table","https://www.boe.ohio.gov/adams/",NA,"Monroe Twp.*(zoning)|Monroe Township.*(zoning)",NA,NA,NA,"true","unverified",NA,
-  "oh-ashville",1,"html_table","https://www.boe.ohio.gov/pickaway/",NA,"Ashville.*(referendum|06-2026|resolution)","^(yes|for)","^(no|against)",NA,"true","unverified","Ballot choices are FOR / AGAINST the resolution.",
+  "oh-ashville",1,"html_table","https://www.boe.ohio.gov/pickaway/",NA,"Ashville.*(referendum|06-2026|resolution)","^(yes|for)","^(no|against)",NA,"true","unverified","Ballot choices are Yes / No per the county ballot proof (patterns also accept For / Against).",
   "oh-wilmington-1",1,"html_table","https://www.boe.ohio.gov/clinton/",NA,"Wilmington.*(referendum|ordinance).*1",NA,NA,NA,"true","unverified","Four questions; tighten each contest_pattern to its ordinance number once the sample ballot is out.",
   "oh-wilmington-2",1,"html_table","https://www.boe.ohio.gov/clinton/",NA,"Wilmington.*(referendum|ordinance).*2",NA,NA,NA,"true","unverified",NA,
   "oh-wilmington-3",1,"html_table","https://www.boe.ohio.gov/clinton/",NA,"Wilmington.*(referendum|ordinance).*3",NA,NA,NA,"true","unverified",NA,
