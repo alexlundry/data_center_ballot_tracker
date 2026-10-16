@@ -78,6 +78,16 @@ Ohio's Secretary of State live site reports statewide contests and State Issue 3
 
 Put numbers in the Google Sheet "Data Center Ballot Tracker — Election Night Manual Entry" (its `manual_results` tab is pre-filled with one row per November measure and is read by the `sheet` row in `sources.csv`; it must be shared as Anyone with the link > Viewer or published to the web) or in `data/manual_results.csv`: `race_id, yes_votes, no_votes, precincts_reporting, precincts_total, status (final when complete), as_of, source_url, override (TRUE to beat the automated feed), entered_by, note`. The next pipeline pass picks it up.
 
+## Registered voters from the Ohio voter file
+
+The Ohio Secretary of State's voter file portal (https://www6.ohiosos.gov/ords/f?p=VOTERFTP:HOME) answers automated requests with a bot check, so the county files have to be downloaded by hand. Download the county files for Adams (1), Ashtabula (4), Butler (9), Champaign (11), Clinton (14), Defiance (20), Delaware (21), Franklin (25), Huron (39), Lake (43), Licking (45), Lucas (48), Pickaway (65), Trumbull (78) and Wyandot (88) into one folder, then run:
+
+```
+Rscript R/count_registered_voters.R ~/Downloads/ohio-voter-files
+```
+
+It writes `data/registered_voters_ohio.csv` with one row per Ohio race (total and active registrations, the matching rule used, and the source file), and prints county totals for reference. Cities and villages are matched on the CITY / VILLAGE columns; the Sprigg and Monroe township zoning questions count the unincorporated area only (TOWNSHIP set, CITY and VILLAGE blank). Add `--write-sheet` to push the counts into columns G and Y of the manual_results tab of the election-night sheet (googlesheets4, interactive login; `--sheet <id>` overrides the sheet).
+
 ## Design
 
 Redbud research-deliverable design system: cream paper, white cards, plum-black ink, magenta accent, navy hero; Source Serif 4 / IBM Plex Sans / IBM Plex Mono. The two data colors (blue for Restrict, clay for Allow) were validated for color-vision deficiency and contrast on both the white cards and the navy hero.
