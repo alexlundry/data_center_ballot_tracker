@@ -1,0 +1,59 @@
+name: Probe results sources
+
+# Manual check of what the GitHub Actions runner can reach: every results_url
+# and api_url in data/sources.csv plus the Ohio hosts that block cloud
+# fetchers. Writes a table to the run summary. No repository changes.
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe every source URL
+        shell: bash
+        run: |
+          python3 - <<'PY' | tee probe.md
+          import csv, subprocess, re, sys, urllib.parse
+          urls = []
+          for r in csv.DictReader(open('data/sources.csv', encoding='utf-8')):
+              for k in ('results_url', 'api_url'):
+                  u = (r.get(k) or '').strip()
+                  if u.startswith('http') and '{' not in u and 'ELECTION_ID' not in u:
+                      urls.append((r['race_id'], r['adapter'], u))
+          extra = [('probe', 'host', u) for u in [
+              'https://www.boe.ohio.gov/pickaway/', 'https://lookup.boe.ohio.gov/vtrapp/ashtabula/',
+              'https://liveresults.boe.ohio.gov/ENR/butlerohenr/', 'https://www.huron.boe.ohio.gov/',
+              'https://www6.ohiosos.gov/ords/f?p=VOTERFTP:HOME::::::', 'https://www.ohiosos.gov/elections/election-results-and-data/',
+              'https://results.enr.clarityelections.com/IL/Madison/', 'https://results.enr.clarityelections.com/IL/Will/',
+              'https://results.enr.clarityelections.com/IL/Bloomington/', 'https://results.lavote.gov/electionresults/json?electionid=4338',
+              'https://elections.clarkcountynv.gov/ElectionResultsTV/ENR.aspx', 'https://vrcdn.electionsfl.org/StaticPages/volusia.html',
+              'https://elections.co.rock.wi.us/20260407.html', 'https://www.lyoncountyks.gov/181/Elections', 'https://www.bucoks.gov/448/Election-Results',
+              'https://www.franklincoks.org/210/Clerk-Elections', 'https://morgancounty-il.com/wp/departments/county-clerk/',
+              'https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php', 'https://bloomingtonelectionsil.gov/elections/pastresults/']]
+          seen = set(); rows = []
+          UA = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36'
+          for rid, ad, u in urls + extra:
+              if u in seen: continue
+              seen.add(u)
+              try:
+                  out = subprocess.run(['curl', '-sS', '-L', '-m', '25', '-A', UA, '-o', '/tmp/body', '-w', '%{http_code} %{content_type} %{size_download} %{url_effective}', u],
+                                       capture_output=True, text=True, timeout=40)
+                  w = out.stdout.strip().split(' ', 3)
+                  code, ctype, size = w[0], w[1] if len(w) > 1 else '', w[2] if len(w) > 2 else ''
+                  body = open('/tmp/body', 'rb').read(200000).decode('utf-8', 'ignore')
+                  bot = bool(re.search(r'just a moment|cf-challenge|challenge-platform|Website Maintenance|bot detection|Access Denied|Request unsuccessful|Incapsula|_Incapsula_Resource|distil', body, re.I))
+                  verdict = 'BLOCKED (bot check)' if bot else ('OK' if code.startswith('2') else f'HTTP {code}')
+              except Exception as e:
+                  code, ctype, size, verdict = 'ERR', '', '', f'error {e}'
+              rows.append((rid, ad, u, code, verdict, size))
+          print('| race_id | adapter | url | status | verdict | bytes |')
+          print('|---|---|---|---|---|---|')
+          for r in rows: print('| ' + ' | '.join(str(x) for x in r) + ' |')
+          PY
+          cat probe.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: probe
+          path: probe.md
