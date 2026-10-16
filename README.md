@@ -21,6 +21,8 @@ RUNBOOK.md       what to do on election night
 
 ## Running it locally
 
+Working on this repo with Claude Code? `CLAUDE.md` holds the conventions every session must keep, and `docs/handoff-local-session.md` is the current ordered task list. The reachability facts behind the plan are in `docs/automation-plan.md`.
+
 ```sh
 # R packages (once)
 Rscript -e 'install.packages(c("tidyverse","httr2","jsonlite","rvest","xml2","readxl","glue","cli","pdftools","testthat"))'

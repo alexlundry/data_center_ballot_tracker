@@ -59,6 +59,8 @@ curl -sS -o /dev/null -w "%{http_code}\n" https://liveresults.boe.ohio.gov/ENR/b
 
 Two `200`s mean the block is by network reputation and the plain R loop on the Mac will work as is. A `403` means a JavaScript challenge; the loop then needs a real browser for those hosts (the `chromote` package driving the Mac's Chrome), which is a contained addition to `fetch_text` and `fetch_file`.
 
+**Result (Oct 16):** both returned `403`. The Ohio hosts run a JavaScript challenge, so the browser-backed fetch is required. The design is task T2 in `docs/handoff-local-session.md`.
+
 **b. URL discovery in the pipeline.** Add `discover_url` and `discover_pattern` columns to `data/sources.csv` and a `discover_placeholders()` step in `fetch_results.R` that fills `ELECTION_ID` and `PDF_URL` before each fetch, caching results in `data/discovered.json`. Rules identified so far:
 
 | Source | Discovery |
