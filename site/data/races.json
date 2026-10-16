@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T14:42:49-0400",
+  "generated_at": "2026-10-16T14:44:00-0400",
   "count": 44,
   "races": [
     {
@@ -742,8 +742,8 @@
       "target_project": "Possible data center project discussed in April 2026",
       "proponents": "Protect the Heartland (700+ signatures)",
       "opponents": "City of El Dorado (lost court challenge)",
-      "summary": "Citizen-initiated ordinance prohibiting High Impact Data Centers and Tier 2 and Tier 3 battery energy storage systems. Under K.S.A. 12-3013, if adopted by voters it cannot be amended or repealed by the commission for ten years without voter approval. The Butler County District Court ruled the petition a proper legislative subject; the commission placed it on the ballot 5-0 on Aug 25.",
-      "ballot_text": "Shall the following ordinance be adopted? [ordinance title] prohibiting the installation and operation of High Impact Data Centers and Tier 2 and Tier 3 Battery Energy Storage Systems. Per the city, the question as printed carries the ordinance title, the definitions (a high impact data center has a peak electrical load exceeding 10 megawatts or a daily water draw exceeding 100,000 gallons; Tier 2 storage has aggregate capacity between 81 and 600 kilowatt-hours or more than one storage technology in a room or enclosed area; Tier 3 exceeds 600 kilowatt-hours) and a statement that the ordinance remains in effect for ten years unless amended or repealed by voter approval of a ballot question. (Reconstructed from city notices 652 and 688 and news coverage; the certified question text was not retrieved.)",
+      "summary": "Citizen-initiated ordinance prohibiting High Impact Data Centers and Tier 2 and Tier 3 battery energy storage systems. Under K.S.A. 12-3013, if adopted by voters it cannot be amended or repealed by the commission for ten years without voter approval. The 13th Judicial District court ruled the petition a proper legislative subject (Aug 21, 2026 city statement); the City Commission placed it on the ballot by resolution at a special meeting on Aug 25, 2026.",
+      "ballot_text": "Shall the following ordinance be adopted? [ordinance title] prohibiting the installation and operation of High Impact Data Centers and Tier 2 and Tier 3 Battery Energy Storage Systems. Per the city's Aug 26, 2026 official statement, the question as approved by the City Commission carries the ordinance title, the specific technical thresholds defining \"High Impact Data Center\" (peak electrical load exceeding 10 megawatts or a daily water draw exceeding 100,000 gallons) and \"Tier 2 and Tier 3 Battery Energy Storage Systems\" (Tier 2: aggregate capacity between 81 and 600 kilowatt-hours or more than one storage technology in a room or enclosed area; Tier 3: over 600 kilowatt-hours), and a description of the ordinance's ten-year effective period, under the \"generally descriptive\" option in K.S.A. 12-3013(b). (Reconstructed from city notices 652, 683 and 688 and the Aug 26 statement; the certified question text as printed on the Butler County ballot has not been retrieved.)",
       "ballot_text_verbatim": "FALSE",
       "status": "on_ballot",
       "lat": 37.8172,
@@ -754,7 +754,7 @@
       "results_page_url": "https://www.bucoks.gov/448/Election-Results",
       "poll_close_et": "20:00",
       "result_note": null,
-      "notes": "Polls close 7 pm Central. Results page URL unverified. Butler County District Court ruled in August that the ordinance is legislative and may proceed by initiative (city notice 683).",
+      "notes": "Polls close 7 pm Central. Results page URL unverified. The 13th Judicial District ruled in August that the ordinance is legislative and may proceed by initiative (city notice 683); the commission's Aug 26, 2026 official statement on the ballot question is in docs/source-docs/el-dorado-ks-official-statement-ballot-question-2026-08-26.pdf and says the full ordinance will be published on eldoks.gov under K.S.A. 12-3013(d). The sample ballot from the Butler County Clerk (bucoks.gov Elections) would give the verbatim question.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
