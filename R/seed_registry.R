@@ -16,7 +16,7 @@ suppressMessages({ library(tibble); library(readr); library(dplyr) })
 #                     zoning_adoption | advisory | referendum | land_use_authorization |
 #                     direct_legislation | general_plan_amendment | board_structure
 #  binding            binding | advisory
-#  origin             citizen_petition | council_referred | electors_meeting | court_ordered
+#  origin             citizen_petition | council_referred | electors_meeting | court_ordered | charter_commission
 #  yes_means          restrict = YES vote is the anti-data-center side
 #                     allow    = YES vote is the pro-data-center side
 #  status             on_ballot | pending_litigation | decided
