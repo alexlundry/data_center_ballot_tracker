@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T21:24:32-0400",
+  "generated_at": "2026-10-16T07:57:45-0400",
   "count": 44,
   "races": [
     {
@@ -23,7 +23,7 @@
       "proponents": "Hubbard residents' petition (750+ signatures)",
       "opponents": null,
       "summary": "Citizen-initiated ordinance prohibiting the construction of any data center within city limits, including converting existing buildings. No megawatt threshold: the only outright ban among Ohio's November measures. Council had already adopted a 12-month moratorium.",
-      "ballot_text": "HUBBARD CITY (All Hubbard City). ISSUE: Proposed Ordinance. PURPOSE: Shall the Ordinance to approve or reject a ban on data centers within the City limits, be passed? (Trumbull County Board of Elections running list.) The ordinance defines a data center as \"any facility that primarily contains electronic equipment used to process, store, and transmit digital information\" and also bars converting an existing building into one (fragment per WKBN; full ordinance text not retrieved).",
+      "ballot_text": "Shall the ordinance to approve or reject a ban on data centers within the city limits, be passed? (Ohio Secretary of State listing and Trumbull County BOE running list.) The ordinance defines a data center as \"any facility that primarily contains electronic equipment used to process, store, and transmit digital information\" and also bars converting an existing building into one (fragment per WKBN; full ordinance text not retrieved).",
       "ballot_text_verbatim": "TRUE",
       "status": "on_ballot",
       "lat": 41.1565,
@@ -34,7 +34,7 @@
       "results_page_url": "https://boe.co.trumbull.oh.gov/boe_results.html",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "Issue number not yet confirmed; check Trumbull BOE sample ballot.",
+      "notes": "Issue number not yet confirmed; check Trumbull BOE sample ballot. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -70,7 +70,7 @@
       "results_page_url": "https://www.boe.ohio.gov/champaign/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": null,
+      "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article VII, Section 8.07 (the petition's Article VII/VIII inconsistency carries through to the state list).",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -106,7 +106,7 @@
       "results_page_url": "https://vote.delawarecountyohio.gov/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "Delaware County Issue 9 is a different Sunbury charter amendment (council seats); confirm this measure's issue number.",
+      "notes": "Delaware County Issue 9 is a different Sunbury charter amendment (council seats); confirm this measure's issue number. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file (misspelled Sunsbury) as Charter Amendment: Article XI, Section XI.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -142,7 +142,7 @@
       "results_page_url": "https://www.boe.ohio.gov/ashtabula/election-info/election-results",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": null,
+      "notes": "NOT present in the Ohio Secretary of State's Nov 3 Local Questions and Issues file (the only Ashtabula County Conneaut row is a park district levy); the measure is confirmed by the Ashtabula County BOE's Aug 26 approval and News 5 Cleveland. Verify with the county sample ballot.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -178,7 +178,7 @@
       "results_page_url": "https://www.boe.ohio.gov/defiance/election-info/election-night-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": null,
+      "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Section 1.12.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -214,7 +214,7 @@
       "results_page_url": "https://liveresults.boe.ohio.gov/ENR/butlerohenr/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "Ohio Supreme Court ordered the measure onto the ballot Sept 1, 2026.",
+      "notes": "Ohio Supreme Court ordered the measure onto the ballot Sept 1, 2026. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article IX, Section 9.06.",
       "adapters": "html_table",
       "source_status": "pattern"
     },
@@ -250,7 +250,7 @@
       "results_page_url": "https://liveresults.franklincountyohio.gov/enr/franklinohenr/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": null,
+      "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: XI.",
       "adapters": "html_table",
       "source_status": "pattern"
     },
@@ -286,7 +286,7 @@
       "results_page_url": "https://www.boe.ohio.gov/licking/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "The Licking County BOE summary shows no megawatt threshold; news reports describe the 25 MW definition. One of four Pataskala charter amendments plus a library levy on the same ballot.",
+      "notes": "The Licking County BOE summary shows no megawatt threshold; news reports describe the 25 MW definition. One of four Pataskala charter amendments plus a library levy on the same ballot. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article XI, Section 11.09 (three other Pataskala charter amendments are on the same ballot).",
       "adapters": "pdf",
       "source_status": "unverified"
     },
@@ -322,7 +322,7 @@
       "results_page_url": "https://www.boe.ohio.gov/licking/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "Some roundups describe it as an outright ban; confirm threshold in the certified text.",
+      "notes": "Some roundups describe it as an outright ban; confirm threshold in the certified text. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article X, Section 10.12.",
       "adapters": "pdf",
       "source_status": "unverified"
     },
@@ -358,7 +358,7 @@
       "results_page_url": "https://liveresults.boe.ohio.gov/ENR/lucasohenr/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "Issue 25 (Issues 26 and 27 on the Oregon ballot are unrelated charter changes). Council accepted the BOE certification Aug 19. Lucas County reports on the SOS-hosted ENR platform (Nov 2025 was instance 21).",
+      "notes": "Issue 25 (Issues 26 and 27 on the Oregon ballot are unrelated charter changes). Council accepted the BOE certification Aug 19. Lucas County reports on the SOS-hosted ENR platform (Nov 2025 was instance 21). Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article XIII, Section 8.",
       "adapters": "html_table",
       "source_status": "pattern"
     },
@@ -383,7 +383,7 @@
       "proponents": "Citizen petition (Conserve Ohio template)",
       "opponents": null,
       "summary": "Charter amendment prohibiting data center construction using the 25 MW definition. Reported by Ohio Capital Journal and Ballotpedia; the weakest-confirmed Ohio entry, so verify with the Wyandot County Board of Elections.",
-      "ballot_text": "Charter amendment prohibiting the construction of data centers (summary from secondary sources only; neither the ballot text nor an official listing has been retrieved).",
+      "ballot_text": "Charter Amendment: Article XVII, Section 17.13 (Ohio Secretary of State listing; the section prohibits data center construction per secondary reports, and the ballot question line has not been retrieved).",
       "ballot_text_verbatim": "FALSE",
       "status": "on_ballot",
       "lat": 40.8273,
@@ -394,7 +394,7 @@
       "results_page_url": "https://www.boe.ohio.gov/wyandot/election-info/election-results",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "NOT CONFIRMED by any official source as of Oct 16: only Ballotpedia-derived trackers and the Ohio Capital Journal list it, and they disagree on whether it is an outright ban or the 25 MW template. No Wyandot BOE listing or local-paper story surfaced. Call the Wyandot County BOE, (419) 294-1226, before election night; remove the row if it is not on the ballot.",
+      "notes": "CONFIRMED on the ballot: Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as City of Upper Sandusky, Charter Amendment: Article XVII, Section 17.13. Secondary sources disagree on whether it is an outright ban or the 25 MW template; the Wyandot BOE sample ballot settles the text.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -409,18 +409,18 @@
       "scope": "direct",
       "election_date": "2026-11-03",
       "measure_label": null,
-      "title": "Advisory question on allowing data center development",
-      "measure_type": "advisory",
-      "binding": "advisory",
+      "title": "Proposed ordinance allowing data center development",
+      "measure_type": "ordinance",
+      "binding": "binding",
       "origin": "council_referred",
       "yes_means": "allow",
       "threshold_mw": null,
       "target_project": "Decimal Digital AI data center pitch",
       "proponents": "Village council (advisory)",
       "opponents": null,
-      "summary": "Non-binding question asking whether village officials should allow data center development within village limits. The village adopted a 12-month moratorium in February and is still owed about $1.3M from a 2024 crypto-mining operation.",
-      "ballot_text": "Advisory question on whether village officials should allow data center development within village limits (description per Newsweek and the Brockovich Report citing Ballotpedia; the ballot wording itself was not retrieved. The Huron County Auditor posts a November 2026 ballot issues list.)",
-      "ballot_text_verbatim": "FALSE",
+      "summary": "A proposed village ordinance that would allow data center development within village limits, put to voters as an adopt-or-reject question. Earlier reporting described it as advisory; the Secretary of State's list shows a binding proposed ordinance. The village adopted a 12-month moratorium in February after Decimal Digital's pitch and is still owed about $1.3M from a 2024 crypto-mining operation.",
+      "ballot_text": "Shall the proposed ordinance allowing data center development be adopted?",
+      "ballot_text_verbatim": "TRUE",
       "status": "on_ballot",
       "lat": 41.2445,
       "lon": -82.698,
@@ -430,7 +430,7 @@
       "results_page_url": "https://www.huron.boe.ohio.gov/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "A YES vote favors allowing data centers.",
+      "notes": "A YES vote favors allowing data centers. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Village of Monroeville: Shall the proposed ordinance allowing data center development be adopted? Who placed it (council or petition) is unverified.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -466,7 +466,7 @@
       "results_page_url": "https://www.boe.ohio.gov/adams/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": null,
+      "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Sprigg Township, Zoning amendment.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -502,7 +502,7 @@
       "results_page_url": "https://www.boe.ohio.gov/adams/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": null,
+      "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Monroe Township, Zoning amendment.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -538,7 +538,7 @@
       "results_page_url": "https://www.boe.ohio.gov/pickaway/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "A YES vote is the pro-data-center side. Council's attempt to repeal the agreement (Resolution 16-2026) failed at its third reading on Oct 5, 2026, so the referendum stays on the ballot. Village electors only.",
+      "notes": "A YES vote is the pro-data-center side. Council's attempt to repeal the agreement (Resolution 16-2026) failed at its third reading on Oct 5, 2026, so the referendum stays on the ballot. Village electors only. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file with the same question wording.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -574,7 +574,7 @@
       "results_page_url": "https://www.boe.ohio.gov/clinton/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "Four separate ballot questions on parcels formerly tied to the Ardent Companies project (agreement terminated this summer). Separate petitions against the Sept 3 Amazon-related ordinances are NOT on Nov 3. Map dots are offset slightly so all four are visible.",
+      "notes": "Four separate ballot questions on parcels formerly tied to the Ardent Companies project (agreement terminated this summer). Separate petitions against the Sept 3 Amazon-related ordinances are NOT on Nov 3. Map dots are offset slightly so all four are visible. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Zoning Ordinance O-26-04.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -610,7 +610,7 @@
       "results_page_url": "https://www.boe.ohio.gov/clinton/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": null,
+      "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Zoning Ordinance O-26-06.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -646,7 +646,7 @@
       "results_page_url": "https://www.boe.ohio.gov/clinton/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": null,
+      "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Zoning Ordinance O-26-07.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -682,7 +682,7 @@
       "results_page_url": "https://www.boe.ohio.gov/clinton/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "Ordinance number confirmed as O-26-05 from the Clinton County sample ballot.",
+      "notes": "Ordinance number confirmed as O-26-05 from the Clinton County sample ballot. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Zoning Ordinance O-26-05.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -1571,8 +1571,8 @@
       "proponents": "Residents' petition (300 signatures submitted; 76 needed)",
       "opponents": null,
       "summary": "Citizen-initiated ordinance requiring any hyperscale data center developer (over 10,000 sq ft, over 5,000 servers, or over 50 MW) that seeks a tax abatement, PILOT or other special tax designation to first deposit a bond or escrow equal to at least the projected tax revenue over the project's 31-year life plus projected salaries for 200 full-time employees, with annual make-whole payments if projections fall short and assessments for environmental, standard-of-living or property-value effects. Also requires a noise guarantee of 50 dB by day and 45 dB overnight with council-set fines. Conditions the deal rather than banning the building.",
-      "ballot_text": "Lake County Board of Elections certified listing: \"16 Perry Village (1 pct.) Initiative Petition (Proposed Ordinance) <e2><80><93> An Ordinance Amending Chapter 133.01 \"Established; Power and Duties\" of the Codified Ordinances of the Village of Perry\" [...] (listing verbatim; the question text was truncated in the source and the full ordinance is posted by the BOE as \"Full Text <e2><80><93> Perry Village Ordinance By Petition\"). The ordinance applies to data centers exceeding any of 10,000 square feet, 5,000 servers or 50 MW that seek a tax abatement, PILOT or special tax designation.",
-      "ballot_text_verbatim": "FALSE",
+      "ballot_text": "Shall the ordinance amending Chapter 133.01 \"Established; Power & Duties\" of the codified ordinances of the Village of Perry be adopted? (Ohio Secretary of State listing; Lake County Issue 16.) The ordinance requires hyperscale data center developers (over 10,000 square feet, 5,000 servers or 50 MW) seeking a tax abatement, PILOT or special tax designation to post a 31-year bond covering projected tax revenue and 200 salaries, with make-whole payments and a 50 dB day / 45 dB night noise guarantee.",
+      "ballot_text_verbatim": "TRUE",
       "status": "on_ballot",
       "lat": 41.76,
       "lon": -81.143,
@@ -1592,7 +1592,7 @@
       "jurisdiction": "Piqua (city), Miami County",
       "state": "OH",
       "what": "Charter amendments banning data centers and crypto mining; referendum on the AES Ohio franchise ordinance tied to Meta's ~1,400 MW project",
-      "status": "Moved to a Feb 2, 2027 special election (recalls of three commissioners are on Nov 3)",
+      "status": "Moved to a Feb 2, 2027 special election by the commission on Oct 6, 2026 (recalls of three commissioners are on Nov 3). The Ohio SOS questions-and-issues file dated Sept 18 still lists a Piqua charter amendment (Article 138) for Nov 3; it predates the move.",
       "date": "2027-02-02",
       "link": "https://www.daytondailynews.com/local/piqua-voters-could-see-two-data-center-charter-amendments-on-november-ballot/article_53bbb626-cbfb-590e-bd09-a5c2760804bf.html"
     },
