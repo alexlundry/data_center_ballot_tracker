@@ -73,4 +73,5 @@ summary <- list(measures_nov3 = nrow(nov), with_results = nrow(wv),
 out <- list(generated_at = now_iso(), election_date = "2026-11-03", simulated = TRUE, summary = summary, races = results)
 path <- "site/data/results.json"
 jsonlite::write_json(out, path, auto_unbox = TRUE, na = "null", pretty = TRUE, digits = NA)
-cli::cli_alert_success("wrote SIMULATED {path} at stage {stage}")
+write_results_csv(results |> select(-history), races)
+cli::cli_alert_success("wrote SIMULATED {path} (and results.csv) at stage {stage}")

@@ -200,3 +200,21 @@ derive_fields <- function(res, race) {
     status = status
   )
 }
+
+# ---- Flat CSV for the Google Sheet ------------------------------------------
+# One row per race with the latest numbers. The election-night sheet imports
+# this file (IMPORTDATA) so people entering results by hand can see which
+# races the automated feeds already cover. Written next to results.json.
+write_results_csv <- function(results, races, path = "site/data/results.csv") {
+  flat <- races |>
+    select(race_id, state, jurisdiction, election_date, yes_means) |>
+    inner_join(results |> select(any_of(c("race_id", "yes_votes", "no_votes", "total_votes", "yes_pct",
+                                          "restrict_pct", "leader", "precincts_reporting", "precincts_total",
+                                          "pct_reporting", "status", "adapter", "as_of", "source_url", "fetch_ok"))),
+               by = "race_id") |>
+    mutate(yes_pct = round(as.numeric(yes_pct), 1), restrict_pct = round(as.numeric(restrict_pct), 1),
+           pct_reporting = round(as.numeric(pct_reporting), 1),
+           feed = case_when(adapter == "manual" ~ "manual entry", is.na(adapter) ~ "none yet", TRUE ~ adapter))
+  readr::write_csv(flat, path, na = "")
+  invisible(flat)
+}

@@ -174,5 +174,6 @@ if (DRY_RUN) {
   print(results |> select(race_id, yes_votes, no_votes, pct_reporting, leader, status, adapter, fetch_ok))
 } else {
   jsonlite::write_json(out, RESULTS_PATH, auto_unbox = TRUE, na = "null", pretty = TRUE, digits = NA)
-  log_msg("wrote ", RESULTS_PATH, " (", nrow(results), " races, ", summary$with_results, " with results)")
+  write_results_csv(results, races)
+  log_msg("wrote ", RESULTS_PATH, " and site/data/results.csv (", nrow(results), " races, ", summary$with_results, " with results)")
 }

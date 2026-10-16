@@ -59,9 +59,9 @@ jobs:
             fi
           fi
           git add site/data/races.json data/history.csv
-          if [ "$counts_changed" = "1" ]; then git add site/data/results.json; fi
+          if [ "$counts_changed" = "1" ]; then git add site/data/results.json site/data/results.csv; fi
           if git diff --cached --quiet; then echo "no meaningful change"; else
-            git add site/data/results.json
+            git add site/data/results.json site/data/results.csv
             git commit -m "results $(date -u +%Y-%m-%dT%H:%MZ)"
             git push
           fi
