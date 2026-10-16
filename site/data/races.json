@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T14:20:23-0400",
+  "generated_at": "2026-10-16T14:35:36-0400",
   "count": 44,
   "races": [
     {
@@ -131,18 +131,18 @@
       "proponents": "Citizen petition (Conserve Ohio template)",
       "opponents": "City Manager Nick Sanford warned of judicial review",
       "summary": "Adds Article XVI, Conservation of Natural Resources, to the city charter, prohibiting data centers with aggregate monthly demand or peak load over 25 MW (318 valid signatures). Council declined to adopt a moratorium; the petition went forward anyway.",
-      "ballot_text": "Charter amendment adding Article XVI, \"Conservation of Natural Resources,\" prohibiting data centers with an aggregate demand or peak load above 25 megawatts, with the 25 MW definition aggregated across parcels and counted from any energy source or combination (summary per the Star Beacon and OpenVoterGuide; the ballot text itself was not retrieved).",
-      "ballot_text_verbatim": "FALSE",
+      "ballot_text": "Issue 10. Proposed Charter Amendment, Conneaut City. A majority affirmative vote is necessary for passage. Shall the Charter of the City of Conneaut be amended to add Article XVI to read as follows: ARTICLE XVI CONSERVATION OF NATURAL RESOURCES. Section XVI-1. Prohibition of Construction of a Data Center. (A) The construction of a data center is hereby prohibited. (B) As used in this Section, \"construction\" shall mean the erection of one or more buildings, infrastructure, facilities, and related activities, which include preparations and modifications for same, for a common purpose. (C) As used in this Section, \"data center\" shall mean one or more buildings or physical facilities or infrastructure, located on a single real property parcel or on contiguous, adjacent, or otherwise aggregated real property parcels that (1) Are used primarily or exclusively for digital information services such as the management, storage, processing, and dissemination of electronic data and information through the use of computer systems, servers, networking equipment, and related components, including equipment cooling systems; and (2) Has an aggregate monthly demand or peak load of greater than twenty five (25) megawatts, however derived from any energy source, or a combination thereof. (D) This Section is self-executing. Shall the proposed charter amendment be adopted? YES / NO.",
+      "ballot_text_verbatim": "TRUE",
       "status": "on_ballot",
       "lat": 41.9478,
       "lon": -80.5545,
-      "ballot_text_url": null,
+      "ballot_text_url": "https://lookup.boe.ohio.gov/vtrapp/ashtabula/",
       "ballotpedia_url": null,
       "news_url": "https://www.news5cleveland.com/news/local-news/oh-ashtabula/conneaut-voters-to-decide-whether-to-ban-large-data-centers",
       "results_page_url": "https://www.boe.ohio.gov/ashtabula/election-info/election-results",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "NOT present in the Ohio Secretary of State's Nov 3 Local Questions and Issues file (the only Ashtabula County Conneaut row is a park district levy); the measure is confirmed by the Ashtabula County BOE's Aug 26 approval and News 5 Cleveland. Verify with the county sample ballot.",
+      "notes": "NOT present in the Ohio Secretary of State's Nov 3 Local Questions and Issues file (the only Ashtabula County Conneaut row is a park district levy); the measure is confirmed by the Ashtabula County BOE's Aug 26 approval and News 5 Cleveland. Confirmed as Issue 10 on the Ashtabula County sample ballot for Conneaut precinct 1-C (generated Sept 15, 2026; docs/source-docs/ashtabula-county-sample-ballot-conneaut-1c.pdf), which carries the full Article XVI text.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
