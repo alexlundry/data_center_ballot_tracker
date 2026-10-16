@@ -1,5 +1,7 @@
 # Source documents the build environment could not open
 
+Status (Oct 16): FETCHED items are in `docs/source-docs/` and applied to the registry: 1 (SOS XLSX, Sept 18 version), 3 (Lake County list; Perry full-text ordinance still open), 4 (Clinton sample ballot), 5 (Delaware), 6 (Champaign), 7 (Trumbull), 9 (Oregon), 10 (Licking). Item 2's link served a 2017 notice, not Issue 28. Still open: 2 (Issue 28 full text, separate link on the Franklin County 2026 page), 8 (Pickaway proofs), 11 (Ashtabula, Defiance, Adams, Huron, Wyandot sample ballots), 12 through 21.
+
 Fetched copies go in `docs/source-docs/` (any format). Each closes a named gap in `data/races.csv`.
 
 ## Highest value
