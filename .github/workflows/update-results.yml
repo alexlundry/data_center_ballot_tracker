@@ -64,7 +64,16 @@ jobs:
               counts_changed=0
             fi
           fi
-          git add site/data/races.json data/history.csv
+          # races.json is rebuilt every run too; stage it only if more than
+          # its generated_at changed
+          if git cat-file -e HEAD:site/data/races.json 2>/dev/null && \
+             diff <(git show HEAD:site/data/races.json | jq -S 'del(.generated_at)') \
+                  <(jq -S 'del(.generated_at)' site/data/races.json) >/dev/null; then
+            git checkout -- site/data/races.json
+          else
+            git add site/data/races.json
+          fi
+          git add data/history.csv
           if [ "$counts_changed" = "1" ]; then git add site/data/results.json site/data/results.csv; fi
           if git diff --cached --quiet; then echo "no meaningful change"; else
             git add site/data/results.json site/data/results.csv
