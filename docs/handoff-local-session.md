@@ -28,6 +28,8 @@ The script now tries several precinct spellings and, if nothing matches, prints 
 
 ### T2. Browser-backed fetch for the bot-checked hosts (the unlock for 16 races)
 
+**Status Oct 23: blocked by design.** A spike with chromote (fresh profile, `--headless=new`, then headed) got Cloudflare's "Our security service has detected suspicious activity, and access to the website has been blocked" page on `boe.ohio.gov` within 20 seconds, both ways. The block page is 1.25 MB (inlined fonts), so a size check cannot tell it from a real page; detect it by its title. Getting past it would take stealth patches that hide the automation, which is evading the state's bot detection and is not something to build. Options being decided with Alex: a drop folder that a person's browser downloads into, the sheet's manual override, or asking the SOS/county boards for an allowlist or feed. The design below is kept for reference.
+
 Goal: adapters keep calling `fetch_text()` and `fetch_file()` from `R/utils.R`; for the challenge hosts those helpers go through Chrome instead of httr2.
 
 Design:

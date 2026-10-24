@@ -42,8 +42,9 @@ Rscript R/count_registered_voters.R <folder> [--only WYANDOT]
 
 ## Network facts (verified Oct 16, 2026)
 
-- `boe.ohio.gov`, `lookup.boe.ohio.gov`, `liveresults.boe.ohio.gov`, `huron.boe.ohio.gov` and `ohiosos.gov` (including the `www6` voter-file portal) answer plain HTTP clients with a JavaScript bot challenge (HTTP 403) from every origin tested: GitHub Actions, the Claude cloud environment, and curl on Alex's Mac. A real browser passes. Those hosts need the browser-backed fetch described in the handoff; do not spend time on headers, user agents or retries.
-- `liveresults.franklincountyohio.gov` returned 403 from the cloud and is untested from the Mac.
+- `boe.ohio.gov`, `lookup.boe.ohio.gov`, `liveresults.boe.ohio.gov`, `huron.boe.ohio.gov` and `ohiosos.gov` (including the `www6` voter-file portal) answer plain HTTP clients with a JavaScript bot challenge (HTTP 403) from every origin tested: GitHub Actions, the Claude cloud environment, and curl on Alex's Mac. A person in an ordinary browser passes. Do not spend time on headers, user agents or retries.
+- Oct 23: Chrome driven by chromote also gets Cloudflare's "access has been blocked" page from the Mac, headless and headed alike. Cloudflare flags the automation itself. T2 as designed does not work, and making it work would mean evading bot detection, which is off the table. Results from these hosts need a person's browser (see T2 in the handoff) or the counties' cooperation.
+- `liveresults.franklincountyohio.gov` returned 403 from the cloud and from curl on the Mac (Oct 23).
 - `results.lavote.gov`'s election-list page is Incapsula-protected, but its JSON results endpoint works.
 - Every other host in `sources.csv` is reachable from GitHub Actions (`probe-sources.yml` run of Oct 16).
 - The Ohio Secretary of State's live results do not carry local issues; county sites are the only source for the 20 Ohio measures.
