@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T14:52:27-0400",
+  "generated_at": "2026-10-23T20:50:04-0400",
   "count": 44,
   "races": [
     {
@@ -827,8 +827,8 @@
       "poll_close_et": "20:00",
       "result_note": null,
       "notes": "Results come from the Bloomington Election Commission, not the McLean County Clerk. Polls close 7 pm Central. Wording confirmed by 25News (Oct 14, 2026); the official question page and specimen ballot are on the commission's site.",
-      "adapters": "pdf,html_table",
-      "source_status": "unverified"
+      "adapters": "clarity,pdf",
+      "source_status": "pattern"
     },
     {
       "race_id": "il-joliet-twp",
@@ -899,8 +899,8 @@
       "poll_close_et": "20:00",
       "result_note": null,
       "notes": "A YES vote favors data centers. Who placed the question is unverified.",
-      "adapters": "html_table,pdf",
-      "source_status": "unverified"
+      "adapters": "clarity,pdf",
+      "source_status": "pattern"
     },
     {
       "race_id": "il-granite-city-twp",
@@ -935,8 +935,8 @@
       "poll_close_et": "20:00",
       "result_note": null,
       "notes": "A YES vote favors data centers.",
-      "adapters": "html_table,pdf",
-      "source_status": "unverified"
+      "adapters": "clarity,pdf",
+      "source_status": "pattern"
     },
     {
       "race_id": "il-nameoki-twp",
@@ -971,8 +971,8 @@
       "poll_close_et": "20:00",
       "result_note": null,
       "notes": "A YES vote favors data centers.",
-      "adapters": "html_table,pdf",
-      "source_status": "unverified"
+      "adapters": "clarity,pdf",
+      "source_status": "pattern"
     },
     {
       "race_id": "il-venice-twp",
@@ -1007,8 +1007,8 @@
       "poll_close_et": "20:00",
       "result_note": null,
       "notes": "A YES vote favors data centers. Wording reproduced verbatim in the Alton Telegraph voter guide; the other three townships use the identical form.",
-      "adapters": "html_table,pdf",
-      "source_status": "unverified"
+      "adapters": "clarity,pdf",
+      "source_status": "pattern"
     },
     {
       "race_id": "il-morgan-county",

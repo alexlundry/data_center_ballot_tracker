@@ -37,7 +37,8 @@ sources <- readr::read_csv("data/sources.csv", show_col_types = FALSE,
   mutate(priority = as.integer(coalesce(priority, "9")),
          enabled = tolower(coalesce(enabled, "true")) %in% c("true", "t", "yes", "y", "1")) |>
   filter(enabled) |>
-  arrange(race_id, priority)
+  arrange(race_id, priority) |>
+  discover_placeholders()
 
 ctx <- list(
   manual_tbl = read_manual_table("data/manual_results.csv"),

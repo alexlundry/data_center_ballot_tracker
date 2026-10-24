@@ -13,6 +13,8 @@
 adapter_pdf <- function(src) {
   if (!requireNamespace("pdftools", quietly = TRUE)) stop("install.packages('pdftools')")
   path <- src$local_file %||% fetch_file(src$api_url %||% src$results_url, ext = ".pdf")
+  # An HTML page (no PDF url set yet, or a block page) must not parse as an empty result
+  if (!identical(readBin(path, "raw", 5), charToRaw("%PDF-"))) stop("not a PDF; set api_url to the results PDF")
   lines <- pdftools::pdf_text(path) |> paste(collapse = "\n") |> str_split("\n") |> unlist() |> str_squish()
   idx <- which(str_detect(lines, regex(src$contest_pattern %||% "", ignore_case = TRUE)))
   if (length(idx) == 0) stop("contest_pattern not found in PDF text")

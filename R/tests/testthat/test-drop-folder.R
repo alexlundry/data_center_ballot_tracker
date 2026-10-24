@@ -100,3 +100,20 @@ test_that("a blocked host with no matching file fails without a network request"
   res2 <- suppressMessages(run_adapter(src, list()))
   expect_match(res2$error, "does not exist")
 })
+
+test_that("a blocked ENR source with an unfilled ELECTION_ID still reads the drop folder", {
+  d <- new_drop()
+  file.copy(fx("county_results.html"), file.path(d, "Index.html"))
+  src <- list(race_id = "oh-trenton", adapter = "html_table", contest_pattern = "Conneaut", extra_json = NA,
+              results_url = "https://liveresults.boe.ohio.gov/ENR/butlerohenr/ELECTION_ID/en/Index_ELECTION_ID.html")
+  res <- run_adapter(src, list())
+  expect_false(inherits(res, "adapter_error"))
+  expect_equal(res$yes_votes, 1532L)
+})
+
+test_that("the pdf adapter rejects an HTML page instead of reading it as 0 / 0", {
+  d <- new_drop()
+  writeLines("<html><title>Website Maintenance</title>Urbana charter</html>", file.path(d, "page.pdf"))
+  src <- list(race_id = "oh-urbana", adapter = "pdf", contest_pattern = "Urbana", results_url = "https://e.org/")
+  expect_error(adapter_pdf(modifyList(src, list(local_file = file.path(d, "page.pdf")))), "not a PDF")
+})

@@ -29,7 +29,9 @@
 
 ## Known soft spots
 - Ohio SOS `liveresults.ohiosos.gov` carries statewide contests and State Issue 3 only (Directives 2026-22 and 2026-48; the Nov 2025 SOS review sent readers to county sites for local results). All 20 Ohio measures come from 15 county boards: Butler, Franklin and Lucas run an ENR site whose instance ID changes each election (read it off the index page at 7:30 pm); the other 12 post PDFs.
-- Election IDs to collect on the night, each a placeholder `ELECTION_ID` in `data/sources.csv`: Butler OH ENR, Franklin OH ENR, Lucas OH ENR, Will County IL (Clarity), LA County (JSON), Volusia FL (VR Systems), Morgan County IL (GBS portal). Replace them with sed or a quick edit, then `make fetch`.
+- Election IDs and night-of PDF links are found automatically: each pass reads the page in `discover_url` (`data/sources.csv`) and fills `ELECTION_ID` or `PDF_URL`, logging "discovered ELECTION_ID = …" once. Covered: Bloomington and Madison (Clarity), Will (Clarity, if the county uses it), Morgan IL (GBS), LA County (walks ids 4339–4370), Volusia, Trumbull (Hubbard) and Delaware (Sunbury) PDFs. A source still waiting logs "ELECTION_ID not discovered yet" and makes no request. If a rule misses, paste the id or url over the placeholder in `sources.csv` (that wins), or fix `discover_pattern`. Found values are cached in `data/discovered.json`; delete a line there to force a fresh look.
+- Clarity usually lists an election a few days early with zero counts. Once Bloomington and Madison appear, run `Rscript R/fetch_results.R --dry-run` and check the logged contest names match the patterns.
+- The Butler, Franklin and Lucas ENR urls still carry `ELECTION_ID`, but those counties come through the drop folder; replace the id only so the dashboard's source link works.
 - Illinois: Bloomington's numbers come from the Bloomington Election Commission, not McLean County.
 - Wisconsin: Janesville absentee ballots are counted centrally and may post separately from in-person totals.
 - Kansas counties post PDFs; the `pdf` adapter is best-effort. Plan on manual entry for Emporia, El Dorado and Ottawa.

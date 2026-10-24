@@ -7,7 +7,7 @@ Read `docs/automation-plan.md` (what is and is not automated, and why) and `docs
 ## Layout
 
 - `data/races.csv`: the registry, 44 rows (34 on the Nov 3 ballot, the rest decided earlier or on other dates). One row per question; Wilmington OH has four.
-- `data/sources.csv`: results feeds per race, tried by `priority`; `adapter` names a parser in `R/adapters/`.
+- `data/sources.csv`: results feeds per race, tried by `priority`; `adapter` names a parser in `R/adapters/`. `discover_url` / `discover_pattern` / `discover_pick` fill `ELECTION_ID` or `PDF_URL` placeholders each pass (`R/adapters/discover.R`, cache in gitignored `data/discovered.json`).
 - `data/manual_results.csv`, `data/not_on_ballot.csv`, `data/registered_voters_ohio.csv`, `data/history.csv` (election-night change log, written by the pipeline).
 - `R/`: `build_races.R` (registry to `site/data/races.json`), `fetch_results.R` (one pass of every feed to `site/data/results.json` and `results.csv`), `adapters/` (including `drop_folder.R`), `drop_status.R` (election-night drop-folder checklist), `utils.R` (HTTP and parsing helpers), `write_sheet.R`, `watch.R` (laptop loop), `count_registered_voters.R`, `simulate_results.R`, `reset_results.R`, `tests/testthat/`.
 - `site/index.html`: the whole dashboard, one file, inline CSS and JS, d3 and topojson-client from CDNs. `site/data/` holds the JSON it reads.
@@ -54,4 +54,4 @@ Rscript R/count_registered_voters.R <folder> [--only WYANDOT]
 
 - Ballot wording is verbatim for 29 of 34 Nov 3 measures. Still open: Volusia (Edgewater), Butler KS (El Dorado), Franklin KS (Ottawa) and Morgan IL sample ballots.
 - Registered voters are on the sheet (column G) for 29 of 34 races, from official files (all 20 Ohio races, Upper Sandusky added Oct 23); the non-Ohio gaps are explained in column Y.
-- Feeds: as of Oct 16 no source will produce numbers on election night without either a browser-backed fetch (Ohio) or an election id that counties have not published yet. The plan to fix that is `docs/automation-plan.md`; the ordered task list is `docs/handoff-local-session.md`.
+- Feeds (Oct 23): 17 Ohio sources use the drop folder; election ids and night-of PDF links are discovered automatically (T3 done); Kansas is manual; Will County's live source is still unknown. PDF layouts are mostly untested (T4). The ordered task list is `docs/handoff-local-session.md`.

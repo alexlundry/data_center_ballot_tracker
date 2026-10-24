@@ -48,6 +48,8 @@ Acceptance:
 
 ### T3. Automatic URL discovery (removes every "paste the election id" step)
 
+**Status Oct 23: built** (`R/adapters/discover.R`, rules in `data/sources.csv`, tests in `test-discover.R`). Each rule was checked against the live page with the date swapped for the latest past election: Bloomington 126005, Madison 126058, Morgan 7104 (read page `id=5946`, which lists every Morgan election; results pages do not), Volusia 4004 (Aug 18 page), LA 4338 (probe), Trumbull `Election Summary050526.pdf`. Delaware's rule is unproven: its May summary is no longer on the home page, so only link handling was tested. Will County's `elections.json` is still empty. Kansas has no rule; plan on manual entry. Bloomington and the four Madison townships now use the `clarity` adapter, whose summary also gives per-township registered voters (T8). The table below is the original research.
+
 Add columns `discover_url`, `discover_pattern` (a regex with one capture group) and `discover_pick` (`first`, `last` or `max`) to `data/sources.csv`. Add a `discover_placeholders(sources)` step at the top of `R/fetch_results.R` that fetches each distinct `discover_url` once, applies the pattern, substitutes the capture into `ELECTION_ID` or `PDF_URL` placeholders in `results_url` and `api_url`, and caches `{race_id, placeholder, value, found_at}` in `data/discovered.json` so a transient failure keeps the last good value. Log every discovery. Write tests with saved fixture pages.
 
 Rules found so far (verify each against the live page before relying on it):
