@@ -23,6 +23,7 @@ jobs:
             any::readxl
             any::glue
             any::cli
+            any::pdftools
             any::testthat
       - run: Rscript -e 'testthat::test_dir("R/tests/testthat")'
       - run: Rscript R/build_races.R

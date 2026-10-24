@@ -57,6 +57,10 @@ drop_text <- function(path) {
   info <- file.info(path)
   key <- paste(path, as.numeric(info$mtime), info$size)
   if (!is.null(.drop_cache[[key]])) return(.drop_cache[[key]])
+  # A missing pdftools would otherwise look like "no file matches"
+  if (grepl("\\.pdf$", path, ignore.case = TRUE) && !requireNamespace("pdftools", quietly = TRUE)) {
+    stop("install.packages('pdftools') to read PDFs in the drop folder")
+  }
   txt <- tryCatch({
     if (grepl("\\.pdf$", path, ignore.case = TRUE)) {
       paste(suppressMessages(pdftools::pdf_text(path)), collapse = "\n")
