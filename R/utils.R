@@ -79,7 +79,7 @@ extract_precincts <- function(text) {
   if (is.na(m[1, 1])) {
     m <- str_match(
       text,
-      regex("precincts\\s*(?:reporting|reported|counted)?[^\\d]{0,20}(\\d[\\d,]*)\\s*(?:of|/)\\s*(\\d[\\d,]*)",
+      regex("precincts?\\s*(?:reporting|reported|counted)?[^\\d]{0,20}(\\d[\\d,]*)\\s*(?:of|/)\\s*(\\d[\\d,]*)",
             ignore_case = TRUE)
     )
   }

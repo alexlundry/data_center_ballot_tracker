@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T20:50:04-0400",
+  "generated_at": "2026-10-23T21:53:03-0400",
   "count": 44,
   "races": [
     {
@@ -215,8 +215,8 @@
       "poll_close_et": "19:30",
       "result_note": null,
       "notes": "Ohio Supreme Court ordered the measure onto the ballot Sept 1, 2026. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article IX, Section 9.06.",
-      "adapters": "html_table",
-      "source_status": "pattern"
+      "adapters": "ohio_enr",
+      "source_status": "verified"
     },
     {
       "race_id": "oh-grove-city",
@@ -251,7 +251,7 @@
       "poll_close_et": "19:30",
       "result_note": null,
       "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: XI. Full text of the amendment fetched Oct 16 from the county's 2026 election page (docs/source-docs/grove-city-issue-28-full-text.pdf); the county link named Grove-City-Charter-Amendment-5 serves a 2017 notice of election and is unrelated.",
-      "adapters": "html_table",
+      "adapters": "ohio_enr,pdf",
       "source_status": "pattern"
     },
     {
@@ -359,8 +359,8 @@
       "poll_close_et": "19:30",
       "result_note": null,
       "notes": "Issue 25 (Issues 26 and 27 on the Oregon ballot are unrelated charter changes). Council accepted the BOE certification Aug 19. Lucas County reports on the SOS-hosted ENR platform (Nov 2025 was instance 21). Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article XIII, Section 8. Full text from the city's 2026 Election for Voters page.",
-      "adapters": "html_table",
-      "source_status": "pattern"
+      "adapters": "ohio_enr",
+      "source_status": "verified"
     },
     {
       "race_id": "oh-upper-sandusky",

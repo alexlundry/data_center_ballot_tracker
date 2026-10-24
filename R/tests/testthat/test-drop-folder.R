@@ -170,3 +170,36 @@ test_that("NO does not match 'No Valid Petition Filed'", {
   expect_false(str_detect("No Valid Petition Filed 0", regex(NO_RX, ignore_case = TRUE)))
   expect_true(str_detect("No 218", regex(NO_RX, ignore_case = TRUE)))
 })
+
+test_that("Ohio ENR pages (Butler, Lucas) read countywide contests and skip precinct sections", {
+  enr <- function(file, pattern) adapter_ohio_enr(list(race_id = "t", adapter = "ohio_enr", results_url = "x",
+    contest_pattern = pattern, yes_pattern = NA, no_pattern = NA, local_file = fx(file)))
+  b <- enr("butler_enr_20260505.html", "ISSUE 1 FAIRFIELD CITY SCHOOLS")
+  expect_equal(c(b$yes_votes, b$no_votes), c(6230L, 7289L))
+  expect_equal(c(b$precincts_reporting, b$precincts_total), c(57L, 57L))
+  b3 <- enr("butler_enr_20260505.html", "BUTLER COUNTY BOARD OF DD")
+  expect_equal(c(b3$yes_votes, b3$no_votes), c(27915L, 25231L))
+  # Lucas lists Against first and repeats every contest per precinct ("HARDING 1 - 8. Zoo ...")
+  z <- enr("lucas_enr_20260505.html", "Zoo Tax Levy")
+  expect_equal(c(z$yes_votes, z$no_votes), c(31582L, 23595L))
+  expect_equal(z$raw_contest, "8. Zoo Tax Levy Additional 0.9")
+  s <- enr("lucas_enr_20260505.html", "Springfield LSD")
+  expect_equal(c(s$yes_votes, s$no_votes), c(2089L, 3000L))
+})
+
+test_that("a saved ENR page in the drop folder is matched by its contest titles", {
+  d <- new_drop()
+  file.copy(fx("lucas_enr_20260505.html"), file.path(d, "Election Night Results.html"))
+  file.copy(fx("butler_enr_20260505.html"), file.path(d, "Election Night Results (1).html"))
+  src <- list(race_id = "oh-oregon", adapter = "ohio_enr", contest_pattern = "Zoo Tax Levy", yes_pattern = NA, no_pattern = NA,
+              results_url = "https://liveresults.boe.ohio.gov/ENR/lucasohenr/ELECTION_ID/en/Index_ELECTION_ID.html")
+  r <- run_adapter(src, list())
+  expect_equal(r$yes_votes, 31582L)
+  expect_equal(basename(find_drop_file(modifyList(src, list(contest_pattern = "FAIRFIELD CITY SCHOOLS")))), "Election Night Results (1).html")
+})
+
+test_that("Franklin's Electionware summary PDF reads (Grove City fallback)", {
+  r <- adapter_pdf(list(race_id = "t", adapter = "pdf", results_url = "x", yes_pattern = NA, no_pattern = NA,
+                        contest_pattern = "Southwest Public Library", local_file = fx("franklin_20260505_summary.pdf")))
+  expect_equal(c(r$yes_votes, r$no_votes, r$precincts_reporting, r$precincts_total), c(10164L, 8126L, 110L, 110L))
+})

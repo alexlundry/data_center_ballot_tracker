@@ -5,6 +5,7 @@ ADAPTERS <- list(
   json_generic = function(src, ctx) adapter_json_generic(src),
   csv_generic  = function(src, ctx) adapter_csv_generic(src),
   ohio_sos     = function(src, ctx) adapter_ohio_sos(src, ctx$ohio_cache),
+  ohio_enr     = function(src, ctx) adapter_ohio_enr(src),
   pdf          = function(src, ctx) adapter_pdf(src),
   sheet        = function(src, ctx) adapter_sheet(src),
   manual       = function(src, ctx) adapter_manual(src, ctx$manual_tbl)

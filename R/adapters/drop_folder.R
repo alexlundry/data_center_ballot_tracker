@@ -21,7 +21,7 @@
 
 DROP_HOSTS <- c("boe.ohio.gov", "ohiosos.gov", "liveresults.franklincountyohio.gov")
 DROP_ELECTION_DAY <- "2026-11-03"
-DROP_EXT <- list(pdf = "pdf", html_table = c("html", "htm"))
+DROP_EXT <- list(pdf = "pdf", html_table = c("html", "htm"), ohio_enr = c("html", "htm"))
 
 drop_dir <- function() {
   d <- Sys.getenv("DCBT_DROP_DIR")
@@ -65,7 +65,11 @@ drop_text <- function(path) {
     if (grepl("\\.pdf$", path, ignore.case = TRUE)) {
       paste(suppressMessages(pdftools::pdf_text(path)), collapse = "\n")
     } else {
-      rvest::html_text2(xml2::read_html(path))
+      # Matching needs only the contest titles; extracting all text from a
+      # 36 MB Lucas page takes minutes, the titles take a second
+      raw <- readr::read_file(path)
+      titles <- str_match_all(raw, 'class="race-title">([^<]*)')[[1]][, 2]
+      if (length(titles)) paste(titles, collapse = "\n") else rvest::html_text2(xml2::read_html(raw))
     }
   }, error = function(e) "")
   assign(key, txt, envir = .drop_cache)
