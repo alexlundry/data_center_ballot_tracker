@@ -117,3 +117,27 @@ test_that("the pdf adapter rejects an HTML page instead of reading it as 0 / 0",
   src <- list(race_id = "oh-urbana", adapter = "pdf", contest_pattern = "Urbana", results_url = "https://e.org/")
   expect_error(adapter_pdf(modifyList(src, list(local_file = file.path(d, "page.pdf")))), "not a PDF")
 })
+
+test_that("the pdf adapter skips blank lines (Adams/Hart layout puts Against past line 15)", {
+  d <- new_drop()
+  p <- file.path(d, "adams.pdf")
+  rows <- c("Adams County EMS (Vote for 1)", "Precincts Reported: 21 of 21 (100.00%)", "Total",
+            "Times Cast 4,070 / 17,042 23.88%", "Candidate Party Total",
+            "For the Tax Levy 1,750", "Against the Tax Levy 2,274", "Total Votes 4,024")
+  grDevices::pdf(p, height = 14); graphics::plot.new()
+  for (i in seq_along(rows)) graphics::text(0, 1 - i * 0.06, rows[i], adj = 0)  # wide spacing -> blank lines
+  grDevices::dev.off()
+  res <- adapter_pdf(list(race_id = "t", adapter = "pdf", contest_pattern = "Adams County EMS", local_file = p,
+                          results_url = "x", yes_pattern = NA, no_pattern = NA))
+  expect_equal(res$yes_votes, 1750L); expect_equal(res$no_votes, 2274L)
+  expect_equal(res$precincts_reporting, 21L); expect_equal(res$precincts_total, 21L)
+})
+
+test_that("a real Electionware summary (Ashtabula, May 2026) reads the TOTAL column", {
+  src <- list(race_id = "t", adapter = "pdf", results_url = "x", yes_pattern = NA, no_pattern = NA,
+              local_file = fx("ashtabula_20260505_summary.pdf"))
+  a <- adapter_pdf(modifyList(src, list(contest_pattern = "Ashtabula Area CSD Tax Levy")))
+  expect_equal(a$yes_votes, 1565L); expect_equal(a$no_votes, 2061L)
+  r <- adapter_pdf(modifyList(src, list(contest_pattern = "Rock Creek Public LIbrary")))
+  expect_equal(r$yes_votes, 252L); expect_equal(r$no_votes, 176L)
+})

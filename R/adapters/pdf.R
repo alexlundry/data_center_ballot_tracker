@@ -16,6 +16,9 @@ adapter_pdf <- function(src) {
   # An HTML page (no PDF url set yet, or a block page) must not parse as an empty result
   if (!identical(readBin(path, "raw", 5), charToRaw("%PDF-"))) stop("not a PDF; set api_url to the results PDF")
   lines <- pdftools::pdf_text(path) |> paste(collapse = "\n") |> str_split("\n") |> unlist() |> str_squish()
+  # pdf_text keeps vertical spacing as empty lines; drop them so the window
+  # below counts printed rows (Hart reports push "Against" past line 15 otherwise)
+  lines <- lines[nzchar(lines)]
   idx <- which(str_detect(lines, regex(src$contest_pattern %||% "", ignore_case = TRUE)))
   if (length(idx) == 0) stop("contest_pattern not found in PDF text")
   window <- lines[idx[1]:min(length(lines), idx[1] + 15)]
