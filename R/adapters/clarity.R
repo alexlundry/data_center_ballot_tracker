@@ -30,17 +30,28 @@ clarity_summary_csv <- function(base, ver) {
   utils::unzip(zip_path, exdir = exdir)
   csv <- list.files(exdir, pattern = "summary\\.csv$", full.names = TRUE, recursive = TRUE)[1]
   if (is.na(csv)) stop("summary.csv not found in summary.zip")
+  clarity_parse_summary_csv(csv)
+}
+
+# Counties differ in the precinct columns: "num Area rptg" (Bloomington) or
+# "num Precinct rptg" (Madison). registered voters and ballots cast are per
+# contest, so a township question carries the township's own registration.
+clarity_parse_summary_csv <- function(csv) {
   raw <- readr::read_csv(csv, show_col_types = FALSE,
                          col_types = readr::cols(.default = readr::col_character()))
   names(raw) <- tolower(names(raw))
+  col <- function(...) {
+    hit <- intersect(c(...), names(raw))[1]
+    if (is.na(hit)) NA else raw[[hit]]
+  }
   tibble(
     contest = raw[["contest name"]],
     choice = raw[["choice name"]],
     votes = parse_int(raw[["total votes"]]),
-    precincts_reporting = parse_int(raw[["num area rptg"]] %||% NA),
-    precincts_total = parse_int(raw[["num area total"]] %||% NA),
-    ballots_cast = parse_int(raw[["ballots cast"]] %||% NA),
-    registered_voters = parse_int(raw[["registered voters"]] %||% NA)
+    precincts_reporting = parse_int(col("num area rptg", "num precinct rptg")),
+    precincts_total = parse_int(col("num area total", "num precinct total")),
+    ballots_cast = parse_int(col("ballots cast")),
+    registered_voters = parse_int(col("registered voters"))
   )
 }
 

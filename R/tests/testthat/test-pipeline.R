@@ -68,3 +68,17 @@ test_that("manual table parses override flags and keeps newest row", {
   r <- adapter_manual(list(race_id = "x", results_url = NA), m)
   expect_equal(r$status_override, "final")
 })
+
+test_that("Clarity summary.csv with Madison's precinct columns maps to the township contest", {
+  tbl <- clarity_parse_summary_csv(fx("clarity_summary_madison.csv"))
+  src <- list(race_id = "il-chouteau-twp", adapter = "clarity", results_url = "x",
+              contest_pattern = "CHOUTEAU (TOWNSHIP|TWP)|DATA CENT.*CHOUTEAU")
+  res <- standardize_result(tbl, src)
+  expect_equal(res$yes_votes, 412L); expect_equal(res$no_votes, 618L)
+  expect_equal(res$precincts_reporting, 3L); expect_equal(res$precincts_total, 4L)
+  expect_equal(res$registered_voters, 1890L)
+  # Granite City's township pattern must not catch the school district levy
+  gc <- list(race_id = "il-granite-city-twp", adapter = "clarity", results_url = "x",
+             contest_pattern = "GRANITE CITY (TOWNSHIP|TWP)|DATA CENT.*GRANITE CITY")
+  expect_null(suppressWarnings(standardize_result(tbl, gc)))
+})
