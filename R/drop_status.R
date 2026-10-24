@@ -36,8 +36,12 @@ status <- blocked |>
 
 for (page in unique(status$results_url)) {
   rows <- status |> filter(results_url == page)
-  # ENR urls carry an ELECTION_ID placeholder; show the site's index instead
-  cli::cli_h2(sub("ELECTION_ID.*$", "", page))
+  # ENR urls carry an ELECTION_ID placeholder, and the ENR folder itself answers
+  # "Forbidden"; say how to reach the election's page instead
+  if (grepl("ELECTION_ID", page)) {
+    cli::cli_h2(paste0(sub("ELECTION_ID.*$", "", page), "<id>/en/Index_<id>.html"))
+    cli::cli_text("(the folder alone says Forbidden; follow the county board's results link, or set the id in sources.csv)")
+  } else cli::cli_h2(page)
   for (i in seq_len(nrow(rows))) {
     r <- rows[i, ]
     if (is.na(r$file)) cli::cli_alert_danger("{r$race_id}: MISSING ({r$adapter}, looking for /{r$contest_pattern}/)")

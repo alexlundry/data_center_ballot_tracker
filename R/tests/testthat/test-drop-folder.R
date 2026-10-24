@@ -141,3 +141,32 @@ test_that("a real Electionware summary (Ashtabula, May 2026) reads the TOTAL col
   r <- adapter_pdf(modifyList(src, list(contest_pattern = "Rock Creek Public LIbrary")))
   expect_equal(r$yes_votes, 252L); expect_equal(r$no_votes, 176L)
 })
+
+test_that("real May 2026 county summaries read the right totals and precincts", {
+  cases <- tibble::tribble(~file, ~pattern, ~yes, ~no, ~prec_rep, ~prec_tot,
+    "ashtabula", "Ashtabula Area CSD Tax Levy",                    1565L, 2061L, NA,  NA,
+    "champaign", "Urbana City School 1% Income Tax",               903L,  1508L, NA,  NA,
+    "clinton",   "Wayne Twp Cemetery Levy",                        131L,  56L,   1L,  1L,
+    "defiance",  "Defiance County Add'l Levy",                     3275L, 2803L, 33L, 33L,
+    "licking",   "Riverview School District - Proposed Tax Levy",  53L,   93L,   NA,  NA,
+    "pickaway",  "Southwest Public Libraries",                     5L,    25L,   1L,  1L,
+    "wyandot",   "Income Tax Renewal Riverdale",                   158L,  140L,  NA,  NA)
+  for (i in seq_len(nrow(cases))) {
+    c <- cases[i, ]
+    r <- adapter_pdf(list(race_id = c$file, adapter = "pdf", contest_pattern = c$pattern, results_url = "x",
+                          yes_pattern = NA, no_pattern = NA, local_file = fx(paste0(c$file, "_20260505_summary.pdf"))))
+    expect_equal(c(r$yes_votes, r$no_votes), c(c$yes, c$no), label = c$file)
+    expect_equal(c(r$precincts_reporting, r$precincts_total), c(c$prec_rep, c$prec_tot), label = paste(c$file, "precincts"))
+  }
+})
+
+test_that("precinct phrasing from Clinton/Huron and Defiance is understood", {
+  expect_equal(extract_precincts("1 precincts reported out of 1 total"), c(1L, 1L))
+  expect_equal(extract_precincts("46 precincts reported out of 46 total"), c(46L, 46L))
+  expect_equal(extract_precincts("Number of Precincts 33 Precincts Reporting 30 90.91%"), c(30L, 33L))
+})
+
+test_that("NO does not match 'No Valid Petition Filed'", {
+  expect_false(str_detect("No Valid Petition Filed 0", regex(NO_RX, ignore_case = TRUE)))
+  expect_true(str_detect("No 218", regex(NO_RX, ignore_case = TRUE)))
+})

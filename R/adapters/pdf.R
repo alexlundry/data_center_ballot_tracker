@@ -21,7 +21,14 @@ adapter_pdf <- function(src) {
   lines <- lines[nzchar(lines)]
   idx <- which(str_detect(lines, regex(src$contest_pattern %||% "", ignore_case = TRUE)))
   if (length(idx) == 0) stop("contest_pattern not found in PDF text")
-  window <- lines[idx[1]:min(length(lines), idx[1] + 15)]
+  # Read up to 15 rows, stopping before the next contest (its "Vote For" line,
+  # less the heading row above it) so a contest without its own precinct line
+  # does not borrow the next one's
+  end <- min(length(lines), idx[1] + 15)
+  nxt <- which(str_detect(lines, regex("vote for \\d", ignore_case = TRUE)))
+  nxt <- nxt[nxt > idx[1] + 1 & nxt <= end]
+  if (length(nxt)) end <- max(idx[1], nxt[1] - 2)
+  window <- lines[idx[1]:end]
   yes_rx <- src$yes_pattern %||% YES_RX; no_rx <- src$no_pattern %||% NO_RX
   grab <- function(rx) {
     ln <- window[str_detect(window, regex(rx, ignore_case = TRUE))][1]

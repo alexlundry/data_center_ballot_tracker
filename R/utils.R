@@ -21,7 +21,7 @@ log_msg <- function(...) {
 # with yes_pattern / no_pattern in data/sources.csv when a county labels the
 # choices differently ("For the Ordinance", "Shall be approved", etc.).
 YES_RX <- "^\\s*(yes|for|approve|in favor|for the|shall be approved|favor)"
-NO_RX  <- "^\\s*(no|against|reject|disapprove|opposed|shall not be approved)"
+NO_RX  <- "^\\s*(no(?!\\s+valid petition)|against|reject|disapprove|opposed|shall not be approved)"
 
 # ---- HTTP ------------------------------------------------------------------
 
@@ -66,6 +66,12 @@ parse_extra <- function(extra_json) {
 
 # Pull "123 of 456 precincts" style phrases out of free text.
 extract_precincts <- function(text) {
+  # Clinton/Huron (Hart): "46 precincts reported out of 46 total"
+  m <- str_match(text, regex("(\\d[\\d,]*)\\s*precincts\\s+reported\\s+out\\s+of\\s+(\\d[\\d,]*)", ignore_case = TRUE))
+  if (!is.na(m[1, 1])) return(c(parse_int(m[1, 2]), parse_int(m[1, 3])))
+  # Defiance: "Number of Precincts 33 ... Precincts Reporting 30"
+  m <- str_match(text, regex("number of precincts\\s+(\\d[\\d,]*).{0,40}?precincts reporting\\s+(\\d[\\d,]*)", ignore_case = TRUE))
+  if (!is.na(m[1, 1])) return(c(parse_int(m[1, 3]), parse_int(m[1, 2])))
   m <- str_match(
     text,
     regex("(\\d[\\d,]*)\\s*(?:of|/)\\s*(\\d[\\d,]*)\\s*precincts", ignore_case = TRUE)
