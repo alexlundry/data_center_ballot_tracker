@@ -73,7 +73,8 @@ jobs:
           else
             git add site/data/races.json
           fi
-          git add data/history.csv
+          # history.csv exists only once some race has numbers
+          if [ -f data/history.csv ]; then git add data/history.csv; fi
           if [ "$counts_changed" = "1" ]; then git add site/data/results.json site/data/results.csv; fi
           if git diff --cached --quiet; then echo "no meaningful change"; else
             git add site/data/results.json site/data/results.csv
