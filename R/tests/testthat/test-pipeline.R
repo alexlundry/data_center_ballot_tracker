@@ -82,3 +82,12 @@ test_that("Clarity summary.csv with Madison's precinct columns maps to the towns
              contest_pattern = "GRANITE CITY (TOWNSHIP|TWP)|DATA CENT.*GRANITE CITY")
   expect_null(suppressWarnings(standardize_result(tbl, gc)))
 })
+
+test_that("GOOGLE_SA_JSON may hold the key itself or a path to it", {
+  source(file.path(ROOT, "R/write_sheet.R"))
+  json <- '{"type": "service_account", "client_email": "x@y.iam.gserviceaccount.com"}'
+  expect_equal(readLines(sa_key_file(json)), json)
+  f <- tempfile(fileext = ".json"); writeLines(json, f)
+  expect_equal(sa_key_file(f), f)
+  expect_error(sa_key_file(file.path(tempdir(), "missing.json")), "neither key JSON")
+})
