@@ -64,7 +64,7 @@ OHIO_JURISDICTIONS <- tribble(
   "oh-oregon",         "Lucas",      48, "city",     "OREGON", NA,
   "oh-ashville",       "Pickaway",   65, "village",  "ASHVILLE", NA,
   "oh-hubbard",        "Trumbull",   78, "city",     "HUBBARD", NA,
-  "oh-upper-sandusky", "Wyandot",    88, "city",     "UPPER SANDUSKY", "UPPER\\s*SAND|U\\.?\\s*SANDUSKY|UPR\\s*SAND"
+  "oh-upper-sandusky", "Wyandot",    88, "city",     "UPPER SANDUSKY", "^UPPER [A-F]$|UPPER\\s*SAND|U\\.?\\s*SANDUSKY|UPR\\s*SAND"
 )
 
 WANT <- c("COUNTY_NUMBER", "VOTER_STATUS", "CITY", "VILLAGE", "TOWNSHIP", "PRECINCT_NAME", "PRECINCT_CODE")

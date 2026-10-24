@@ -51,5 +51,5 @@ Rscript R/count_registered_voters.R <folder> [--only WYANDOT]
 ## Where things stand
 
 - Ballot wording is verbatim for 29 of 34 Nov 3 measures. Still open: Volusia (Edgewater), Butler KS (El Dorado), Franklin KS (Ottawa) and Morgan IL sample ballots.
-- Registered voters are on the sheet (column G) for 28 of 34 races, from official files; Upper Sandusky needs the `--only WYANDOT` rerun; the non-Ohio gaps are explained in column Y.
+- Registered voters are on the sheet (column G) for 29 of 34 races, from official files (all 20 Ohio races, Upper Sandusky added Oct 23); the non-Ohio gaps are explained in column Y.
 - Feeds: as of Oct 16 no source will produce numbers on election night without either a browser-backed fetch (Ohio) or an election id that counties have not published yet. The plan to fix that is `docs/automation-plan.md`; the ordered task list is `docs/handoff-local-session.md`.

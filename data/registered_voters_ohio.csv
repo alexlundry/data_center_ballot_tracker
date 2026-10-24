@@ -18,4 +18,4 @@ oh-granville,GRANVILLE,Licking,4074,3364,710,VILLAGE/CITY column,LICKING.txt,202
 oh-oregon,OREGON,Lucas,13870,12139,1731,CITY/VILLAGE column,LUCAS.txt,2026-10-16,
 oh-ashville,ASHVILLE,Pickaway,3237,2870,367,VILLAGE/CITY column,PICKAWAY.txt,2026-10-16,
 oh-hubbard,HUBBARD,Trumbull,5478,4851,627,CITY/VILLAGE column,TRUMBULL.txt,2026-10-16,
-oh-upper-sandusky,UPPER SANDUSKY,Wyandot,0,0,0,fallback: PRECINCT_NAME prefix,WYANDOT.txt,2026-10-16,
+oh-upper-sandusky,UPPER SANDUSKY,Wyandot,4163,3659,504,fallback: PRECINCT_NAME matches /^UPPER [A-F]$|UPPER\s*SAND|U\.?\s*SANDUSKY|UPR\s*SAND/,WYANDOT.txt,2026-10-23,
