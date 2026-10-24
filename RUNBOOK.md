@@ -7,6 +7,7 @@
 - [ ] Decide hosting: enable GitHub Pages (Settings > Pages > Source: GitHub Actions) or connect the repo to Netlify. Push once and confirm the site loads.
 - [ ] The manual-entry Google Sheet exists (Data Center Ballot Tracker — Election Night Manual Entry, in Alex's Drive) and is wired into the `sheet` row of `sources.csv`. Before election night: set sharing to Anyone with the link > Viewer (or Publish to web) so the pipeline can read it without login, and give edit access to everyone who will key in numbers. Test with `Rscript R/fetch_results.R --dry-run`; a failure to read the sheet is logged as a warning, not a crash.
 - [ ] Optional but recommended: let the pipeline write live numbers into the Google Sheet directly (otherwise the sheet's live_results tab refreshes only about hourly, or when someone bumps the Refresh key on its instructions tab). Ten-minute setup: in Google Cloud create a service account, download its JSON key, share the sheet with the service account's email as Editor, then add two repository secrets on GitHub: `GOOGLE_SA_JSON` (the key file contents) and `RESULTS_SHEET_ID` (`1jma2RqwyFNB8dP23f0nM4LCRti54uBJBoqEIktR9fRs`). The next pipeline run replaces the import formula with plain values every pass.
+- [ ] Create `~/Downloads/dcbt_drop`, empty it, and set the browser to ask where to save downloads. Rehearse once: save a May 2026 county PDF there and run `DCBT_DROP_SINCE=2026-05-01 make drop`.
 - [ ] `make reset` so `results.json` has no simulated data, then `make build`, commit, push.
 - [ ] Run `Rscript R/fetch_results.R` once against the live pre-election pages. Every source should fail cleanly (no contest yet) rather than crash. Fix anything that throws.
 
@@ -17,6 +18,12 @@
   1. Look at the Action log (or `watch.R` output) for that `race_id`. "no contest matched" means the `contest_pattern` regex is wrong: copy the exact contest name from the page into `sources.csv`. "could not map choices" means the choice labels are not Yes/No: set `yes_pattern` / `no_pattern`.
   2. If the page is a PDF, switch `adapter` to `pdf` and put the PDF URL in `api_url`.
   3. If nothing works within a few minutes, key the numbers into the Google Sheet with `override = TRUE`. Manual beats automated. Keep updating that row as the county updates.
+- **Ohio drop folder (17 sources on `boe.ohio.gov`, `huron.boe.ohio.gov`, `liveresults.boe.ohio.gov` and Franklin's ENR).** These hosts block every script, so the pipeline never requests them. Instead:
+  1. Run `make drop`. It lists each county page to open and which races have no file yet.
+  2. Open the page in your normal browser and save the **cumulative or summary** results into `~/Downloads/dcbt_drop` (or `$DCBT_DROP_DIR`). Save PDFs as they come; save ENR pages (Butler, Lucas, Franklin) with File > Save Page As > "Webpage, Complete". Any filename works: the pipeline matches files to races by the contest text inside them and reads the newest match. Files named with "precinct" or "detail" are ignored.
+  3. Repeat whenever a county posts an update. The loop picks it up on its next pass, and the result's `as_of` is the file's download time, not the fetch time.
+  - Only files modified on or after Nov 3 are read (`DCBT_DROP_SINCE` overrides). GitHub Actions has no drop folder, so these 17 sources only update from the Mac loop.
+  - Still replace the `ELECTION_ID` placeholders for the three ENR counties so the dashboard's source link works.
 - Mark a race `status = final` in the sheet once the county shows 100% precincts or "final unofficial".
 - Use the **Copy summary** button for a plain-text update to paste into email or Slack.
 

@@ -5,8 +5,10 @@
 TRACKER_TZ <- "America/New_York"
 USER_AGENT <- "RedbudDataCenterTracker/1.0 (+https://www.redbud.consulting)"
 
-now_iso <- function(tz = TRACKER_TZ) {
-  format(lubridate::with_tz(Sys.time(), tz), "%Y-%m-%dT%H:%M:%S%z")
+now_iso <- function(tz = TRACKER_TZ) now_iso_at(Sys.time(), tz)
+
+now_iso_at <- function(time, tz = TRACKER_TZ) {
+  format(lubridate::with_tz(time, tz), "%Y-%m-%dT%H:%M:%S%z")
 }
 
 log_msg <- function(...) {

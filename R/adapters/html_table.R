@@ -14,7 +14,7 @@
 # Precincts are pulled from the surrounding text ("12 of 14 precincts").
 
 adapter_html_table <- function(src) {
-  page <- fetch_text(src$results_url)
+  page <- if (!is.null(src$local_file)) readr::read_file(src$local_file) else fetch_text(src$results_url)
   doc <- xml2::read_html(page)
   extra <- parse_extra(src$extra_json)
   tables <- rvest::html_elements(doc, "table")

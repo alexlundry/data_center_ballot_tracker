@@ -9,7 +9,7 @@ Read `docs/automation-plan.md` (what is and is not automated, and why) and `docs
 - `data/races.csv`: the registry, 44 rows (34 on the Nov 3 ballot, the rest decided earlier or on other dates). One row per question; Wilmington OH has four.
 - `data/sources.csv`: results feeds per race, tried by `priority`; `adapter` names a parser in `R/adapters/`.
 - `data/manual_results.csv`, `data/not_on_ballot.csv`, `data/registered_voters_ohio.csv`, `data/history.csv` (election-night change log, written by the pipeline).
-- `R/`: `build_races.R` (registry to `site/data/races.json`), `fetch_results.R` (one pass of every feed to `site/data/results.json` and `results.csv`), `adapters/`, `utils.R` (HTTP and parsing helpers), `write_sheet.R`, `watch.R` (laptop loop), `count_registered_voters.R`, `simulate_results.R`, `reset_results.R`, `tests/testthat/`.
+- `R/`: `build_races.R` (registry to `site/data/races.json`), `fetch_results.R` (one pass of every feed to `site/data/results.json` and `results.csv`), `adapters/` (including `drop_folder.R`), `drop_status.R` (election-night drop-folder checklist), `utils.R` (HTTP and parsing helpers), `write_sheet.R`, `watch.R` (laptop loop), `count_registered_voters.R`, `simulate_results.R`, `reset_results.R`, `tests/testthat/`.
 - `site/index.html`: the whole dashboard, one file, inline CSS and JS, d3 and topojson-client from CDNs. `site/data/` holds the JSON it reads.
 - `docs/`: `automation-plan.md`, `handoff-local-session.md`, `research/documents-to-fetch.md` (which official documents have been fetched), `source-docs/` (the official ballot documents themselves).
 - `.github/workflows/`: `update-results.yml` (cron every 5 min on Nov 3 and 4), `deploy-pages.yml` (on push to `site/**`), `test.yml`, `probe-sources.yml` (manual reachability check).
@@ -22,6 +22,7 @@ make build        # races.csv + sources.csv -> site/data/races.json (run after e
 make fetch        # one pass of live results
 make test         # testthat suite
 make serve        # dashboard at http://localhost:8787
+make drop         # which blocked-host races have a file in ~/Downloads/dcbt_drop
 Rscript R/fetch_results.R --dry-run
 Rscript R/watch.R 120                         # election-night loop
 Rscript R/count_registered_voters.R <folder> [--only WYANDOT]
@@ -43,7 +44,7 @@ Rscript R/count_registered_voters.R <folder> [--only WYANDOT]
 ## Network facts (verified Oct 16, 2026)
 
 - `boe.ohio.gov`, `lookup.boe.ohio.gov`, `liveresults.boe.ohio.gov`, `huron.boe.ohio.gov` and `ohiosos.gov` (including the `www6` voter-file portal) answer plain HTTP clients with a JavaScript bot challenge (HTTP 403) from every origin tested: GitHub Actions, the Claude cloud environment, and curl on Alex's Mac. A person in an ordinary browser passes. Do not spend time on headers, user agents or retries.
-- Oct 23: Chrome driven by chromote also gets Cloudflare's "access has been blocked" page from the Mac, headless and headed alike. Cloudflare flags the automation itself. T2 as designed does not work, and making it work would mean evading bot detection, which is off the table. Results from these hosts need a person's browser (see T2 in the handoff) or the counties' cooperation.
+- Oct 23: Chrome driven by chromote also gets Cloudflare's "access has been blocked" page from the Mac, headless and headed alike. Cloudflare flags the automation itself. T2 as designed does not work, and making it work would mean evading bot detection, which is off the table. Results from these hosts come through the drop folder: a person saves them in an ordinary browser into `~/Downloads/dcbt_drop`, and `R/adapters/drop_folder.R` matches files to races by content (`make drop` shows what is missing).
 - `liveresults.franklincountyohio.gov` returned 403 from the cloud and from curl on the Mac (Oct 23).
 - `results.lavote.gov`'s election-list page is Incapsula-protected, but its JSON results endpoint works.
 - Every other host in `sources.csv` is reachable from GitHub Actions (`probe-sources.yml` run of Oct 16).

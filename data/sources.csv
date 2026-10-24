@@ -45,5 +45,5 @@ oh-urbana,1,pdf,https://www.boe.ohio.gov/champaign/,https://www.boe.ohio.gov/cha
 oh-wilmington-1,1,pdf,https://www.boe.ohio.gov/clinton/election-info/election-results/,,O-26-04|119\.37,,,,true,verified,Cumulative / Precinct Detail PDFs. Patterns keyed to ordinance numbers from the sample ballot.
 oh-wilmington-2,1,pdf,https://www.boe.ohio.gov/clinton/election-info/election-results/,,O-26-06|191\.12|McGuinn,,,,true,verified,
 oh-wilmington-3,1,pdf,https://www.boe.ohio.gov/clinton/election-info/election-results/,,O-26-07|170\.11,,,,true,verified,
-oh-wilmington-4,1,pdf,https://www.boe.ohio.gov/clinton/election-info/election-results/,,O-26-05|1957|65\.29,,,,true,verified,Ordinance number not legible on the sample ballot; pattern keyed to the parcel address.
+oh-wilmington-4,1,pdf,https://www.boe.ohio.gov/clinton/election-info/election-results/,,O-26-05|1957 SR 730|65\.29 acres,,,,true,verified,Ordinance number not legible on the sample ballot; pattern keyed to the parcel address.
 wi-janesville,1,html_table,https://elections.co.rock.wi.us/20261103.html,,Janesville.*(GM|JATCO|450|referendum),,,,true,pattern,"Rock County YYYYMMDD.html pattern confirmed with 20260407.html (static HTML, updated through the night)."
