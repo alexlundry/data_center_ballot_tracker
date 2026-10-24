@@ -61,8 +61,10 @@ The first five matter most: the tracker has no reliable source for them yet.
 | [ ] | Volusia County FL Supervisor of Elections, https://www.volusiaelections.gov/elections/election-results/november-3-2026-general-election.stml | Edgewater Charter Amendment No. 4 | Confirm the results link will appear on that page. | |
 | [ ] | Lake County OH Board of Elections, https://www.lakecountyohio.gov/boe/election-results/ | Perry Village Issue 16 | Confirm the summary is still posted at https://webapps.lakecountyohio.gov/boe/web1.pdf. | |
 | [ ] | Rock County WI Clerk, https://elections.co.rock.wi.us/ | Janesville GM/JATCO site referendum | Confirm the results page will be https://elections.co.rock.wi.us/20261103.html, and when absentee ballots (counted centrally) are added. | |
+| [ ] | **Huron County OH Board of Elections**, https://www.huron.boe.ohio.gov/ | Monroeville advisory question | In May its election-night "Unofficial Summary Results" were a **scanned printout**, which the tracker cannot read. Ask whether Nov 3 results will also be scans, or whether they can post the report as a downloadable PDF straight from their software. Either way, plan to enter Monroeville by hand. | |
+| [ ] | **Adams County OH Board of Elections**, https://www.boe.ohio.gov/adams/ | Sprigg and Monroe township zoning plans | The only May file online is a scanned official canvass. Ask whether the Nov 3 election-night results will be a PDF from their software or a scan, and what the link will be called. | |
 
-LA County (Alhambra), Clark County NV (Boulder City) and the twelve other Ohio counties need no call this week.
+LA County (Alhambra), Clark County NV (Boulder City) and the other ten Ohio counties need no call this week.
 
 ---
 
@@ -113,28 +115,12 @@ The site compares turnout to registration. We still lack the number of registere
 
 ---
 
-## Before Friday Oct 30: download practice files from the Ohio county sites
+## Before Friday Oct 30: get to know the twelve Ohio results pages
 
-Twelve Ohio county election sites block automated downloads, so on election night a person has to download their results by hand. We need a sample of each one's format now, from the **May 5, 2026 primary**, so Alex can test that the tracker reads them.
+Twelve Ohio county election sites block automated downloads, so on election night you download their results by hand (see the election-night table below). Alex has already tested the tracker on each county's May 2026 files: ten of the twelve read correctly. Huron posts scanned images (manual entry), and Adams is unknown (see the call above).
 
-From each page below, open the election results for **May 5, 2026** and download the **summary or cumulative** results (not the precinct-by-precinct report). Save into the shared folder named `may-2026-ohio`, filename starting with the county.
-
-| Done | County | Page |
-|---|---|---|
-| [ ] | Adams | https://www.boe.ohio.gov/adams/election-info/election-results/ |
-| [ ] | Ashtabula | https://www.boe.ohio.gov/ashtabula/election-info/election-results |
-| [ ] | Champaign | https://www.boe.ohio.gov/champaign/ |
-| [ ] | Clinton | https://www.boe.ohio.gov/clinton/election-info/election-results/ |
-| [ ] | Defiance | https://www.boe.ohio.gov/defiance/election-info/election-night-results/ |
-| [ ] | Huron | https://www.huron.boe.ohio.gov/ |
-| [ ] | Licking | https://www.boe.ohio.gov/licking/election-info/election-results/ |
-| [ ] | Pickaway | https://www.boe.ohio.gov/pickaway/election-info/election-results/ |
-| [ ] | Wyandot | https://www.boe.ohio.gov/wyandot/election-info/election-results |
-| [ ] | Butler (web page, not PDF) | https://liveresults.boe.ohio.gov/ENR/butlerohenr/ (open the May 2026 election; in Chrome: File > Save Page As > "Webpage, Complete") |
-| [ ] | Lucas (web page) | https://liveresults.boe.ohio.gov/ENR/lucasohenr/ (same) |
-| [ ] | Franklin (web page) | https://liveresults.franklincountyohio.gov/enr/franklinohenr/ (same) |
-
-While you are on each page, note in one line what the results link for Nov 3 is likely to be called and where on the page it will appear. On election night you will be clicking those links fast.
+- [ ] Open each page in the election-night table below. Find the May 5, 2026 results on it and note in one line what the link was called and where on the page it sat. On election night you will be clicking the Nov 3 equivalent fast.
+- [ ] Adams only: look for an **election-night** (unofficial) May 5 results PDF, as opposed to the scanned "Official Certification" packet. If you find one, open it in Preview and try to select a line of text. Send Alex the file and say whether the text could be selected.
 
 ---
 
@@ -143,6 +129,7 @@ While you are on each page, note in one line what the results link for Nov 3 is 
 - [ ] Open each results page from the tables above. Note any that already list the Nov 3 election (some show it a day early with zero votes). For Bloomington, Madison and Will on Clarity, write down the exact name of the data center question as the site shows it, and send the list to Alex.
 - [ ] Practice manual entry on **your copy** of the sheet: enter made-up numbers for one race, with `override` = TRUE, the time in `as_of`, and the county page in `source_url`. Then mark it `final`. Ask Alex to check it.
 - [ ] With Alex, decide where you will work on election night: at Alex's computer, or from your own laptop saving files into a shared folder that Alex's computer reads. If remote, do one test download into that folder and have Alex confirm the tracker sees it.
+- [ ] Open the Butler and Lucas addresses in the election-night table. If they already show the Nov 3 election (with zero votes), the guessed numbers are right; if not, tell Alex what number the county's own results link uses.
 - [ ] Re-run the ballot-status calls for any measure from the first table that was still uncertain.
 
 ---
@@ -151,9 +138,30 @@ While you are on each page, note in one line what the results link for Nov 3 is 
 
 Polls close (Eastern): **7:00 pm** Florida (Edgewater) · **7:30 pm** Ohio (20 measures) · **8:00 pm** Kansas and Illinois · **9:00 pm** Wisconsin · **10:00 pm** Nevada · **11:00 pm** California.
 
-**1. Ohio downloads (your main job from 7:30 pm).** For the twelve Ohio counties in the download table above, open the results page, and as soon as Nov 3 results appear save the **summary/cumulative** report into the election-night drop folder. Any filename is fine; the tracker reads the newest file. Then repeat for every county every 15 to 20 minutes, or whenever the page says it was updated, until each county shows 100% of precincts. Keep a simple log: county, time downloaded, precincts reported.
+**1. Ohio downloads (your main job from 7:30 pm).** For the counties below, open the page, and as soon as Nov 3 results appear save them into the election-night drop folder. Any filename is fine; the tracker matches each file to its races by what is inside it and reads the newest. Repeat for every county every 15 to 20 minutes, or whenever the page says it was updated, until each county shows 100% of precincts. Keep a simple log: county, time downloaded, precincts reported.
 
-**2. Kansas by hand (from 8:00 pm).** The tracker cannot read the Kansas PDFs reliably. For Emporia, El Dorado and Ottawa, type the YES and NO totals into the sheet's `manual_results` row for that race, exactly as the county labels them (do not flip YES and NO, even if YES means "ban"), with `override` = TRUE, the time in `as_of`, the PDF link in `source_url`, and your initials in `entered_by`. Update the row each time the county updates.
+| County | Races | Page | What to save |
+|---|---|---|---|
+| Adams | Sprigg Twp, Monroe Twp | https://www.boe.ohio.gov/adams/election-info/election-results/ | Summary/cumulative PDF (if it is a scan, enter by hand, step 2) |
+| Ashtabula | Conneaut | https://www.boe.ohio.gov/ashtabula/election-info/election-results | Summary Results Report PDF |
+| Champaign | Urbana | https://www.boe.ohio.gov/champaign/ | Summary PDF |
+| Clinton | Wilmington (4 questions, one file) | https://www.boe.ohio.gov/clinton/election-info/election-results/ | Summary PDF |
+| Defiance | Defiance | https://www.boe.ohio.gov/defiance/election-info/election-night-results/ | Cumulative PDF |
+| Huron | Monroeville | https://www.huron.boe.ohio.gov/ | Nothing to save if it is a scan: enter by hand (step 2) |
+| Licking | Pataskala, Granville (one file) | https://www.boe.ohio.gov/licking/election-info/election-results/ | Election Summary PDF |
+| Pickaway | Ashville | https://www.boe.ohio.gov/pickaway/election-info/election-results/ | Summary PDF |
+| Wyandot | Upper Sandusky | https://www.boe.ohio.gov/wyandot/election-info/election-results | Summary PDF |
+| Butler | Trenton | Probably https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html (May was `.../23/en/Index_23.html`) | The web page: once the contest list has loaded, File > Save Page As > "Webpage, Complete" |
+| Lucas | Oregon | Probably https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html (May was `.../22/en/Index_22.html`) | The web page, same way (the file will be large; that is fine) |
+| Franklin | Grove City | Follow the results link on https://vote.franklincountyohio.gov/election-info/2026 | The web page, same way, or the county's summary PDF |
+
+Notes:
+- The ENR addresses only work with the election number in them. `.../ENR/butlerohenr/` on its own says "Forbidden". If the guessed number is wrong, follow the results link from the county board's own site.
+- Save the **summary or cumulative** report, never the precinct-by-precinct one (the tracker ignores files with "precinct" or "detail" in the name).
+- Check each new PDF once: open it and try to select a line of text. If you cannot, it is a scan; tell Alex and enter that county's races by hand (step 2).
+- Hubbard (Trumbull), Sunbury (Delaware) and Perry Village (Lake) do not need downloading; the tracker fetches them itself. Spot-check them in step 3.
+
+**2. Manual entry (from 7:30 pm for Ohio, 8:00 pm for Kansas).** The tracker cannot read these, so you type them in: **Monroeville** (Huron posts scanned images), **Sprigg and Monroe townships** if Adams posts a scan, any Ohio county whose PDF fails the text check above, and **Emporia, El Dorado and Ottawa** (Kansas PDFs are unreliable). For each, type the YES and NO totals into the sheet's `manual_results` row for that race, exactly as the county labels them (do not flip YES and NO, even if YES means "ban"), with `override` = TRUE, the time in `as_of`, the PDF link in `source_url`, and your initials in `entered_by`. Update the row each time the county updates.
 
 **3. Spot-check everything.** When a county first posts numbers, compare its page to the tracker's card for that race within about 10 minutes. If the card is wrong or still says "No results yet", tell Alex with the race and a link, and if Alex asks, enter the numbers by hand as in step 2.
 
