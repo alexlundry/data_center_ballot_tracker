@@ -1,7 +1,11 @@
 # Election-week checklist: Data Centers on the Ballot
 
 For: the graduate research assistant, Wed Oct 28 to Wed Nov 4, 2026
-From: Alex Lundry (Redbud Consulting)
+From: Alex Lundry, Redbud Consulting
+
+**Contact Alex:** alex@redbud.consulting · cell number in the Google Doc copy of this checklist (call or text, any time this week)
+
+**Working folder:** Google Drive, "Data Center Tracker" (Alex will share it). It holds this checklist, the statement of work, and the **Election Night Drop** subfolder.
 
 ## What this project is
 
@@ -14,11 +18,11 @@ You do not need to write code. You need a phone, a web browser, and edit access 
 - **Record every answer** in the tables below: who you spoke to, the date, and exactly what they said. "Clerk's office (Jane, deputy clerk), Oct 28: results go up as a PDF on the county homepage after 8:30 pm" is useful. "They said it's online" is not.
 - **Ask for the exact web address** whenever someone tells you where something will be posted, and ask whether they will post it in the same place all night or replace it with new files.
 - **Get documents, not descriptions.** When a call ends in "it's on our website," find it and download it while you are on the phone if you can.
-- **Save every document** you download to the shared folder Alex gives you, with the county name at the start of the filename (for example `Wyandot - sample ballot Upper Sandusky.pdf`).
+- **Save every document** you download to the Data Center Tracker folder (not the Election Night Drop subfolder, which is only for results on election night), with the county name at the start of the filename (for example `Wyandot - sample ballot Upper Sandusky.pdf`).
 - **Do not** sort, rename, or delete anything in the Google Sheet, and do not enter vote counts before election night (they show up on the public site). The only thing you add before then is registered-voter counts (columns G and Y, see below). For practice, make a copy of the sheet.
 - **Escalate to Alex the same day** when anything suggests a measure was pulled from the ballot, delayed, or changed.
 
-Phone numbers are on each office's website (linked below). Election offices are busiest in the last week; keep calls short and say up front: "I'm a researcher tracking local data center ballot questions; I have two quick questions about [measure] on the Nov 3 ballot."
+Phone numbers are on each office's website (linked below). Election offices are busiest in the last week; keep calls short and say up front: "I'm a researcher with Redbud Consulting tracking local data center ballot questions; I have two quick questions about [measure] on the Nov 3 ballot."
 
 ## Schedule at a glance
 
@@ -40,10 +44,10 @@ Anything still open Friday at 4 pm goes to Alex, who decides whether it waits fo
 ## Wednesday Oct 28, first thing: kickoff with Alex
 
 - [ ] Get edit access to the election-night Google Sheet, and make your own copy of it for practice.
-- [ ] Get access to the shared folder for documents and downloads.
+- [ ] Get access to the Data Center Tracker folder in Google Drive and its Election Night Drop subfolder.
 - [ ] Agree how to reach Alex fast (text or call) for escalations, and on election night.
-- [ ] Agree what to say you are and where clerks should email documents.
-- [ ] Decide where you will work on election night (Alex's computer, or your own laptop saving into a shared folder).
+- [ ] Agree where clerks should email documents. You introduce yourself as working for Redbud Consulting.
+- [ ] Election night is remote: work from anywhere with a laptop and a reliable connection. Results files go into the Election Night Drop folder, which syncs to Alex's computer, where the tracker reads them. Install Google Drive for desktop if you want to save downloads straight into that folder; otherwise upload each file to it in the browser.
 
 ---
 
@@ -172,7 +176,7 @@ Twelve Ohio county election sites block automated downloads, so on election nigh
 
 - [ ] Open each results page from the tables above. Note any that already list the Nov 3 election (some show it a day early with zero votes). For Bloomington, Madison and Will on Clarity, write down the exact name of the data center question as the site shows it, and send the list to Alex.
 - [ ] Practice manual entry on **your copy** of the sheet: enter made-up numbers for one race, with `override` = TRUE, the time in `as_of`, and the county page in `source_url`. Then mark it `final`. Ask Alex to check it.
-- [ ] If you will work remotely on election night: do one test download into the shared drop folder and have Alex confirm the tracker sees it.
+- [ ] Do one test download into the Election Night Drop folder and have Alex confirm the tracker sees it. Then delete the test file.
 - [ ] Open the Butler and Lucas addresses in the election-night table. If they already show the Nov 3 election (with zero votes), the guessed numbers are right; if not, tell Alex what number the county's own results link uses.
 - [ ] Re-run the ballot-status calls for any measure from the first table that was still uncertain, and make any callbacks Alex kept for Monday.
 
@@ -182,7 +186,7 @@ Twelve Ohio county election sites block automated downloads, so on election nigh
 
 Polls close (Eastern): **7:00 pm** Florida (Edgewater) · **7:30 pm** Ohio (20 measures) · **8:00 pm** Kansas and Illinois · **9:00 pm** Wisconsin · **10:00 pm** Nevada · **11:00 pm** California.
 
-**1. Ohio downloads (your main job from 7:30 pm).** For the counties below, open the page, and as soon as Nov 3 results appear save them into the election-night drop folder. Any filename is fine; the tracker matches each file to its races by what is inside it and reads the newest. Repeat for every county every 15 to 20 minutes, or whenever the page says it was updated, until each county shows 100% of precincts. Keep a simple log: county, time downloaded, precincts reported.
+**1. Ohio downloads (your main job from 7:30 pm).** For the counties below, open the page, and as soon as Nov 3 results appear save them into the Election Night Drop folder in Google Drive (save directly with Google Drive for desktop, or upload in the browser right after downloading). Any filename is fine; the tracker matches each file to its races by what is inside it and reads the newest. Repeat for every county every 15 to 20 minutes, or whenever the page says it was updated, until each county shows 100% of precincts. Keep a simple log: county, time downloaded, precincts reported.
 
 | County | Races | Page | What to save |
 |---|---|---|---|
