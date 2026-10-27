@@ -1,6 +1,6 @@
 # Data Centers on the Ballot: guide for Claude sessions
 
-Election-night tracker for every US data center ballot measure on Nov 3, 2026. Owner: Alex Lundry, Redbud Consulting (writes R, tidyverse). Public dashboard: https://alexlundry.github.io/data_center_ballot_tracker/. Repo: https://github.com/alexlundry/data_center_ballot_tracker.
+Election-night tracker for every US data center ballot measure on Nov 3, 2026. Owner: Alex Lundry, Redbud Consulting (writes R, tidyverse). Public dashboard: https://datacentersontheballot.com/ (Cloudflare Pages, git-connected; https://alexlundry.github.io/data_center_ballot_tracker/ is a GitHub Pages mirror). Repo: https://github.com/alexlundry/data_center_ballot_tracker.
 
 Read `docs/automation-plan.md` (what is and is not automated, and why) and `docs/handoff-local-session.md` (the current task list) before starting pipeline work.
 

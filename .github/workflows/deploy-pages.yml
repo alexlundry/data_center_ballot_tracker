@@ -1,6 +1,7 @@
 # Publish site/ to GitHub Pages on every push to main (including the results
 # commits from update-results.yml). Enable Pages (Settings > Pages > Source:
-# GitHub Actions) once. Netlify users can ignore this and use netlify.toml.
+# GitHub Actions) once. The live site is on Cloudflare Pages (see RUNBOOK.md);
+# this workflow keeps the GitHub Pages mirror current.
 name: Deploy site
 
 on:

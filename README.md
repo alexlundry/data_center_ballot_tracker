@@ -17,7 +17,7 @@ RUNBOOK.md       what to do on election night
 2. **`data/sources.csv`** says where each race's live numbers come from: an adapter name (`clarity`, `json_generic`, `csv_generic`, `html_table`, `ohio_sos`, `pdf`, `sheet`, `manual`), the page URL people click through to, the machine endpoint, a regex that identifies the contest, and optional yes/no label regexes. Several rows per race are fine; they are tried in `priority` order.
 3. **`R/fetch_results.R`** runs every adapter, standardizes everything to yes/no votes + precincts, applies manual overrides, appends to `data/history.csv`, and writes `site/data/results.json`. If a feed fails the previous numbers are kept and flagged stale.
 4. **`site/index.html`** reads the two JSON files, refreshes every minute, and does all aggregation in the browser. It also has a **Simulate returns** button that fills the page with made-up numbers (loudly labeled) so you can see how the layout behaves before any real results exist.
-5. **`.github/workflows/update-results.yml`** runs step 3 on a 5-minute cron and commits the JSON; **`deploy-pages.yml`** publishes `site/` to GitHub Pages. `netlify.toml` does the same for Netlify. `R/watch.R` is a laptop loop for nights when GitHub's cron lags.
+5. **`.github/workflows/update-results.yml`** runs step 3 on a 5-minute cron and commits the JSON; the live site is **Cloudflare Pages**, git-connected to this repo: every push to main that touches `site/` publishes the folder (no build step), and `site/_headers` keeps `/data/*` fresh on the CDN. **`deploy-pages.yml`** still publishes `site/` to GitHub Pages as a mirror, and `netlify.toml` would do the same on Netlify. `R/watch.R` is a laptop loop for nights when GitHub's cron lags.
 
 ## Running it locally
 

@@ -9,7 +9,7 @@ From: Alex Lundry, Redbud Consulting
 
 ## What this project is
 
-On Nov 3 voters in 34 places decide questions about data centers: bans, moratoriums, rezonings, advisory votes. The tracker at https://alexlundry.github.io/data_center_ballot_tracker/ shows every one of them and fills in vote counts on election night. Most numbers are collected automatically. This list is the part a computer cannot do: calling election offices, downloading files from sites that block scripts, and entering numbers by hand when a feed fails.
+On Nov 3 voters in 34 places decide questions about data centers: bans, moratoriums, rezonings, advisory votes. The tracker at https://datacentersontheballot.com/ (mirror: https://alexlundry.github.io/data_center_ballot_tracker/) shows every one of them and fills in vote counts on election night. Most numbers are collected automatically. This list is the part a computer cannot do: calling election offices, downloading files from sites that block scripts, and entering numbers by hand when a feed fails.
 
 You do not need to write code. You need a phone, a web browser, and edit access to the election-night Google Sheet ("Data Center Ballot Tracker — Election Night Manual Entry"; Alex will share it).
 
