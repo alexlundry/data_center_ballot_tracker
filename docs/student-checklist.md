@@ -26,7 +26,7 @@ There are only three business days for calls before the weekend (Wed, Thu, Fri) 
 
 | Day | Hours | Do |
 |---|---|---|
-| **Wed Oct 28** | about 5 | Kickoff with Alex (first thing). Ballot-status calls (all four). Start the results-format calls with the top five, Will County first. |
+| **Wed Oct 28** | about 5.5 | Kickoff with Alex (first thing), then the call to the Ohio Secretary of State. Ballot-status calls (all four). Start the results-format calls with the top five, Will County first. |
 | **Thu Oct 29** | about 5 | Finish the results-format calls. Start the missing facts: Ohio issue numbers and sample ballots. |
 | **Fri Oct 30** | about 5 | Finish the missing facts and registered voters. Call back anyone who did not answer. Afternoon or weekend: learn the twelve Ohio results pages. |
 | **Mon Nov 2** | about 3 | Last callbacks, daily check, dry run with Alex. |
@@ -44,6 +44,25 @@ Anything still open Friday at 4 pm goes to Alex, who decides whether it waits fo
 - [ ] Agree how to reach Alex fast (text or call) for escalations, and on election night.
 - [ ] Agree what to say you are and where clerks should email documents.
 - [ ] Decide where you will work on election night (Alex's computer, or your own laptop saving into a shared folder).
+
+---
+
+## Wednesday Oct 28, right after kickoff: call the Ohio Secretary of State
+
+The Ohio county election sites (everything on `boe.ohio.gov`, plus `liveresults.boe.ohio.gov`, `huron.boe.ohio.gov` and `ohiosos.gov`) block our tracker's automated requests with a Cloudflare "access has been blocked" page. A person in a normal browser gets through, which is why election night relies on saving pages by hand. If the Secretary of State's office can let the tracker through, most of that hand work goes away, so this is the first call of the week.
+
+- **Phone:** 1-877-767-6446 (877-SOS-OHIO), or (614) 466-2655. Ask for whoever handles the website or IT.
+- **What to say:** we run a nonpartisan public tracker of local data center ballot measures and read the county boards' results pages every few minutes on election night. Their site's security service blocks those requests. Can they allowlist our address for Nov 3–4, or is there a results feed for local issues we should use instead?
+- **What they will ask for:** the block page lists an IP address and a reference ID.
+  - IP: 73.132.113.169. This is Alex's network as of Oct 23; confirm it is still current with Alex at kickoff.
+  - Reference ID: a4f4c2e48c2ad6b7. If they want a fresh one, Alex can reload a blocked page and read off the new one.
+- **Also ask:** Franklin County's `liveresults.franklincountyohio.gov` blocks us too. That is the county's own site, not the Secretary of State's, so ask who to contact there, and if you get a name, call Franklin County next.
+
+| Done | Who you spoke to | What they said | Follow-up promised (by when) |
+|---|---|---|---|
+| [ ] | | | |
+
+If they say no or cannot help, that is fine: write it down and move on. The plan for election night does not depend on this call. If they say yes, tell Alex right away so Alex can test it the same day.
 
 ---
 
