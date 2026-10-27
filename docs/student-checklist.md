@@ -1,6 +1,6 @@
 # Election-week checklist: Data Centers on the Ballot
 
-For: the graduate research assistant, Mon Oct 26 to Wed Nov 4, 2026
+For: the graduate research assistant, Wed Oct 28 to Wed Nov 4, 2026
 From: Alex Lundry (Redbud Consulting)
 
 ## What this project is
@@ -11,7 +11,7 @@ You do not need to write code. You need a phone, a web browser, and edit access 
 
 ## How to work
 
-- **Record every answer** in the tables below: who you spoke to, the date, and exactly what they said. "Clerk's office (Jane, deputy clerk), Oct 27: results go up as a PDF on the county homepage after 8:30 pm" is useful. "They said it's online" is not.
+- **Record every answer** in the tables below: who you spoke to, the date, and exactly what they said. "Clerk's office (Jane, deputy clerk), Oct 28: results go up as a PDF on the county homepage after 8:30 pm" is useful. "They said it's online" is not.
 - **Ask for the exact web address** whenever someone tells you where something will be posted, and ask whether they will post it in the same place all night or replace it with new files.
 - **Get documents, not descriptions.** When a call ends in "it's on our website," find it and download it while you are on the phone if you can.
 - **Save every document** you download to the shared folder Alex gives you, with the county name at the start of the filename (for example `Wyandot - sample ballot Upper Sandusky.pdf`).
@@ -20,9 +20,34 @@ You do not need to write code. You need a phone, a web browser, and edit access 
 
 Phone numbers are on each office's website (linked below). Election offices are busiest in the last week; keep calls short and say up front: "I'm a researcher tracking local data center ballot questions; I have two quick questions about [measure] on the Nov 3 ballot."
 
+## Schedule at a glance
+
+There are only three business days for calls before the weekend (Wed, Thu, Fri) plus Monday. Offices close for the weekend, so do the calls in the order below and leave the no-call work (learning the Ohio pages) for Friday afternoon or the weekend. Most offices are in Eastern time; the Kansas, Illinois and Wisconsin ones are an hour behind, Nevada and California three.
+
+| Day | Hours | Do |
+|---|---|---|
+| **Wed Oct 28** | about 5 | Kickoff with Alex (first thing). Ballot-status calls (all four). Start the results-format calls with the top five, Will County first. |
+| **Thu Oct 29** | about 5 | Finish the results-format calls. Start the missing facts: Ohio issue numbers and sample ballots. |
+| **Fri Oct 30** | about 5 | Finish the missing facts and registered voters. Call back anyone who did not answer. Afternoon or weekend: learn the twelve Ohio results pages. |
+| **Mon Nov 2** | about 3 | Last callbacks, daily check, dry run with Alex. |
+| **Tue Nov 3** | about 6.5 | Election night, 6:45 pm to about 1:00 am ET. |
+| **Wed Nov 4** | about 2.5 | Late updates and handing back your log. |
+
+Anything still open Friday at 4 pm goes to Alex, who decides whether it waits for Monday or gets dropped.
+
 ---
 
-## Monday Oct 26 — Tuesday Oct 27: is everything still on the ballot?
+## Wednesday Oct 28, first thing: kickoff with Alex
+
+- [ ] Get edit access to the election-night Google Sheet, and make your own copy of it for practice.
+- [ ] Get access to the shared folder for documents and downloads.
+- [ ] Agree how to reach Alex fast (text or call) for escalations, and on election night.
+- [ ] Agree what to say you are and where clerks should email documents.
+- [ ] Decide where you will work on election night (Alex's computer, or your own laptop saving into a shared folder).
+
+---
+
+## Wednesday Oct 28: is everything still on the ballot?
 
 Four measures could still come off the ballot, or their results might not be counted. Confirm each one directly with the office that runs the election.
 
@@ -37,7 +62,7 @@ Also: if you see news that **any** of the 34 measures listed at the end of this 
 
 ---
 
-## Tuesday Oct 27 — Thursday Oct 29: how will each county post results?
+## Wednesday Oct 28 — Thursday Oct 29: how will each county post results?
 
 For each office below, ask:
 1. Where will election-night results appear (exact web address)?
@@ -68,7 +93,7 @@ LA County (Alhambra), Clark County NV (Boulder City) and the other ten Ohio coun
 
 ---
 
-## Wednesday Oct 28 — Friday Oct 30: missing facts about the measures
+## Thursday Oct 29 — Friday Oct 30: missing facts about the measures
 
 ### Ohio issue numbers
 
@@ -102,7 +127,7 @@ We print each question's exact wording on the site. For these we have only a sum
 
 ### Registered voters
 
-The site compares turnout to registration. We still lack the number of registered voters for these places. Ask the clerk for the count of registered voters **in that city or township** (not the whole county), and the date it was counted. Enter it in the sheet's `manual_results` tab: the number in column G and the source ("Lyon County Clerk, phone, Oct 28, count as of Oct 13") in column Y. Do not change any other column.
+The site compares turnout to registration. We still lack the number of registered voters for these places. Ask the clerk for the count of registered voters **in that city or township** (not the whole county), and the date it was counted. Enter it in the sheet's `manual_results` tab: the number in column G and the source ("Lyon County Clerk, phone, Oct 30, count as of Oct 13") in column Y. Do not change any other column.
 
 | Done | Place | Office |
 |---|---|---|
@@ -115,7 +140,7 @@ The site compares turnout to registration. We still lack the number of registere
 
 ---
 
-## Before Friday Oct 30: get to know the twelve Ohio results pages
+## Friday Oct 30 afternoon or the weekend: get to know the twelve Ohio results pages
 
 Twelve Ohio county election sites block automated downloads, so on election night you download their results by hand (see the election-night table below). Alex has already tested the tracker on each county's May 2026 files: ten of the twelve read correctly. Huron posts scanned images (manual entry), and Adams is unknown (see the call above).
 
@@ -128,9 +153,9 @@ Twelve Ohio county election sites block automated downloads, so on election nigh
 
 - [ ] Open each results page from the tables above. Note any that already list the Nov 3 election (some show it a day early with zero votes). For Bloomington, Madison and Will on Clarity, write down the exact name of the data center question as the site shows it, and send the list to Alex.
 - [ ] Practice manual entry on **your copy** of the sheet: enter made-up numbers for one race, with `override` = TRUE, the time in `as_of`, and the county page in `source_url`. Then mark it `final`. Ask Alex to check it.
-- [ ] With Alex, decide where you will work on election night: at Alex's computer, or from your own laptop saving files into a shared folder that Alex's computer reads. If remote, do one test download into that folder and have Alex confirm the tracker sees it.
+- [ ] If you will work remotely on election night: do one test download into the shared drop folder and have Alex confirm the tracker sees it.
 - [ ] Open the Butler and Lucas addresses in the election-night table. If they already show the Nov 3 election (with zero votes), the guessed numbers are right; if not, tell Alex what number the county's own results link uses.
-- [ ] Re-run the ballot-status calls for any measure from the first table that was still uncertain.
+- [ ] Re-run the ballot-status calls for any measure from the first table that was still uncertain, and make any callbacks Alex kept for Monday.
 
 ---
 
