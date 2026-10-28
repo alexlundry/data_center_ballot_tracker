@@ -172,6 +172,7 @@ nav.tabs a:hover, nav.tabs a.active { color: var(--fg); border-bottom-color: var
 .card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px 12px; flex-wrap: wrap; margin-bottom: 10px; }
 .card-head h4, .strip-head h4 { margin: 0; white-space: nowrap; }
 .png-actions { display: inline-flex; gap: 4px; }
+.png-busy * { transition: none !important; }
 .png-actions button { border: 1px solid var(--line); background: var(--paper); color: var(--fg-faint); border-radius: var(--radius-sm); padding: 2px 7px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
 .png-actions button:hover, .png-actions button:focus-visible { color: var(--primary); border-color: var(--primary); outline: none; }
 button[data-png-act][disabled] { opacity: .65; cursor: progress; }
@@ -1339,7 +1340,7 @@ function drawStrip(el, opts) {
     const ext = pts.length ? Math.max(...pts.map((p) => Math.abs(p.dy))) : 0;
     const h = Math.max(big ? 74 : (multi ? 44 : 64), 2 * ext + 2 * R + 14) + labTop;
     l.y = y0; l.h = h; l.cy = y0 + labTop + (h - labTop) / 2;
-    pts.forEach((p) => { p.cy = l.cy + p.dy; nodes.push(p); });
+    pts.forEach((p) => { p.cy = l.cy + p.dy; p.r = R; nodes.push(p); });
     y0 += h;
   });
   const H = y0 + m.b;
@@ -1410,7 +1411,7 @@ function renderScore() {
     el.innerHTML = `<div class="card-head"><h4>On the ballot · ${n} measures</h4>${pngActions('score')}</div>` + kindsByCount().map((k) => {
       const items = A.nov.filter((v) => v.kind === k); if (!items.length) return '';
       return `<div class="prow" data-pf="kind" data-pv="${k}" tabindex="0" role="button" style="grid-template-columns:minmax(0,1fr) 30px minmax(70px,120px)"><span>${KIND_LABEL[k]}</span><span class="pn">${items.length}</span><div class="pbar" style="background:none"><span class="sg-c" ${barW('pre:' + k, 100 * items.length / max)}></span></div></div>`;
-    }).join('') + `<p class="fine">${A.nov.filter((v) => v.race.yes_means === 'allow').length} of the ${n} are worded so that YES is the pro-data-center side; the tracker flips those so Restrict and Allow always mean the same thing. Click a type to see those measures.</p>`;
+    }).join('') + `<p class="fine">${A.nov.filter((v) => v.race.yes_means === 'allow').length} of the ${n} are worded so that YES is the pro-data-center side; the tracker flips those so Restrict and Allow always mean the same thing. <span class="png-skip">Click a type to see those measures.</span></p>`;
     return;
   }
   const c = segCounts(A.nov), rA = c.rw + c.rl, aA = c.aw + c.al;
@@ -1722,7 +1723,7 @@ function openModal(v, keep) {
         <h4 class="lbl" style="margin:16px 0 6px">What it does</h4><p style="margin:0 0 12px;font-size:13.5px;color:var(--fg-soft)">${esc(r.summary || '')}</p><dl>${dl}</dl></div>
       <div><h4 class="lbl" style="margin:0 0 8px">Results</h4>${resHTML}<div class="spark" id="spark"></div>
         <div class="mshare"><button type="button" class="btn" data-act="link">Copy link</button><button type="button" class="btn" data-act="text">Copy result</button>${v.isNov ? `<button type="button" class="btn" data-act="star">${starred.has(r.race_id) ? '★ In Your races' : '☆ Add to Your races'}</button>` : ''}${navigator.share ? '<button type="button" class="btn" data-act="share">Share…</button>' : ''}<button type="button" class="btn" data-png="race" data-png-act="copy" title="Copy this card as an image">Copy image</button><button type="button" class="btn" data-png="race" data-png-act="download" title="Download this card as a PNG">Download image</button></div>
-        <h4 class="lbl" style="margin:14px 0 2px">Links</h4><div class="links">${links || '<span class="muted small">None yet.</span>'}</div></div>
+        <h4 class="lbl png-skip" style="margin:14px 0 2px">Links</h4><div class="links png-skip">${links || '<span class="muted small">None yet.</span>'}</div></div>
     </div>`;
   if (!keep) lastFocus = document.activeElement;
   openId = r.race_id;
@@ -1771,7 +1772,8 @@ function drawSpark(v) {
 // ---------- PNG export (the race card and the big charts) ----------
 // html-to-image loads only when someone exports, so page load is unaffected.
 const H2I_SRC = 'https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js';
-const PNG_SKIP = ['png-actions', 'mshare', 'close', 'seg'];
+// The on-page card headings and how-to notes are left out: the image gets its own heading (pngHeading).
+const PNG_SKIP = ['png-actions', 'mshare', 'close', 'seg', 'card-head', 'strip-head', 'strip-note', 'png-skip'];
 let h2iLoad = null, fontCSS = null;
 function pngActions(kind) { return `<span class="png-actions" data-png="${kind}"><button type="button" data-png-act="copy" title="Copy this chart as an image">Copy image</button><button type="button" data-png-act="download" title="Download this chart as a PNG">Download</button></span>`; }
 function loadH2I() {
@@ -1810,6 +1812,71 @@ function pngTarget(kind) {
   if (kind.startsWith('pat-')) { const w = document.querySelector(`.png-actions[data-png="${kind}"]`); return { node: w && w.closest('.card'), extras: A.pre ? [] : [$('#patLegend')], name: 'patterns-' + kind.slice(4) }; }
   return null;
 }
+// A shared image has to explain itself: a date line, what the chart shows, and where the count stands.
+function pngHeading(kind) {
+  const n = A.nov.length, rep = A.rep.length, simulated = sim || (results && results.simulated);
+  const day = fmtDate(ELECTION), done = rep === n && A.finals === n;
+  const kicker = `${simulated ? 'Simulated results' : A.pre ? 'On the ballot' : 'Unofficial results'} · ${day}`;
+  const rA = A.rWon + A.rLead, aA = A.aWon + A.aLead, tc = A.tc ? `, ${A.tc} too close to call` : '', out = n - rep ? `; ${n - rep} not yet reporting` : '';
+  const count = A.pre ? (waiting() ? `Polls have closed in ${andList(closedNames())}; no county has posted a count yet.` : `${n} measures in ${A.states.length} states: ${A.binding} binding, ${n - A.binding} advisory.`)
+    : done ? `Final unofficial counts: Restrict won ${A.rWon}, Allow won ${A.aWon}${tc}.` : `Restrict ahead in ${rA}, Allow ahead in ${aA}${tc}${out}.`;
+  const BY = { all: '', yes: ', by what a YES vote does', kind: ', by type of measure', state: ', by state' };
+  const PAT = { dir: 'what a YES vote does', kind: 'type of measure', origin: 'who put them on the ballot', state: 'state' };
+  if (kind === 'race') {
+    const v = views.find((x) => x.race.race_id === openId), r = v && v.race;
+    if (!r) return { kicker };
+    return { kicker: `${r.status === 'decided' ? 'Result' : !v.has ? 'On the ballot' : simulated ? 'Simulated results' : 'Unofficial results'} · ${fmtDate(r.election_date)}` };
+  }
+  if (kind === 'line') return { kicker, title: 'How each data center measure is voting' + (BY[groupBy] || ''), dek: `Each dot is one of the ${n} measures, placed by the Restrict side's share of the vote. ${count}` };
+  if (kind === 'score') return A.pre ? { kicker, title: 'Data center measures on the ballot, by type', dek: count }
+    : { kicker, title: done ? 'Who won the data center ballot measures' : 'Who is winning the data center ballot measures', dek: `${rep === n ? `All ${n}` : `${rep} of the ${n}`} measures are reporting${A.precTot ? `, with ${fmt(A.precRep)} of ${fmt(A.precTot)} precincts in` : ''}.` };
+  if (kind.startsWith('pat-')) { const f = PAT[kind.slice(4)] || ''; return A.pre ? { kicker, title: `Data center measures on the ballot, by ${f}`, dek: count }
+    : { kicker, title: `Which data center measures ${done ? 'won' : 'are winning'}, by ${f}`, dek: `Each bar splits that group's measures by where the count stands. ${count}` }; }
+  const o = A.byState.find((s) => s.key === 'OH') || { n: 0, rep: 0, r: 0, a: 0, t: 0 };
+  if (kind === 'map-us') return { kicker, title: 'Data center ballot measures across the United States', dek: `One dot per measure${ohT && o.n > 2 ? `; Ohio's ${o.n} share one marker and have a map of their own` : ''}. ${count}` };
+  if (kind === 'map-oh') {
+    return { kicker, title: `Ohio has ${o.n} of the ${n} data center ballot measures`, dek: 'One dot per measure.' + (A.pre ? '' : ` Restrict ahead in ${o.r}, Allow ahead in ${o.a}${o.t ? `, ${o.t} too close to call` : ''}${o.n - o.rep ? `; ${o.n - o.rep} not yet reporting` : ''}.`) };
+  }
+  return { kicker };
+}
+// A card's height on the page can come from its grid row (the line card matches the scorecard), and the
+// skipped parts leave gaps; measure the content alone, synchronously so the page never repaints.
+function contentHeight(node) {
+  const hide = [...node.querySelectorAll(PNG_SKIP.map((c) => '.' + c).join(','))], was = hide.map((el) => el.style.display);
+  const s = { alignSelf: node.style.alignSelf, height: node.style.height };
+  hide.forEach((el) => { el.style.display = 'none'; }); node.style.alignSelf = 'start'; node.style.height = 'auto';
+  const h = Math.ceil(node.getBoundingClientRect().height);
+  hide.forEach((el, i) => { el.style.display = was[i]; }); Object.assign(node.style, s);
+  return h;
+}
+// The image draws text a hair wider than the page and copies each box's width in px, so a label that just
+// fits ("Too close to call" in 89.9px) wraps and overlaps. Text on one line now is pinned there for the capture.
+function pinLines(roots) {
+  const pinned = [], rg = document.createRange();
+  roots.filter(Boolean).forEach((root) => [root, ...root.querySelectorAll('*')].forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
+    const texts = [...el.childNodes].filter((c) => c.nodeType === 3 && c.textContent.trim());
+    if (!texts.length) return;
+    const tops = texts.flatMap((c) => { rg.selectNodeContents(c); return [...rg.getClientRects()].map((r) => Math.round(r.top)); });
+    if (tops.length === texts.length && new Set(tops).size === 1) { pinned.push([el, el.style.whiteSpace]); el.style.whiteSpace = 'nowrap'; }
+  }));
+  return () => pinned.forEach(([el, ws]) => { el.style.whiteSpace = ws; });
+}
+// Bars and dots still easing into place (just after a refresh or a regroup) jump to where they are headed.
+function settleMarks(roots) {
+  document.documentElement.classList.add('png-busy');
+  roots.filter(Boolean).forEach((root) => root.querySelectorAll('[data-w]').forEach((el) => { el.style.width = el.dataset.w + '%'; el.removeAttribute('data-w'); }));
+  if (window.d3) d3.selectAll('#strip circle.sdot').interrupt().attr('cx', (d) => d.x).attr('cy', (d) => d.cy).attr('r', (d) => d.r);
+  return () => document.documentElement.classList.remove('png-busy');
+}
+// Greedy word wrap (sep picks the break points); balance narrows the width while the line count holds, so a
+// title doesn't end on one word.
+function wrapText(ctx, text, max, balance, sep = ' ') {
+  const fit = (w) => text.split(sep).reduce((ls, word) => { const t = ls.length ? ls[ls.length - 1] + sep + word : word; if (ls.length && ctx.measureText(t).width > w) ls.push(word); else if (ls.length) ls[ls.length - 1] = t; else ls.push(word); return ls; }, []);
+  let lines = fit(max);
+  if (balance && lines.length > 1) for (let w = max - 8; w > max / 2; w -= 8) { const l = fit(w); if (l.length > lines.length) break; lines = l; }
+  return lines;
+}
 async function renderPNG(kind) {
   const t = pngTarget(kind);
   if (!t || !t.node) throw new Error('Nothing to export.');
@@ -1818,19 +1885,36 @@ async function renderPNG(kind) {
   if (fontCSS == null) fontCSS = await buildFontCSS().catch(() => '');
   // style resets the exported root: the race card's centering margins would otherwise be copied as fixed offsets.
   const pr = 2, opts = { pixelRatio: pr, fontEmbedCSS: fontCSS, style: { margin: '0' }, filter: (n) => !(n.classList && PNG_SKIP.some((c) => n.classList.contains(c))) };
-  const main = await lib.toCanvas(t.node, { ...opts, backgroundColor: '#ffffff' });
-  const extras = [];
-  for (const el of t.extras) if (el && el.textContent.trim()) extras.push(await lib.toCanvas(el, { ...opts, backgroundColor: '#faf5f1' }));
-  // Credit line, wrapped to two lines when the image is narrow.
+  const unsettle = settleMarks([t.node]), h = contentHeight(t.node), unpin = pinLines([t.node, ...t.extras]), extras = [];
+  let main;
+  try {
+    main = await lib.toCanvas(t.node, { ...opts, height: h, backgroundColor: '#ffffff' });
+    // A legend wider than its chart (the map legend under the Ohio card) re-wraps to the chart's width.
+    for (const el of t.extras) {
+      if (!el || !el.textContent.trim()) continue;
+      const w = Math.min(Math.ceil(el.getBoundingClientRect().width), Math.floor(main.width / pr)), was = el.style.width;
+      el.style.width = w + 'px'; const eh = Math.ceil(el.getBoundingClientRect().height); el.style.width = was;
+      extras.push(await lib.toCanvas(el, { ...opts, width: w, height: eh, backgroundColor: '#faf5f1' }));
+    }
+  } finally { unpin(); unsettle(); }
+  // Credit line; on a narrow image the site line drops under the name and wraps at its separators.
   const simulated = sim || (results && results.simulated), gen = results && parseISO(results.generated_at);
-  const title = 'Data Centers on the Ballot', site = 'datacentersontheballot.com · Redbud Consulting' + (simulated ? '' : gen ? ' · results as of ' + fmtET(gen, true) : '');
+  const title = 'Data Centers on the Ballot', site = 'datacentersontheballot.com · Redbud Consulting' + (simulated || A.pre ? '' : gen ? ' · results as of ' + fmtET(gen, true) : '');
   const fTitle = `600 ${13 * pr}px "Source Serif 4", Georgia, serif`, fSite = `${10.5 * pr}px "IBM Plex Mono", ui-monospace, monospace`;
   const m = document.createElement('canvas').getContext('2d');
   m.font = fTitle; const tw = m.measureText(title).width; m.font = fSite; const sw = m.measureText(site).width;
   const pad = 20 * pr, gap = 10 * pr, logo = 22 * pr, simH = simulated ? 28 * pr : 0;
   const W = Math.max(main.width, ...extras.map((c) => c.width)) + 2 * pad;
-  const oneLine = logo + 8 * pr + tw + 14 * pr + sw <= W - 2 * pad, footH = oneLine ? 34 * pr : 52 * pr;
-  const H = simH + pad + main.height + extras.reduce((h, c) => h + gap + c.height, 0) + gap + footH + pad / 2;
+  const oneLine = logo + 8 * pr + tw + 14 * pr + sw <= W - 2 * pad;
+  const siteLines = oneLine ? [site] : wrapText(m, site, W - 2 * pad - logo - 8 * pr, false, ' · '), footH = oneLine ? 34 * pr : (52 + 16 * (siteLines.length - 1)) * pr;
+  // Heading above the chart, in the page's own type: sans kicker, serif title, sans dek.
+  const head = pngHeading(kind), hs = W / pr < 560 ? 19 : 23, lhT = Math.round(hs * 1.2) * pr, lhD = 19 * pr;
+  const fK = `700 ${10.5 * pr}px "IBM Plex Sans", sans-serif`, fH = `600 ${hs * pr}px "Source Serif 4", Georgia, serif`, fD = `${13 * pr}px "IBM Plex Sans", sans-serif`;
+  const textW = Math.min(W - 2 * pad, 760 * pr);
+  m.font = fH; const tLines = head.title ? wrapText(m, head.title, textW, true) : [];
+  m.font = fD; const dLines = head.dek ? wrapText(m, head.dek, textW, true) : [];
+  const headH = 13 * pr + (tLines.length ? 8 * pr + tLines.length * lhT : 0) + (dLines.length ? 6 * pr + dLines.length * lhD : 0) + 16 * pr;
+  const H = simH + pad + headH + main.height + extras.reduce((h, c) => h + gap + c.height, 0) + gap + footH + pad / 2;
   const out = document.createElement('canvas'); out.width = W; out.height = H;
   const ctx = out.getContext('2d');
   ctx.fillStyle = '#faf5f1'; ctx.fillRect(0, 0, W, H);
@@ -1840,7 +1924,18 @@ async function renderPNG(kind) {
     ctx.fillStyle = '#a23838'; ctx.font = `700 ${11 * pr}px "IBM Plex Sans", sans-serif`; ctx.textAlign = 'center';
     ctx.fillText('SIMULATED RESULTS · NOT REAL · LAYOUT PREVIEW ONLY', W / 2, simH / 2); ctx.textAlign = 'left';
   }
-  let y = simH + pad; ctx.drawImage(main, pad, y); y += main.height;
+  let y = simH + pad;
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = '#a8336e'; ctx.font = fK;
+  if ('letterSpacing' in ctx) ctx.letterSpacing = `${1.5 * pr}px`;
+  ctx.fillText(head.kicker.toUpperCase(), pad, y);
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+  y += 13 * pr;
+  if (tLines.length) { y += 8 * pr; ctx.fillStyle = '#2a1a26'; ctx.font = fH; tLines.forEach((l) => { ctx.fillText(l, pad, y); y += lhT; }); }
+  if (dLines.length) { y += 6 * pr; ctx.fillStyle = '#6b5d68'; ctx.font = fD; dLines.forEach((l) => { ctx.fillText(l, pad, y); y += lhD; }); }
+  y += 16 * pr;
+  ctx.textBaseline = 'middle';
+  ctx.drawImage(main, pad, y); y += main.height;
   extras.forEach((c) => { y += gap; ctx.drawImage(c, pad, y); y += c.height; });
   y += gap;
   ctx.fillStyle = '#ead9d4'; ctx.fillRect(pad, y, W - 2 * pad, pr);
@@ -1849,7 +1944,7 @@ async function renderPNG(kind) {
   ctx.fillStyle = '#2a1a26'; ctx.font = fTitle; ctx.fillText(title, pad + logo + 8 * pr, y + logo / 2);
   ctx.fillStyle = '#6b5d68'; ctx.font = fSite;
   if (oneLine) ctx.fillText(site, pad + logo + 8 * pr + tw + 14 * pr, y + logo / 2);
-  else ctx.fillText(site, pad + logo + 8 * pr, y + logo + 10 * pr);
+  else siteLines.forEach((l, i) => ctx.fillText(l, pad + logo + 8 * pr, y + logo + 10 * pr + i * 16 * pr));
   return out;
 }
 function pngBlob(kind) { return renderPNG(kind).then((c) => new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error('Could not make the image.'))), 'image/png'))); }
