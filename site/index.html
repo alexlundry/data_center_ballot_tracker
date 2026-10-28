@@ -703,11 +703,11 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
         <h4>How the numbers work</h4>
         <dl>
           <dt>Restrict / Allow</dt><dd>Each question's YES and NO are mapped to the anti-data-center side (Restrict) and the pro-data-center side (Allow), so a NO vote on a "should the council approve data centers" question counts as Restrict.</dd>
-          <dt>Leading, early, won</dt><dd>Leading means ahead by 2 points or more. An early count has under half the precincts in. Won means a final count or every precinct reporting; nothing here is certified.</dd>
+          <dt>Leading, early, won</dt><dd>Leading means ahead by 2 points or more. An early count has under half the precincts in. Won means a final count or every precinct reporting; in states that count mail ballots for days, such as California and Nevada, only a final count. Nothing here is certified.</dd>
           <dt>Too close</dt><dd>Margin under 2 points.</dd>
           <dt>Typical share</dt><dd>The median of the Restrict side's percentage across measures with votes, so a small village counts the same as a city. The pooled figure adds up raw votes instead.</dd>
           <dt>Votes remaining</dt><dd>A rough estimate that assumes unreported precincts are the same size as reported ones. Treat it as a hint, not a projection.</dd>
-          <dt>Changed since you last looked</dt><dd>Your browser remembers the counts from when you last left the page and marks what moved since. Nothing is sent anywhere.</dd>
+          <dt>Changed since you last looked</dt><dd>Your browser remembers the counts from when you last left the page for more than a few minutes (or closed it) and marks what moved since. Nothing is sent anywhere.</dd>
         </dl>
       </div>
       <div class="card">
@@ -786,6 +786,11 @@ const GROUP_LABEL = { close: 'Too close to call', counting: 'Counting', final: '
 const SEGS = [['rw', 'Restrict won'], ['rl', 'Restrict leading'], ['t', 'Too close'], ['al', 'Allow leading'], ['aw', 'Allow won'], ['n', 'No results yet']];
 const OH_CITIES = [['Cleveland', 41.4993, -81.6944, 'e'], ['Columbus', 39.9612, -82.9988, 'sw'], ['Cincinnati', 39.1031, -84.512, 'e'], ['Toledo', 41.6528, -83.5379, 'n'], ['Dayton', 39.7589, -84.1916, 'w']];
 const EVENT_LABEL = { first: 'First votes', lead: 'Lead change', close: 'Too close', final: 'Final' };
+// States that count mail ballots for days after election night: "all precincts in" there is not a win until a race is marked final.
+const LATE_COUNT_STATES = new Set(['AZ', 'CA', 'CO', 'HI', 'NV', 'OR', 'UT', 'WA']);
+const SEEN_AWAY_MS = 3 * 60 * 1000;
+// Same test as the R summary: pulled measures (status = removed) drop out of the count.
+const onBallot = (r) => r.election_date === ELECTION && ['on_ballot', 'pending_litigation'].includes(r.status);
 
 let races = [], results = null, notOnBallot = [], views = [], topo = null, A = null;
 let sim = false, simStage = 0.55, lastFetch = null, fetchErr = null;
@@ -797,7 +802,7 @@ let starred = new Set(store.get('dcbt_starred', []));
 let alertsOn = !!store.get('dcbt_alerts', false);
 let seen = null, changed = new Set(), knownEvents = null, hlSet = null;
 let openId = null, lastFocus = null;
-const prevW = new Map(), prevStat = new Map(), prevTotals = new Map();
+const prevW = new Map(), prevStat = new Map(), prevTotals = new Map(), prevSig = new Map();
 
 // Deep links: ?race=<race_id>, filters, ?tv; ?preview shows the Simulate button (?preview&sim=55 starts it).
 const VALID = { kind: KIND_ORDER, dir: ['restrict', 'allow'], origin: ['citizens', 'government'], status: ['close', 'counting', 'final', 'none', 'changed'], sort: ['status', 'margin', 'state', 'reporting', 'updated', 'votes'] };
@@ -816,13 +821,20 @@ function starBtn(v) {
 }
 function renderStarFilter() {
   const b = $('#fStar'); if (!b) return;
-  const n = [...starred].filter((id) => races.some((r) => r.race_id === id && r.election_date === ELECTION)).length;
+  const n = [...starred].filter((id) => races.some((r) => r.race_id === id && onBallot(r))).length;
   b.textContent = (filters.star ? '★' : '☆') + ' Starred' + (n ? ` (${n})` : '');
   b.setAttribute('aria-pressed', String(filters.star));
 }
 
 // ---------- time helpers ----------
-function parseISO(s) { if (!s) return null; const d = new Date(String(s).replace(/([+-]\d\d)(\d\d)$/, '$1:$2')); return isNaN(d) ? null : d; }
+function parseISO(s) {
+  if (!s) return null;
+  let str = String(s).trim();
+  // A bare "YYYY-MM-DD HH:MM:SS" (older pipeline output) is UTC; browsers would read it as local time.
+  if (/^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(:\d{2})?$/.test(str)) str = str.replace(' ', 'T') + 'Z';
+  const d = new Date(str.replace(/([+-]\d\d)(\d\d)$/, '$1:$2'));
+  return isNaN(d) ? null : d;
+}
 function fmtET(d, withDate) {
   if (!d) return '—';
   const o = { timeZone: TZ, hour: 'numeric', minute: '2-digit' };
@@ -874,7 +886,7 @@ async function loadResults() {
 function showErr(msg) { $('#errText').textContent = msg; $('#errBanner').classList.add('show'); }
 function computeStateRank() {
   const m = new Map();
-  races.filter((r) => r.election_date === ELECTION && r.status !== 'decided').forEach((r) => m.set(r.state, { n: (m.get(r.state)?.n || 0) + 1, name: r.state_name }));
+  races.filter(onBallot).forEach((r) => m.set(r.state, { n: (m.get(r.state)?.n || 0) + 1, name: r.state_name }));
   stateRank = new Map([...m.entries()].sort((a, b) => b[1].n - a[1].n || a[1].name.localeCompare(b[1].name)).map(([k], i) => [k, i]));
 }
 
@@ -921,7 +933,7 @@ function outcome(v) {
   const side = v.leader;
   if (v.status === 'final') return { side, tier: side === 'tie' ? 'close' : 'won' };
   if (side === 'tie' || v.margin < 2) return { side, tier: 'close' };
-  if (v.status === 'all_precincts') return { side, tier: 'won' };
+  if (v.status === 'all_precincts' && !LATE_COUNT_STATES.has(v.race.state)) return { side, tier: 'won' };
   if (v.pctRep != null && v.pctRep < 50) return { side, tier: 'early' };
   return { side, tier: 'leading' };
 }
@@ -935,7 +947,7 @@ function makeView(race, res) {
   const margin = has ? Math.abs(rPct - aPct) : null;
   const precRep = num(res.precincts_reporting), precTot = num(res.precincts_total);
   const pctRep = (precRep != null && precTot) ? 100 * precRep / precTot : null;
-  let status = res.status || (has ? 'counting' : 'no_results');
+  let status = String(res.status || '').trim().toLowerCase() || (has ? 'counting' : 'no_results');
   if (race.status === 'decided' && has) status = 'final';
   if (!has) status = 'no_results';
   const leader = !has ? 'none' : rPct > aPct ? 'restrict' : aPct > rPct ? 'allow' : 'tie';
@@ -943,7 +955,7 @@ function makeView(race, res) {
   const v = { race, res, yes, no, total, has, yesPct, noPct, rPct, aPct, margin, precRep, precTot, pctRep, status, leader, est,
     rVotes: has ? (race.yes_means === 'restrict' ? yes : no) : null, aVotes: has ? (race.yes_means === 'restrict' ? no : yes) : null,
     asOf: parseISO(res.as_of), stale: res.fetch_ok === false && has, history: Array.isArray(res.history) ? res.history : [],
-    isNov: race.election_date === ELECTION && race.status !== 'decided', direct: race.scope === 'direct', adv: race.binding === 'advisory',
+    isNov: onBallot(race), direct: race.scope === 'direct', adv: race.binding === 'advisory',
     kind: kindOf(race), origin: ORIGIN_GROUP[race.origin] || 'citizens' };
   v.out = outcome(v);
   v.group = !has ? 'none' : v.out.tier === 'close' ? 'close' : (status === 'final' || status === 'all_precincts') ? 'final' : 'counting';
@@ -953,7 +965,7 @@ function buildViews() {
   const byId = new Map(((results && results.races) || []).map((x) => [x.race_id, x]));
   views = races.map((race) => {
     let res = byId.get(race.race_id) || {};
-    if (sim && race.election_date === ELECTION && race.status !== 'decided') res = simulate(race);
+    if (sim && onBallot(race)) res = simulate(race);
     return makeView(race, res);
   });
 }
@@ -962,7 +974,7 @@ function dotCls(v) { if (!v || !v.has) return 'n'; return callClass(v) + (v.out.
 function sideName(s) { return s === 'restrict' ? 'Restrict' : s === 'allow' ? 'Allow' : 'Tied'; }
 function place(v) { return `${v.race.jurisdiction}, ${v.race.state}`; }
 function measText(v) {
-  const done = v.status === 'final' || v.status === 'all_precincts';
+  const done = v.status === 'final' || (v.status === 'all_precincts' && v.out.tier === 'won');
   if (v.yes > v.no) return done ? 'measure passed' : 'measure passing';
   if (v.yes < v.no) return done ? 'measure failed' : 'measure failing';
   return 'YES and NO tied';
@@ -972,7 +984,7 @@ function callText(v) {
   const side = sideName(v.leader), meas = measText(v);
   if (v.status === 'final') return v.out.tier === 'close' ? `Final: tied · ${meas}` : `Final: ${side} wins · ${meas}`;
   if (v.out.tier === 'close') return `Too close to call · ${meas}`;
-  if (v.status === 'all_precincts') return `All precincts in: ${side} wins · ${meas}`;
+  if (v.status === 'all_precincts') return v.out.tier === 'won' ? `All precincts in: ${side} wins · ${meas}` : `All precincts in, later ballots still to count: ${side} ahead by ${pct1(v.margin).replace('%', '')} pts · ${meas}`;
   return `${v.out.tier === 'early' ? 'Early count: ' : ''}${side} ahead by ${pct1(v.margin).replace('%', '')} pts · ${meas}`;
 }
 function sideShort(v) {
@@ -1050,6 +1062,9 @@ function aggregates() {
     closes: closeGroups(nov), pre: rep.length === 0, events: buildEvents(list)
   };
 }
+// Polls have closed somewhere but no county has posted a count yet.
+function waiting() { return A.pre && A.closes.length > 0 && Date.now() >= A.closes[0].date.getTime(); }
+function closedNames() { const now = Date.now(); return A.closes.filter((c) => now >= c.date.getTime()).flatMap((c) => c.names); }
 
 // ---------- events (first returns, lead changes, tightening, finals) ----------
 function buildEvents(list) {
@@ -1065,14 +1080,16 @@ function buildEvents(list) {
       const rp = 100 * (restrictYes ? p.yes : p.no) / (p.yes + p.no);
       const side = rp > 50 ? 'restrict' : rp < 50 ? 'allow' : null;
       const close = Math.abs(2 * rp - 100) < 2;
-      const lead = side === 'restrict' ? `<span class="r">Restrict</span> ${pct1(rp)}` : `<span class="a">Allow</span> ${pct1(100 - rp)}`;
-      if (i === 0 && pts.length < 60) add('first', p.t, `<b>${esc(place(v))}</b>: first votes counted. ${lead}${repTxt(p)}.`, `${place(v)}: first votes counted, ${side === 'restrict' ? 'Restrict ' + pct1(rp) : 'Allow ' + pct1(100 - rp)}.`);
+      const lead = !side ? 'Tied at 50.0%' : side === 'restrict' ? `<span class="r">Restrict</span> ${pct1(rp)}` : `<span class="a">Allow</span> ${pct1(100 - rp)}`;
+      const leadTxt = !side ? 'tied at 50.0%' : side === 'restrict' ? 'Restrict ' + pct1(rp) : 'Allow ' + pct1(100 - rp);
+      if (i === 0 && pts.length < 60) add('first', p.t, `<b>${esc(place(v))}</b>: first votes counted. ${lead}${repTxt(p)}.`, `${place(v)}: first votes counted, ${leadTxt}.`);
       else if (side && lastSide && side !== lastSide) add('lead', p.t, `<b>${esc(place(v))}</b>: <span class="${side === 'restrict' ? 'r' : 'a'}">${sideName(side)}</span> takes the lead, ${pct1(side === 'restrict' ? rp : 100 - rp)} to ${pct1(side === 'restrict' ? 100 - rp : rp)}${repTxt(p)}.`, `${place(v)}: lead change, ${sideName(side)} now ahead ${pct1(side === 'restrict' ? rp : 100 - rp)}.`);
       else if (close && !wasClose && i > 0) add('close', p.t, `<b>${esc(place(v))}</b> tightens to under 2 points: Restrict ${pct1(rp)}${repTxt(p)}.`, `${place(v)} is now too close to call.`);
       if (side) lastSide = side; wasClose = close;
     });
-    if (v.has && (v.status === 'final' || v.status === 'all_precincts')) {
-      const t = v.asOf || (pts.length ? pts[pts.length - 1].t : null);
+    // Timed by the last count change, not as_of, so the event (and its toast) fires once.
+    if (v.has && v.out.tier === 'won') {
+      const t = pts.length ? pts[pts.length - 1].t : v.asOf;
       if (t) {
         const s = v.leader, share = s === 'restrict' ? v.rPct : v.aPct;
         const what = v.status === 'final' ? 'final count' : 'all precincts in';
@@ -1085,7 +1102,7 @@ function buildEvents(list) {
 
 // ---------- since you last looked ----------
 function snapshot() { const c = {}; if (A) A.nov.forEach((v) => { if (v.has) c[v.race.race_id] = [v.yes, v.no, v.status]; }); return { t: Date.now(), c }; }
-function saveSeen() { if (!A) return; seen = snapshot(); store.set(seenKey(), seen); }
+function saveSeen() { if (!A || (!results && !sim)) return; seen = snapshot(); store.set(seenKey(), seen); }
 function computeChanged() {
   changed = new Set();
   if (!seen || !seen.c) return;
@@ -1093,7 +1110,18 @@ function computeChanged() {
 }
 
 // ---------- render ----------
+// Where keyboard focus sits, so a refresh can put it back.
+function focusKey() {
+  const ae = document.activeElement;
+  if (!ae || ae === document.body || !ae.closest) return null;
+  const scope = ae.closest('section[id], #tv'); const pre = scope ? '#' + scope.id + ' ' : '';
+  if (ae.dataset.star) return `${pre}button[data-star="${ae.dataset.star}"]`;
+  if (ae.dataset.id && ae.matches('.brow, .race, .tile, tr')) return `${pre}.${ae.classList[0]}[data-id="${ae.dataset.id}"]`;
+  if (ae.dataset.open && ae.matches('circle')) return `${pre}circle[data-open="${ae.dataset.open}"]`;
+  return null;
+}
 function render() {
+  const fk = openId ? null : focusKey();
   buildViews(); A = aggregates(); computeChanged();
   if (filters.state && !A.states.includes(filters.state)) filters.state = '';
   renderStatus(); renderHero(); renderRail(); renderStrip(); renderScore(); renderLatest(); renderStories();
@@ -1104,7 +1132,10 @@ function render() {
   A.list.forEach((v) => { const id = v.race.race_id, was = prevTotals.get(id); if (was !== undefined && was !== v.total) moved.add(id); prevTotals.set(id, v.total); });
   moved.forEach((id) => document.querySelectorAll(`.brow[data-id="${id}"], .race[data-id="${id}"], .tile[data-id="${id}"]`).forEach((el) => el.classList.add('flash')));
   moved.forEach((id) => document.querySelectorAll(`circle.sdot[data-open="${id}"]`).forEach((el) => { el.classList.remove('flashdot'); void el.getBoundingClientRect(); el.classList.add('flashdot'); }));
-  if (openId && moved.has(openId)) { const v = views.find((x) => x.race.race_id === openId); if (v) openModal(v, true); }
+  // The open race popup re-renders when anything it shows changes, not only the vote total.
+  if (openId) { const v = views.find((x) => x.race.race_id === openId); const sig = v ? `${v.total}|${v.status}|${v.stale}|${v.out.tier}` : ''; if (v && prevSig.has(openId) && prevSig.get(openId) !== sig) openModal(v, true); }
+  A.list.forEach((v) => prevSig.set(v.race.race_id, `${v.total}|${v.status}|${v.stale}|${v.out.tier}`));
+  if (fk) { const el = document.querySelector(fk); if (el && el !== document.activeElement) el.focus({ preventScroll: true }); }
   handleEvents();
   animateBars();
 }
@@ -1115,7 +1146,7 @@ function renderStatus() {
   $('#simStage').parentElement.style.display = sim ? '' : 'none';
   $('#simBtn').hidden = !PREVIEW;
   if (fetchErr) { dot.className = 'live-dot err'; lab.textContent = 'Feed error'; showErr('Could not refresh results.json (' + fetchErr + '). Showing the last successful load.'); }
-  else { $('#errBanner').classList.remove('show'); dot.className = 'live-dot' + (A.pre ? '' : ' on'); lab.textContent = A.pre ? 'Pre-election' : 'Live'; }
+  else { $('#errBanner').classList.remove('show'); dot.className = 'live-dot' + (A.pre ? '' : ' on'); lab.textContent = waiting() ? 'Waiting for returns' : A.pre ? 'Pre-election' : 'Live'; }
   const gen = results && parseISO(results.generated_at);
   $('#updatedAt').textContent = gen ? fmtET(gen, !isToday(gen)) : '—';
   $('#updatedAt').title = lastFetch ? 'Page last checked ' + fmtET(lastFetch) + '; data file generated ' + (results ? results.generated_at : '') : '';
@@ -1161,6 +1192,11 @@ function heroStatsHTML() {
 }
 function headlineHTML() {
   const n = A.nov.length, rep = A.rep.length;
+  if (waiting()) {
+    const now = Date.now(), closed = A.closes.filter((c) => now >= c.date.getTime()), k = closed.reduce((t, c) => t + c.items.length, 0);
+    return k === n ? `Polls have closed everywhere. All <strong>${n} data center measures</strong> are being counted; the first returns appear here as county election offices post them.`
+      : `Polls have closed in ${esc(andList(closedNames()))}, home to <strong>${k} of the ${n}</strong> data center measures. The first returns appear here as county election offices post them.`;
+  }
   if (A.pre) {
     const big = A.byState[0];
     return `<strong>${n} data center measures</strong> in <strong>${A.states.length} states</strong> go before voters on November 3: ${A.binding} binding and ${n - A.binding} advisory.${big ? ` ${esc(big.name)} alone has ${big.n}.` : ''}`;
@@ -1168,7 +1204,8 @@ function headlineHTML() {
   const rA = A.rWon + A.rLead, aA = A.aWon + A.aLead;
   const typical = ` In the typical measure, <span class="r">Restrict</span> has <strong>${pct0(A.medianR)}</strong> of the vote.`;
   if (rep === n && A.finals === n) return `Final unofficial counts: <span class="r">Restrict</span> won <strong>${A.rWon} of ${n}</strong> data center measures and <span class="a">Allow</span> won <strong>${A.aWon}</strong>${A.tc ? `; <strong>${A.tc}</strong> ended too close to call` : ''}.${typical.replace(' has ', ' took ')}`;
-  const lead = rA >= aA
+  if (rA === aA) return (rA === 0 ? `All <strong>${rep}</strong> measures reporting are too close to call.` : `<span class="r">Restrict</span> and <span class="a">Allow</span> are each ahead in <strong>${rA} of ${rep}</strong> measures reporting${A.tc ? `, with <strong>${A.tc}</strong> too close to call` : ''}.`) + typical;
+  const lead = rA > aA
     ? `The <span class="r">Restrict</span> side is ahead in <strong>${rA} of ${rep}</strong> measures reporting${A.rWon ? ` (${A.rWon} final)` : ''}`
     : `The <span class="a">Allow</span> side is ahead in <strong>${aA} of ${rep}</strong> measures reporting${A.aWon ? ` (${A.aWon} final)` : ''}`;
   return `${lead}${A.tc ? `, with <strong>${A.tc}</strong> too close to call` : ''}.${typical}`;
@@ -1332,7 +1369,7 @@ function renderStrip() {
   if (!window.d3) { el.innerHTML = '<p class="empty">The chart library could not load; the race list below has every result.</p>'; return; }
   drawStrip(el, {});
   let empty = el.querySelector('.strip-empty');
-  if (A.pre) { if (!empty) el.insertAdjacentHTML('beforeend', '<p class="strip-empty"></p>'); el.querySelector('.strip-empty').textContent = `All ${A.nov.length} measures land on this line as their first votes are counted, starting at ${A.closes[0] ? closeLabel(A.closes[0].hhmm) : '7:00 PM ET'} on Nov 3.`; }
+  if (A.pre) { if (!empty) el.insertAdjacentHTML('beforeend', '<p class="strip-empty"></p>'); el.querySelector('.strip-empty').textContent = waiting() ? `Waiting for first returns. All ${A.nov.length} measures land on this line as their first votes are counted.` : `All ${A.nov.length} measures land on this line as their first votes are counted, starting at ${A.closes[0] ? closeLabel(A.closes[0].hhmm) : '7:00 PM ET'} on Nov 3.`; }
   else if (empty) empty.remove();
   const wait = A.nov.length - A.rep.length;
   $('#slegend').innerHTML = legendHTML(false) + (wait && !A.pre ? `<span class="muted">${wait} not yet reporting</span>` : '');
@@ -1386,6 +1423,7 @@ function eventLi(e) {
 }
 function latestEmpty() {
   if (!A.pre) return '<li class="empty">No count changes yet.</li>';
+  if (waiting()) return `<li class="empty">Polls have closed in ${esc(andList(closedNames()))}. Waiting for the first count from a county election office; first returns, lead changes and final counts will appear here as they happen.</li>`;
   const f = A.closes[0], oh = A.closes.find((c) => c.byState.some(([s]) => s === 'OH'));
   return `<li class="empty">Nothing yet. The first polls close at ${f ? closeLabel(f.hhmm) + ' (' + andList(f.names) + ')' : '7:00 PM ET'}${oh && oh !== f ? `; Ohio's ${oh.byState.find(([s]) => s === 'OH')[1]} measures follow at ${closeLabel(oh.hhmm)}` : ''}. First returns, lead changes and final counts will appear here as they happen.</li>`;
 }
@@ -1394,18 +1432,20 @@ function link(v) { return `<a href="?race=${v.race.race_id}" data-open="${v.race
 function nightStories() {
   const rep = A.rep, out = [];
   const ahead = (arr) => arr.filter((v) => v.leader === 'restrict' && v.out.tier !== 'close').length;
+  const aheadA = (arr) => arr.filter((v) => v.leader === 'allow' && v.out.tier !== 'close').length;
   const ys = rep.filter((v) => v.race.yes_means === 'restrict'), ns = rep.filter((v) => v.race.yes_means === 'allow');
-  if (ys.length && ns.length) {
-    const a = ahead(ys), b = ahead(ns), sa = a / ys.length, sb = b / ns.length;
-    const read = sa >= 0.5 && sb >= 0.5 ? ' Restrict is winning however the question is worded, which points to real opposition rather than a habit of voting no.'
-      : sb >= 0.5 ? ' Restrict is doing better where it only takes a NO vote, which looks more like ordinary status-quo voting.'
-      : sa >= 0.5 ? ' Voters are mostly saying YES either way, so the wording may be doing some of the work.'
-      : ' Allow is ahead whichever way the question is worded.';
+  // Needs a few races on each side of the wording before reading anything into it.
+  if (ys.length >= 3 && ns.length >= 3) {
+    const a = ahead(ys), b = ahead(ns), ra = a > aheadA(ys), rb = b > aheadA(ns), la = aheadA(ys) > a, lb = aheadA(ns) > b;
+    const read = ra && rb ? ' Restrict is winning however the question is worded, which points to real opposition rather than a habit of voting no.'
+      : rb && la ? ' Restrict is doing better where it only takes a NO vote, which looks more like ordinary status-quo voting.'
+      : ra && lb ? ' Voters are mostly saying YES either way, so the wording may be doing some of the work.'
+      : la && lb ? ' Allow is ahead whichever way the question is worded.' : '';
     out.push(`Where a YES vote restricts data centers, <span class="r">Restrict</span> leads in <b>${a} of ${ys.length}</b>. Where a YES vote allows them, NO (the Restrict side) leads in <b>${b} of ${ns.length}</b>.${read}`);
   }
   const open = rep.filter((v) => v.out.tier !== 'won' && v.status !== 'final');
   const closest = [...(open.length ? open : rep)].sort((a, b) => a.margin - b.margin)[0];
-  if (closest) out.push(`Closest race: ${link(closest)}, where ${sideName(closest.leader)} leads ${pct1(Math.max(closest.rPct, closest.aPct))} to ${pct1(Math.min(closest.rPct, closest.aPct))}${closest.pctRep != null ? ` with ${pct0(closest.pctRep)} of precincts in` : ''}.`);
+  if (closest) out.push(`Closest race: ${link(closest)}, ${closest.leader === 'tie' ? 'tied at 50.0%' : `where ${sideName(closest.leader)} leads ${pct1(Math.max(closest.rPct, closest.aPct))} to ${pct1(Math.min(closest.rPct, closest.aPct))}`}${closest.pctRep != null ? ` with ${pct0(closest.pctRep)} of precincts in` : ''}.`);
   const bestA = [...rep].sort((a, b) => b.aPct - a.aPct)[0];
   if (bestA) out.push(bestA.aPct > 50 ? `<span class="a">Allow</span>'s best showing: ${link(bestA)}, ${pct1(bestA.aPct)}.${A.aWon + A.aLead > 1 ? ` Allow is ahead in ${A.aWon + A.aLead} measures in all.` : ''}` : `<span class="a">Allow</span> leads nowhere yet. Its best showing is ${link(bestA)} at ${pct1(bestA.aPct)}.`);
   const bestR = [...rep].sort((a, b) => b.rPct - a.rPct)[0];
@@ -1439,7 +1479,7 @@ function renderStories() { $('#storiesTitle').textContent = A.pre ? 'What to wat
 // ---------- race list ----------
 function buildFilterOptions() {
   const sel = $('#fState');
-  const sts = [...new Map(races.filter((r) => r.election_date === ELECTION && r.status !== 'decided').map((r) => [r.state, r.state_name])).entries()].sort((a, b) => (stateRank.get(a[0]) ?? 99) - (stateRank.get(b[0]) ?? 99));
+  const sts = [...new Map(races.filter(onBallot).map((r) => [r.state, r.state_name])).entries()].sort((a, b) => (stateRank.get(a[0]) ?? 99) - (stateRank.get(b[0]) ?? 99));
   sts.forEach(([k, name]) => { const o = document.createElement('option'); o.value = k; o.textContent = name; sel.appendChild(o); });
   const ks = $('#fKind');
   KIND_ORDER.forEach((k) => { const o = document.createElement('option'); o.value = k; o.textContent = KIND_LABEL[k]; ks.appendChild(o); });
@@ -1666,7 +1706,7 @@ function openModal(v, keep) {
       <dl style="margin-top:10px"><dt>Precincts</dt><dd>${v.precRep != null && v.precTot ? `${v.precRep} of ${v.precTot} (${pct0(v.pctRep)})` : 'not reported'}</dd><dt>Votes counted</dt><dd>${fmt(v.total)}${v.res.ballots_cast ? ' · ballots cast ' + fmt(v.res.ballots_cast) : ''}${v.res.registered_voters ? ' · registered ' + fmt(v.res.registered_voters) : ''}</dd>${v.est != null && v.est > 0 && v.status !== 'final' ? `<dt>Still out</dt><dd>about ${fmt(v.est)} votes (rough estimate)</dd>` : ''}<dt>As of</dt><dd>${fmtET(v.asOf, !isToday(v.asOf))}</dd>${source ? `<dt>Source</dt><dd>${esc(source)}</dd>` : ''}</dl>`
     : `<p class="empty">No results yet.${r.poll_close_et && v.isNov ? ' Polls close ' + closeLabel(r.poll_close_et) + '.' : ''}</p>`;
   const verbatim = r.ballot_text_verbatim === true || r.ballot_text_verbatim === 'TRUE';
-  const scroll = $('#modalBg').scrollTop;
+  const scroll = $('#modalBg').scrollTop, hadFocus = keep && $('#modal').contains(document.activeElement);
   $('#modal').innerHTML = `<div class="mhead"><button class="close" type="button" aria-label="Close">×</button><div class="eyebrow">${esc(r.state_name)} · ${r.county ? esc(r.county) + ' County · ' : ''}${LEVEL_LABEL[r.level] || ''}${r.scope === 'adjacent' ? ' · related question' : ''}</div><h3>${esc(r.jurisdiction)}</h3><p>${r.measure_label ? esc(r.measure_label) + ' · ' : ''}${esc(r.title)} · <b style="color:#fff">YES = ${r.yes_means}</b></p></div>
     <div class="mbody">
       <div><h4 class="lbl" style="margin:0 0 8px">Ballot language${verbatim ? '' : ' (paraphrase or partial)'}</h4><div class="ballot ${verbatim ? '' : 'paraphrase'}">${esc(r.ballot_text || 'Not yet retrieved.')}</div>
@@ -1687,7 +1727,7 @@ function openModal(v, keep) {
     else if (b.dataset.act === 'star') { toggleStar(r.race_id); openModal(views.find((x) => x.race.race_id === r.race_id), true); }
     else if (b.dataset.act === 'share') navigator.share({ title: `${place(v)} · Data Centers on the Ballot`, text: raceLine(v), url: raceURL(r.race_id) }).catch(() => {});
   });
-  if (!keep) $('#modal .close').focus();
+  if (!keep || hadFocus) $('#modal .close').focus();
   if (window.d3 && v.history && v.history.length > 1) drawSpark(v);
   syncURL();
 }
@@ -1774,6 +1814,7 @@ function toast(text, id) {
   setTimeout(() => el.classList.add('out'), 7000); setTimeout(() => el.remove(), 7600);
 }
 function handleEvents() {
+  if (!results && !sim) return;
   if (!knownEvents) { knownEvents = new Set(A.events.map((e) => e.key)); return; }
   const fresh = A.events.filter((e) => !knownEvents.has(e.key));
   fresh.forEach((e) => knownEvents.add(e.key));
@@ -1803,7 +1844,7 @@ function exitTV() {
 }
 function renderTV() {
   $('#tvSim').hidden = !(sim || (results && results.simulated));
-  $('#tvLive').textContent = fetchErr ? 'Feed error' : A.pre ? 'Pre-election' : 'Live · ' + ($('#updatedAt').textContent);
+  $('#tvLive').textContent = fetchErr ? 'Feed error' : waiting() ? 'Waiting for returns' : A.pre ? 'Pre-election' : 'Live · ' + ($('#updatedAt').textContent);
   $('#tvHeadline').innerHTML = headlineHTML();
   $('#tvStats').innerHTML = heroStatsHTML(); countUps($('#tvStats'));
   if (window.d3) drawStrip($('#tvStrip'), { big: true, group: 'all' });
@@ -1902,7 +1943,13 @@ function wire() {
   let rz = null; let lastW = window.innerWidth;
   window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (!A || Math.abs(window.innerWidth - lastW) < 2) return; lastW = window.innerWidth; renderStrip(); if (document.body.classList.contains('tv')) renderTV(); }, 180); });
   // "Since you last looked": remember the counts when the viewer leaves, compare when they come back.
-  document.addEventListener('visibilitychange', () => { if (document.hidden) saveSeen(); else loadResults(); });
+  // A quick trip to another tab (say, a county's results page) doesn't count as looking again:
+  // the baseline moves only after a few minutes away, or when the page is closed.
+  let hiddenAt = 0, pendingSeen = null;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { hiddenAt = Date.now(); if (A && (results || sim)) { pendingSeen = snapshot(); store.set(seenKey(), pendingSeen); } }
+    else { if (pendingSeen && Date.now() - hiddenAt > SEEN_AWAY_MS) seen = pendingSeen; pendingSeen = null; loadResults(); }
+  });
   window.addEventListener('pagehide', saveSeen);
 }
 wire();

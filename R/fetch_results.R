@@ -115,6 +115,21 @@ results <- purrr::map_dfr(seq_len(nrow(races)), function(i) {
   bind_cols(tibble(race_id = race$race_id), res |> select(-any_of("override")), d)
 })
 
+# A count that has not moved keeps the as_of from when it was first seen, so
+# results.json (and the workflow's commit) changes only when a number does.
+if (!is.null(prev) && all(c("race_id", "as_of", "yes_votes", "no_votes", "precincts_reporting") %in% names(prev))) {
+  prev_seen <- as_tibble(prev) |>
+    transmute(race_id, prev_as_of = as.character(as_of), prev_yes = as.integer(yes_votes), prev_no = as.integer(no_votes),
+              prev_prec = as.integer(precincts_reporting))
+  results <- results |>
+    left_join(prev_seen, by = "race_id") |>
+    mutate(as_of = if_else(!is.na(prev_as_of) & !is.na(yes_votes) &
+                             coalesce(prev_yes == yes_votes & prev_no == no_votes, FALSE) &
+                             coalesce(prev_prec == precincts_reporting, is.na(prev_prec) & is.na(precincts_reporting)),
+                           prev_as_of, as_of)) |>
+    select(-starts_with("prev_"))
+}
+
 # ---- history -----------------------------------------------------------------
 prev_counts <- if (!is.null(prev) && all(c("race_id", "yes_votes", "no_votes", "precincts_reporting") %in% names(prev))) {
   as_tibble(prev) |> transmute(race_id, p_yes = as.integer(yes_votes), p_no = as.integer(no_votes),
@@ -139,8 +154,10 @@ history <- if (file.exists(HISTORY_PATH)) {
     arrange(fetched_at, .by_group = TRUE) |>
     filter(is.na(lag(total_votes)) | total_votes != lag(total_votes) | row_number() == n()) |>
     slice_tail(n = 60) |>
-    summarise(history = list(transmute(pick(everything()), t = fetched_at, yes = yes_votes, no = no_votes,
-                                       rep = pct_reporting)), .groups = "drop")
+    # readr parses fetched_at to UTC; write it back with its offset, since a bare
+    # "2026-11-04 01:15:00" is read by browsers as the viewer's local time
+    summarise(history = list(transmute(pick(everything()), t = now_iso_at(lubridate::as_datetime(fetched_at)),
+                                       yes = yes_votes, no = no_votes, rep = pct_reporting)), .groups = "drop")
 } else tibble(race_id = character(), history = list())
 
 results <- results |> left_join(history, by = "race_id")
