@@ -1,5 +1,8 @@
 # Cloudflare Pages headers (same rule netlify.toml declares for Netlify).
 # results.json and results.csv must never sit in the CDN cache for more than
 # half a minute on election night; the dashboard also cache-busts with ?t=.
+# Pages themselves (index.html) get Cloudflare's default max-age=0,
+# must-revalidate, so if the live site looks old after a push, the deploy did
+# not run: check the "Cloudflare Pages" check on the commit, not the cache.
 /data/*
   Cache-Control: public, max-age=30, must-revalidate
