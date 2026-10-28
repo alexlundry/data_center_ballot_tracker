@@ -1386,6 +1386,8 @@ function legendHTML(withNone) {
 }
 
 // ---------- scorecard ----------
+// Types of measure, most common first; ties keep KIND_ORDER.
+function kindsByCount() { const c = (k) => A.nov.filter((v) => v.kind === k).length; return KIND_ORDER.filter((k) => c(k)).sort((a, b) => c(b) - c(a)); }
 function segCounts(items) {
   const rep = items.filter((v) => v.has), c = { rw: 0, rl: 0, t: 0, al: 0, aw: 0, n: items.length - rep.length };
   rep.forEach((v) => { if (v.out.tier === 'close') c.t++; else if (v.leader === 'restrict') c[v.out.tier === 'won' ? 'rw' : 'rl']++; else c[v.out.tier === 'won' ? 'aw' : 'al']++; });
@@ -1398,7 +1400,7 @@ function renderScore() {
   const n = A.nov.length, el = $('#scorecard');
   if (A.pre) {
     const max = Math.max(...KIND_ORDER.map((k) => A.nov.filter((v) => v.kind === k).length));
-    el.innerHTML = `<h4>On the ballot · ${n} measures</h4>` + KIND_ORDER.map((k) => {
+    el.innerHTML = `<h4>On the ballot · ${n} measures</h4>` + kindsByCount().map((k) => {
       const items = A.nov.filter((v) => v.kind === k); if (!items.length) return '';
       return `<div class="prow" data-pf="kind" data-pv="${k}" tabindex="0" role="button" style="grid-template-columns:minmax(0,1fr) 30px minmax(70px,120px)"><span>${KIND_LABEL[k]}</span><span class="pn">${items.length}</span><div class="pbar" style="background:none"><span class="sg-c" ${barW('pre:' + k, 100 * items.length / max)}></span></div></div>`;
     }).join('') + `<p class="fine">${A.nov.filter((v) => v.race.yes_means === 'allow').length} of the ${n} are worded so that YES is the pro-data-center side; the tracker flips those so Restrict and Allow always mean the same thing. Click a type to see those measures.</p>`;
@@ -1576,7 +1578,7 @@ function renderRaces() {
 function patternGroups() {
   return [
     { title: 'What a YES vote does', field: 'dir', rows: [['restrict', 'YES restricts data centers'], ['allow', 'YES allows data centers']].map(([k, l]) => ({ key: k, label: l, items: A.nov.filter((v) => v.race.yes_means === k) })) },
-    { title: 'Type of measure', field: 'kind', rows: KIND_ORDER.map((k) => ({ key: k, label: KIND_LABEL[k], items: A.nov.filter((v) => v.kind === k) })) },
+    { title: 'Type of measure', field: 'kind', rows: kindsByCount().map((k) => ({ key: k, label: KIND_LABEL[k], items: A.nov.filter((v) => v.kind === k) })) },
     { title: 'Who put it on the ballot', field: 'origin', rows: ['citizens', 'government'].map((k) => ({ key: k, label: ORIGIN_GROUP_LABEL[k], items: A.nov.filter((v) => v.origin === k) })) },
     { title: 'State', field: 'state', rows: A.byState.map((s) => ({ key: s.key, label: s.name, items: A.nov.filter((v) => v.race.state === s.key) })) }
   ].map((g) => ({ ...g, rows: g.rows.filter((r) => r.items.length) }));
