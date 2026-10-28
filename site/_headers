@@ -3,6 +3,8 @@
 # half a minute on election night; the dashboard also cache-busts with ?t=.
 # Pages themselves (index.html) get Cloudflare's default max-age=0,
 # must-revalidate, so if the live site looks old after a push, the deploy did
-# not run: check the "Cloudflare Pages" check on the commit, not the cache.
+# not run: check the project's Deployments list in the Cloudflare dashboard.
+# The project's build watch path must be site/* (one asterisk covers
+# subfolders); site/** matches nothing and skips every build.
 /data/*
   Cache-Control: public, max-age=30, must-revalidate
