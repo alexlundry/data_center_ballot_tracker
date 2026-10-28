@@ -19,9 +19,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#faf5f1">
 <link rel="icon" type="image/png" href="assets/redbud-logo-mark.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
 <style>
 /* Layout: sticky Redbud header, navy hero (headline, countdown, poll-closing strip), your starred
    races, the one-line overview of every measure + scorecard, latest events + storylines, the
@@ -169,6 +169,12 @@ nav.tabs a:hover, nav.tabs a.active { color: var(--fg); border-bottom-color: var
 .grid-2.eq { grid-template-columns: 1fr 1fr; }
 .grid-2.night { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
 .card h4 { margin: 0 0 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: var(--fg-faint); }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.card-head h4, .strip-head h4 { margin: 0; white-space: nowrap; }
+.png-actions { display: inline-flex; gap: 4px; }
+.png-actions button { border: 1px solid var(--line); background: var(--paper); color: var(--fg-faint); border-radius: var(--radius-sm); padding: 2px 7px; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+.png-actions button:hover, .png-actions button:focus-visible { color: var(--primary); border-color: var(--primary); outline: none; }
+button[data-png-act][disabled] { opacity: .65; cursor: progress; }
 .big { font-family: var(--sans); font-size: 34px; font-weight: 600; line-height: 1; letter-spacing: -0.02em; }
 .big.r { color: var(--restrict-deep); } .big.a { color: var(--allow-deep); }
 .big small { font-size: 13px; font-weight: 500; color: var(--fg-mid); margin-left: 4px; letter-spacing: 0; }
@@ -359,7 +365,7 @@ section.rail-sec { padding-top: 22px; }
 
 /* Patterns */
 .pat { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 16px; }
-.prow { display: grid; grid-template-columns: minmax(0, 1fr) 30px minmax(90px, 1fr) 118px; gap: 10px; align-items: center; padding: 7px 6px; border-bottom: 1px solid var(--line); font-size: 13px; cursor: pointer; border-radius: 3px; transition: background .15s ease; }
+.prow { display: grid; grid-template-columns: minmax(0, 1fr) 30px minmax(90px, 1fr) 128px; gap: 10px; align-items: center; padding: 7px 6px; border-bottom: 1px solid var(--line); font-size: 13px; cursor: pointer; border-radius: 3px; transition: background .15s ease; }
 .prow:last-child { border-bottom: none; }
 .prow:hover, .prow.on { background: var(--panel-soft); }
 .prow.on { box-shadow: inset 3px 0 0 var(--primary); }
@@ -603,7 +609,8 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
     <div class="grid-2 night">
       <div class="card">
         <div class="strip-head"><h4>Every measure on one line</h4>
-          <div class="seg" id="groupSeg" role="group" aria-label="Group the line by"><button type="button" data-g="all">All</button><button type="button" data-g="yes">What YES does</button><button type="button" data-g="kind">Type</button><button type="button" data-g="state">State</button></div></div>
+          <div class="seg" id="groupSeg" role="group" aria-label="Group the line by"><button type="button" data-g="all">All</button><button type="button" data-g="yes">What YES does</button><button type="button" data-g="kind">Type</button><button type="button" data-g="state">State</button></div>
+          <span class="png-actions" data-png="line"><button type="button" data-png-act="copy" title="Copy this chart as an image">Copy image</button><button type="button" data-png-act="download" title="Download this chart as a PNG">Download</button></span></div>
         <div id="strip"></div>
         <div class="legend" id="slegend"></div>
         <p class="strip-note">Each dot is one measure, placed by the Restrict side's share of the vote: right of center, Restrict is winning; left of center, Allow is. Group by <b>What YES does</b> to see whether voters are choosing to restrict data centers or just voting no.</p>
@@ -663,8 +670,8 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
       <div class="legend" id="mapLegend"></div>
     </div>
     <div class="maps">
-      <div class="card map-wrap" id="mapCard"><h4>United States</h4><svg id="usmap" viewBox="0 0 975 610" role="img" aria-label="Map of data center ballot measures in the United States"></svg></div>
-      <div class="card map-wrap" id="ohioCard"><h4>Ohio, up close</h4><svg id="ohmap" viewBox="0 0 420 440" role="img" aria-label="Map of Ohio's data center ballot measures"></svg></div>
+      <div class="card map-wrap" id="mapCard"><div class="card-head"><h4>United States</h4><span class="png-actions" data-png="map-us"><button type="button" data-png-act="copy" title="Copy this map as an image">Copy image</button><button type="button" data-png-act="download" title="Download this map as a PNG">Download</button></span></div><svg id="usmap" viewBox="0 0 975 610" role="img" aria-label="Map of data center ballot measures in the United States"></svg></div>
+      <div class="card map-wrap" id="ohioCard"><div class="card-head"><h4>Ohio, up close</h4><span class="png-actions" data-png="map-oh"><button type="button" data-png-act="copy" title="Copy this map as an image">Copy image</button><button type="button" data-png-act="download" title="Download this map as a PNG">Download</button></span></div><svg id="ohmap" viewBox="0 0 420 440" role="img" aria-label="Map of Ohio's data center ballot measures"></svg></div>
     </div>
   </div>
 </section>
@@ -1400,14 +1407,14 @@ function renderScore() {
   const n = A.nov.length, el = $('#scorecard');
   if (A.pre) {
     const max = Math.max(...KIND_ORDER.map((k) => A.nov.filter((v) => v.kind === k).length));
-    el.innerHTML = `<h4>On the ballot · ${n} measures</h4>` + kindsByCount().map((k) => {
+    el.innerHTML = `<div class="card-head"><h4>On the ballot · ${n} measures</h4>${pngActions('score')}</div>` + kindsByCount().map((k) => {
       const items = A.nov.filter((v) => v.kind === k); if (!items.length) return '';
       return `<div class="prow" data-pf="kind" data-pv="${k}" tabindex="0" role="button" style="grid-template-columns:minmax(0,1fr) 30px minmax(70px,120px)"><span>${KIND_LABEL[k]}</span><span class="pn">${items.length}</span><div class="pbar" style="background:none"><span class="sg-c" ${barW('pre:' + k, 100 * items.length / max)}></span></div></div>`;
     }).join('') + `<p class="fine">${A.nov.filter((v) => v.race.yes_means === 'allow').length} of the ${n} are worded so that YES is the pro-data-center side; the tracker flips those so Restrict and Allow always mean the same thing. Click a type to see those measures.</p>`;
     return;
   }
   const c = segCounts(A.nov), rA = c.rw + c.rl, aA = c.aw + c.al;
-  el.innerHTML = `<h4>Scorecard · ${n} measures</h4>
+  el.innerHTML = `<div class="card-head"><h4>Scorecard · ${n} measures</h4>${pngActions('score')}</div>
     ${segBar(c, n, 'score:', 'bar', `${n} measures`)}
     <div class="legend">${SEGS.map(([k, l]) => `<span><i class="sg-${k}"></i>${l}</span>`).join('')}</div>
     <div class="tally"><div><div class="big r">${rA}</div><div class="lbl">Restrict ahead</div><div class="sub">${c.rw} won · ${c.rl} leading</div></div>
@@ -1592,7 +1599,7 @@ function renderPatterns() {
   const groups = patternGroups();
   $('#pat').innerHTML = groups.map((g) => {
     const max = Math.max(...g.rows.map((r) => r.items.length));
-    return `<div class="card"><h4>${g.title}</h4>${g.rows.map((r) => {
+    return `<div class="card"><div class="card-head"><h4>${g.title}</h4>${pngActions('pat-' + g.field)}</div>${g.rows.map((r) => {
       const c = segCounts(r.items), on = filters[g.field] === r.key, rA = c.rw + c.rl, aA = c.aw + c.al;
       const bar = A.pre ? `<div class="pbar" style="background:none"><span class="sg-c" ${barW(`pat:${g.field}:${r.key}:n`, 100 * r.items.length / max)}></span></div>`
         : segBar(c, r.items.length, `pat:${g.field}:${r.key}:`, 'pbar', r.label);
@@ -1714,7 +1721,7 @@ function openModal(v, keep) {
       <div><h4 class="lbl" style="margin:0 0 8px">Ballot language${verbatim ? '' : ' (paraphrase or partial)'}</h4><div class="ballot ${verbatim ? '' : 'paraphrase'}">${esc(r.ballot_text || 'Not yet retrieved.')}</div>
         <h4 class="lbl" style="margin:16px 0 6px">What it does</h4><p style="margin:0 0 12px;font-size:13.5px;color:var(--fg-soft)">${esc(r.summary || '')}</p><dl>${dl}</dl></div>
       <div><h4 class="lbl" style="margin:0 0 8px">Results</h4>${resHTML}<div class="spark" id="spark"></div>
-        <div class="mshare"><button type="button" class="btn" data-act="link">Copy link</button><button type="button" class="btn" data-act="text">Copy result</button>${v.isNov ? `<button type="button" class="btn" data-act="star">${starred.has(r.race_id) ? '★ In Your races' : '☆ Add to Your races'}</button>` : ''}${navigator.share ? '<button type="button" class="btn" data-act="share">Share…</button>' : ''}</div>
+        <div class="mshare"><button type="button" class="btn" data-act="link">Copy link</button><button type="button" class="btn" data-act="text">Copy result</button>${v.isNov ? `<button type="button" class="btn" data-act="star">${starred.has(r.race_id) ? '★ In Your races' : '☆ Add to Your races'}</button>` : ''}${navigator.share ? '<button type="button" class="btn" data-act="share">Share…</button>' : ''}<button type="button" class="btn" data-png="race" data-png-act="copy" title="Copy this card as an image">Copy image</button><button type="button" class="btn" data-png="race" data-png-act="download" title="Download this card as a PNG">Download image</button></div>
         <h4 class="lbl" style="margin:14px 0 2px">Links</h4><div class="links">${links || '<span class="muted small">None yet.</span>'}</div></div>
     </div>`;
   if (!keep) lastFocus = document.activeElement;
@@ -1759,6 +1766,108 @@ function drawSpark(v) {
   svg.append('rect').attr('x', m.l).attr('y', 0).attr('width', W - m.r - m.l).attr('height', H).attr('fill', 'transparent').style('cursor', 'crosshair')
     .on('mousemove', (ev) => { const [mx] = d3.pointer(ev); const i = bisect(pts, x.invert(mx)); const d = pts[i]; if (!d) return; marker.style('display', null).attr('cx', x(d.t)).attr('cy', y(d.rp)); tipAt(`${fmtET(d.t)}: Restrict ${pct1(d.rp)} · ${fmt(d.tot)} votes counted`, ev.clientX, ev.clientY); })
     .on('mouseleave', () => { marker.style('display', 'none'); hideTip(); });
+}
+
+// ---------- PNG export (the race card and the big charts) ----------
+// html-to-image loads only when someone exports, so page load is unaffected.
+const H2I_SRC = 'https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js';
+const PNG_SKIP = ['png-actions', 'mshare', 'close', 'seg'];
+let h2iLoad = null, fontCSS = null;
+function pngActions(kind) { return `<span class="png-actions" data-png="${kind}"><button type="button" data-png-act="copy" title="Copy this chart as an image">Copy image</button><button type="button" data-png-act="download" title="Download this chart as a PNG">Download</button></span>`; }
+function loadH2I() {
+  if (window.htmlToImage) return Promise.resolve(window.htmlToImage);
+  if (!h2iLoad) h2iLoad = new Promise((res, rej) => { const s = document.createElement('script'); s.src = H2I_SRC; s.onload = () => res(window.htmlToImage); s.onerror = () => { h2iLoad = null; rej(new Error('The image library could not load.')); }; document.head.appendChild(s); });
+  return h2iLoad;
+}
+const loadImg = (src) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+// The page's Google Fonts, Latin subset only, inlined as data URLs (the library's own pass fetches every
+// subset of every weight, which took ~25 s). Built once, on the first export.
+async function buildFontCSS() {
+  const rules = [];
+  for (const sh of document.styleSheets) {
+    if (!sh.href || !sh.href.includes('fonts.googleapis.com')) continue;
+    let list; try { list = sh.cssRules; } catch (e) { continue; }
+    for (const r of list) if (r.type === CSSRule.FONT_FACE_RULE && /U\+0000-00FF/i.test(r.style.getPropertyValue('unicode-range'))) rules.push(r);
+  }
+  const parts = await Promise.all(rules.map(async (r) => {
+    const m = /url\(["']?([^"')]+)["']?\)/.exec(r.style.getPropertyValue('src'));
+    if (!m) return '';
+    try {
+      const blob = await fetch(m[1]).then((x) => x.blob());
+      const data = await new Promise((res) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.readAsDataURL(blob); });
+      return r.cssText.replace(m[1], data);
+    } catch (e) { return ''; }
+  }));
+  return parts.join('\n');
+}
+// What each button exports; patterns and maps get their legend, which sits outside the card.
+function pngTarget(kind) {
+  if (kind === 'race') return { node: $('#modal'), extras: [], name: 'race-' + openId };
+  if (kind === 'line') return { node: $('#strip').closest('.card'), extras: [], name: 'overview-line-' + groupBy };
+  if (kind === 'score') return { node: $('#scorecard'), extras: [], name: A.pre ? 'on-the-ballot' : 'scorecard' };
+  if (kind === 'map-us') return { node: $('#mapCard'), extras: [$('#mapLegend')], name: 'map-us' };
+  if (kind === 'map-oh') return { node: $('#ohioCard'), extras: [$('#mapLegend')], name: 'map-ohio' };
+  if (kind.startsWith('pat-')) { const w = document.querySelector(`.png-actions[data-png="${kind}"]`); return { node: w && w.closest('.card'), extras: A.pre ? [] : [$('#patLegend')], name: 'patterns-' + kind.slice(4) }; }
+  return null;
+}
+async function renderPNG(kind) {
+  const t = pngTarget(kind);
+  if (!t || !t.node) throw new Error('Nothing to export.');
+  const lib = await loadH2I();
+  if (document.fonts) await document.fonts.ready;
+  if (fontCSS == null) fontCSS = await buildFontCSS().catch(() => '');
+  // style resets the exported root: the race card's centering margins would otherwise be copied as fixed offsets.
+  const pr = 2, opts = { pixelRatio: pr, fontEmbedCSS: fontCSS, style: { margin: '0' }, filter: (n) => !(n.classList && PNG_SKIP.some((c) => n.classList.contains(c))) };
+  const main = await lib.toCanvas(t.node, { ...opts, backgroundColor: '#ffffff' });
+  const extras = [];
+  for (const el of t.extras) if (el && el.textContent.trim()) extras.push(await lib.toCanvas(el, { ...opts, backgroundColor: '#faf5f1' }));
+  // Credit line, wrapped to two lines when the image is narrow.
+  const simulated = sim || (results && results.simulated), gen = results && parseISO(results.generated_at);
+  const title = 'Data Centers on the Ballot', site = 'datacentersontheballot.com · Redbud Consulting' + (simulated ? '' : gen ? ' · results as of ' + fmtET(gen, true) : '');
+  const fTitle = `600 ${13 * pr}px "Source Serif 4", Georgia, serif`, fSite = `${10.5 * pr}px "IBM Plex Mono", ui-monospace, monospace`;
+  const m = document.createElement('canvas').getContext('2d');
+  m.font = fTitle; const tw = m.measureText(title).width; m.font = fSite; const sw = m.measureText(site).width;
+  const pad = 20 * pr, gap = 10 * pr, logo = 22 * pr, simH = simulated ? 28 * pr : 0;
+  const W = Math.max(main.width, ...extras.map((c) => c.width)) + 2 * pad;
+  const oneLine = logo + 8 * pr + tw + 14 * pr + sw <= W - 2 * pad, footH = oneLine ? 34 * pr : 52 * pr;
+  const H = simH + pad + main.height + extras.reduce((h, c) => h + gap + c.height, 0) + gap + footH + pad / 2;
+  const out = document.createElement('canvas'); out.width = W; out.height = H;
+  const ctx = out.getContext('2d');
+  ctx.fillStyle = '#faf5f1'; ctx.fillRect(0, 0, W, H);
+  ctx.textBaseline = 'middle';
+  if (simulated) {
+    ctx.fillStyle = '#f7e1e1'; ctx.fillRect(0, 0, W, simH);
+    ctx.fillStyle = '#a23838'; ctx.font = `700 ${11 * pr}px "IBM Plex Sans", sans-serif`; ctx.textAlign = 'center';
+    ctx.fillText('SIMULATED RESULTS · NOT REAL · LAYOUT PREVIEW ONLY', W / 2, simH / 2); ctx.textAlign = 'left';
+  }
+  let y = simH + pad; ctx.drawImage(main, pad, y); y += main.height;
+  extras.forEach((c) => { y += gap; ctx.drawImage(c, pad, y); y += c.height; });
+  y += gap;
+  ctx.fillStyle = '#ead9d4'; ctx.fillRect(pad, y, W - 2 * pad, pr);
+  y += 8 * pr;
+  try { ctx.drawImage(await loadImg('assets/redbud-logo-mark.png'), pad, y, logo, logo); } catch (e) { /* the credit text still identifies the source */ }
+  ctx.fillStyle = '#2a1a26'; ctx.font = fTitle; ctx.fillText(title, pad + logo + 8 * pr, y + logo / 2);
+  ctx.fillStyle = '#6b5d68'; ctx.font = fSite;
+  if (oneLine) ctx.fillText(site, pad + logo + 8 * pr + tw + 14 * pr, y + logo / 2);
+  else ctx.fillText(site, pad + logo + 8 * pr, y + logo + 10 * pr);
+  return out;
+}
+function pngBlob(kind) { return renderPNG(kind).then((c) => new Promise((res, rej) => c.toBlob((b) => (b ? res(b) : rej(new Error('Could not make the image.'))), 'image/png'))); }
+function downloadBlob(blob, name) { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); }
+async function pngAction(btn) {
+  const kind = btn.dataset.png || (btn.closest('[data-png]') || {}).dataset?.png;
+  if (!kind || btn.disabled) return;
+  const t = pngTarget(kind), file = `datacentersontheballot-${t ? t.name : kind}.png`;
+  const label = btn.innerHTML, done = (msg) => { btn.textContent = msg; btn.disabled = false; setTimeout(() => { btn.innerHTML = label; }, 1800); };
+  btn.disabled = true; btn.textContent = 'Making…';
+  // The clipboard item is created inside the click (Safari requires it) around the pending image.
+  const blobP = pngBlob(kind);
+  if (btn.dataset.pngAct === 'copy' && navigator.clipboard && window.ClipboardItem) {
+    try { await navigator.clipboard.write([new ClipboardItem({ 'image/png': blobP })]); done('Copied'); return; }
+    catch (e) { /* clipboard refused (permissions or an older browser): save the file instead */ }
+  }
+  try { downloadBlob(await blobP, file); done(btn.dataset.pngAct === 'copy' ? 'Downloaded' : 'Saved'); }
+  catch (e) { done('Failed'); }
 }
 
 // ---------- copy ----------
@@ -1918,6 +2027,7 @@ function wire() {
   const openFrom = (el) => { const id = el.dataset.open || el.dataset.id; const v = views.find((x) => x.race.race_id === id); if (v) openModal(v); };
   const patternPick = (row) => { const f = row.dataset.pf, val = row.dataset.pv; setFilter(f, filters[f] === val ? '' : val); document.getElementById('races').scrollIntoView(); };
   document.addEventListener('click', (e) => {
+    const pb = e.target.closest('button[data-png-act]'); if (pb) { e.stopPropagation(); pngAction(pb); return; }
     const sb = e.target.closest('button[data-star]'); if (sb) { e.stopPropagation(); toggleStar(sb.dataset.star); return; }
     const op = e.target.closest('[data-open]'); if (op) { e.preventDefault(); openFrom(op); return; }
     const pr = e.target.closest('.prow[data-pf]'); if (pr) { patternPick(pr); return; }
