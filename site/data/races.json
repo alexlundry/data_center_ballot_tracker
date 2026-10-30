@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T21:53:03-0400",
+  "generated_at": "2026-10-30T17:29:14-0400",
   "count": 44,
   "races": [
     {
@@ -534,11 +534,11 @@
       "lon": -82.9527,
       "ballot_text_url": "http://www.circlevilleherald.com/news/referendum-petition-language-on-board-of-elections-ballot-proofs/article_d7981670-c993-4566-a261-e15ead5dd172.html",
       "ballotpedia_url": null,
-      "news_url": "https://sciotovalleyguardian.com/2026/10/08/ashville-receives-3-5-million-from-edgeconnex-ahead-of-referendum/",
+      "news_url": "https://www.nbc4i.com/news/your-local-election-hq/ashville-residents-to-vote-on-data-center-referendum/",
       "results_page_url": "https://www.boe.ohio.gov/pickaway/election-info/election-results/",
       "poll_close_et": "19:30",
       "result_note": null,
-      "notes": "A YES vote is the pro-data-center side. Ballot choices are Yes / No (not For / Against), per the Pickaway County ballot proof for precinct 17 Ashville-East (docs/source-docs/pickaway-county-ballot-proof-ashville-east-p2.webp), which prints the full resolution text above the question. Council's attempt to repeal the agreement (Resolution 16-2026) failed at its third reading on Oct 5, 2026, so the referendum stays on the ballot. Village electors only. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file with the same question wording. No issue number is printed.",
+      "notes": "A YES vote is the pro-data-center side. Ballot choices are Yes / No (not For / Against), per the Pickaway County ballot proof for precinct 17 Ashville-East (docs/source-docs/pickaway-county-ballot-proof-ashville-east-p2.webp), which prints the full resolution text above the question. Council introduced Resolution 16-2026 in September to repeal the agreement itself, which could have mooted the referendum; on Sept 22 it put off the vote (Citizen Portal meeting summary, https://citizenportal.ai/articles/10163769/Ohio/Pickaway-County/Ashville/Council-delays-vote-on-repeal-tied-to-EdgeConnects-datacenter-agreement). An earlier note here said the repeal failed at its third reading on Oct 5; no source for that was found on Oct 30. Either way the referendum is on the ballot: NBC4 (Oct 26, 2026, https://www.nbc4i.com/news/your-local-election-hq/ashville-residents-to-vote-on-data-center-referendum/) reports the Nov 3 vote, with YES upholding the agreement and NO overturning it, and the Scioto Valley Guardian (Oct 8, https://sciotovalleyguardian.com/2026/10/08/ashville-receives-3-5-million-from-edgeconnex-ahead-of-referendum/) says it is headed to the Nov 3 ballot. The Pickaway County BOE did not return the research assistant's call (Oct 28-30). Village electors only. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file with the same question wording. No issue number is printed.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -778,19 +778,19 @@
       "target_project": "Lightfield Energy Proximity Park (~300 acres, contract since terminated)",
       "proponents": "Ottawa United (658 verified signatures)",
       "opponents": "City of Ottawa (outside counsel called the ordinance administrative)",
-      "summary": "Citizen-initiated ordinance prohibiting data centers that use more than 25 MW within city limits. Judge Eric Godderz ordered the question onto the ballot; a hearing on Oct 20, 2026 will decide whether the ordinance is legislative or administrative, which determines whether a YES vote takes effect. The city has since terminated the Lightfield sales contract.",
+      "summary": "Citizen-initiated ordinance prohibiting data centers that use more than 25 MW within city limits. Judge Eric Godderz ordered the question onto the ballot in September, and on Oct 20, 2026 ruled the ordinance legislative rather than administrative and denied the city's motion to dismiss, so it stands as a valid initiative under K.S.A. 12-3013. The city has since terminated the Lightfield sales contract.",
       "ballot_text": "Citizen-initiated ordinance barring the city from allowing or constructing any data center using more than 25 megawatts of power within city limits. Per KSHB and KOFO: a YES vote would restrict any data center built in Ottawa to no more than 25 megawatts; a NO vote would allow construction of data centers that use more than 25 megawatts. (Paraphrase; the certified question text was not retrieved.)",
       "ballot_text_verbatim": "FALSE",
-      "status": "pending_litigation",
+      "status": "on_ballot",
       "lat": 38.6156,
       "lon": -95.2678,
       "ballot_text_url": null,
       "ballotpedia_url": null,
-      "news_url": "https://www.kshb.com/news/local-news/data-centers/franklin-county-judge-rules-data-center-question-will-go-on-november-ballot",
+      "news_url": "https://www.kshb.com/news/local-news/data-centers/ottawa-residents-win-case-against-city-voters-to-decide-10-year-data-center-ban",
       "results_page_url": "https://www.franklincoks.org/210/Clerk-Elections",
       "poll_close_et": "20:00",
       "result_note": null,
-      "notes": "Polls close 7 pm Central. Court hearing Oct 20, 2026.",
+      "notes": "Polls close 7 pm Central. Oct 20, 2026: Judge Godderz ruled the ordinance legislative and denied the city's motion to dismiss (KSHB, https://www.kshb.com/news/local-news/data-centers/ottawa-residents-win-case-against-city-voters-to-decide-10-year-data-center-ban; the article mentions no appeal). The September ruling that placed it on the ballot: https://www.kshb.com/news/local-news/data-centers/franklin-county-judge-rules-data-center-question-will-go-on-november-ballot. The Franklin County KS Clerk's office confirmed by phone to Redbud's research assistant (Oct 28-30) that the question stays on the ballot and that results will be posted as one PDF after counting on election night.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -862,8 +862,8 @@
       "results_page_url": "https://www.willcountyclerk.gov/elections/election-results/",
       "poll_close_et": "20:00",
       "result_note": null,
-      "notes": "A YES vote favors data centers. Polls close 7 pm Central.",
-      "adapters": "clarity,html_table",
+      "notes": "A YES vote favors data centers. Polls close 7 pm Central. Results: plan on manual entry from the sheet. As of Oct 30, willcountyclerk.gov answers scripts with an AWS WAF bot challenge (HTTP 202, x-amzn-waf-action: challenge), the same class of block as the Ohio hosts, and Will County's Clarity election list (results.enr.clarityelections.com/IL/Will/elections.json) is empty. Clerk's staff could not say where Nov 3 results will post (research assistant call, Oct 28-30).",
+      "adapters": "clarity",
       "source_status": "pattern"
     },
     {
