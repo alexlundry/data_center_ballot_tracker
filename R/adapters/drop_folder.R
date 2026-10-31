@@ -92,13 +92,15 @@ find_drop_file <- function(src, dir = drop_dir()) {
 }
 
 # Called by run_adapter for sources on DROP_HOSTS: returns src with local_file
-# set, or stops with a message that says what to download.
+# set, or stops with a message that says what to download. The messages leave
+# out the folder path: they end up in the public results.json, and on the Mac
+# the path names the owner's Google Drive account. `make drop` prints it.
 resolve_drop_file <- function(src) {
   dir <- drop_dir()
-  if (!dir.exists(dir)) stop("drop folder ", dir, " does not exist (set DCBT_DROP_DIR or create it)")
+  if (!dir.exists(dir)) stop("drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)")
   path <- find_drop_file(src, dir)
   if (is.null(path)) {
-    stop("no file in drop folder ", dir, " matches /", src$contest_pattern,
+    stop("no file in drop folder matches /", src$contest_pattern,
          "/; download the county's cumulative results from ", src$results_url)
   }
   age <- round(as.numeric(difftime(Sys.time(), file.info(path)$mtime, units = "mins")))

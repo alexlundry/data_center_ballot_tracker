@@ -136,7 +136,9 @@ prev_counts <- if (!is.null(prev) && all(c("race_id", "yes_votes", "no_votes", "
                                p_prec = as.integer(precincts_reporting))
 } else tibble(race_id = character(), p_yes = integer(), p_no = integer(), p_prec = integer())
 hist_rows <- results |>
-  filter(!is.na(total_votes)) |>
+  # feeds publish a zero-count contest days early; logging it would put
+  # "0 votes" lines in the dashboard's update log before polls close
+  filter(!is.na(total_votes), total_votes > 0) |>
   left_join(prev_counts, by = "race_id") |>
   # log a row only when the count moved (or the race is new), so history.csv
   # and the dashboard's update log reflect real changes, not every poll

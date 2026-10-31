@@ -6,7 +6,7 @@ Read `docs/automation-plan.md` (what is and is not automated, and why) and `docs
 
 ## Layout
 
-- `data/races.csv`: the registry, 44 rows (34 on the Nov 3 ballot, the rest decided earlier or on other dates). One row per question; Wilmington OH has four.
+- `data/races.csv`: the registry, 56 rows (44 on the Nov 3 ballot in 10 states, the rest decided earlier or on other dates). One row per question; Wilmington OH has four.
 - `data/sources.csv`: results feeds per race, tried by `priority`; `adapter` names a parser in `R/adapters/`. `discover_url` / `discover_pattern` / `discover_pick` fill `ELECTION_ID` or `PDF_URL` placeholders each pass (`R/adapters/discover.R`, cache in gitignored `data/discovered.json`).
 - `data/manual_results.csv`, `data/not_on_ballot.csv`, `data/registered_voters_ohio.csv`, `data/history.csv` (election-night change log, written by the pipeline).
 - `R/`: `build_races.R` (registry to `site/data/races.json`), `fetch_results.R` (one pass of every feed to `site/data/results.json` and `results.csv`), `adapters/` (including `drop_folder.R`), `drop_status.R` (election-night drop-folder checklist), `utils.R` (HTTP and parsing helpers), `write_sheet.R`, `watch.R` (laptop loop), `count_registered_voters.R`, `simulate_results.R`, `reset_results.R`, `tests/testthat/`.
@@ -53,6 +53,7 @@ Rscript R/count_registered_voters.R <folder> [--only WYANDOT]
 
 ## Where things stand
 
-- Ballot wording is verbatim for 29 of 34 Nov 3 measures. Still open: Volusia (Edgewater), Butler KS (El Dorado), Franklin KS (Ottawa) and Morgan IL sample ballots.
-- Registered voters are on the sheet (column G) for 29 of 34 races, from official files (all 20 Ohio races, Upper Sandusky added Oct 23); the non-Ohio gaps are explained in column Y.
+- Oct 31: added from Ballotpedia's list (cited by Axios) North Berwick, Peru, Wells and Wiscasset ME, Harwood ND and Downe Township NJ; from the Bangor Daily News, four more Maine moratoriums Ballotpedia lacks (Brownfield, Eliot, Freedom, Sabattus); and two decided NH votes (Canterbury, Nottingham). Maine towns count and post their own results, often the next morning as scans, so all eight are manual entry. Mandan ND (Dec 15 vote) is a watch-list item like Clarksville AR. Royalton VT's March moratorium was a show-of-hands town meeting vote, not a ballot question, and stays out.
+- Ballot wording is verbatim for 36 of 44 Nov 3 measures. Still open: Volusia (Edgewater), Butler KS (El Dorado), Franklin KS (Ottawa), Morgan IL and Cass ND (Harwood) sample ballots, and the Peru and Freedom ME warrants.
+- Registered voters are on the sheet (column G) for 38 of 44 races, from official files (all 20 Ohio races; the Maine towns from the Secretary of State's Mar 7, 2026 file); the gaps are explained in column Y. North Dakota has no voter registration.
 - Feeds (Oct 23): 17 Ohio sources use the drop folder; election ids and night-of PDF links are discovered automatically (T3 done); Kansas is manual; Will County's live source is still unknown. PDF layouts are mostly untested (T4). The ordered task list is `docs/handoff-local-session.md`.

@@ -23,10 +23,10 @@ ks-el-dorado,KS,City of El Dorado,2026-11-03,restrict,,,,,,none,,,,no_results,,,
 ks-ottawa,KS,City of Ottawa,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 il-joliet-twp,IL,Joliet Township,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
-il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
-il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
-il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
-il-venice-twp,IL,Venice Township,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
+il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,0,0,0,,,none,0,6,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
+il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,0,0,0,,,none,0,17,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
+il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,0,0,0,,,none,0,8,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
+il-venice-twp,IL,Venice Township,2026-11-03,allow,0,0,0,,,none,0,4,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-morgan-county,IL,Morgan County,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 wi-janesville,WI,City of Janesville,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
@@ -43,3 +43,15 @@ ga-dekalb-dem,GA,DeKalb County (Democratic primary),2026-05-19,restrict,138696,8
 ga-columbia-dem,GA,Columbia County (Democratic primary),2026-05-19,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 ga-glynn-dem,GA,Glynn County (Democratic primary),2026-05-19,allow,,,,,,none,,,,no_results,,,,TRUE,none yet
 oh-perry-village,OH,Village of Perry,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
+me-north-berwick,ME,Town of North Berwick,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
+me-peru,ME,Town of Peru,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
+me-wells,ME,Town of Wells,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
+me-wiscasset,ME,Town of Wiscasset,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
+nd-harwood,ND,City of Harwood,2026-11-03,restrict,0,0,0,,,none,0,1,0,no_results,json_generic,2026-10-31T15:51:39-0400,https://resultsnd.sos.nd.gov/#election=348,TRUE,json_generic
+nj-downe-twp,NJ,Downe Township,2026-11-03,allow,0,0,0,,,none,,,,no_results,clarity,2026-10-31T15:51:39-0400,https://cumberlandcountyclerknj.gov/election-information/election-results/,TRUE,clarity
+nh-canterbury,NH,Town of Canterbury,2026-03-10,restrict,322,63,385,83.6,83.6,restrict,,,,final,manual,2026-03-11T09:00:00-0400,https://www.canterburynh.gov/wp-content/uploads/2026/03/Town-Meeting-Election-Results-3_10_26.pdf,TRUE,manual entry
+nh-nottingham,NH,Town of Nottingham,2026-09-08,restrict,1335,143,1478,90.3,90.3,restrict,,,,final,manual,2026-09-09T09:00:00-0400,https://www.nottingham-nh.gov/sites/g/files/vyhlif3611/f/pages/2026_nottingham_special_town_election_results.pdf,TRUE,manual entry
+me-brownfield,ME,Town of Brownfield,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
+me-eliot,ME,Town of Eliot,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
+me-freedom,ME,Town of Freedom,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
+me-sabattus,ME,Town of Sabattus,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
