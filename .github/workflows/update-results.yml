@@ -6,10 +6,14 @@ name: Update results
 
 on:
   schedule:
-    # Every 5 minutes (UTC) on Nov 3 and Nov 4 only, which covers election
-    # night in every US time zone. Widen or trigger manually for the days
-    # after if counties are still updating. GitHub may delay scheduled runs.
+    # Every 5 minutes (UTC) on Nov 3 and Nov 4, which covers election night in
+    # every US time zone and runs to 7 pm ET Wednesday. GitHub may delay
+    # scheduled runs.
     - cron: "*/5 * 3,4 11 *"
+    # Then hourly through Nov 13 for the slow counts: Maine towns that post
+    # scans, California and Nevada mail ballots, stalled counties, and notes
+    # added to the sheet. A run commits only when a count or note changes.
+    - cron: "7 * 5-13 11 *"
   workflow_dispatch:
 
 permissions:

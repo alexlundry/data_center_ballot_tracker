@@ -45,6 +45,9 @@ ctx <- list(
   ohio_cache = new.env()
 )
 
+# Notes for the dashboard, sheet first (see public_notes in adapters/manual.R)
+notes <- public_notes(ctx$manual_tbl)
+
 # Pull any Google Sheet mirrors once and merge them into the manual table
 sheet_srcs <- sources |> filter(adapter == "sheet") |> distinct(api_url, results_url)
 for (i in seq_len(nrow(sheet_srcs))) {
@@ -52,6 +55,7 @@ for (i in seq_len(nrow(sheet_srcs))) {
   tbl <- tryCatch(read_sheet_table(url), error = function(e) {
     cli::cli_alert_warning("sheet {url} failed: {conditionMessage(e)}"); NULL
   })
+  notes <- bind_rows(public_notes(tbl), notes)
   if (!is.null(tbl) && nrow(tbl) > 0) {
     ctx$manual_tbl <- bind_rows(tbl, ctx$manual_tbl) |>
       arrange(race_id, desc(coalesce(as_of, ""))) |> distinct(race_id, .keep_all = TRUE)
@@ -114,6 +118,8 @@ results <- purrr::map_dfr(seq_len(nrow(races)), function(i) {
   d <- derive_fields(res, race)
   bind_cols(tibble(race_id = race$race_id), res |> select(-any_of("override")), d)
 })
+# The sheet's note wins over the CSV's for the same race
+results <- results |> left_join(notes |> distinct(race_id, .keep_all = TRUE), by = "race_id")
 
 # A count that has not moved keeps the as_of from when it was first seen, so
 # results.json (and the workflow's commit) changes only when a number does.

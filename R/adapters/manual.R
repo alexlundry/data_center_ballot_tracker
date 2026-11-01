@@ -49,6 +49,14 @@ clean_manual_table <- function(tbl) {
     distinct(race_id, .keep_all = TRUE)
 }
 
+# The sheet's public_note column ("Town office reopens Thursday"). Notes go on
+# the dashboard whether or not a race has votes, so they are read apart from
+# the counts, which adapter_manual skips until a YES or NO number is entered.
+public_notes <- function(tbl) {
+  if (is.null(tbl) || !"public_note" %in% names(tbl)) return(tibble(race_id = character(), public_note = character()))
+  tbl |> filter(!is.na(public_note)) |> select(race_id, public_note)
+}
+
 # Returns a standard result row for one race, or NULL.
 adapter_manual <- function(src, manual_tbl) {
   row <- manual_tbl |> filter(race_id == src$race_id)

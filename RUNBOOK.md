@@ -11,10 +11,11 @@
 - [ ] `make reset` so `results.json` has no simulated data, then `make build`, commit, push.
 - [ ] Preview the night on the live site: open https://datacentersontheballot.com/?preview&sim=55 and drag the Night progress slider from 0 to 100. Open TV mode (https://datacentersontheballot.com/?tv) on whatever screen the war room will use and check it fits.
 - [ ] Run `Rscript R/fetch_results.R` once against the live pre-election pages. Every source should fail cleanly (no contest yet) rather than crash. Fix anything that throws.
+- [ ] Check the link preview before posting: paste https://datacentersontheballot.com/ into a draft post (or LinkedIn's Post Inspector) and confirm the card reads "November 3, 2026 · Results" (`site/assets/og-card.png`, source `docs/og-card.html`). Platforms cache the card by URL, so a changed card needs a new file name.
 
 ## Election day
 - 6:00 pm ET: enable the `Update results` workflow (or start `Rscript R/watch.R 120` on a laptop with push access). Check the Actions tab shows a green run.
-- 7:00 pm ET: Volusia County (Edgewater) opens. 7:30 pm: all 19 Ohio measures. 8:00 pm: Kansas (3), Illinois (7), Chester County PA. 9:00 pm: Rock County WI. 10:00 pm: Clark County NV. 11:00 pm: LA County CA.
+- 7:00 pm ET: Volusia County (Edgewater) opens. 7:30 pm: all 20 Ohio measures. 8:00 pm: Maine (8), Illinois (7), Kansas (3), Downe Township NJ, Harwood ND. 9:00 pm: Rock County WI. 10:00 pm: Clark County NV. 11:00 pm: LA County CA.
 - Wall screen: https://datacentersontheballot.com/?tv (Escape or Exit TV mode to leave). To point someone at one race, open it and use Copy link (`?race=<race_id>`).
 - As each county's first numbers post, open its page and compare to the dashboard row. If the row still says "Not yet":
   1. Look at the Action log (or `watch.R` output) for that `race_id`. "no contest matched" means the `contest_pattern` regex is wrong: copy the exact contest name from the page into `sources.csv`. "could not map choices" means the choice labels are not Yes/No: set `yes_pattern` / `no_pattern`.
@@ -28,8 +29,9 @@
   - Still replace the `ELECTION_ID` placeholders for the three ENR counties so the dashboard's source link works.
   - The ENR folders (`liveresults.boe.ohio.gov/ENR/butlerohenr/` and the like) answer "Forbidden" on their own; open the election's page, `…/<id>/en/Index_<id>.html`, from the county board's results link. Confirmed ids: Butler May 2026 = 23 (Nov 2026 probably 24), Lucas May 2026 = 22 (Nov 2026 probably 23). Save the page with File > Save Page As > "Webpage, Complete" once the contest list has loaded; the `ohio_enr` reader was checked on both counties' May pages (Lucas's saved page is about 36 MB because it carries every precinct; that is fine). For Grove City a saved Franklin summary PDF also works. Franklin: follow https://vote.franklincountyohio.gov/election-info/2026.
   - Formats checked against May 5, 2026 files (fixtures in `R/tests/testthat/fixtures/`): Ashtabula, Defiance, Licking, Pickaway and Wyandot (Electionware) and Champaign and Clinton (Hart) are text PDFs the reader handles. **Huron posts a scanned image** even on election night (its May unofficial canvass, timestamped 9:32 pm), so Monroeville needs manual entry in the sheet. Adams's May file online is a scanned official canvass; whether its election-night PDF is text is unknown, so be ready to enter Sprigg and Monroe by hand.
-- Mark a race `status = final` in the sheet once the county shows 100% precincts or "final unofficial".
-- Use the **Copy summary** button for a plain-text update to paste into email or Slack.
+- Mark a race `status = final` in the sheet once the county shows 100% precincts or "final unofficial". For Alhambra CA and Boulder City NV, wait until the county says its count is final: there "all precincts in" still leaves mail ballots, and the dashboard keeps them under Still out until `final`.
+- **Still out notes.** The dashboard's Still out list shows every measure without a complete count, with a line on when to expect more (`results_expected` in `data/races.csv`). When you learn something better (a clerk says the count resumes at 1 pm, a town will post Thursday), type one plain sentence into `public_note`, column Z of the sheet's `manual_results` tab. It is public, it shows even with no vote counts, and it replaces the registry line for that race. Clear it once the count is complete. Staff-only notes stay in `update_note` (column X).
+- Use the **Copy summary** button for a plain-text update to paste into email or Slack. It ends with the races that have no results posted and when to expect them.
 
 ## Known soft spots
 - Ohio SOS `liveresults.ohiosos.gov` carries statewide contests and State Issue 3 only (Directives 2026-22 and 2026-48; the Nov 2025 SOS review sent readers to county sites for local results). All 20 Ohio measures come from 15 county boards: Butler, Franklin and Lucas run an ENR site whose instance ID changes each election (read it off the index page at 7:30 pm); the other 12 post PDFs.
@@ -42,5 +44,7 @@
 - GitHub's 5-minute cron can lag by 10–20 minutes on busy nights. `R/watch.R` is the fallback.
 - "Votes remaining" assumes equal-size precincts. Say "estimate" if you quote it.
 
-## After
-- Disable the cron workflow. Run `make fetch` once the next morning for complete unofficial counts, set `final` on everything, and commit.
+## The days after
+- The `Update results` workflow keeps running hourly from Nov 5 through Nov 13 (every 5 minutes on Nov 3 and 4). It commits only when a count or a sheet note changes. Ohio drop-folder races still need the Mac loop or a `make fetch` run after a file is saved.
+- Wednesday morning: go down the Still out list. Enter the Maine towns as their clerks post (most the morning after; Peru's office reopens Thursday Nov 5; Freedom and Brownfield need a phone call), check that stalled partial counts really are stalled on the county's page, and put a `public_note` on anything a reader would ask about.
+- Set `final` on each race as its county finishes, then disable the `Update results` workflow after Nov 13 (its cron would otherwise fire again next November).

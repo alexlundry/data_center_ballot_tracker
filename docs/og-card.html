@@ -1,0 +1,45 @@
+<!doctype html>
+<!-- The social card (site/assets/og-card.png, 1200 x 630). To re-render after editing:
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+       --window-size=1200,630 --virtual-time-budget=8000 --screenshot=site/assets/og-card.png docs/og-card.html
+     Platforms cache the image by URL, so a changed card needs a new file name (and the og:image tag updated). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,500&family=IBM+Plex+Sans:wght@400&family=IBM+Plex+Mono:wght@500;700&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body { position: relative; background: linear-gradient(120deg, #15203a 0%, #1f2c4a 50%, #2a3a5c 100%); color: #f5f1e8; font-family: 'IBM Plex Sans', sans-serif; }
+  body::before { content: ''; position: absolute; top: -260px; right: -120px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(169,49,120,0.30), transparent 70%); }
+  .wrap { position: absolute; inset: 64px 72px 56px; display: flex; flex-direction: column; }
+  .kick { display: flex; align-items: center; gap: 18px; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 21px; letter-spacing: 0.2em; color: #e0629f; text-transform: uppercase; }
+  .kick img { width: 64px; height: 64px; }
+  h1 { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 92px; line-height: 1.02; letter-spacing: -0.02em; margin: 34px 0 0; color: #fff; }
+  h1 em { font-style: italic; font-weight: 500; color: #e0629f; }
+  p { font-size: 27px; line-height: 1.42; color: rgba(245,241,232,0.78); margin: 22px 0 0; max-width: 960px; }
+  .strip { position: relative; margin-top: auto; height: 70px; }
+  .strip .line { position: absolute; left: 0; right: 0; top: 40px; height: 2px; background: rgba(245,241,232,0.25); }
+  .strip .mid { position: absolute; left: 50%; top: 16px; width: 2px; height: 50px; background: rgba(245,241,232,0.6); }
+  .strip .cap { position: absolute; top: 0; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 15px; letter-spacing: 0.12em; }
+  .strip .cap.a { left: 0; color: #d9772e; } .strip .cap.r { right: 0; color: #4d97d6; }
+  .strip i { position: absolute; width: 22px; height: 22px; border-radius: 50%; transform: translate(-50%, -50%); border: 2px solid #1f2c4a; }
+  .foot { display: flex; justify-content: space-between; align-items: baseline; margin-top: 30px; font-family: 'IBM Plex Mono', monospace; font-size: 22px; }
+  .foot b { color: #fff; font-weight: 700; } .foot span { color: rgba(245,241,232,0.7); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kick"><img src="../site/assets/redbud-logo-mark.png" alt="">November 3, 2026 · Results</div>
+  <h1>Data Centers <em>on the Ballot</em></h1>
+  <p>Results for every local data center ballot measure in the United States, including the ones still being counted.</p>
+  <div class="strip" id="strip"><div class="line"></div><div class="mid"></div><span class="cap a">◂ ALLOW</span><span class="cap r">RESTRICT ▸</span></div>
+  <div class="foot"><b>datacentersontheballot.com</b><span>Redbud Consulting</span></div>
+</div>
+<script>
+  // Illustrative dots only (not results): placed by share, blue right of center, orange left.
+  const xs = [[30, 1], [35, 0], [40, 1], [44, 0], [47, 1], [55, 0], [58, 1], [61, 0], [63, 1], [66, 0], [69, 1], [72, 0], [75, 1], [79, 0]];
+  const s = document.getElementById('strip');
+  xs.forEach(([x, up]) => { const i = document.createElement('i'); i.style.left = x + '%'; i.style.top = (up ? 30 : 52) + 'px'; i.style.background = x < 50 ? '#d9772e' : '#4d97d6'; s.appendChild(i); });
+</script>
+</body>
+</html>

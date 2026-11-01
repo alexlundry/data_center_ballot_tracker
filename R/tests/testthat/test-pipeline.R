@@ -69,6 +69,20 @@ test_that("manual table parses override flags and keeps newest row", {
   expect_equal(r$status_override, "final")
 })
 
+test_that("public notes come through for races with no votes, and not from a sheet without the column", {
+  tmp <- tempfile(fileext = ".csv")
+  writeLines(c("race_id,yes_votes,no_votes,status,as_of,override,public_note",
+               "me-peru,,,,,TRUE,Town office reopens Thursday.",
+               "me-wells,,,,,TRUE,",
+               "oh-urbana,700,300,,,TRUE, "), tmp)
+  m <- read_manual_table(tmp)
+  n <- public_notes(m)
+  expect_equal(n$race_id, "me-peru"); expect_equal(n$public_note, "Town office reopens Thursday.")
+  expect_null(adapter_manual(list(race_id = "me-peru", results_url = NA), m))
+  expect_equal(nrow(public_notes(m |> select(-public_note))), 0)
+  expect_equal(nrow(public_notes(NULL)), 0)
+})
+
 test_that("Clarity summary.csv with Madison's precinct columns maps to the township contest", {
   tbl <- clarity_parse_summary_csv(fx("clarity_summary_madison.csv"))
   src <- list(race_id = "il-chouteau-twp", adapter = "clarity", results_url = "x",
