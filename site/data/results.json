@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T15:51:39-0400",
+  "generated_at": "2026-11-03T00:29:19-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -12,7 +12,7 @@
     "mean_allow_pct": null,
     "pooled_restrict_pct": null,
     "total_votes_counted": 0,
-    "fetch_failures": 30
+    "fetch_failures": 35
   },
   "races": [
     {
@@ -43,6 +43,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -60,7 +61,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Urbana.*(charter|8\\.07|data center)/; download the county's cumulative results from https://www.boe.ohio.gov/champaign/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -73,6 +74,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -103,6 +105,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -120,7 +123,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Conneaut.*(Issue 10|charter|data center)/; download the county's cumulative results from https://www.boe.ohio.gov/ashtabula/election-info/election-results",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -133,6 +136,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -150,7 +154,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Defiance.*(charter|1\\.12|data center)/; download the county's cumulative results from https://www.boe.ohio.gov/defiance/election-info/election-night-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -163,6 +167,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -180,7 +185,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "ohio_enr: no file in drop folder matches /Trenton.*(charter|9\\.06|data center)|ISSUE 17\\b.*TRENTON/; download the county's cumulative results from https://liveresults.boe.ohio.gov/ENR/butlerohenr/ELECTION_ID/en/Index_ELECTION_ID.html",
+      "fetch_error": "ohio_enr: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -193,6 +198,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -210,7 +216,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "ohio_enr: no file in drop folder matches /Grove City.*(charter|consent|Issue 28)/; download the county's cumulative results from https://liveresults.franklincountyohio.gov/enr/franklinohenr/ELECTION_ID/en/index_ELECTION_ID.html | pdf: no file in drop folder matches /Grove City.*(charter|consent|Issue 28)|#28\\b/; download the county's cumulative results from https://liveresults.franklincountyohio.gov/enr/franklinohenr/",
+      "fetch_error": "ohio_enr: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path) | pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -223,6 +229,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -240,7 +247,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Pataskala.*(charter|11\\.09|data center)/; download the county's cumulative results from https://www.boe.ohio.gov/licking/election-info/election-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -253,6 +260,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -270,7 +278,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Granville.*(charter|10\\.12|data center)/; download the county's cumulative results from https://www.boe.ohio.gov/licking/election-info/election-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -283,6 +291,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -300,7 +309,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "ohio_enr: no file in drop folder matches /Oregon.*(charter|data center)|^25\\.\\s*.*Oregon/; download the county's cumulative results from https://liveresults.boe.ohio.gov/ENR/lucasohenr/ELECTION_ID/en/Index_ELECTION_ID.html",
+      "fetch_error": "ohio_enr: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -313,6 +322,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -330,7 +340,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Upper Sandusky.*(charter|data center)/; download the county's cumulative results from https://www.boe.ohio.gov/wyandot/election-info/election-results",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -343,6 +353,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -360,7 +371,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Monroeville.*(advisory|data center)/; download the county's cumulative results from https://www.huron.boe.ohio.gov/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -373,6 +384,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -390,7 +402,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Sprigg.*(zoning)/; download the county's cumulative results from https://www.boe.ohio.gov/adams/election-info/election-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -403,6 +415,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -420,7 +433,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Monroe (Twp|Township).*(zoning)/; download the county's cumulative results from https://www.boe.ohio.gov/adams/election-info/election-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -433,6 +446,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -450,7 +464,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /Ashville.*(referendum|06-2026|resolution|EdgeConneX)/; download the county's cumulative results from https://www.boe.ohio.gov/pickaway/election-info/election-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -463,6 +477,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -480,7 +495,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /O-26-04|119\\.37/; download the county's cumulative results from https://www.boe.ohio.gov/clinton/election-info/election-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -493,6 +508,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -510,7 +526,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /O-26-06|191\\.12|McGuinn/; download the county's cumulative results from https://www.boe.ohio.gov/clinton/election-info/election-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -523,6 +539,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -540,7 +557,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /O-26-07|170\\.11/; download the county's cumulative results from https://www.boe.ohio.gov/clinton/election-info/election-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -553,6 +570,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -570,7 +588,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "pdf: no file in drop folder matches /O-26-05|1957 SR 730|65\\.29 acres/; download the county's cumulative results from https://www.boe.ohio.gov/clinton/election-info/election-results/",
+      "fetch_error": "pdf: drop folder does not exist (set DCBT_DROP_DIR or create it; make drop shows the path)",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -583,6 +601,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -613,6 +632,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -643,6 +663,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -673,6 +694,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -703,6 +725,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -733,6 +756,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -747,10 +771,10 @@
       "as_of": "2026-10-31T15:51:26-0400",
       "source_url": "https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php",
       "adapter": "clarity",
-      "note": null,
+      "note": "stale: last fetch failed",
       "status_override": null,
-      "fetch_ok": true,
-      "fetch_error": null,
+      "fetch_ok": false,
+      "fetch_error": "clarity: ELECTION_ID not discovered yet | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -763,6 +787,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -777,10 +802,10 @@
       "as_of": "2026-10-31T15:51:26-0400",
       "source_url": "https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php",
       "adapter": "clarity",
-      "note": null,
+      "note": "stale: last fetch failed",
       "status_override": null,
-      "fetch_ok": true,
-      "fetch_error": null,
+      "fetch_ok": false,
+      "fetch_error": "clarity: ELECTION_ID not discovered yet | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -793,6 +818,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -807,10 +833,10 @@
       "as_of": "2026-10-31T15:51:26-0400",
       "source_url": "https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php",
       "adapter": "clarity",
-      "note": null,
+      "note": "stale: last fetch failed",
       "status_override": null,
-      "fetch_ok": true,
-      "fetch_error": null,
+      "fetch_ok": false,
+      "fetch_error": "clarity: ELECTION_ID not discovered yet | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -823,6 +849,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -837,10 +864,10 @@
       "as_of": "2026-10-31T15:51:26-0400",
       "source_url": "https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php",
       "adapter": "clarity",
-      "note": null,
+      "note": "stale: last fetch failed",
       "status_override": null,
-      "fetch_ok": true,
-      "fetch_error": null,
+      "fetch_ok": false,
+      "fetch_error": "clarity: ELECTION_ID not discovered yet | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -853,6 +880,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -883,6 +911,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -913,6 +942,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -943,6 +973,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -960,7 +991,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "html_table: no table matched contest_pattern | html_table: no <table> elements on page",
+      "fetch_error": "html_table: no table matched contest_pattern | html_table: HTTP 404 Not Found.",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
@@ -973,6 +1004,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1003,6 +1035,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1033,6 +1066,7 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "final",
+      "public_note": null,
       "history": []
     },
     {
@@ -1063,6 +1097,7 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "final",
+      "public_note": null,
       "history": []
     },
     {
@@ -1093,6 +1128,7 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "final",
+      "public_note": null,
       "history": []
     },
     {
@@ -1123,6 +1159,7 @@
       "est_votes_remaining": 0,
       "leader": "restrict",
       "status": "final",
+      "public_note": null,
       "history": []
     },
     {
@@ -1153,6 +1190,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1183,6 +1221,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1213,6 +1252,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1243,6 +1283,7 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "final",
+      "public_note": null,
       "history": []
     },
     {
@@ -1273,6 +1314,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1303,6 +1345,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1333,6 +1376,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1363,6 +1407,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1393,6 +1438,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1423,6 +1469,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1453,6 +1500,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1483,6 +1531,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1497,10 +1546,10 @@
       "as_of": "2026-10-31T15:51:39-0400",
       "source_url": "https://cumberlandcountyclerknj.gov/election-information/election-results/",
       "adapter": "clarity",
-      "note": null,
+      "note": "stale: last fetch failed",
       "status_override": null,
-      "fetch_ok": true,
-      "fetch_error": null,
+      "fetch_ok": false,
+      "fetch_error": "clarity: ELECTION_ID not discovered yet",
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -1513,6 +1562,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1543,14 +1593,8 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "final",
-      "history": [
-        {
-          "t": "2026-10-31T15:51:39-0400",
-          "yes": 322,
-          "no": 63,
-          "rep": null
-        }
-      ]
+      "public_note": null,
+      "history": []
     },
     {
       "race_id": "nh-nottingham",
@@ -1580,14 +1624,8 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "final",
-      "history": [
-        {
-          "t": "2026-10-31T15:51:39-0400",
-          "yes": 1335,
-          "no": 143,
-          "rep": null
-        }
-      ]
+      "public_note": null,
+      "history": []
     },
     {
       "race_id": "me-brownfield",
@@ -1617,6 +1655,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1647,6 +1686,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1677,6 +1717,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     },
     {
@@ -1707,6 +1748,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
+      "public_note": null,
       "history": []
     }
   ]
