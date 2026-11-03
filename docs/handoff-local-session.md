@@ -105,6 +105,6 @@ On the night, run the loop under `launchd` and keep a Claude Code session open i
 
 ## Open questions for Alex
 
-- Where will Will County publish Nov 3 results (Clarity id, or something else)?
+- ~~Where will Will County publish Nov 3 results?~~ Clarity 127394, linked from the clerk's results page (found Nov 3 morning).
 - Should the dashboard show turnout against registration now that registered voters are known for 28 races? (Cheap once T6 puts the column in the registry.)
 - Slack webhook or email for alerts?

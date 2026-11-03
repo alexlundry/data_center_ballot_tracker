@@ -11,7 +11,8 @@
 # Strategy: read every <table>, keep the ones whose text (or the heading
 # immediately before them) matches contest_pattern, then treat the first
 # column as the choice label and the first numeric column as votes.
-# Precincts are pulled from the surrounding text ("12 of 14 precincts").
+# Precincts are pulled from the surrounding text ("12 of 14 precincts"), or
+# failing that from the element just after the table.
 
 adapter_html_table <- function(src) {
   page <- if (!is.null(src$local_file)) readr::read_file(src$local_file) else fetch_text(src$results_url)
@@ -46,8 +47,18 @@ adapter_html_table <- function(src) {
     }
     if (is.na(votes_col)) next
     prec <- extract_precincts(paste(heading, text_here))
+    if (anyNA(prec)) {
+      # Rock County WI prints "Precincts Reporting: 0 of 40" in a span right after the table
+      after <- xml2::xml_find_first(tb, "following-sibling::*[1]")
+      if (!inherits(after, "xml_missing")) prec <- extract_precincts(rvest::html_text2(after))
+    }
+    label <- if (nzchar(heading)) heading else paste("table", i)
+    # The table itself carried the title (Rock County): the headings before it
+    # belong to the previous contest, so name it by its own first row
+    if (nzchar(src$contest_pattern %||% "") && !str_detect(heading, rx))
+      label <- str_squish(str_split_1(text_here, "\n")[1])
     out[[length(out) + 1]] <- tibble(
-      contest = if (nzchar(heading)) heading else paste("table", i),
+      contest = label,
       choice = as.character(df[[choice_col]]),
       votes = parse_int(df[[votes_col]]),
       precincts_reporting = prec[1], precincts_total = prec[2],

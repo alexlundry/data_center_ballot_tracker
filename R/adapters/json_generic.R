@@ -12,12 +12,14 @@
 #    "prec_rep_key": "PrecinctsReporting",
 #    "prec_tot_key": "PrecinctsTotal"}
 # Defaults match the Clarity summary.json layout.
+# A path step that meets an array collects that key from every element, so
+# LA County's Election.ContestGroups[].Contests[] is "Election.ContestGroups.Contests".
 
 get_path <- function(x, path) {
   if (is.null(path) || !nzchar(path)) return(x)
   for (p in str_split(path, "\\.")[[1]]) {
-    x <- x[[p]]
-    if (is.null(x)) return(NULL)
+    x <- if (is.null(names(x)) && is.list(x)) purrr::list_flatten(purrr::compact(purrr::map(x, p))) else x[[p]]
+    if (is.null(x) || length(x) == 0) return(NULL)
   }
   x
 }

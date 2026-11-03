@@ -105,3 +105,44 @@ test_that("GOOGLE_SA_JSON may hold the key itself or a path to it", {
   expect_equal(sa_key_file(f), f)
   expect_error(sa_key_file(file.path(tempdir(), "missing.json")), "neither key JSON")
 })
+
+# Nov 3 sources: fixtures are cut from that morning's responses, with invented counts
+src_row <- function(race, pr = "1") {
+  s <- readr::read_csv(file.path(ROOT, "data/sources.csv"), show_col_types = FALSE,
+                       col_types = readr::cols(.default = readr::col_character()))
+  as.list(s[s$race_id == race & s$priority == pr, ][1, ])
+}
+
+test_that("Enhanced Voting data (Volusia) reads Edgewater Amendment 4, not its neighbours", {
+  fetch_text <<- function(url, ...) paste(readLines(url, warn = FALSE), collapse = "\n")
+  src <- src_row("fl-edgewater"); src$api_url <- fx("enhanced_voting_volusia.json")
+  expect_equal(src$adapter, "enhanced_voting")
+  res <- adapter_enhanced_voting(src)
+  expect_equal(res$yes_votes, 5210L); expect_equal(res$no_votes, 2875L)
+  expect_equal(res$precincts_reporting, 14L); expect_equal(res$precincts_total, 17L)
+  expect_equal(res$raw_contest, "Amendment 4 - Edgewater")
+})
+
+test_that("Enhanced Voting's 0 of 0 units before the first upload is unknown, not complete", {
+  js <- jsonlite::fromJSON(fx("enhanced_voting_volusia.json"), simplifyVector = FALSE)
+  for (i in seq_along(js$ballotItems)) js$ballotItems[[i]]$reportingStatus[c("reportingUnits", "totalUnits")] <- list(0L, 0L)
+  f <- tempfile(fileext = ".json"); jsonlite::write_json(js, f, auto_unbox = TRUE, null = "null")
+  src <- src_row("fl-edgewater"); src$api_url <- f
+  res <- adapter_enhanced_voting(src)
+  expect_true(is.na(res$precincts_reporting)); expect_true(is.na(res$precincts_total))
+})
+
+test_that("LA County JSON walks ContestGroups to Alhambra Measure DB", {
+  src <- src_row("ca-alhambra"); src$api_url <- fx("lavote_4348.json")
+  res <- adapter_json_generic(src)
+  expect_equal(res$yes_votes, 8123L); expect_equal(res$no_votes, 6034L)
+  expect_match(res$raw_contest, "MEASURE DB$")
+})
+
+test_that("Rock County page reads the Janesville summary and its precinct line", {
+  src <- src_row("wi-janesville"); src$local_file <- fx("rock_20261103.html")
+  res <- adapter_html_table(src)
+  expect_equal(res$yes_votes, 11204L); expect_equal(res$no_votes, 9877L)
+  expect_equal(res$precincts_reporting, 31L); expect_equal(res$precincts_total, 40L)
+  expect_match(res$raw_contest, "^Development Referendum City of Janesville")
+})

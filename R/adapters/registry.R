@@ -1,6 +1,7 @@
 # Map adapter names in data/sources.csv to functions.
 ADAPTERS <- list(
   clarity      = function(src, ctx) adapter_clarity(src),
+  enhanced_voting = function(src, ctx) adapter_enhanced_voting(src),
   html_table   = function(src, ctx) adapter_html_table(src),
   json_generic = function(src, ctx) adapter_json_generic(src),
   csv_generic  = function(src, ctx) adapter_csv_generic(src),
