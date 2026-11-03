@@ -1,0 +1,3 @@
+race_id,fetched_at,yes_votes,no_votes,total_votes,precincts_reporting,precincts_total,pct_reporting,adapter
+ca-monterey-park,2026-11-03T18:00:40-0500,10388,1372,11760,NA,NA,NA,manual
+ga-dekalb-dem,2026-11-03T18:00:40-0500,138816,8182,146998,191,191,100,manual
