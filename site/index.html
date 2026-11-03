@@ -481,6 +481,14 @@ table.t tr.tgroup td { background: var(--panel-soft); font-size: 10px; font-weig
 .modal .mhead p { margin: 0; color: var(--fg-on-dark-dim); font-size: 13px; }
 .modal .close { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.12); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 18px; line-height: 1; }
 .modal .close:hover { background: var(--primary); }
+.modal .mplain { margin: 10px 0 0; max-width: 64ch; color: var(--fg-on-dark); font-size: 14px; line-height: 1.5; }
+/* Previous / next through the race list, in its current order and filters. */
+.modal .mhead.has-nav { padding-right: 168px; }
+.mnav { position: absolute; top: 12px; right: 52px; display: flex; align-items: center; gap: 6px; }
+.mnav button { background: rgba(255,255,255,0.12); border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 16px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+.mnav button:hover:not([disabled]) { background: var(--primary); }
+.mnav button[disabled] { opacity: .35; cursor: default; }
+.mnav span { font-family: var(--mono); font-size: 10.5px; color: var(--fg-on-dark-dim); min-width: 46px; text-align: center; font-variant-numeric: tabular-nums; }
 .modal .mbody { padding: 18px 24px 22px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 22px; }
 .modal .ballot { font-family: var(--serif); font-size: 15.5px; line-height: 1.5; background: var(--primary-bg); border-left: 4px solid var(--primary-bright); padding: 12px 16px; border-radius: 0 var(--radius) var(--radius) 0; font-variation-settings: 'opsz' 20; color: var(--fg); }
 .modal .ballot.paraphrase { border-left-color: var(--neutral); background: var(--panel-soft); }
@@ -599,6 +607,8 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
   .prow.pre { grid-template-columns: minmax(0, 1fr) 24px minmax(60px, 1fr); }
   .prow .tal { white-space: normal; line-height: 1.3; }
   .card { padding: 16px; }
+  .modal .mhead.has-nav { padding-right: 56px; }
+  .mnav { position: static; margin: -4px 0 10px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }
 </style>
@@ -687,7 +697,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
     </div>
     <div class="filters" id="filters">
       <div class="fg fg-sort">
-        <label><span><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1v8M1 3l2-2 2 2M7 9V1M5 7l2 2 2-2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Sort</span><select id="fSort"><option value="status">By status</option><option value="margin">Closest margin</option><option value="state">State (Ohio first)</option><option value="reporting">Most reported</option><option value="updated">Recently updated</option><option value="votes">Most votes</option></select></label>
+        <label><span><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1v8M1 3l2-2 2 2M7 9V1M5 7l2 2 2-2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Sort</span><select id="fSort"><option value="status">By status</option><option value="margin">Closest margin</option><option value="state">State (Ohio first)</option><option value="reporting">Most reported</option><option value="updated">Recently updated</option><option value="votes">Most votes</option><option value="restrict">Highest Restrict %</option><option value="allow">Highest Allow %</option></select></label>
       </div>
       <div class="fg fg-filter" role="group" aria-label="Filters">
         <label>State <select id="fState"><option value="">All states</option></select></label>
@@ -854,7 +864,7 @@ let openId = null, lastFocus = null;
 const prevW = new Map(), prevStat = new Map(), prevTotals = new Map(), prevSig = new Map();
 
 // Deep links: ?race=<race_id>, filters, ?tv; ?preview shows the Simulate button (?preview&sim=55 starts it).
-const VALID = { kind: KIND_ORDER, dir: ['restrict', 'allow'], origin: ['citizens', 'government'], status: ['close', 'counting', 'final', 'none', 'changed', 'earlier'], sort: ['status', 'margin', 'state', 'reporting', 'updated', 'votes'] };
+const VALID = { kind: KIND_ORDER, dir: ['restrict', 'allow'], origin: ['citizens', 'government'], status: ['close', 'counting', 'final', 'none', 'changed', 'earlier'], sort: ['status', 'margin', 'state', 'reporting', 'updated', 'votes', 'restrict', 'allow'] };
 Object.keys(VALID).forEach((k) => { const val = params.get(k); if (val && VALID[k].includes(val)) filters[k] = val; });
 if (params.get('state')) filters.state = params.get('state').toUpperCase().slice(0, 2);
 if (params.get('q')) filters.q = params.get('q').slice(0, 80);
@@ -1390,12 +1400,14 @@ function numsHTML(v) {
 }
 
 // ---------- the overview line ----------
+// Lanes run from the most measures to the fewest (ties keep their usual order); "Elsewhere" is always last.
 function stripLanes(nov, by) {
-  if (by === 'yes') return [['restrict', 'Where YES restricts'], ['allow', 'Where YES allows']].map(([k, l]) => ({ key: k, label: l, items: nov.filter((v) => v.race.yes_means === k) })).filter((l) => l.items.length);
-  if (by === 'kind') return KIND_ORDER.map((k) => ({ key: k, label: KIND_LABEL[k], items: nov.filter((v) => v.kind === k) })).filter((l) => l.items.length);
+  const byCount = (lanes) => lanes.filter((l) => l.items.length).sort((a, b) => b.items.length - a.items.length);
+  if (by === 'yes') return byCount([['restrict', 'Where YES restricts'], ['allow', 'Where YES allows']].map(([k, l]) => ({ key: k, label: l, items: nov.filter((v) => v.race.yes_means === k) })));
+  if (by === 'kind') return byCount(KIND_ORDER.map((k) => ({ key: k, label: KIND_LABEL[k], items: nov.filter((v) => v.kind === k) })));
   if (by === 'state') {
     const big = A.byState.filter((s) => s.n >= 3), keys = new Set(big.map((s) => s.key));
-    return big.map((s) => ({ key: s.key, label: s.name, items: nov.filter((v) => v.race.state === s.key) }))
+    return byCount(big.map((s) => ({ key: s.key, label: s.name, items: nov.filter((v) => v.race.state === s.key) })))
       .concat([{ key: 'other', label: 'Elsewhere', items: nov.filter((v) => !keys.has(v.race.state)) }]).filter((l) => l.items.length);
   }
   return [{ key: 'all', label: '', items: nov }];
@@ -1641,7 +1653,10 @@ const SORTERS = {
   state: byName,
   reporting: (a, b) => ((b.pctRep ?? -1) - (a.pctRep ?? -1)) || byName(a, b),
   updated: (a, b) => ((b.asOf?.getTime() ?? 0) - (a.asOf?.getTime() ?? 0)) || byName(a, b),
-  votes: (a, b) => ((b.total ?? -1) - (a.total ?? -1)) || byName(a, b)
+  votes: (a, b) => ((b.total ?? -1) - (a.total ?? -1)) || byName(a, b),
+  // Highest share first; measures with no votes yet go last.
+  restrict: (a, b) => (a.has === b.has ? 0 : a.has ? -1 : 1) || ((b.rPct ?? -1) - (a.rPct ?? -1)) || byName(a, b),
+  allow: (a, b) => (a.has === b.has ? 0 : a.has ? -1 : 1) || ((b.aPct ?? -1) - (a.aPct ?? -1)) || byName(a, b)
 };
 // Before any results exist, "no results posted" would read as if counting had started.
 const groupLabel = (g) => g === 'none' && A.pre ? 'No results yet' : GROUP_LABEL[g];
@@ -1837,9 +1852,24 @@ function fmtDate(s) { const d = new Date(s + 'T12:00:00'); return isNaN(d) ? s :
 // ---------- modal ----------
 function raceURL(id) { return location.origin + location.pathname + '?race=' + encodeURIComponent(id); }
 function raceLine(v) { return `${place(v)}: ${v.has ? `Restrict ${pct1(v.rPct)}, Allow ${pct1(v.aPct)} · ${v.precTot ? v.precRep + '/' + v.precTot + ' precincts' : fmt(v.total) + ' votes'} · ${callText(v)}` : callText(v)}`; }
+// The popup steps through the race list as it stands (filters, sort, then the earlier group); a race the list
+// doesn't show, opened from the map say, steps through everything in status order instead.
+function modalOrder(id) {
+  const shown = filtered().concat(A.decided.filter(matches));
+  return shown.some((v) => v.race.race_id === id) ? shown : A.list.slice().sort(SORTERS.status).concat(A.decided);
+}
+function stepModal(d) {
+  const list = modalOrder(openId), i = list.findIndex((v) => v.race.race_id === openId), next = list[i + d];
+  if (i < 0 || !next) return;
+  openModal(next, 'nav');
+  const b = $(`#modal .mnav button[data-step="${d}"]`); if (b && !b.disabled) b.focus(); else $('#modal .close').focus();
+}
+// keep: true re-renders the open popup in place; 'nav' means the arrows stepped to this race.
 function openModal(v, keep) {
   if (!v) return;
-  const r = v.race;
+  const r = v.race, nav = keep === 'nav';
+  const order = modalOrder(r.race_id), at = order.findIndex((x) => x.race.race_id === r.race_id);
+  const navHTML = at < 0 ? '' : `<div class="mnav png-skip"><button type="button" data-step="-1" aria-label="Previous measure"${at === 0 ? ' disabled' : ''}>‹</button><span>${at + 1} of ${order.length}</span><button type="button" data-step="1" aria-label="Next measure"${at === order.length - 1 ? ' disabled' : ''}>›</button></div>`;
   const yesCls = r.yes_means === 'restrict' ? 'r' : 'a', noCls = r.yes_means === 'restrict' ? 'a' : 'r';
   const tl = TYPE_LABEL[r.measure_type];
   const dl = [['Type', KIND_LABEL[v.kind] + (tl && tl.toLowerCase() !== KIND_LABEL[v.kind].toLowerCase() ? ' · ' + tl.toLowerCase() : '')], ['Binding', r.binding], ['Origin', ORIGIN_LABEL[r.origin] || r.origin], ['Threshold', r.threshold_mw ? r.threshold_mw + ' MW' : null], ['Targets', r.target_project], ['For', r.proponents], ['Against', r.opponents], ['Status', r.status === 'pending_litigation' ? 'On the ballot; litigation pending' : r.status === 'decided' ? 'Decided' : 'On the ballot'], ['Election', fmtDate(r.election_date) + (r.poll_close_et ? ' · polls close ' + closeLabel(r.poll_close_et) : '')]]
@@ -1856,7 +1886,7 @@ function openModal(v, keep) {
     : `<p class="empty">${v.isNov && pollsClosed(v) ? 'No results posted yet.' : `No results yet.${r.poll_close_et && v.isNov ? ' Polls close ' + closeLabel(r.poll_close_et) + '.' : ''}`}</p>${exHTML}`;
   const verbatim = r.ballot_text_verbatim === true || r.ballot_text_verbatim === 'TRUE';
   const scroll = $('#modalBg').scrollTop, hadFocus = keep && $('#modal').contains(document.activeElement);
-  $('#modal').innerHTML = `<div class="mhead"><button class="close" type="button" aria-label="Close">×</button><div class="eyebrow">${esc(r.state_name)} · ${r.county ? esc(r.county) + ' County · ' : ''}${LEVEL_LABEL[r.level] || ''}${r.scope === 'adjacent' ? ' · related question' : ''}</div><h3>${esc(r.jurisdiction)}</h3><p>${r.measure_label ? esc(r.measure_label) + ' · ' : ''}${esc(r.title)} · <b style="color:#fff">YES = ${r.yes_means}</b></p></div>
+  $('#modal').innerHTML = `<div class="mhead${navHTML ? ' has-nav' : ''}"><button class="close" type="button" aria-label="Close">×</button>${navHTML}<div class="eyebrow">${v.isNov ? '' : esc(fmtDate(r.election_date)) + ' · '}${esc(r.state_name)} · ${r.county ? esc(r.county) + ' County · ' : ''}${LEVEL_LABEL[r.level] || ''}${r.scope === 'adjacent' ? ' · related question' : ''}</div><h3>${esc(r.jurisdiction)}</h3><p>${r.measure_label ? esc(r.measure_label) + ' · ' : ''}${esc(r.title)} · <b style="color:#fff">YES = ${r.yes_means}</b></p>${r.plain_summary ? `<p class="mplain">${esc(r.plain_summary)}</p>` : ''}</div>
     <div class="mbody">
       <div><h4 class="lbl" style="margin:0 0 8px">Ballot language${verbatim ? '' : ' (paraphrase or partial)'}</h4><div class="ballot ${verbatim ? '' : 'paraphrase'}">${esc(r.ballot_text || 'Not yet retrieved.')}</div>
         <h4 class="lbl" style="margin:16px 0 6px">What it does</h4><p style="margin:0 0 12px;font-size:13.5px;color:var(--fg-soft)">${esc(r.summary || '')}</p><dl>${dl}</dl></div>
@@ -1867,15 +1897,16 @@ function openModal(v, keep) {
   if (!keep) lastFocus = document.activeElement;
   openId = r.race_id;
   $('#modalBg').classList.add('show'); document.body.style.overflow = 'hidden';
-  $('#modalBg').scrollTop = keep ? scroll : 0;
+  $('#modalBg').scrollTop = keep && !nav ? scroll : 0;
   $('#modal .close').addEventListener('click', closeModal);
+  $('#modal .mnav')?.addEventListener('click', (e) => { const b = e.target.closest('button[data-step]'); if (b) stepModal(+b.dataset.step); });
   $('#modal .mshare').addEventListener('click', (e) => {
     const b = e.target.closest('button[data-act]'); if (!b) return;
     if (b.dataset.act === 'link') copyText(raceURL(r.race_id), b, 'Link copied');
     else if (b.dataset.act === 'text') copyText(raceLine(v) + '\n' + raceURL(r.race_id), b, 'Copied');
     else if (b.dataset.act === 'share') navigator.share({ title: `${place(v)} · Data Centers on the Ballot`, text: raceLine(v), url: raceURL(r.race_id) }).catch(() => {});
   });
-  if (!keep || hadFocus) $('#modal .close').focus();
+  if (!keep || (hadFocus && !nav)) $('#modal .close').focus();
   if (window.d3 && v.history && v.history.length > 1) drawSpark(v);
   syncURL();
 }
@@ -1905,7 +1936,9 @@ function drawSpark(v) {
   svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', '#3273a3').attr('stroke-width', 2).attr('d', d3.line().x((d) => x(d.t)).y((d) => y(d.rp)));
   const last = pts[pts.length - 1];
   svg.append('circle').attr('cx', x(last.t)).attr('cy', y(last.rp)).attr('r', 4).attr('fill', '#3273a3').attr('stroke', '#fff').attr('stroke-width', 2);
-  svg.append('text').attr('x', x(last.t) + 7).attr('y', y(last.rp) + 4).attr('font-size', 11).attr('font-weight', 600).attr('fill', '#205373').attr('font-family', 'IBM Plex Sans, sans-serif').text(pct1(last.rp));
+  // Both labels sit in the right margin: near 50%, the value label steps above (or below) the 50% label.
+  const ly = y(last.rp), ry = y(50), vy = Math.abs(ly - ry) < 14 ? (last.rp >= 50 ? ry - 14 : ry + 14) : ly;
+  svg.append('text').attr('x', x(last.t) + 7).attr('y', vy + 4).attr('font-size', 11).attr('font-weight', 600).attr('fill', '#205373').attr('font-family', 'IBM Plex Sans, sans-serif').text(pct1(last.rp));
   svg.append('text').attr('x', m.l).attr('y', H - 6).attr('font-size', 10).attr('fill', '#8e8088').attr('font-family', 'IBM Plex Mono, monospace').text('Restrict share · ' + spanLabel(pts[0].t, last.t));
   const marker = svg.append('circle').attr('r', 5).attr('fill', '#fff').attr('stroke', '#3273a3').attr('stroke-width', 2).style('display', 'none');
   const bisect = d3.bisector((d) => d.t).center;
@@ -2256,6 +2289,7 @@ function wire() {
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { if (openId) closeModal(); else if (document.body.classList.contains('tv')) exitTV(); return; }
+    if (openId && (e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !(e.target.matches && e.target.matches('input, select, textarea'))) { e.preventDefault(); stepModal(e.key === 'ArrowLeft' ? -1 : 1); return; }
     if (e.key !== 'Enter' && e.key !== ' ') return;
     const t = e.target; if (!t.closest || t.matches('input, select, textarea, button, a')) return;
     const pr = t.closest('.prow[data-pf]'); if (pr) { e.preventDefault(); patternPick(pr); return; }
