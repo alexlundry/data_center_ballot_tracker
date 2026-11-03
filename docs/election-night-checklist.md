@@ -20,25 +20,27 @@ For each county:
 **Two kinds of file:**
 
 - **PDF counties.** The county page links its file as `…/c/elecres/20261103results.pdf`. The direct links below are the same files; if one gives "page not found", use the county page.
-- **Results-site counties (Butler, Lucas, Franklin).** Wait until the contest list has loaded, then use File > Save Page As > "Webpage, Complete".
+- **Results-site counties (Butler, Lucas, Franklin).** For Butler, save the summary PDF its results site links (`summary_24.pdf`), or save the page itself. For Lucas and Franklin, wait until the contest list has loaded, then use File > Save Page As > "Webpage, Complete".
+
+**Zero reports checked at 2:45 pm:** Adams, Ashtabula, Butler, Champaign, Clinton, Defiance and Licking were in the folder, and all 12 of their races read correctly. Franklin, Lucas and Wyandot were still to get.
 
 | County | Races in the file | Where to get it | Contest to look for |
 |---|---|---|---|
 | Adams | Sprigg Township, Monroe Township | [county page](https://www.boe.ohio.gov/adams/election-info/election-results/) · [PDF](https://www.boe.ohio.gov/adams/c/elecres/20261103results.pdf) | "Township of Sprigg Proposed Zoning Plan", "Township of Monroe Proposed Zoning Plan" (For / Against the Zoning Resolution) |
-| Ashtabula | Conneaut | [county page](https://www.boe.ohio.gov/ashtabula/election-info/election-results) · [PDF](https://www.boe.ohio.gov/ashtabula/c/elecres/20261103results.pdf) | Issue 10, City of Conneaut Charter Amendment (Data Centers) |
-| Butler | Trenton | [ENR page](https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html) (save as webpage) | ISSUE 17 CITY OF TRENTON |
-| Champaign | Urbana | [county page](https://www.boe.ohio.gov/champaign/) · [PDF](https://www.boe.ohio.gov/champaign/c/elecres/20261103results.pdf) | City of Urbana charter amendment (section 8.07) |
-| Clinton | Wilmington parcels 1–4 | [county page](https://www.boe.ohio.gov/clinton/election-info/election-results/) · [PDF](https://www.boe.ohio.gov/clinton/c/elecres/20261103results.pdf) | Ordinances O-26-04 (1), O-26-06 (2), O-26-07 (3), O-26-05 (4) |
-| Defiance | Defiance | [county page](https://www.boe.ohio.gov/defiance/election-info/election-results/) · [PDF](https://www.boe.ohio.gov/defiance/c/elecres/20261103results.pdf) | City of Defiance charter amendment (section 1.12) |
+| Ashtabula | Conneaut | [county page](https://www.boe.ohio.gov/ashtabula/election-info/election-results) · [PDF](https://www.boe.ohio.gov/ashtabula/c/elecres/20261103results.pdf) | "10 Conn City Charter Amend" (Ashtabula's short title) |
+| Butler | Trenton | [ENR page](https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html) (save its summary PDF, or the page as a webpage) | ISSUE 17 CITY OF TRENTON |
+| Champaign | Urbana | [county page](https://www.boe.ohio.gov/champaign/) · [PDF](https://www.boe.ohio.gov/champaign/c/elecres/20261103results.pdf) | Urbana City Charter Amendment - Data Centers |
+| Clinton | Wilmington parcels 1–4 | [county page](https://www.boe.ohio.gov/clinton/election-info/election-results/) · [PDF](https://www.boe.ohio.gov/clinton/c/elecres/20261103results.pdf) | Wilmington Referendum Ordinance O-26-04 (parcel 1), O-26-06 (2), O-26-07 (3), O-26-05 (4) |
+| Defiance | Defiance | [county page](https://www.boe.ohio.gov/defiance/election-info/election-results/) · [PDF](https://www.boe.ohio.gov/defiance/c/elecres/20261103results.pdf) | City of Defiance - Proposed Charter Amendment - Prohibition of a Data Center |
 | Franklin | Grove City | [Franklin's 2026 page](https://vote.franklincountyohio.gov/election-info/2026), then its results link (save as webpage, or save the summary PDF) | Issue 28, Grove City charter amendment (community consent) |
-| Licking | Pataskala, Granville | [county page](https://www.boe.ohio.gov/licking/election-info/election-results/) · [PDF](https://www.boe.ohio.gov/licking/c/elecres/20261103results.pdf) | Pataskala charter amendment (11.09); Granville charter amendment (10.12) |
+| Licking | Pataskala, Granville | [county page](https://www.boe.ohio.gov/licking/election-info/election-results/) · [PDF](https://www.boe.ohio.gov/licking/c/elecres/20261103results.pdf) | City of Pataskala - Charter Amendment - Data Centers (the last of four Pataskala charter amendments); Village of Granville - Charter Amendment - Data Centers |
 | Lucas | Oregon | [ENR page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html) (save as webpage) | 25. Oregon Prohibition of Construction of a Data Center |
 | Wyandot | Upper Sandusky | [county page](https://www.boe.ohio.gov/wyandot/election-info/election-results) · [PDF](https://www.boe.ohio.gov/wyandot/c/elecres/20261103results.pdf) | City of Upper Sandusky charter amendment (section 17.13) |
 
 **Notes:**
 
 - **Adams:** the zero report you saved at 1:39 pm is already in the folder; a newer download replaces it automatically.
-- **Adams has no precinct count,** so Sprigg and Monroe will show "partly counted" until you enter the final numbers in the sheet with `override = TRUE` and `status = final`.
+- **No precinct line in Adams, Ashtabula or Licking.** These counties print no precinct line per contest, so Sprigg, Monroe, Conneaut, Pataskala and Granville will show "partly counted" until you enter the final numbers in the sheet with `override = TRUE` and `status = final`. Butler, Champaign, Clinton and Defiance print precincts, so those races complete on their own.
 - **Butler and Lucas ENR folders:** the folder pages on their own say "Forbidden"; the Index links above are the election pages.
 
 ## 2. Manual entry in the sheet (no file the loop can read)

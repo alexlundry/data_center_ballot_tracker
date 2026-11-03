@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T13:47:12-0500",
+  "generated_at": "2026-11-03T14:42:21-0500",
   "count": 56,
   "races": [
     {
@@ -221,7 +221,7 @@
       "result_note": null,
       "notes": "Ohio Supreme Court ordered the measure onto the ballot Sept 1, 2026. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article IX, Section 9.06.",
       "results_expected": "Usually election night, from the Butler County Board of Elections.",
-      "adapters": "ohio_enr",
+      "adapters": "ohio_enr,pdf",
       "source_status": "verified"
     },
     {

@@ -25,18 +25,27 @@ pdf_contest_result <- function(lines, src) {
   lines <- lines[nzchar(lines)]
   idx <- which(str_detect(lines, regex(src$contest_pattern %||% "", ignore_case = TRUE)))
   if (length(idx) == 0) stop("contest_pattern not found in PDF text")
+  # extra_json options, for Butler's summary PDF: "votes": "last" reads the last
+  # whole number on a row (Absentee, Election Day, Provisional, Total), and
+  # "stop_at_vote_for": false keeps the window open past its own "Vote For 1",
+  # which sits five rows under the title
+  e <- parse_extra(src$extra_json)
   # Read up to 15 rows, stopping before the next contest (its "Vote For" line,
   # less the heading row above it) so a contest without its own precinct line
   # does not borrow the next one's
   end <- min(length(lines), idx[1] + 15)
   nxt <- which(str_detect(lines, regex("vote for \\d", ignore_case = TRUE)))
   nxt <- nxt[nxt > idx[1] + 1 & nxt <= end]
-  if (length(nxt)) end <- max(idx[1], nxt[1] - 2)
+  if (length(nxt) && !isFALSE(e$stop_at_vote_for)) end <- max(idx[1], nxt[1] - 2)
   window <- lines[idx[1]:end]
   yes_rx <- src$yes_pattern %||% YES_RX; no_rx <- src$no_pattern %||% NO_RX
   grab <- function(rx) {
     i <- which(str_detect(window, regex(rx, ignore_case = TRUE)))[1]
     if (is.na(i)) return(NA_integer_)
+    if (identical(e$votes, "last")) {
+      whole <- str_extract_all(window[i], "(?<![\\d.,])\\d[\\d,]*(?![\\d.,%])")[[1]]
+      return(if (length(whole)) parse_int(whole[length(whole)]) else NA_integer_)
+    }
     nums <- str_extract_all(window[i], "\\d[\\d,]*")[[1]]
     # Dominion (Adams) wraps a long label and prints its count on the row
     # between: "Against the Zoning" / "412" / "Resolution"

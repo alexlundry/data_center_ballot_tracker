@@ -159,6 +159,36 @@ test_that("Adams (Dominion) zero report: Township of Monroe heading, wrapped Aga
   expect_error(pdf_contest_result(lines[-(grep("Township of Monroe Proposed", lines) + 7)], src), "could not read the no count")
 })
 
+test_that("Nov 3 zero reports: Ashtabula's short Conneaut title, Licking's four Pataskala amendments, Butler's Total column", {
+  # Write counts over a contest's YES and NO rows in the real report
+  counts <- function(file, head, yes_row, no_row) {
+    l <- str_split_1(paste(pdftools::pdf_text(fx(file)), collapse = "\n"), "\n")
+    h <- grep(head, l, fixed = TRUE)[1]; after <- l[-(1:h)]
+    l[h + grep("^\\s*yes\\s", after, ignore.case = TRUE)[1]] <- yes_row
+    l[h + grep("^\\s*no\\s", after, ignore.case = TRUE)[1]] <- no_row
+    l
+  }
+  co <- src_row("oh-conneaut"); co$local_file <- fx("ashtabula_20261103_zero.pdf")
+  expect_equal(adapter_pdf(co)$raw_contest, "10 Conn City Charter Amend")
+  r <- pdf_contest_result(counts("ashtabula_20261103_zero.pdf", "10 Conn City Charter Amend", "YES 2,100 51.22%", "NO 2,000 48.78%"), co)
+  expect_equal(c(r$yes_votes, r$no_votes), c(2100L, 2000L))
+
+  pa <- src_row("oh-pataskala"); pa$local_file <- fx("licking_20261103_zero.pdf")
+  expect_equal(adapter_pdf(pa)$raw_contest, "City of Pataskala - Charter Amendment - Data Centers")
+  # TOTAL comes first: TOTAL, VOTE %, Election Day, Absentee Mail, Absentee Office, Provisional
+  r <- pdf_contest_result(counts("licking_20261103_zero.pdf", "City of Pataskala - Charter Amendment - Data Centers",
+                                 "YES 1,500 55.56% 900 400 150 50", "NO 1,200 44.44% 700 300 150 50"), pa)
+  expect_equal(c(r$yes_votes, r$no_votes), c(1500L, 1200L))
+
+  tr <- src_row("oh-trenton", "3"); tr$local_file <- fx("butler_20261103_zero.pdf")
+  z <- adapter_pdf(tr)
+  expect_equal(z$raw_contest, "ISSUE 17 CITY OF TRENTON")
+  expect_equal(c(z$precincts_reporting, z$precincts_total), c(0L, 8L))
+  # Absentee, Election Day, Provisional, Total: the last number is the count
+  r <- pdf_contest_result(counts("butler_20261103_zero.pdf", "ISSUE 17 CITY OF TRENTON", "Yes 120 2,345 3 2,468", "No 98 1,870 2 1,970"), tr)
+  expect_equal(c(r$yes_votes, r$no_votes), c(2468L, 1970L))
+})
+
 test_that("Rock County page reads the Janesville summary and its precinct line", {
   src <- src_row("wi-janesville"); src$local_file <- fx("rock_20261103.html")
   res <- adapter_html_table(src)
