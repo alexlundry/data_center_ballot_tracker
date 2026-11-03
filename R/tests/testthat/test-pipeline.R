@@ -139,6 +139,26 @@ test_that("LA County JSON walks ContestGroups to Alhambra Measure DB", {
   expect_match(res$raw_contest, "MEASURE DB$")
 })
 
+test_that("Adams (Dominion) zero report: Township of Monroe heading, wrapped Against row", {
+  src <- src_row("oh-monroe-twp"); src$local_file <- fx("adams_20261103_zero.pdf")
+  res <- adapter_pdf(src)
+  expect_equal(res$yes_votes, 0L); expect_equal(res$no_votes, 0L)
+  expect_match(res$raw_contest, "^Township of Monroe Proposed Zoning Plan")
+  # "Against the Zoning" / count / "Resolution": write distinct counts into the real lines
+  lines <- str_split_1(paste(pdftools::pdf_text(fx("adams_20261103_zero.pdf")), collapse = "\n"), "\n")
+  put <- function(lines, head, yes, no) {
+    f <- grep(head, lines, fixed = TRUE) + grep("^For the Zoning", lines[-(1:grep(head, lines, fixed = TRUE))])[1]
+    lines[f] <- sub("0$", yes, lines[f]); lines[f + 2] <- sub("0$", no, lines[f + 2]); lines
+  }
+  lines <- put(put(lines, "Township of Monroe Proposed", "211", "187"), "Township of Sprigg Proposed", "512", "1,034")
+  m <- pdf_contest_result(lines, src)
+  expect_equal(c(m$yes_votes, m$no_votes), c(211L, 187L))
+  s <- pdf_contest_result(lines, src_row("oh-sprigg-twp"))
+  expect_equal(c(s$yes_votes, s$no_votes), c(512L, 1034L))
+  # An Against count the reader cannot find is an error, not a 0
+  expect_error(pdf_contest_result(lines[-(grep("Township of Monroe Proposed", lines) + 7)], src), "could not read the no count")
+})
+
 test_that("Rock County page reads the Janesville summary and its precinct line", {
   src <- src_row("wi-janesville"); src$local_file <- fx("rock_20261103.html")
   res <- adapter_html_table(src)
