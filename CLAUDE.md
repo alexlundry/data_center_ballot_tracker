@@ -51,6 +51,7 @@ Rscript R/count_registered_voters.R <folder> [--only WYANDOT]
 - `results.lavote.gov`'s election-list page is Incapsula-protected, but its JSON results endpoint works.
 - Every other host in `sources.csv` is reachable from GitHub Actions (`probe-sources.yml` run of Oct 16).
 - Nov 3 morning link check: plain clients still get 403 from every `boe.ohio.gov` page. `liveresults.franklincountyohio.gov` answers 200 at its root (the Oct 403 was the `/enr/franklinohenr/` folder listing). `liveresults.ohiosos.gov` answers too, but carries no local issues. `app.enhancedvoting.com` (Volusia, Pickaway) is not bot-checked. `nvsos.gov` serves an Incapsula block; `maps.bucoks.com` no longer resolves. The desktop app's built-in browser loads `boe.ohio.gov` pages; `lucascountyohiovotes.gov` gave it a Cloudflare challenge, which was left alone.
+- Nov 3 afternoon: `results.enr.clarityelections.com` (CloudFront) gives GitHub Actions an empty body and plain `curl` a "Request blocked" 403, but the pipeline's R client on the Mac reads it. The seven Clarity races update only from the Mac loop; same rule as Ohio, no header or user-agent work. GitHub ran the 5-minute `Update results` cron only twice between midnight and 1:30 pm ET on Nov 3, so `watch.R` on the Mac is the main loop.
 - The Ohio Secretary of State's live results do not carry local issues; county sites are the only source for the 20 Ohio measures.
 
 ## Where things stand
