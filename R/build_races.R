@@ -37,9 +37,15 @@ src_summary <- sources |>
 no_src <- races |> filter(election_date == "2026-11-03", !race_id %in% src_summary$race_id)
 if (nrow(no_src)) cli::cli_alert_warning("no results source yet: {paste(no_src$race_id, collapse = ', ')}")
 
+# A ballot_text_url may cite the repo copy (docs/source-docs/...), which the
+# site does not serve; point those at the public GitHub file instead
+REPO_BLOB <- "https://github.com/alexlundry/data_center_ballot_tracker/blob/main/"
+
 out <- races |>
   left_join(src_summary, by = "race_id") |>
-  mutate(lat = as.numeric(lat), lon = as.numeric(lon),
+  mutate(ballot_text_url = if_else(str_starts(coalesce(ballot_text_url, ""), "docs/"),
+                                   paste0(REPO_BLOB, ballot_text_url), ballot_text_url),
+         lat = as.numeric(lat), lon = as.numeric(lon),
          threshold_mw = suppressWarnings(as.numeric(threshold_mw)),
          adapters = coalesce(adapters, ""),
          source_status = coalesce(source_status, "none"))

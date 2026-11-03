@@ -22,13 +22,22 @@ adapter_html_table <- function(src) {
   if (length(tables) == 0) stop("no <table> elements on page")
 
   rx <- regex(src$contest_pattern %||% "", ignore_case = TRUE)
+  # Clark County NV nests every contest's table inside one layout table and
+  # titles each in a <span>; matching the layout table would sum every YES/NO
+  # on the page. extra_json {"nested_layout": true} skips tables that hold
+  # tables and reads spans as headings. Off by default: on Rock County's page
+  # a span heading would be the previous contest's precinct line.
+  nested <- isTRUE(extra$nested_layout)
+  heads <- "self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::caption or self::p or self::strong or self::b"
+  if (nested) heads <- paste(heads, "or self::span")
   out <- list()
   for (i in seq_along(tables)) {
     tb <- tables[[i]]
+    if (nested && length(xml2::xml_find_all(tb, ".//table")) > 0) next
     text_here <- rvest::html_text2(tb)
     # Headings / captions / paragraphs just before the table (nearest three),
     # so "Issue 10 - Conneaut" two elements up still identifies the table.
-    prev <- xml2::xml_find_all(tb, "preceding::*[self::h1 or self::h2 or self::h3 or self::h4 or self::h5 or self::caption or self::p or self::strong or self::b][position() <= 3]")
+    prev <- xml2::xml_find_all(tb, paste0("preceding::*[", heads, "][position() <= 3]"))
     heading <- if (length(prev) == 0) "" else paste(rev(rvest::html_text2(prev)), collapse = " | ")
     caption <- xml2::xml_find_first(tb, ".//caption")
     if (!inherits(caption, "xml_missing")) heading <- paste(rvest::html_text2(caption), heading, sep = " | ")

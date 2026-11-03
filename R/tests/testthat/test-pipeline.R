@@ -196,3 +196,36 @@ test_that("Rock County page reads the Janesville summary and its precinct line",
   expect_equal(res$precincts_reporting, 31L); expect_equal(res$precincts_total, 40L)
   expect_match(res$raw_contest, "^Development Referendum City of Janesville")
 })
+
+test_that("Clark County nests contest tables in a layout table: Boulder City reads its own Question 1", {
+  src <- src_row("nv-boulder-city"); src$local_file <- fx("clark_20241105_enr.html")
+  # Nov 2024 general: CITY OF BOULDER CITY BALLOT QUESTION NUM. 1 was 5,752 to 3,871
+  res <- adapter_html_table(src)
+  expect_equal(c(res$yes_votes, res$no_votes), c(5752L, 3871L))
+  expect_match(res$raw_contest, "BOULDER CITY BALLOT QUESTION NUM. 1")
+  # Without the option the layout table matches and every YES/NO in the county is summed
+  plain <- src; plain$extra_json <- NA
+  expect_gt(adapter_html_table(plain)$yes_votes, 1e6)
+  # A span heading also carries the next contest's VOTE FOR 1; Question 2 must not match
+  q2 <- tempfile(fileext = ".html")
+  readr::write_file(sub("BOULDER CITY BALLOT QUESTION NUM. 1", "BOULDER CITY BALLOT QUESTION NUM. 2",
+                        readr::read_file(fx("clark_20241105_enr.html")), fixed = TRUE), q2)
+  src$local_file <- q2
+  expect_error(adapter_html_table(src), "no table matched")
+})
+
+test_that("Hart two-column summary: columns = 2 reads a right-hand contest's own counts", {
+  # Delaware May 2026: Shawnee Hills (right column) sits beside Fort Morrow (59 / 32)
+  src <- list(race_id = "x", adapter = "pdf", local_file = fx("delaware_20260505_summary.pdf"),
+              contest_pattern = "Village of Shawnee Hills\\W+Proposed Tax Levy", extra_json = NA)
+  expect_equal(c(adapter_pdf(src)$yes_votes, adapter_pdf(src)$no_votes), c(59L, 32L))
+  src$extra_json <- '{"columns": 2}'
+  expect_equal(c(adapter_pdf(src)$yes_votes, adapter_pdf(src)$no_votes), c(141L, 104L))
+  src$contest_pattern <- "City of Columbus\\W+Proposed Charter Amendment"
+  expect_equal(c(adapter_pdf(src)$yes_votes, adapter_pdf(src)$no_votes), c(776L, 377L))
+  # Sunbury and Defiance use the option; their patterns cannot span both columns
+  expect_equal(parse_extra(src_row("oh-sunbury")$extra_json)$columns, 2)
+  expect_false(str_detect(src_row("oh-sunbury")$contest_pattern, fixed(".*")))
+  de <- src_row("oh-defiance"); de$local_file <- fx("defiance_20260505_summary.pdf")
+  expect_no_error(tryCatch(adapter_pdf(de), error = function(e) if (grepl("not found", conditionMessage(e))) NULL else stop(e)))
+})

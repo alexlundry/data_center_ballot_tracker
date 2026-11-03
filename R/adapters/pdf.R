@@ -19,10 +19,10 @@ adapter_pdf <- function(src) {
 }
 
 pdf_contest_result <- function(lines, src) {
-  lines <- str_squish(lines)
   # pdf_text keeps vertical spacing as empty lines; drop them so the window
   # below counts printed rows (Hart reports push "Against" past line 15 otherwise)
-  lines <- lines[nzchar(lines)]
+  raw <- lines[nzchar(str_squish(lines))]
+  lines <- str_squish(raw)
   idx <- which(str_detect(lines, regex(src$contest_pattern %||% "", ignore_case = TRUE)))
   if (length(idx) == 0) stop("contest_pattern not found in PDF text")
   # extra_json options, for Butler's summary PDF: "votes": "last" reads the last
@@ -30,6 +30,21 @@ pdf_contest_result <- function(lines, src) {
   # "stop_at_vote_for": false keeps the window open past its own "Vote For 1",
   # which sits five rows under the title
   e <- parse_extra(src$extra_json)
+  # "columns": 2, for Hart summary reports (Delaware, Defiance), which print
+  # contests side by side; pdf_text joins both columns on one line, so a
+  # right-hand contest would read the left-hand one's counts. A right-hand
+  # contest keeps each row from just left of its heading; a left-hand one
+  # drops rows that start in the right-hand column.
+  if (identical(as.numeric(e$columns %||% 1), 2)) {
+    at <- str_locate(raw[idx[1]], regex(src$contest_pattern, ignore_case = TRUE))[1, 1]
+    if (is.na(at)) stop("two-column report: could not place the heading ", lines[idx[1]])
+    lead <- str_locate(raw, "\\S")[, 1]
+    lines <- if (at > 25) {
+      str_squish(str_remove(str_sub(raw, max(1, at - 4)), "^\\S+\\s{2,}"))
+    } else {
+      if_else(lead > 25, "", lines)
+    }
+  }
   # Read up to 15 rows, stopping before the next contest (its "Vote For" line,
   # less the heading row above it) so a contest without its own precinct line
   # does not borrow the next one's
