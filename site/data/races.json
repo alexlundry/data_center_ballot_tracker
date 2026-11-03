@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T16:48:01-0500",
+  "generated_at": "2026-11-03T17:07:17-0500",
   "count": 56,
   "races": [
     {
@@ -36,6 +36,7 @@
       "result_note": null,
       "notes": "Issue number not yet confirmed; check Trumbull BOE sample ballot. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file.",
       "results_expected": "Usually election night, from the Trumbull County Board of Elections.",
+      "plain_summary": "Bans building any data center in Hubbard, of any size, including turning an existing building into one.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -73,6 +74,7 @@
       "result_note": null,
       "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article VII, Section 8.07 (the petition's Article VII/VIII inconsistency carries through to the state list). Full text from the Champaign County sample ballot (Urbana 3-A), which prints it without an issue number; the ballot reads Article VIII.",
       "results_expected": "Usually election night, from the Champaign County Board of Elections.",
+      "plain_summary": "Writes a ban on data centers into Urbana's city charter, exempting only small private facilities that serve a single organization and draw under 7.5 MW.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -110,6 +112,7 @@
       "result_note": null,
       "notes": "Delaware County Issue 9 is a different Sunbury charter amendment (council seats); confirm this measure's issue number. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file (misspelled Sunsbury) as Charter Amendment: Article XI, Section XI. Full text from the Delaware County sample ballot (Sunbury City A), printed without an issue number.",
       "results_expected": "Usually election night, from the Delaware County Board of Elections.",
+      "plain_summary": "Amends Sunbury's charter to ban data centers that draw more than 25 MW. Amazon has proposed a campus of about $2 billion in the city's technology park.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -147,6 +150,7 @@
       "result_note": null,
       "notes": "NOT present in the Ohio Secretary of State's Nov 3 Local Questions and Issues file (the only Ashtabula County Conneaut row is a park district levy); the measure is confirmed by the Ashtabula County BOE's Aug 26 approval and News 5 Cleveland. Confirmed as Issue 10 on the Ashtabula County sample ballot for Conneaut precinct 1-C (generated Sept 15, 2026; docs/source-docs/ashtabula-county-sample-ballot-conneaut-1c.pdf), which carries the full Article XVI text.",
       "results_expected": "Usually election night, from the Ashtabula County Board of Elections.",
+      "plain_summary": "Amends Conneaut's charter to ban data centers that draw more than 25 MW. No data center has been formally proposed in the city.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -184,6 +188,7 @@
       "result_note": null,
       "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Section 1.12. Full text confirmed on the Defiance County sample ballot for Defiance City precinct 1-C (generated Sept 17, 2026; docs/source-docs/defiance-county-sample-ballot-defiance-city-1c.pdf). No issue number is printed.",
       "results_expected": "Usually election night, from the Defiance County Board of Elections.",
+      "plain_summary": "Amends Defiance's charter to ban building data centers that draw more than 25 MW.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -221,6 +226,7 @@
       "result_note": null,
       "notes": "Ohio Supreme Court ordered the measure onto the ballot Sept 1, 2026. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article IX, Section 9.06.",
       "results_expected": "Usually election night, from the Butler County Board of Elections.",
+      "plain_summary": "Amends Trenton's charter to ban building data centers that draw more than 25 MW. It reached the ballot after the Ohio Supreme Court ordered the council to certify the petition.",
       "adapters": "ohio_enr,pdf",
       "source_status": "verified"
     },
@@ -258,6 +264,7 @@
       "result_note": null,
       "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: XI. Full text of the amendment fetched Oct 16 from the county's 2026 election page (docs/source-docs/grove-city-issue-28-full-text.pdf); the county link named Grove-City-Charter-Amendment-5 serves a 2017 notice of election and is unrelated.",
       "results_expected": "Usually election night, from the Franklin County Board of Elections.",
+      "plain_summary": "Requires a citywide vote before any development of 50 acres or more, or one using more than 20 MW of power or 500,000 gallons of water a day, with the developer paying for the election. It is not a ban, but it would put the proposed 300-acre data center to a vote.",
       "adapters": "ohio_enr,pdf",
       "source_status": "pattern"
     },
@@ -295,6 +302,7 @@
       "result_note": null,
       "notes": "The Licking County BOE summary shows no megawatt threshold; news reports describe the 25 MW definition. One of four Pataskala charter amendments plus a library levy on the same ballot. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article XI, Section 11.09 (three other Pataskala charter amendments are on the same ballot). Question confirmed against the Licking County issues list (8 precincts). Ballot text note (moved out of ballot_text Nov 3): Verbatim from the Licking County Board of Elections filed-issues list, typos included. The section defines a data center as facilities used primarily or exclusively for digital information services with aggregate monthly demand or peak load greater than 25 megawatts, aggregated across contiguous parcels..",
       "results_expected": "Usually election night, from the Licking County Board of Elections.",
+      "plain_summary": "Amends Pataskala's charter to ban building data centers that draw more than 25 MW. The council already rejected Aligned Data Centers' 200 MW plan, and Aligned is challenging that in court.",
       "adapters": "pdf",
       "source_status": "unverified"
     },
@@ -332,6 +340,7 @@
       "result_note": null,
       "notes": "Some roundups describe it as an outright ban; confirm threshold in the certified text. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article X, Section 10.12. Ballot text note (moved out of ballot_text Nov 3): Verbatim from the Licking County Board of Elections filed-issues list, typos and City limits included; three Granville precincts. The section uses the 25 MW definition..",
       "results_expected": "Usually election night, from the Licking County Board of Elections.",
+      "plain_summary": "Amends Granville's village charter to ban data centers that draw more than 25 MW. No data center has been proposed in the village.",
       "adapters": "pdf",
       "source_status": "unverified"
     },
@@ -369,6 +378,7 @@
       "result_note": null,
       "notes": "Issue 25 (Issues 26 and 27 on the Oregon ballot are unrelated charter changes). Council accepted the BOE certification Aug 19. Lucas County reports on the SOS-hosted ENR platform (Nov 2025 was instance 21). Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article XIII, Section 8. Full text from the city's 2026 Election for Voters page. The city's page adds: A \"YES\" vote is in support of the charter change and Prohibition (ban) of Data Centers greater than 25MW (moved out of ballot_text Nov 3).",
       "results_expected": "Usually election night, from the Lucas County Board of Elections.",
+      "plain_summary": "Amends Oregon's charter to cap data centers at 25 MW. Organizers say it would steer development to brownfield and industrial sites; a data center has been proposed on farmland in the city.",
       "adapters": "ohio_enr",
       "source_status": "verified"
     },
@@ -406,6 +416,7 @@
       "result_note": null,
       "notes": "CONFIRMED on the ballot: Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as City of Upper Sandusky, Charter Amendment: Article XVII, Section 17.13, and printed on the Wyandot County sample ballot for precinct Upper A (generated Sept 15, 2026; docs/source-docs/wyandot-county-sample-ballot-upper-sandusky-a.pdf). No issue number is printed. The ballot attributes the amendment to the city charter commission (heading cites Ordinance 85-14) rather than a petition.",
       "results_expected": "Usually election night, from the Wyandot County Board of Elections.",
+      "plain_summary": "Amends Upper Sandusky's charter to ban building data centers, reportedly those over 25 MW; the city's charter commission put it on the ballot. A self-powered facility of about 150 MW has been proposed north of town.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -443,6 +454,7 @@
       "result_note": null,
       "notes": "A YES vote favors allowing data centers. The Huron County sample ballot for Monroeville Village (generated Sept 3, 2026; docs/source-docs/huron-county-sample-ballot-monroeville-village.pdf) prints this as an ADVISORY ELECTION with the question above, so the earlier reporting was right and the Ohio Secretary of State file's one-line description (\"Shall the proposed ordinance allowing data center development be adopted?\") does not match the ballot. Placed by Village Council (the question is addressed to council for public input). No issue number is printed.",
       "results_expected": "Usually election night, from the Huron County Board of Elections.",
+      "plain_summary": "Non-binding question asking whether residents support allowing data center development in the village, subject to zoning and development agreements. The result does not approve or block any project by itself.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -480,6 +492,7 @@
       "result_note": null,
       "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Sprigg Township, Zoning amendment. Full ballot text from the Adams County sample ballot for Sprigg Township (generated Oct 12, 2026; docs/source-docs/adams-county-sample-ballot-sprigg-township.pdf). The ballot choices are For the Zoning Resolution / Against the Zoning Resolution, not Yes / No. The question says the plan was adopted by the township (trustees' zoning resolution under ORC 519, which goes to the voters under ORC 519.11), so the origin is the township board rather than a petition. No issue number is printed.",
       "results_expected": "Usually election night, from the Adams County Board of Elections.",
+      "plain_summary": "A FOR vote adopts township zoning, which would give Sprigg Township authority over the data center planned at the former J.M. Stuart power plant site.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -517,6 +530,7 @@
       "result_note": null,
       "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Monroe Township, Zoning amendment. Full ballot text from the Adams County sample ballot for Monroe Township (generated Oct 12, 2026; docs/source-docs/adams-county-sample-ballot-monroe-township.pdf). The ballot choices are For the Zoning Resolution / Against the Zoning Resolution, not Yes / No. The question says the plan was adopted by the township (trustees' zoning resolution under ORC 519, which goes to the voters under ORC 519.11), so the origin is the township board rather than a petition. No issue number is printed.",
       "results_expected": "Usually election night, from the Adams County Board of Elections.",
+      "plain_summary": "A FOR vote adopts township zoning, which would give Monroe Township authority over the data center planned at the former Killen power plant site.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -554,6 +568,7 @@
       "result_note": null,
       "notes": "A YES vote is the pro-data-center side. Ballot choices are Yes / No (not For / Against), per the Pickaway County ballot proof for precinct 17 Ashville-East (docs/source-docs/pickaway-county-ballot-proof-ashville-east-p2.webp), which prints the full resolution text above the question. Council introduced Resolution 16-2026 in September to repeal the agreement itself, which could have mooted the referendum; on Sept 22 it put off the vote (Citizen Portal meeting summary, https://citizenportal.ai/articles/10163769/Ohio/Pickaway-County/Ashville/Council-delays-vote-on-repeal-tied-to-EdgeConnects-datacenter-agreement). An earlier note here said the repeal failed at its third reading on Oct 5; no source for that was found on Oct 30. Either way the referendum is on the ballot: NBC4 (Oct 26, 2026, https://www.nbc4i.com/news/your-local-election-hq/ashville-residents-to-vote-on-data-center-referendum/) reports the Nov 3 vote, with YES upholding the agreement and NO overturning it, and the Scioto Valley Guardian (Oct 8, https://sciotovalleyguardian.com/2026/10/08/ashville-receives-3-5-million-from-edgeconnex-ahead-of-referendum/) says it is headed to the Nov 3 ballot. The Pickaway County BOE did not return the research assistant's call (Oct 28-30). Village electors only. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file with the same question wording. No issue number is printed.",
       "results_expected": "Usually election night, from the Pickaway County Board of Elections.",
+      "plain_summary": "A YES vote upholds the council's agreement with EdgeConneX for two data centers and a gas plant on about 195 acres. A NO vote rejects the agreement, though that alone does not stop construction.",
       "adapters": "enhanced_voting",
       "source_status": "verified"
     },
@@ -591,6 +606,7 @@
       "result_note": null,
       "notes": "Four separate ballot questions on parcels formerly tied to the Ardent Companies project (agreement terminated this summer). Separate petitions against the Sept 3 Amazon-related ordinances are NOT on Nov 3. Map dots are offset slightly so all four are visible. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Zoning Ordinance O-26-04. Full text from the Clinton County sample ballot (Wilmington 1-A), which prints the referendums by ordinance number without issue numbers.",
       "results_expected": "Usually election night, from the Clinton County Board of Elections.",
+      "plain_summary": "A YES vote keeps the council's rezoning of 119 acres on SR 730 from rural residential to light industrial for data center use; a NO vote overturns it. It is one of four Wilmington rezoning votes covering about 546 acres.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -628,6 +644,7 @@
       "result_note": null,
       "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Zoning Ordinance O-26-06. Full text from the Clinton County sample ballot (Wilmington 1-A), which prints the referendums by ordinance number without issue numbers.",
       "results_expected": "Usually election night, from the Clinton County Board of Elections.",
+      "plain_summary": "A YES vote keeps the council's rezoning of 191 acres on McGuinn Road from rural residential to light industrial for data center use; a NO vote overturns it. It is one of four Wilmington rezoning votes covering about 546 acres.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -665,6 +682,7 @@
       "result_note": null,
       "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Zoning Ordinance O-26-07. Full text from the Clinton County sample ballot (Wilmington 1-A), which prints the referendums by ordinance number without issue numbers.",
       "results_expected": "Usually election night, from the Clinton County Board of Elections.",
+      "plain_summary": "A YES vote keeps the council's rezoning of 170 acres on U.S. 68 South from rural residential to light industrial for data center use; a NO vote overturns it. It is one of four Wilmington rezoning votes covering about 546 acres.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -702,6 +720,7 @@
       "result_note": null,
       "notes": "Ordinance number confirmed as O-26-05 from the Clinton County sample ballot. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Zoning Ordinance O-26-05. Full text from the Clinton County sample ballot (Wilmington 1-A), which prints the referendums by ordinance number without issue numbers.",
       "results_expected": "Usually election night, from the Clinton County Board of Elections.",
+      "plain_summary": "A YES vote keeps the council's rezoning of 65 acres at 1957 SR 730 from rural residential to light industrial for data center use; a NO vote overturns it. It is one of four Wilmington rezoning votes covering about 546 acres.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -739,6 +758,7 @@
       "result_note": null,
       "notes": "Polls close 7 pm Central. Ballot Question 2 (form of ballot per Resolution 3799, Exhibit B); Question 3 is the companion battery-storage ban. A YES vote adopts the ordinance. Resolution 3799 (adopted Aug 26, 2026; docs/source-docs/emporia-resolution-3799.pdf) records that the Lyon County District Court ordered the question onto the ballot on Aug 20, 2026 (case LY-2026-CV-000119) and stayed publication, implementation and enforcement of the ordinance pending final judgment regardless of the outcome, while the city preserves its argument that the subject is administrative and not a proper initiative. The Emporia Gazette reports the petition text cites a nonexistent code article.",
       "results_expected": "Usually election night, from the Lyon County Clerk.",
+      "plain_summary": "Bans data centers that draw more than 10 MW of power or 100,000 gallons of water a day from every zoning district in Emporia. If it passes, it takes effect only after a court rules on the city's challenge to the petition.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -776,6 +796,7 @@
       "result_note": null,
       "notes": "Polls close 7 pm Central. Results page URL unverified. The 13th Judicial District ruled in August that the ordinance is legislative and may proceed by initiative (city notice 683); the commission's Aug 26, 2026 official statement on the ballot question is in docs/source-docs/el-dorado-ks-official-statement-ballot-question-2026-08-26.pdf and says the full ordinance will be published on eldoks.gov under K.S.A. 12-3013(d). The sample ballot from the Butler County Clerk (bucoks.gov Elections) would give the verbatim question.",
       "results_expected": "Usually election night, from the Butler County Clerk.",
+      "plain_summary": "Bans high-impact data centers (over 10 MW) and large battery storage systems in El Dorado. Once adopted, the city commission could not change it for ten years without a public vote.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -813,6 +834,7 @@
       "result_note": null,
       "notes": "Polls close 7 pm Central. Oct 20, 2026: Judge Godderz ruled the ordinance legislative and denied the city's motion to dismiss (KSHB, https://www.kshb.com/news/local-news/data-centers/ottawa-residents-win-case-against-city-voters-to-decide-10-year-data-center-ban; the article mentions no appeal). The September ruling that placed it on the ballot: https://www.kshb.com/news/local-news/data-centers/franklin-county-judge-rules-data-center-question-will-go-on-november-ballot. The Franklin County KS Clerk's office confirmed by phone to Redbud's research assistant (Oct 28-30) that the question stays on the ballot and that results will be posted as one PDF after counting on election night.",
       "results_expected": "Usually election night, from the Franklin County Clerk.",
+      "plain_summary": "Bans data centers that use more than 25 MW in Ottawa. The city has since ended its land-sale contract for the Lightfield Energy project.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -850,6 +872,7 @@
       "result_note": null,
       "notes": "Results come from the Bloomington Election Commission, not the McLean County Clerk. Polls close 7 pm Central. Wording confirmed by 25News (Oct 14, 2026); the official question page and specimen ballot are on the commission's site.",
       "results_expected": "Usually election night, from the Bloomington Election Commission.",
+      "plain_summary": "Non-binding question asking whether voters support a moratorium on large-scale data centers. The city council already has a six-month moratorium and is drafting rules to limit large data centers to the M2 industrial district.",
       "adapters": "clarity,pdf",
       "source_status": "verified"
     },
@@ -887,6 +910,7 @@
       "result_note": null,
       "notes": "A YES vote favors data centers. Polls close 7 pm Central. Ballot text verbatim from the Will County Clerk's referenda list (heading DATA CENTER CONSTRUCTION), read in a browser Nov 3. Results from Will County Clarity election 127394 (sources.csv); the willcountyclerk.gov site answers scripts with an AWS WAF challenge.",
       "results_expected": "Expected election night, from the Will County Clerk.",
+      "plain_summary": "Non-binding question asking whether the Joliet City Council should approve AI data centers, after the council approved a 795-acre AI data center campus 8 to 1.",
       "adapters": "clarity",
       "source_status": "verified"
     },
@@ -924,6 +948,7 @@
       "result_note": null,
       "notes": "A YES vote favors data centers. Placed by citizen petition: St. Louis Public Radio (Oct 20, 2026, https://www.stlpr.org/government-politics-issues/2026-10-20/madison-county-residents-vote-data-center-development-november) reports Heather Groetecke led the signature drive for the four township questions. Ballot text verbatim from the Madison County Clerk's referenda list dated Sept 24, 2026 (docs/source-docs/madison-county-il-referenda-questions-2026.pdf).",
       "results_expected": "Usually election night, from the Madison County Clerk.",
+      "plain_summary": "Non-binding question asking whether new data centers should be permitted in Chouteau Township. Three neighboring Madison County townships ask the same question.",
       "adapters": "clarity,pdf",
       "source_status": "pattern"
     },
@@ -961,6 +986,7 @@
       "result_note": null,
       "notes": "A YES vote favors data centers. Placed by citizen petition: St. Louis Public Radio (Oct 20, 2026, https://www.stlpr.org/government-politics-issues/2026-10-20/madison-county-residents-vote-data-center-development-november) reports Heather Groetecke led the signature drive for the four township questions. Ballot text verbatim from the Madison County Clerk's referenda list dated Sept 24, 2026 (docs/source-docs/madison-county-il-referenda-questions-2026.pdf).",
       "results_expected": "Usually election night, from the Madison County Clerk.",
+      "plain_summary": "Non-binding question asking whether new data centers should be permitted in Granite City Township. Three neighboring Madison County townships ask the same question.",
       "adapters": "clarity,pdf",
       "source_status": "pattern"
     },
@@ -998,6 +1024,7 @@
       "result_note": null,
       "notes": "A YES vote favors data centers. Placed by citizen petition: St. Louis Public Radio (Oct 20, 2026, https://www.stlpr.org/government-politics-issues/2026-10-20/madison-county-residents-vote-data-center-development-november) reports Heather Groetecke led the signature drive for the four township questions. Ballot text verbatim from the Madison County Clerk's referenda list dated Sept 24, 2026 (docs/source-docs/madison-county-il-referenda-questions-2026.pdf).",
       "results_expected": "Usually election night, from the Madison County Clerk.",
+      "plain_summary": "Non-binding question asking whether new data centers should be permitted in Nameoki Township. Three neighboring Madison County townships ask the same question.",
       "adapters": "clarity,pdf",
       "source_status": "pattern"
     },
@@ -1035,6 +1062,7 @@
       "result_note": null,
       "notes": "A YES vote favors data centers. Wording reproduced verbatim in the Alton Telegraph voter guide; the other three townships use the identical form. Placed by citizen petition: St. Louis Public Radio (Oct 20, 2026, https://www.stlpr.org/government-politics-issues/2026-10-20/madison-county-residents-vote-data-center-development-november) reports Heather Groetecke led the signature drive for the four township questions. Ballot text verbatim from the Madison County Clerk's referenda list dated Sept 24, 2026 (docs/source-docs/madison-county-il-referenda-questions-2026.pdf).",
       "results_expected": "Usually election night, from the Madison County Clerk.",
+      "plain_summary": "Non-binding question asking whether new data centers should be permitted in Venice Township. Three neighboring Madison County townships ask the same question.",
       "adapters": "clarity,pdf",
       "source_status": "pattern"
     },
@@ -1072,6 +1100,7 @@
       "result_note": null,
       "notes": "WLDS reported two wordings (Shall there be restrictions imposed on the construction and operation of data centers / Should there be restrictions imposed on the construction of data centers); confirm against the certified ballot. Results post on the GBS portal (results.gbsvote.com). Polls close 7 pm Central.",
       "results_expected": "Usually election night, from the Morgan County Clerk.",
+      "plain_summary": "Non-binding countywide question on whether Morgan County should restrict data centers. The county has no zoning, and its commissioners say that leaves them unable to deny a project.",
       "adapters": "html_table",
       "source_status": "pattern"
     },
@@ -1109,6 +1138,7 @@
       "result_note": null,
       "notes": "Polls close 8 pm Central. Janesville absentee ballots are counted centrally and reported separately. Question verbatim from the MyVote Wisconsin sample ballot for City of Janesville Ward 26 (generated Oct 16, 2026; docs/source-docs/myvote-wi-sample-ballot-janesville-ward-26.pdf). The ballot heading is \"City of Janesville Direct Legislation Petition on GM/JATCO Site Development Referendum\"; the question does not mention data centers.",
       "results_expected": "Usually election night, from the Rock County Clerk.",
+      "plain_summary": "Requires a citywide vote to approve any deal worth more than $450 million at the city-owned former GM/JATCO site. It does not mention data centers, but it was written to stop Viridian Partners' proposed 800 MW data center campus there.",
       "adapters": "html_table",
       "source_status": "verified"
     },
@@ -1146,6 +1176,7 @@
       "result_note": null,
       "notes": "Polls close 8 pm Pacific. LA County JSON feed: results.lavote.gov/electionresults/json?electionid=ID (June 2, 2026 primary was 4338; the Nov 3 id appears when the election is listed). City Attorney impartial analysis fetched Oct 16 (docs/source-docs/alhambra-impartial-analysis-measure-db.docx).",
       "results_expected": "Los Angeles County posts a first count on election night and adds mail ballots in scheduled updates for weeks after.",
+      "plain_summary": "Locks in Alhambra's existing ban on data centers in every zone, so a future council could not repeal it without another public vote. If it fails, the council's ban stays in place unless the council changes it.",
       "adapters": "json_generic,html_table",
       "source_status": "verified"
     },
@@ -1183,6 +1214,7 @@
       "result_note": null,
       "notes": "A YES vote is the pro-data-center side. Polls close 7 pm Pacific. Question, explanation and digest verbatim from the city Explanation and Digest (docs/source-docs/boulder-city-q1-digest.pdf); the Clark County all-questions booklet (docs/source-docs/clark-county-all-questions-26g.pdf) adds the ballot question committees' arguments for and against passage. The 2024 NV SOS Clark County page listed Boulder City questions, so the SOS page should carry this one too.",
       "results_expected": "Clark County posts a first count on election night and adds mail ballots for several days after.",
+      "plain_summary": "A YES vote makes data centers an allowed use on about 14,000 acres of city-owned desert in the Eldorado Valley, outside the protected tortoise habitat. Each lease would still need council approval.",
       "adapters": "html_table",
       "source_status": "verified"
     },
@@ -1220,6 +1252,7 @@
       "result_note": null,
       "notes": "Polls close 7 pm Eastern (Volusia is in the Eastern zone). The amendment is one of seven charter questions the council sent to the ballot Aug 3, 2026. Official ballot title and summary as published by Ballotpedia (fetched Oct 16, docs/source-docs/ballotpedia-edgewater.html); the Volusia County sample ballot itself has not been retrieved.",
       "results_expected": "Usually election night, from the Volusia County Supervisor of Elections.",
+      "plain_summary": "Writes a ban on new data centers, including cloud, AI, crypto-mining and colocation facilities, into Edgewater's city charter. The council already banned them by ordinance; supporters say a charter ban is harder for a future council to undo.",
       "adapters": "enhanced_voting",
       "source_status": "verified"
     },
@@ -1257,6 +1290,7 @@
       "result_note": "Passed 88.3% yes (10,388 to 1,372), final LA County count (results last updated June 26, 2026).",
       "notes": "Placed by the City Council under Elections Code section 9222 (Resolution 2026-R6, adopted 5-0 on March 4, 2026; docs/source-docs/monterey-park-2026-R6.pdf), captioned the Community Act Prohibiting Data Centers and consolidated with the June 2 primary. Exhibit A adds a citywide data center prohibition to the Land Use and Urban Design Element adopted by Measure JJ (2020).",
       "results_expected": null,
+      "plain_summary": "Bans data centers citywide through the General Plan, so only a future public vote can lift the ban.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1294,6 +1328,7 @@
       "result_note": "Passed 66.4% yes (2,710 to 1,371), unofficial Ozaukee County count.",
       "notes": "Called the nation's first anti-data-center referendum. An Ozaukee County judge dismissed the business groups' suit against the ordinance on Oct 19, 2026; an appeal is possible.",
       "results_expected": null,
+      "plain_summary": "Requires voter approval before the city creates a tax incremental district with $10 million or more in value or project costs. It applies only to future districts, not the Vantage campus already being built.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1331,6 +1366,7 @@
       "result_note": "Failed: 87.2% no (1,033 to 151). A NO vote was the anti-data-center outcome.",
       "notes": null,
       "results_expected": null,
+      "plain_summary": "Non-binding question on whether the village should build or support utility infrastructure for a large data center.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1368,6 +1404,7 @@
       "result_note": "Rezoning repealed: 89.6% no (2,314 to 269), 2 of 2 precincts.",
       "notes": "Question verbatim from the Washtenaw County official list of proposals for Aug 4, 2026 (docs/source-docs/washtenaw-aug-2026-proposals.pdf).",
       "results_expected": null,
+      "plain_summary": "A YES vote keeps the township's rezoning of 522 acres from agricultural residential to general industrial for a data center campus; a NO vote repeals it.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1405,6 +1442,7 @@
       "result_note": "No won: 76.0% no (5,214 to 1,645), official Georgia Secretary of State count.",
       "notes": null,
       "results_expected": null,
+      "plain_summary": null,
       "adapters": "",
       "source_status": "none"
     },
@@ -1442,6 +1480,7 @@
       "result_note": "No won: 77.8% no (2,992 to 856), official Georgia Secretary of State count.",
       "notes": null,
       "results_expected": null,
+      "plain_summary": null,
       "adapters": "",
       "source_status": "none"
     },
@@ -1479,6 +1518,7 @@
       "result_note": "No won: 56.6% no (5,317 to 4,071), official Georgia Secretary of State count.",
       "notes": null,
       "results_expected": null,
+      "plain_summary": null,
       "adapters": "",
       "source_status": "none"
     },
@@ -1516,6 +1556,7 @@
       "result_note": "Passed: 94.4% yes (138,816 to 8,182), official Georgia Secretary of State count.",
       "notes": null,
       "results_expected": null,
+      "plain_summary": null,
       "adapters": "",
       "source_status": "none"
     },
@@ -1553,6 +1594,7 @@
       "result_note": "Passed: 94.8% yes (11,211 to 620), official Georgia Secretary of State count.",
       "notes": null,
       "results_expected": null,
+      "plain_summary": null,
       "adapters": "",
       "source_status": "none"
     },
@@ -1590,6 +1632,7 @@
       "result_note": "No won: 98.3% no (5,550 to 95), official Georgia Secretary of State count.",
       "notes": null,
       "results_expected": null,
+      "plain_summary": null,
       "adapters": "",
       "source_status": "none"
     },
@@ -1627,6 +1670,7 @@
       "result_note": null,
       "notes": "Found Oct 15 as the jurisdiction missing from the earlier list; with Piqua (moved to Feb 2027) it reconciles Ballotpedia's 21 measures / 18 jurisdictions. Confirmed as Issue 16 on the Lake County certified issues list (docs/source-docs/lake-county-issues-11-3-26.pdf); full ordinance text fetched Oct 16 (docs/source-docs/perry-village-ordinance-full-text.pdf, scanned petition, OCR applied). Ballot text verbatim from Lake County's 2026 general election master sample ballot, page 326, precinct Perry Village AA (docs/source-docs/lake-county-sample-ballot-perry-village.pdf; fact-checked Nov 3). The ordinance defines a hyperscale data center as one exceeding 10,000 sq ft, 5,000 servers or 50 MW; threshold_mw records the MW trigger only.",
       "results_expected": "Usually election night, from the Lake County Board of Elections.",
+      "plain_summary": "Requires any hyperscale data center that seeks a tax break in Perry to first post a bond at least equal to its projected tax revenue plus the pay of 200 full-time workers, and to keep noise under 50 decibels by day and 45 at night. It sets conditions rather than banning data centers.",
       "adapters": "pdf",
       "source_status": "pattern"
     },
@@ -1664,6 +1708,7 @@
       "result_note": null,
       "notes": "Polls 8 am to 8 pm at North Berwick Elementary School. Ballot text from the town sample ballot (docs/source-docs/north-berwick-me-sample-ballot-nov-2026.pdf); full amendment text and intent in docs/source-docs/north-berwick-me-referendum-questions-nov-2026.pdf and the town election newsletter (docs/source-docs/north-berwick-me-election-newsletter-nov-2026.pdf). Origin: Select Board minutes of June 2 and Aug 18, 2026 (docs/source-docs/north-berwick-me-select-board-minutes-2026-06-02.pdf, docs/source-docs/north-berwick-me-select-board-minutes-2026-08-18.pdf). The town clerk counts and posts a scanned return, usually the next morning (Nov 2025 and June 2026 precedents); Maine's Secretary of State does not report local questions.",
       "results_expected": "The town clerk usually posts the count the morning after the election.",
+      "plain_summary": "Bans data centers of 25,000 square feet or more from every zoning district in North Berwick; smaller server rooms that support another use are still allowed.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1701,6 +1746,7 @@
       "result_note": null,
       "notes": "The ordinance title, purpose and 180-day term are confirmed by the Selectboard-signed ordinance (docs/source-docs/peru-me-moratorium-ordinance-2026.pdf); the article number and question wording are Ballotpedia's only. Still to fetch: the Nov 3 warrant or sample ballot (town clerk 207-562-4627). The town office is closed Nov 3 and reopens Thursday Nov 5, so results may not be online before then; June 2026 results were posted nine days later.",
       "results_expected": "The town office is closed Nov 3 and reopens Thursday, Nov 5. The town posted its June results nine days after that vote.",
+      "plain_summary": "Pauses all data center applications and permits in Peru for 180 days from the day it passes. No data center has been proposed in the town.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1738,6 +1784,7 @@
       "result_note": null,
       "notes": "Polls 8 am to 8 pm at the Wells Junior High School gym. Ballot text from the official sample ballot (docs/source-docs/wells-me-sample-ballot-nov-2026.pdf); ordinance text in Appendix 1 of the warrant (docs/source-docs/wells-me-warrant-nov-2026.pdf, https://wellstown.org/DocumentCenter/View/8514). Origin: Selectmen minutes of June 16 and Sept 1, 2026 (docs/source-docs/wells-me-selectmen-minutes-2026-06-16.pdf, docs/source-docs/wells-me-selectmen-minutes-2026-09-01.pdf). The mid-December expiry is counted from the warrant's June 16 start; the warrant gives no end date. The town clerk posts a scanned return, usually the next morning.",
       "results_expected": "The town clerk usually posts the count the next day.",
+      "plain_summary": "Pauses data centers of 100,000 square feet or more in Wells for 180 days, backdated to June 16, 2026, so the pause ends in mid-December unless the town extends it.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1775,6 +1822,7 @@
       "result_note": null,
       "notes": "Polls 8 am to 8 pm at the Wiscasset Community Center. Ballot text from the town sample ballot (docs/source-docs/wiscasset-me-sample-ballot-nov-2026.pdf); the warrant lists the same item as Article 4 (docs/source-docs/wiscasset-me-warrant-nov-2026.pdf). Ordinance: docs/source-docs/wiscasset-me-moratorium-ordinance-nov-2026.pdf; voter guide: docs/source-docs/wiscasset-me-voter-guide-nov-2026.pdf. Origin: Select Board minutes of Aug 18 and Sept 1, 2026 (docs/source-docs/wiscasset-me-select-board-minutes-2026-08-18.pdf, docs/source-docs/wiscasset-me-select-board-minutes-2026-09-01.pdf). Boundless Power background from the town page https://www.wiscasset.gov/283/NDA-Protected-Documents-Between-Boundles. The town posted June 2026 results as unofficial PDFs the next morning.",
       "results_expected": "The town usually posts unofficial results the morning after the election.",
+      "plain_summary": "Pauses applications for new or expanded data centers in Wiscasset for six months, starting with applications filed on Nov 3; the Select Board can extend it.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1812,6 +1860,7 @@
       "result_note": null,
       "notes": "Polls close 7 pm Central. Full Article X text: docs/source-docs/harwood-nd-charter-amendment-article-x.pdf (city PDF, 16 scanned pages). Council discussion of the petition: docs/source-docs/harwood-nd-council-minutes-2026-06-01.pdf. Ballotpedia says the council placed it; the ballot title calls it initiated and the city minutes and InForum (Sept 8, 2026) describe a citizen petition, so origin is citizen_petition. The ND Secretary of State results feed lists it as contest 1844, \"City of Harwood Home Rule Charter Amendment Harwood\"; the same ballot has a Harwood sales tax measure (contest 1830). casscountynd.gov blocks scripts (Akamai). North Dakota has no voter registration.",
       "results_expected": "Usually election night, from the North Dakota Secretary of State.",
+      "plain_summary": "Requires Harwood to commission an independent review, paid for by the developer, and to hold a public hearing and adopt written findings before approving large industrial projects such as data centers (100 MW, 100 acres or 50,000 gallons of water a day). It would apply to expansions and future projects, not the Applied Digital campus already approved.",
       "adapters": "json_generic",
       "source_status": "verified"
     },
@@ -1849,6 +1898,7 @@
       "result_note": null,
       "notes": "Polls close 8 pm Eastern. Ballot text, including the printed period and the typo \"what\", from the county sample ballot (docs/source-docs/cumberland-county-nj-sample-ballot-downe.pdf; mail-in version docs/source-docs/cumberland-county-nj-mail-in-sample-ballot-downe.pdf), matching Resolution R-111-2026 adopted 5-0 Aug 17, 2026 (docs/source-docs/downe-township-nj-resolution-r-111-2026-ballot-question.pdf). The petition is recorded in R-99-2026 (docs/source-docs/downe-township-nj-resolution-r-99-2026.pdf); the ban is docs/source-docs/downe-township-nj-ordinance-2026-04-data-center-ban.pdf. No local news coverage found. Results: Cumberland County Clarity, election 127562, contest \"Downe Township Referendum Question\"; in Nov 2025 Clarity stopped updating short of all precincts and the final count came in the clerk's official PDFs.",
       "results_expected": "Usually election night, from Cumberland County. Provisional ballots are added in the days after.",
+      "plain_summary": "Non-binding question asking whether voters support data centers in Downe Township. The township committee has also moved to ban them in every zone with its own ordinance.",
       "adapters": "clarity",
       "source_status": "verified"
     },
@@ -1886,6 +1936,7 @@
       "result_note": "Passed: 83.6% yes (322 to 63). A YES vote was the anti-data-center outcome.",
       "notes": "Ballot text from the official ballot (docs/source-docs/canterbury-nh-sample-ballot-2026-03-10.pdf); the town's Article 4 sheet adds the Planning Board explanation and the full definition (docs/source-docs/canterbury-nh-warrant-article-4-data-centers.pdf). Counts from the town clerk's attested results copy of the ballot (docs/source-docs/canterbury-nh-election-results-2026-03-10.pdf). Planning Board vote of Jan 27, 2026: docs/source-docs/canterbury-nh-planning-board-minutes-2026-01-27.pdf. Signed warrant: docs/source-docs/canterbury-nh-warrant-2026-signed.pdf. Ballotpedia's \"ballot title\" is the Planning Board explanation, not the ballot wording.",
       "results_expected": null,
+      "plain_summary": "Bans data centers from every zoning district in Canterbury.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1923,6 +1974,7 @@
       "result_note": "Passed: 90.3% yes (1,335 to 143). A YES vote was the anti-data-center outcome.",
       "notes": "Ballot text from the town sample ballot, headed \"Official Ballot, Special Town Election\" (docs/source-docs/nottingham-nh-sample-ballot-2026-09-08.pdf); the ballot prints no article number. Counts from the town's posted results, a scan of the ballot with handwritten totals (docs/source-docs/nottingham-nh-special-town-election-results-2026-09-08.pdf). Planning Board hearing and unanimous vote July 1, 2026 (NHPR, July 3); the Select Board called the special election. Project background: NHPR, May 28 and Oct 20, 2026.",
       "results_expected": null,
+      "plain_summary": "Stops the town from accepting or approving data center permits for 12 months while it studies the effects and drafts zoning.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1960,6 +2012,7 @@
       "result_note": null,
       "notes": "Not on Ballotpedia; found through the Bangor Daily News list of Maine towns voting Nov 3 (Oct 28, 2026, https://www.bangordailynews.com/2026/10/28/politics/elections/maine-town-elections-data-center-bans/). Polls 8 am to 8 pm at the Town Office; paper check-box ballot. Ballot and warrant: docs/source-docs/brownfield-me-warrant-and-sample-ballot-nov-2026.pdf. Ordinance (posted as a draft dated Oct 13, 2026): docs/source-docs/brownfield-me-moratorium-ordinance-draft-2026-10-13.pdf; its definition also has an unclear sentence on computing power (under 250 kW, under 1 MW total service), so no MW threshold is recorded. Select Board vote of Sept 15: docs/source-docs/brownfield-me-select-board-minutes-2026-09-15.pdf. The mid-March expiry is counted from the Sept 16 start. The results page links past counts (Oct 21, 2020 municipal election; Oct 28, 2025 special town meeting, posted the next day); if nothing is posted, call the office (207-935-2007).",
       "results_expected": "The town posts results on its warrants and reports page; its October 2025 town meeting results went up the next day.",
+      "plain_summary": "Pauses data centers of 5,000 square feet or more in Brownfield for 180 days, backdated to Sept 16, 2026, so it runs to about mid-March 2027.",
       "adapters": "",
       "source_status": "none"
     },
@@ -1997,6 +2050,7 @@
       "result_note": null,
       "notes": "Not on Ballotpedia; found through the Bangor Daily News list of Maine towns voting Nov 3. Polls 8 am to 8 pm at Town Hall. Ballot: docs/source-docs/eliot-me-sample-ballot-nov-2026.pdf; warrant (Article 5): docs/source-docs/eliot-me-warrant-nov-2026.pdf (https://www.eliotme.gov/DocumentCenter/View/3904/Town-Special-Referendum-Warrant-PDF); ordinance with the Select Board certification of Aug 27, 2026: docs/source-docs/eliot-me-moratorium-ordinance-nov-2026.pdf. No local news story found. The town posted its Nov 2025 return on election night (PDF created 9:45 pm).",
       "results_expected": "Often election night: the town posted its November 2025 count at about 9:45 p.m., though some past counts went up the next day.",
+      "plain_summary": "Pauses all data center applications in Eliot for 180 days, whatever the size, and directs town boards to draft permanent rules.",
       "adapters": "",
       "source_status": "none"
     },
@@ -2034,6 +2088,7 @@
       "result_note": null,
       "notes": "Not on Ballotpedia; found through the Bangor Daily News list of Maine towns voting Nov 3. Secret ballot 8 am to 8 pm at the Town Office (Sept 21 minutes). Warrant motion: docs/source-docs/freedom-me-select-board-minutes-2026-09-21.pdf; hearing: docs/source-docs/freedom-me-ordinance-hearing-minutes-2026-09-17.pdf; draft ordinance: docs/source-docs/freedom-me-moratorium-ordinance-draft-2026.pdf (only a draft is posted). The town site has no results page; call the clerk (207-382-6177).",
       "results_expected": "The town has no results page; the count comes from the town clerk.",
+      "plain_summary": "Bars any data center in Freedom and stops town officials from acting on data center applications, from the day it passes. The text sets no end date, though town officials have described it as about six months.",
       "adapters": "",
       "source_status": "none"
     },
@@ -2071,6 +2126,7 @@
       "result_note": null,
       "notes": "Not on Ballotpedia; found through the Bangor Daily News list of Maine towns voting Nov 3. On the Annual Town Election ballot under the heading \"Data Center Moratorium\", with no number. Ballot: docs/source-docs/sabattus-me-sample-ballot-nov-2026.pdf; ordinance: docs/source-docs/sabattus-me-moratorium-ordinance-nov-2026.pdf. The move from a special town meeting to the ballot (4-0) is reported only by citizenportal.ai; no official minutes were found. The town posted June 2026 results shortly after midnight on election night.",
       "results_expected": "The town posted its June results shortly after midnight.",
+      "plain_summary": "Pauses new or expanded data centers of 10,000 square feet or 20 MW or more in Sabattus until May 2, 2027, backdated to July 28, 2026, with fines of $5,000 a day.",
       "adapters": "",
       "source_status": "none"
     }

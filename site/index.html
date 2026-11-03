@@ -24,10 +24,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
 <style>
 /* Layout: sticky Redbud header, navy hero (headline and stats; before results, a countdown and the
-   poll-closing strip; after, a bar of where every count stands), the "Still out" list of measures
-   without a complete count, the one-line overview of every measure + scorecard, recent updates +
-   storylines, the results board, patterns, maps (US + Ohio), count log, decided, about. TV mode
-   (?tv) is a separate full-screen layout (#tv) that reuses the same renderers. */
+   poll-closing strip; after, a bar of where every count stands), the collapsed "Still out" list of
+   measures without a complete count, the one-line overview of every measure + scorecard, the results
+   board, patterns, maps (US + Ohio), count log, about. The measures decided earlier in 2026 ride along
+   as a separate layer (a lane on the line, a scorecard row, the board's last group, diamonds on the
+   map), never inside the Nov 3 counts. TV mode (?tv) is a separate full-screen layout (#tv) that
+   reuses the same renderers. */
 :root {
   color-scheme: light;
   --bg: #faf5f1; --paper: #ffffff; --panel-soft: #fbf4ef; --panel-cream: #fbf0e8;
@@ -142,6 +144,10 @@ nav.tabs a:hover, nav.tabs a.active { color: var(--fg); border-bottom-color: var
 .hero .stat .n.r { color: var(--restrict-dark); } .hero .stat .n.a { color: var(--allow-dark); }
 .hero .stat .n small { font-size: 13px; font-weight: 500; color: var(--fg-on-dark-dim); margin-left: 4px; letter-spacing: 0; }
 .hero .stat .l { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--fg-on-dark-dim); margin-top: 5px; font-weight: 500; }
+/* After results: where the measures stand on the left, how far the count has got on the right, split by a heavier rule. */
+.hero .stats.split { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.hero .stats.split .stat.res-end { border-right: 2px solid rgba(245,241,232,0.5); padding-right: 20px; }
+.hero .stats.split .stat.tech-start { padding-left: 22px; }
 .hero .sub { margin: 12px 0 0; font-size: 12.5px; color: var(--fg-on-dark-dim); }
 
 /* Poll-closing strip (in the hero) */
@@ -221,6 +227,18 @@ table.t tr.clickable { cursor: pointer; } table.t tr.clickable:hover td { backgr
 
 /* Still out: measures without a complete count */
 section.out-sec { padding-top: 24px; }
+/* Collapsed by default; the details element survives re-renders, so a viewer's open or closed choice holds until reload. */
+.out-det > summary { display: flex; align-items: center; gap: 12px; list-style: none; cursor: pointer; border-radius: 3px; }
+.out-det > summary::-webkit-details-marker { display: none; }
+.out-det > summary h3.rule { flex: 1; margin: 0; }
+.out-det[open] > summary { margin-bottom: 12px; }
+.out-det > summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; }
+.out-tog { font-size: 11.5px; font-weight: 600; color: var(--primary-deep); white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
+.out-tog svg { transition: transform .2s ease; }
+.out-det > summary:hover .out-tog { color: var(--primary); }
+.out-det[open] .out-tog svg { transform: rotate(180deg); }
+.out-tog .o-hide, .out-det[open] .out-tog .o-show { display: none; }
+.out-det[open] .out-tog .o-hide { display: inline; }
 .out-sec .intro { margin: -4px 0 12px; font-size: 13px; color: var(--fg-mid); max-width: 80ch; }
 .out { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 14px; align-items: start; }
 .out .card { padding: 12px 16px 6px; }
@@ -262,6 +280,8 @@ section.out-sec { padding-top: 24px; }
 .tally > div:last-child { text-align: right; }
 .trow { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 9px; margin-top: 14px; color: var(--fg-soft); }
 .trow b { font-variant-numeric: tabular-nums; }
+.bar.thin { height: 8px; margin: 6px 0 2px; }
+.trow a { font-size: 11.5px; margin-left: 6px; text-decoration: none; font-weight: 600; }
 .fine { font-size: 11.5px; color: var(--fg-faint); margin: 10px 0 0; }
 
 /* Latest + storylines */
@@ -287,12 +307,22 @@ section.out-sec { padding-top: 24px; }
 .empty { color: var(--fg-faint); font-size: 13px; padding: 10px 0; font-style: italic; font-family: var(--serif); }
 
 /* Filters */
-.filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; box-shadow: var(--shadow-sm); margin-bottom: 14px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--header-h) + 8px); z-index: 20; }
+/* Three jobs, three groups: sort on a tinted block at the left, the filters in the middle, search at the right. */
+.filters { display: flex; align-items: stretch; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); margin-bottom: 14px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--header-h) + 8px); z-index: 20; }
+.filters .fg { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; padding: 10px 12px; min-width: 0; }
+.filters .fg-sort { flex: none; background: var(--panel-cream); border-right: 1px solid var(--line-strong); border-radius: var(--radius) 0 0 var(--radius); }
+.filters .fg-sort label { color: var(--primary-deep); }
+.filters .fg-sort label span { display: inline-flex; align-items: center; gap: 4px; }
+.filters .fg-sort select { font-weight: 600; border-color: var(--primary-soft); }
+.filters .fg-filter { flex: 1 1 auto; gap: 8px; }
+.filters .fg-search { flex: 0 1 236px; border-left: 1px solid var(--line-strong); background: var(--panel-soft); border-radius: 0 var(--radius) var(--radius) 0; }
+.filters .fg-search label { flex: 1; }
 .filters select, .filters input { height: 32px; box-sizing: border-box; }
-.filters select { max-width: 158px; }
+.filters select { max-width: 134px; }
 .filters select, .filters input { font-family: var(--sans); font-size: 13px; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--paper); color: var(--fg); min-width: 0; }
-.filters .grow { flex: 1 1 170px; }
-.filters .grow input[type=search] { width: 100%; }
+.filters .sbox { position: relative; display: block; }
+.filters .sbox svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--fg-faint); pointer-events: none; }
+.filters .sbox input { width: 100%; border-radius: 999px; padding-left: 31px; }
 .filters label, .filters .field { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-faint); font-weight: 700; display: flex; flex-direction: column; gap: 3px; }
 .filters .count { margin-left: auto; align-self: flex-end; padding-bottom: 8px; font-family: var(--mono); font-size: 11px; color: var(--fg-mid); letter-spacing: 0.04em; text-transform: uppercase; display: flex; gap: 10px; align-items: center; }
 .filters .count button { border: none; background: none; color: var(--primary-deep); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; padding: 0; text-decoration: underline; }
@@ -306,6 +336,10 @@ section.out-sec { padding-top: 24px; }
 .bgroup { display: flex; align-items: baseline; gap: 8px; padding: 9px 14px 7px; background: var(--panel-soft); border-bottom: 1px solid var(--line); font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg); }
 .bgroup + .brow, .brow:first-child { border-top: none; }
 .bgroup span { color: var(--fg-faint); font-family: var(--mono); font-weight: 500; }
+/* Measures decided earlier in 2026 follow the Nov 3 list as their own group. */
+.bgroup.past { border-top: 2px solid var(--line-strong); }
+.races .grid-head { grid-column: 1 / -1; margin: 12px 0 0; }
+table.t tr.tgroup td { background: var(--panel-soft); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg); padding: 8px; }
 .brow { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr) 124px 116px 112px; gap: 14px; align-items: center; padding: 7px 14px; border-bottom: 1px solid var(--line); cursor: pointer; transition: background .15s ease; }
 .brow:last-child { border-bottom: none; }
 .brow:hover { background: var(--panel-soft); }
@@ -346,6 +380,7 @@ section.out-sec { padding-top: 24px; }
 .race .where { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: var(--fg-faint); }
 .race .name { font-family: var(--serif); font-size: 18px; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; margin: 2px 0 0; font-variation-settings: 'opsz' 30; }
 .race .title { font-size: 12.5px; color: var(--fg-soft); margin: 0; }
+.race .plain { font-size: 13px; line-height: 1.45; color: var(--fg); margin: 0; padding-left: 10px; border-left: 2px solid var(--line-strong); }
 .chips { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; justify-content: flex-end; }
 .yn { display: grid; grid-template-columns: 1fr 1fr; font-size: 12px; margin-top: 4px; }
 .yn .side { display: flex; flex-direction: column; }
@@ -404,7 +439,8 @@ section.out-sec { padding-top: 24px; }
 .gtip { position: fixed; z-index: 200; pointer-events: none; background: var(--fg); color: var(--fg-on-dark); padding: 7px 10px; border-radius: var(--radius-sm); font-family: var(--sans); font-size: 12px; line-height: 1.4; box-shadow: var(--shadow-lg); max-width: 290px; display: none; }
 .gtip b { color: #fff; }
 [data-tip] { cursor: default; }
-.bar > span[data-tip], .meter > span[data-tip], .pbar > span[data-tip] { cursor: help; }
+/* Bar segments keep their container's pointer: the arrow on a chart, the hand on a clickable row. */
+.bar > span[data-tip], .meter > span[data-tip], .pbar > span[data-tip] { cursor: inherit; }
 
 /* Timeline */
 .sched { display: grid; grid-template-columns: 90px 1fr; gap: 0; font-size: 13px; }
@@ -417,13 +453,6 @@ section.out-sec { padding-top: 24px; }
 .log li .t { font-family: var(--mono); color: var(--fg-faint); font-variant-numeric: tabular-nums; font-size: 11.5px; padding-top: 1px; }
 .log li b { color: var(--fg); }
 .log li .r { color: var(--restrict-deep); font-weight: 600; } .log li .a { color: var(--allow-deep); font-weight: 600; }
-
-/* Decided / watching */
-.decided { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
-.watch li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
-.watch li:last-child { border-bottom: none; }
-.watch b { color: var(--fg); }
-.watch ul { list-style: none; margin: 0; padding: 0; }
 
 /* About */
 .about { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
@@ -502,9 +531,18 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
 @media (max-width: 980px) {
   .grid-3, .grid-2, .grid-2.eq, .grid-2.night, .maps { grid-template-columns: 1fr; }
   .modal .mbody { grid-template-columns: 1fr; }
-  .filters { position: static; }
+  .filters { position: static; flex-wrap: wrap; }
+  .filters .fg-filter { flex-basis: 0; }
+  .filters .fg-search { flex: 1 1 100%; border-left: none; border-top: 1px solid var(--line); border-radius: 0 0 var(--radius) var(--radius); }
+  .filters .fg-sort { border-radius: var(--radius) 0 0 0; }
   .brow { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) 112px 104px; }
   .brow .b-st { display: none; }
+}
+@media (max-width: 900px) {
+  .hero .stats.split { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 14px; }
+  .hero .stats.split .stat.res-end { border-right: none; }
+  .hero .stats.split .stat.tech { border-top: 2px solid rgba(245,241,232,0.5); padding-top: 12px; }
+  .hero .stats.split .stat.tech-start { padding-left: 0; }
 }
 @media (max-width: 760px) {
   .brow { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name st" "bar bar" "call rep"; row-gap: 6px; column-gap: 10px; padding: 10px 12px; }
@@ -516,6 +554,8 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
   .hero-top.has-cd { grid-template-columns: 1fr; gap: 14px; }
   .countdown { text-align: left; }
   .cd-l { margin-left: 0; }
+  .filters .fg-sort { flex: 1 1 100%; border-right: none; border-bottom: 1px solid var(--line); border-radius: var(--radius) var(--radius) 0 0; }
+  .filters .fg-filter { flex: 1 1 100%; }
 }
 @media (max-width: 640px) {
   header.site .wrap { padding-top: 8px; }
@@ -533,6 +573,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
   .hero .stat { border-right: none; padding: 0 8px 0 0 !important; }
   .hero .stat .n { font-size: 23px; }
   .hero .stat .n small { font-size: 11px; }
+  .hero .stats.split .stat.tech { padding-top: 12px !important; }
   .cd-n { font-size: 28px; }
   .pcs-track { margin: 0 14px; }
   .races { grid-template-columns: 1fr; }
@@ -566,12 +607,10 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
     </div>
     <nav class="tabs" id="tabs">
       <a href="#overview" class="tab active">Overview</a>
-      <a href="#latest" class="tab">Updates</a>
       <a href="#races" class="tab">Races</a>
       <a href="#patterns" class="tab">Patterns</a>
       <a href="#map" class="tab">Map</a>
       <a href="#timeline" class="tab">Count log</a>
-      <a href="#decided" class="tab">Decided in 2026</a>
       <a href="#about" class="tab">About</a>
     </nav>
   </div>
@@ -597,9 +636,11 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
 
 <section class="out-sec" id="out" hidden>
   <div class="wrap">
-    <h3 class="rule" id="outTitle">Still out</h3>
-    <p class="intro">Measures without a complete count, and when to expect more. Every count here is unofficial until the county certifies it.</p>
-    <div class="out" id="outList"></div>
+    <details class="out-det" id="outDet">
+      <summary><h3 class="rule" id="outTitle">Still out</h3><span class="out-tog"><span class="o-show">Show the list</span><span class="o-hide">Hide the list</span><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+      <p class="intro">Measures without a complete count, and when to expect more. Every count here is unofficial until the county certifies it.</p>
+      <div class="out" id="outList"></div>
+    </details>
   </div>
 </section>
 
@@ -615,19 +656,9 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
           <span class="png-actions" data-png="line"><button type="button" data-png-act="copy" title="Copy this chart as an image">Copy image</button><button type="button" data-png-act="download" title="Download this chart as a PNG">Download</button></span></div>
         <div id="strip"></div>
         <div class="legend" id="slegend"></div>
-        <p class="strip-note">Each dot is one measure, placed by the Restrict side's share of the vote: right of center, Restrict is winning; left of center, Allow is. Group by <b>What YES does</b> to see whether voters are choosing to restrict data centers or just voting no.</p>
+        <p class="strip-note">Each dot is one measure, placed by how its vote splits: left of center, Restrict is winning; right of center, Allow is. Group by <b>What YES does</b> to see whether voters are choosing to restrict data centers or just voting no. Diamonds in the bottom lane are the measures decided earlier in 2026, shown for comparison and not in the Nov 3 counts.</p>
       </div>
       <div class="card" id="scorecard"></div>
-    </div>
-  </div>
-</section>
-
-<section class="block" id="latest">
-  <div class="wrap">
-    <div class="section-head"><div><h2>Recent <em>updates</em></h2><p>Complete counts and lead changes, newest first. Click any line to open the race.</p></div></div>
-    <div class="grid-2">
-      <div class="card"><h4>Complete counts and lead changes</h4><ul class="feed" id="feed"></ul><p class="small" style="margin:10px 0 0"><a href="#timeline">Every count change ›</a></p></div>
-      <div class="card"><h4 id="storiesTitle">Storylines</h4><ul class="stories" id="stories"></ul></div>
     </div>
   </div>
 </section>
@@ -635,18 +666,24 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
 <section class="block" id="races">
   <div class="wrap">
     <div class="section-head">
-      <div><h2>Every <em>measure</em></h2><p>Grouped by where the count stands. Bars always put <b>Restrict</b> on the left in blue and <b>Allow</b> on the right in orange; YES and NO mark which side each ballot answer supports. The center tick is 50 percent.</p></div>
+      <div><h2>Every <em>measure</em></h2><p>Grouped by where the count stands, with the measures decided earlier in 2026 last. Bars always put <b>Restrict</b> on the left in blue and <b>Allow</b> on the right in orange; YES and NO mark which side each ballot answer supports. The center tick is 50 percent.</p></div>
       <div class="seg" role="group" aria-label="View"><button type="button" id="viewBoard" aria-pressed="true">Board</button><button type="button" id="viewCards" aria-pressed="false">Cards</button><button type="button" id="viewTable" aria-pressed="false">Table</button></div>
     </div>
     <div class="filters" id="filters">
-      <label>State <select id="fState"><option value="">All states</option></select></label>
-      <label>Type <select id="fKind"><option value="">All types</option></select></label>
-      <label>YES means <select id="fDir"><option value="">Either</option><option value="restrict">Restrict data centers</option><option value="allow">Allow data centers</option></select></label>
-      <label>Placed by <select id="fOrigin"><option value="">Anyone</option><option value="citizens">Citizens</option><option value="government">Governing body</option></select></label>
-      <label>Status <select id="fStatus"><option value="">All</option><option value="close">Too close</option><option value="counting">Partly counted</option><option value="final">Complete (unofficial)</option><option value="none">No results posted</option><option value="changed">Changed since you last looked</option></select></label>
-      <label>Sort <select id="fSort"><option value="status">By status</option><option value="margin">Closest margin</option><option value="state">State (Ohio first)</option><option value="reporting">Most reported</option><option value="updated">Recently updated</option><option value="votes">Most votes</option></select></label>
-      <label class="grow">Search <input type="search" id="fSearch" placeholder="City, county, project, company…"></label>
-      <span class="count"><span id="fCount"></span><button type="button" id="fClear" hidden>Clear</button></span>
+      <div class="fg fg-sort">
+        <label><span><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1v8M1 3l2-2 2 2M7 9V1M5 7l2 2 2-2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Sort</span><select id="fSort"><option value="status">By status</option><option value="margin">Closest margin</option><option value="state">State (Ohio first)</option><option value="reporting">Most reported</option><option value="updated">Recently updated</option><option value="votes">Most votes</option></select></label>
+      </div>
+      <div class="fg fg-filter" role="group" aria-label="Filters">
+        <label>State <select id="fState"><option value="">All states</option></select></label>
+        <label>Type <select id="fKind"><option value="">All types</option></select></label>
+        <label>YES means <select id="fDir"><option value="">Either</option><option value="restrict">Restrict data centers</option><option value="allow">Allow data centers</option></select></label>
+        <label>Placed by <select id="fOrigin"><option value="">Anyone</option><option value="citizens">Citizens</option><option value="government">Governing body</option></select></label>
+        <label>Status <select id="fStatus"><option value="">All</option><option value="close">Too close</option><option value="counting">Partly counted</option><option value="final">Complete (unofficial)</option><option value="none">No results posted</option><option value="changed">Changed since you last looked</option><option value="earlier">Decided earlier in 2026</option></select></label>
+        <span class="count"><span id="fCount"></span><button type="button" id="fClear" hidden>Clear</button></span>
+      </div>
+      <div class="fg fg-search">
+        <label>Search <span class="sbox"><svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true"><circle cx="5.5" cy="5.5" r="4.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8.6 8.6 12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input type="search" id="fSearch" placeholder="City, county, project, company…"></span></label>
+      </div>
     </div>
     <div class="board" id="board"></div>
     <div class="races" id="raceGrid" hidden></div>
@@ -687,17 +724,6 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
   </div>
 </section>
 
-<section class="block" id="decided">
-  <div class="wrap">
-    <div class="section-head"><div><h2>Already <em>decided</em> in 2026</h2><p>Data center questions voters settled earlier this year, plus party-primary advisory questions and measures that did not make the November ballot.</p></div></div>
-    <div class="decided" id="decidedGrid"></div>
-    <div class="grid-2" style="margin-top:16px">
-      <div class="card"><h4>Party-primary advisory questions (non-binding)</h4><div id="partyTable"></div></div>
-      <div class="card watch"><h4>Also watching: not on the Nov 3 ballot</h4><ul id="watchList"></ul></div>
-    </div>
-  </div>
-</section>
-
 <section class="block" id="about">
   <div class="wrap">
     <div class="section-head"><div><h2>About this <em>tracker</em></h2></div></div>
@@ -722,8 +748,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
       <div class="card">
         <h4>Sources and data</h4>
         <p>Every race links to the election office page the numbers come from. The tracker reads county results pages every few minutes on election night and hourly through Nov 13; towns and counties that post scans or PDFs are entered by hand. A count here can trail the county's own page, so check the source for the latest. Maine's Secretary of State does not report local questions, so its towns' counts come from each town.</p>
-        <p>The data behind the page: <a href="data/results.json">results.json</a> (also as <a href="data/results.csv">results.csv</a>) and the race registry, <a href="data/races.json">races.json</a>. Link to any race with its address (open a race and use Copy link).</p>
-        <p>Built by <a href="https://www.redbud.consulting" target="_blank" rel="noopener">Redbud Consulting</a>, a polling, qualitative research and data strategy firm. Questions or corrections: <a href="https://www.redbud.consulting" target="_blank" rel="noopener">redbud.consulting</a>.</p>
+        <p>Built by <a href="https://www.redbud.consulting" target="_blank" rel="noopener">Redbud Consulting</a>, a polling, qualitative research and data strategy firm. Questions or corrections: <a href="mailto:info@redbud.consulting">info@redbud.consulting</a>.</p>
       </div>
     </div>
   </div>
@@ -740,7 +765,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
   <div class="tv-top"><img src="assets/redbud-logo-mark.png" alt=""><div class="tv-title">Data Centers on the Ballot · <em>2026 Results</em></div><span class="tv-sim" id="tvSim" hidden>Simulated</span><span class="tv-live" id="tvLive"></span><span class="tv-clock" id="tvClock"></span><button type="button" class="btn" id="tvExit">Exit TV mode</button></div>
   <div class="tv-hero hero"><h2 class="lead" id="tvHeadline"></h2><div class="stats" id="tvStats"></div></div>
   <div class="tv-grid">
-    <div class="tv-card"><h4>Every measure on one line · right of center, Restrict is winning</h4><div id="tvStrip"></div></div>
+    <div class="tv-card"><h4>Every measure on one line · left of center, Restrict is winning</h4><div id="tvStrip"></div></div>
     <div class="tv-card"><h4>Recent updates</h4><ul class="feed" id="tvFeed"></ul></div>
     <div class="tv-card" id="tvBoard"></div>
     <div class="tv-card"><h4 id="tvStoriesTitle">Storylines</h4><ul class="stories" id="tvStories"></ul></div>
@@ -802,7 +827,7 @@ const QUIET_MS = 3 * 3600 * 1000;
 // Same test as the R summary: pulled measures (status = removed) drop out of the count.
 const onBallot = (r) => r.election_date === ELECTION && ['on_ballot', 'pending_litigation'].includes(r.status);
 
-let races = [], results = null, notOnBallot = [], views = [], topo = null, A = null;
+let races = [], results = null, views = [], topo = null, A = null;
 let sim = false, simStage = 0.55, lastFetch = null, fetchErr = null;
 let stateRank = new Map();
 const filters = { state: '', kind: '', dir: '', origin: '', status: '', sort: 'status', q: '' };
@@ -813,7 +838,7 @@ let openId = null, lastFocus = null;
 const prevW = new Map(), prevStat = new Map(), prevTotals = new Map(), prevSig = new Map();
 
 // Deep links: ?race=<race_id>, filters, ?tv; ?preview shows the Simulate button (?preview&sim=55 starts it).
-const VALID = { kind: KIND_ORDER, dir: ['restrict', 'allow'], origin: ['citizens', 'government'], status: ['close', 'counting', 'final', 'none', 'changed'], sort: ['status', 'margin', 'state', 'reporting', 'updated', 'votes'] };
+const VALID = { kind: KIND_ORDER, dir: ['restrict', 'allow'], origin: ['citizens', 'government'], status: ['close', 'counting', 'final', 'none', 'changed', 'earlier'], sort: ['status', 'margin', 'state', 'reporting', 'updated', 'votes'] };
 Object.keys(VALID).forEach((k) => { const val = params.get(k); if (val && VALID[k].includes(val)) filters[k] = val; });
 if (params.get('state')) filters.state = params.get('state').toUpperCase().slice(0, 2);
 if (params.get('q')) filters.q = params.get('q').slice(0, 80);
@@ -859,7 +884,7 @@ function electionDayNow() { const f = new Intl.DateTimeFormat('en-CA', { timeZon
 async function loadAll() {
   try {
     const r = await fetch('data/races.json?t=' + Date.now()).then((x) => { if (!x.ok) throw new Error('races.json ' + x.status); return x.json(); });
-    races = r.races || []; notOnBallot = r.not_on_ballot || [];
+    races = r.races || [];
   } catch (e) { showErr('Could not load the race list (' + e.message + ').'); return; }
   computeStateRank();
   try { topo = await fetch('data/us-states-albers-10m.json').then((x) => x.json()); } catch (e) { topo = null; }
@@ -1008,8 +1033,12 @@ function statusPill(v) {
 function barTip(v) { return v.has ? `Restrict ${pct1(v.rPct)} (${fmt(v.rVotes)}) · Allow ${pct1(v.aPct)} (${fmt(v.aVotes)}) · ${fmt(v.total)} votes counted. A ${v.race.yes_means === 'restrict' ? 'YES' : 'NO'} vote is the Restrict side.` : 'No results posted yet'; }
 function dotTip(v) {
   const r = v.race;
-  return `${r.jurisdiction}, ${r.state}\n${r.measure_label ? r.measure_label + ' · ' : ''}${r.title}\n${v.has ? `Restrict ${pct1(v.rPct)} · Allow ${pct1(v.aPct)} · ${v.precTot ? v.precRep + ' of ' + v.precTot + ' precincts' : fmt(v.total) + ' votes'}\n` : ''}${callText(v)}${v.quiet ? '\n' + quietText(v) : ''}`;
+  return `${r.jurisdiction}, ${r.state}\n${r.measure_label ? r.measure_label + ' · ' : ''}${r.title}\n${v.has ? `Restrict ${pct1(v.rPct)} · Allow ${pct1(v.aPct)} · ${v.precTot ? v.precRep + ' of ' + v.precTot + ' precincts' : fmt(v.total) + ' votes'}\n` : ''}${v.isNov ? '' : `Decided ${fmtDate(r.election_date)} · `}${callText(v)}${v.quiet ? '\n' + quietText(v) : ''}`;
 }
+// Measures decided earlier in 2026 are drawn as diamonds (half-diagonal s), on the line and the map alike.
+const diamond = (s) => `M0,${-s}L${s},0L0,${s}L${-s},0Z`;
+// The date that leads a decided measure's location line.
+const pastDate = (v) => v.isNov ? '' : esc(fmtDate(v.race.election_date)) + ' · ';
 const srcNote = (s) => String(s || '').replace(/^entered by [^:]*:\s*/i, '').replace(/^entered by \S+$/i, '');
 // Bars grow from their previous width to the new one (from 0 on first draw).
 function barW(key, w) { const to = w == null ? 0 : w; const from = REDUCED ? to : (prevW.has(key) ? prevW.get(key) : 0); prevW.set(key, to); return `style="width:${from}%" data-w="${to}"`; }
@@ -1065,7 +1094,8 @@ function aggregates() {
     votes, pooledR: votes ? 100 * rVotes / votes : null, medianR: median(rep.map((v) => v.rPct)),
     binding: nov.filter((v) => !v.adv).length,
     precRep: sum(rep, (v) => v.precRep), precTot: sum(nov, (v) => v.precTot),
-    decided: views.filter((v) => v.race.status === 'decided' && v.direct && v.has),
+    // Decided earlier in 2026: a separate layer on the page, never part of the Nov 3 counts above.
+    decided: views.filter((v) => v.race.status === 'decided' && v.direct && v.has).sort((a, b) => a.race.election_date.localeCompare(b.race.election_date)),
     closes: closeGroups(nov), pre: rep.length === 0, events: buildEvents(list)
   };
 }
@@ -1119,15 +1149,15 @@ function focusKey() {
   const scope = ae.closest('section[id], #tv'); const pre = scope ? '#' + scope.id + ' ' : '';
   if (ae.dataset.id && ae.matches('.brow, .race, tr')) return `${pre}.${ae.classList[0]}[data-id="${ae.dataset.id}"]`;
   if (ae.dataset.open && ae.matches('.oi')) return `${pre}.oi[data-open="${ae.dataset.open}"]`;
-  if (ae.dataset.open && ae.matches('circle')) return `${pre}circle[data-open="${ae.dataset.open}"]`;
+  if (ae.dataset.open && ae.matches('.sdot')) return `${pre}${ae.tagName.toLowerCase()}.sdot[data-open="${ae.dataset.open}"]`;
   return null;
 }
 function render() {
   const fk = openId ? null : focusKey();
   buildViews(); A = aggregates(); computeChanged();
   if (filters.state && !A.states.includes(filters.state)) filters.state = '';
-  renderStatus(); renderHero(); renderOut(); renderStrip(); renderScore(); renderLatest(); renderStories();
-  renderFilters(); renderRaces(); renderPatterns(); renderMapDots(); renderTimeline(); renderDecided();
+  renderStatus(); renderHero(); renderOut(); renderStrip(); renderScore();
+  renderFilters(); renderRaces(); renderPatterns(); renderMapDots(); renderTimeline();
   if (document.body.classList.contains('tv')) renderTV();
   // Rows whose counts moved since the last refresh get a brief highlight.
   const moved = new Set();
@@ -1168,13 +1198,13 @@ function renderStatus() {
 function precedentHTML() {
   const dec = A.decided; if (!dec.length) return '';
   const rw = dec.filter((v) => v.leader === 'restrict'), sh = rw.map((v) => v.rPct);
-  const tail = ' <a href="#decided">See them ›</a>';
+  const tail = ' <a href="?status=earlier#races" data-status="earlier">See them ›</a>';
   if (rw.length === dec.length) return `Before Nov 3: <b>Restrict won all ${dec.length}</b> data center measures decided earlier in 2026, with ${pct0(Math.min(...sh))} to ${pct0(Math.max(...sh))} of the vote.${tail}`;
   return `Before Nov 3: <b>Restrict won ${rw.length} of ${dec.length}</b> data center measures decided earlier in 2026.${tail}`;
 }
 function heroStatsHTML() {
   const n = A.nov.length, rep = A.rep.length;
-  const stat = (v, l, cls, tip) => `<div class="stat"${tip ? ` data-tip="${esc(tip)}"` : ''}><div class="n ${cls || ''}">${v}</div><div class="l">${l}</div></div>`;
+  const stat = (v, l, cls, tip, sc) => `<div class="stat${sc ? ' ' + sc : ''}"${tip ? ` data-tip="${esc(tip)}"` : ''}><div class="n ${cls || ''}">${v}</div><div class="l">${l}</div></div>`;
   if (A.pre) {
     const big = A.byState[0], dec = A.decided, rw = dec.filter((v) => v.leader === 'restrict').length;
     return [
@@ -1186,19 +1216,20 @@ function heroStatsHTML() {
       dec.length ? stat(`${rw}–${dec.length - rw}`, 'Restrict record in 2026', 'r', `Restrict won ${rw} of the ${dec.length} data center measures decided earlier in 2026`) : ''
     ].join('');
   }
-  // After the polls: the five counts double as the legend for the bar under them (#cbar).
+  // After the polls: the counts double as the legend for the bar under them (#cbar). Left of the heavy
+  // rule, where the measures stand (Restrict left, Allow right, as on every bar); right of it, how far the count has got.
   const sw = (k) => `<i class="cs-${k}"></i>`;
   // Until some count is complete, "won 0" says nothing: show who is ahead instead.
-  const side = (won, lead, k, name, who) => A.finals
-    ? stat(cnt(won, 'k-' + k) + (lead ? `<small>+${lead} leading</small>` : ''), sw(k) + name + ' won', k[0], `Complete counts the ${who} side won${lead ? `; it leads by 2+ points in ${lead} more` : ''}`)
-    : stat(cnt(lead, 'k-' + k), name + ' ahead', k[0], `The ${who} side leads by 2+ points; no count is complete yet`);
+  const side = (won, lead, k, name, who, sc) => A.finals
+    ? stat(cnt(won, 'k-' + k) + (lead ? `<small>+${lead} leading</small>` : ''), sw(k) + name + ' won', k[0], `Complete counts the ${who} side won${lead ? `; it leads by 2+ points in ${lead} more` : ''}`, sc)
+    : stat(cnt(lead, 'k-' + k), name + ' ahead', k[0], `The ${who} side leads by 2+ points; no count is complete yet`, sc);
   return [
     side(A.rWon, A.rLead, 'rw', 'Restrict', 'anti-data-center'),
-    side(A.aWon, A.aLead, 'aw', 'Allow', 'pro-data-center'),
     stat(cnt(A.tc, 'k-tc'), sw('t') + 'Too close', '', 'Margin under 2 points, however much is counted'),
-    stat(cnt(A.partial, 'k-pc'), sw('p') + 'Partly counted', '', 'Some votes counted, count not complete. See Still out below.'),
-    stat(cnt(A.none, 'k-none'), sw('n') + 'No results posted', '', 'No count posted yet. See Still out below.'),
-    stat(cnt(A.votes, 'k-votes'), 'Votes counted', '', `YES plus NO votes counted across the ${rep} measures with results${A.precTot ? `; ${fmt(A.precRep)} of ${fmt(A.precTot)} precincts in` : ''}`)
+    side(A.aWon, A.aLead, 'aw', 'Allow', 'pro-data-center', 'res-end'),
+    stat(cnt(A.votes, 'k-votes'), 'Votes counted', '', `YES plus NO votes counted across the ${rep} measures with results${A.precTot ? `; ${fmt(A.precRep)} of ${fmt(A.precTot)} precincts in` : ''}`, 'tech tech-start'),
+    stat(cnt(A.partial, 'k-pc'), sw('p') + 'Partly counted', '', 'Some votes counted, count not complete. See Still out below.', 'tech'),
+    stat(cnt(A.none, 'k-none'), sw('n') + 'No results posted', '', 'No count posted yet. See Still out below.', 'tech')
   ].join('');
 }
 // One segment per state of the count, in the same order and colors as the stats above it.
@@ -1206,8 +1237,8 @@ function countBarHTML() {
   const n = A.nov.length, pick = (f) => A.nov.filter(f);
   const parts = [
     ['rw', 'Restrict won', pick((v) => v.out.tier === 'won' && v.leader === 'restrict')],
-    ['aw', 'Allow won', pick((v) => v.out.tier === 'won' && v.leader === 'allow')],
     ['t', 'Too close', pick((v) => v.group === 'close')],
+    ['aw', 'Allow won', pick((v) => v.out.tier === 'won' && v.leader === 'allow')],
     ['p', 'Partly counted', pick((v) => v.group === 'counting')],
     ['n', 'No results posted', pick((v) => v.group === 'none')]
   ];
@@ -1255,6 +1286,7 @@ function renderHero() {
   }
   $('#heroSub').textContent = sub;
   $('#heroStats').innerHTML = heroStatsHTML();
+  $('#heroStats').classList.toggle('split', !A.pre);
   countUps($('#heroStats'));
   // Before results, the poll-closing strip; after, a bar of where every count stands.
   $('#cbar').hidden = A.pre; $('#pcs').hidden = !A.pre;
@@ -1326,7 +1358,7 @@ function outItem(v) {
     <div class="st">${st}</div>${ex ? `<div class="ex">${v.res.public_note ? '<b>Update:</b> ' : ''}${esc(ex)}</div>` : ''}</div>`;
 }
 function renderOut() {
-  const sec = $('#out'), groups = [['none', 'No results posted'], ['counting', 'Partly counted'], ['close', 'Too close to call']]
+  const sec = $('#out'), groups = [['close', 'Too close to call'], ['counting', 'Partly counted'], ['none', 'No results posted']]
     .map(([g, l]) => ({ g, l, items: A.nov.filter((v) => v.group === g).sort(SORTERS.status) })).filter((x) => x.items.length);
   const open = groups.reduce((t, x) => t + x.items.length, 0);
   // Hidden before the first results (every measure would be on it) and once every count is complete.
@@ -1374,43 +1406,63 @@ function drawStrip(el, opts) {
   const lanes = stripLanes(A.nov, by).map((l) => ({ ...l, rep: l.items.filter((v) => v.has) }));
   const multi = lanes.length > 1, labelW = multi && !narrow ? (big ? 200 : 158) : 0, labTop = multi && narrow ? 18 : 0;
   const m = { l: labelW + (narrow ? 12 : 16), r: narrow ? 12 : 20, t: 30, b: 40 };
-  const x = d3.scaleLinear().domain([0, 100]).range([m.l, W - m.r]);
+  // x takes the Restrict share, reversed so Restrict wins to the left and Allow to the right, as on every bar.
+  const x = d3.scaleLinear().domain([100, 0]).range([m.l, W - m.r]);
+  // The measures decided earlier in 2026 get a lane of their own under the Nov 3 lanes, set off by a dashed rule.
+  // With no grouping it is labeled above its dots, so the Nov 3 line keeps the full width.
+  const PAST_GAP = 12, PR = R * 1.2;
+  if (opts.earlier !== false && A.decided.length) lanes.push({ key: 'earlier', label: 'Earlier in 2026', items: A.decided, rep: A.decided, past: true });
   let y0 = m.t; const nodes = [];
   lanes.forEach((l) => {
-    const pts = l.rep.map((v) => ({ id: v.race.race_id, v, x: x(clamp(v.rPct, 0, 100)) }));
-    swarm(pts, R + GAP / 2);
+    const lt = l.past ? (multi && !narrow ? 0 : 18) : labTop;
+    if (l.past) y0 += PAST_GAP;
+    const pts = l.rep.map((v) => ({ id: v.race.race_id, v, past: !!l.past, x: x(clamp(v.rPct, 0, 100)) }));
+    swarm(pts, (l.past ? PR : R) + GAP / 2);
     const ext = pts.length ? Math.max(...pts.map((p) => Math.abs(p.dy))) : 0;
-    const h = Math.max(big ? 74 : (multi ? 44 : 64), 2 * ext + 2 * R + 14) + labTop;
-    l.y = y0; l.h = h; l.cy = y0 + labTop + (h - labTop) / 2;
+    const h = Math.max(big ? 74 : (multi || l.past ? 44 : 64), 2 * ext + 2 * (l.past ? PR : R) + 14) + lt;
+    l.y = y0; l.h = h; l.lt = lt; l.cy = y0 + lt + (h - lt) / 2;
     pts.forEach((p) => { p.cy = l.cy + p.dy; p.r = R; nodes.push(p); });
     y0 += h;
   });
   const H = y0 + m.b;
   let svg = d3.select(el).select('svg');
-  if (svg.empty()) { svg = d3.select(el).append('svg'); svg.append('g').attr('class', 'static'); svg.append('g').attr('class', 'dots'); }
-  svg.attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', `${A.rep.length} measures with results, placed by the Restrict side's share of the vote`);
+  if (svg.empty()) { svg = d3.select(el).append('svg'); svg.append('g').attr('class', 'static'); svg.append('g').attr('class', 'dots'); svg.append('g').attr('class', 'past'); }
+  svg.attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', `${A.rep.length} measures with results, placed by how the vote splits: Restrict winning to the left, Allow to the right`);
   const st = svg.select('g.static'); st.selectAll('*').remove();
   lanes.forEach((l, i) => {
+    if (l.past) {
+      st.append('line').attr('x1', 0).attr('x2', W).attr('y1', l.y - PAST_GAP / 2).attr('y2', l.y - PAST_GAP / 2).attr('stroke', 'var(--line-strong)').attr('stroke-dasharray', '3 3');
+      const sub = `${l.items.length} decided ${l.items.length === 1 ? 'measure' : 'measures'}`;
+      if (l.lt) st.append('text').attr('class', 'st-lab').attr('x', m.l).attr('y', l.y + 13).text(l.label + '  ').append('tspan').attr('class', 'st-sub').text(sub);
+      else { st.append('text').attr('class', 'st-lab').attr('x', 8).attr('y', l.cy - 2).text(l.label); st.append('text').attr('class', 'st-sub').attr('x', 8).attr('y', l.cy + 12).text(sub); }
+      return;
+    }
     if (multi && i % 2 === 0) st.append('rect').attr('x', 0).attr('y', l.y).attr('width', W).attr('height', l.h).attr('fill', 'var(--panel-soft)');
     if (!multi) return;
     const sub = A.pre ? `${l.items.length} ${l.items.length === 1 ? 'measure' : 'measures'}` : `${l.rep.length} of ${l.items.length} with results`;
     if (narrow) { st.append('text').attr('class', 'st-lab').attr('x', m.l).attr('y', l.y + 13).text(l.label + '  ').append('tspan').attr('class', 'st-sub').text(sub); }
     else { st.append('text').attr('class', 'st-lab').attr('x', 8).attr('y', l.cy - 2).text(l.label); st.append('text').attr('class', 'st-sub').attr('x', 8).attr('y', l.cy + 12).text(sub); }
   });
-  st.append('rect').attr('x', x(49)).attr('y', m.t - 6).attr('width', x(51) - x(49)).attr('height', y0 - m.t + 6).attr('fill', 'var(--neutral-soft)');
+  st.append('rect').attr('x', x(51)).attr('y', m.t - 6).attr('width', x(49) - x(51)).attr('height', y0 - m.t + 6).attr('fill', 'var(--neutral-soft)');
   st.append('line').attr('x1', x(50)).attr('x2', x(50)).attr('y1', m.t - 8).attr('y2', y0 + 4).attr('stroke', 'var(--fg)').attr('stroke-opacity', 0.45);
-  st.append('text').attr('class', 'st-cap a').attr('x', x(0)).attr('y', m.t - 14).text('◂ Allow winning');
-  st.append('text').attr('class', 'st-cap r').attr('x', x(100)).attr('y', m.t - 14).attr('text-anchor', 'end').text('Restrict winning ▸');
+  st.append('text').attr('class', 'st-cap r').attr('x', x(100)).attr('y', m.t - 14).text('◂ Restrict winning');
+  st.append('text').attr('class', 'st-cap a').attr('x', x(0)).attr('y', m.t - 14).attr('text-anchor', 'end').text('Allow winning ▸');
   st.append('line').attr('x1', x(0)).attr('x2', x(100)).attr('y1', y0 + 4).attr('y2', y0 + 4).attr('stroke', 'var(--line-strong)');
-  [0, 25, 50, 75, 100].forEach((t) => st.append('text').attr('class', 'st-tick').attr('x', x(t)).attr('y', y0 + 18).attr('text-anchor', t === 0 ? 'start' : t === 100 ? 'end' : 'middle').text(t + '%'));
-  st.append('text').attr('class', 'st-axt').attr('x', x(50)).attr('y', y0 + 33).attr('text-anchor', 'middle').text('Restrict share of the vote');
+  // Ticks read as the leading side's share: Restrict's on the left half, Allow's on the right.
+  [0, 25, 50, 75, 100].forEach((t) => st.append('text').attr('class', 'st-tick').attr('x', x(t)).attr('y', y0 + 18).attr('text-anchor', t === 100 ? 'start' : t === 0 ? 'end' : 'middle').text(Math.max(t, 100 - t) + '%'));
+  st.append('text').attr('class', 'st-axt').attr('x', x(50)).attr('y', y0 + 33).attr('text-anchor', 'middle').text('Leading side’s share of the vote');
+  st.selectAll('text.st-lab').raise();
   if (multi && !A.pre) lanes.forEach((l) => { if (!l.rep.length) st.append('text').attr('class', 'st-none').attr('x', x(75)).attr('y', l.cy + 4).attr('text-anchor', 'middle').text('No results yet'); });
-  const dots = svg.select('g.dots').selectAll('circle.sdot').data(nodes, (d) => d.id);
+  const mark = (s) => s.attr('data-open', (d) => d.id).attr('data-tip', (d) => dotTip(d.v))
+    .attr('tabindex', big ? null : 0).attr('role', 'button').attr('aria-label', (d) => `${place(d.v)}: ${callText(d.v)}`);
+  const dots = svg.select('g.dots').selectAll('circle.sdot').data(nodes.filter((d) => !d.past), (d) => d.id);
   dots.exit().remove();
   const merged = dots.enter().append('circle').attr('cx', x(50)).attr('cy', (d) => d.cy).attr('r', 0).merge(dots);
-  merged.attr('class', (d) => 'sdot ' + dotCls(d.v)).attr('data-open', (d) => d.id).attr('data-tip', (d) => dotTip(d.v))
-    .attr('tabindex', big ? null : 0).attr('role', 'button').attr('aria-label', (d) => `${place(d.v)}: ${callText(d.v)}`);
+  mark(merged.attr('class', (d) => 'sdot ' + dotCls(d.v)));
   merged.transition().duration(REDUCED ? 0 : 700).ease(d3.easeCubicOut).attr('cx', (d) => d.x).attr('cy', (d) => d.cy).attr('r', R);
+  // Decided measures never move, so their diamonds are placed without a transition.
+  mark(svg.select('g.past').selectAll('path.sdot').data(nodes.filter((d) => d.past), (d) => d.id).join('path')
+    .attr('class', (d) => 'sdot past ' + dotCls(d.v)).attr('d', diamond(PR)).attr('transform', (d) => `translate(${d.x},${d.cy})`));
   return { lanes };
 }
 function renderStrip() {
@@ -1428,11 +1480,12 @@ function renderStrip() {
 function restyleStrip() {
   if (!window.d3) return;
   const f = anyFilter();
-  d3.select('#strip').selectAll('circle.sdot').classed('dim', (d) => (f && !matches(d.v)) || (!!hlSet && !hlSet.has(d.id))).classed('hl', (d) => !!hlSet && hlSet.has(d.id));
+  d3.select('#strip').selectAll('.sdot').classed('dim', (d) => (f && !matches(d.v)) || (!!hlSet && !hlSet.has(d.id))).classed('hl', (d) => !!hlSet && hlSet.has(d.id));
 }
 function legendHTML(withNone) {
   const sw = (cls) => `<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle class="sdot ${cls}" cx="7" cy="7" r="5" style="cursor:default"></circle></svg>`;
-  return `<span>${sw('r')}Restrict ahead</span><span>${sw('a')}Allow ahead</span><span>${sw('t')}Too close (under 2 pts)</span><span>${sw('r early')}Early count (under half in)</span><span>${sw('r won')}Won (complete count)</span>${withNone ? `<span>${sw('n')}No results posted</span>` : ''}`;
+  const past = A.decided.length ? `<span><svg width="14" height="14" viewBox="-7 -7 14 14" aria-hidden="true"><path class="sdot past r won" d="${diamond(6)}" style="cursor:default"></path></svg>Decided earlier in 2026</span>` : '';
+  return `<span>${sw('r')}Restrict ahead</span><span>${sw('a')}Allow ahead</span><span>${sw('t')}Too close (under 2 pts)</span><span>${sw('r early')}Early count (under half in)</span><span>${sw('r won')}Won (complete count)</span>${withNone ? `<span>${sw('n')}No results posted</span>` : ''}${past}`;
 }
 
 // ---------- scorecard ----------
@@ -1446,6 +1499,12 @@ function segCounts(items) {
 function segBar(c, total, keyPrefix, cls, label) {
   return `<div class="${cls}" data-tip="${esc(`${label}: ${SEGS.filter(([k]) => c[k]).map(([k, l]) => `${l} ${c[k]}`).join(' · ')}`)}">${SEGS.filter(([k]) => c[k]).map(([k, l]) => `<span class="sg-${k}" ${barW(keyPrefix + k, total ? 100 * c[k] / total : 0)} data-tip="${esc(`${label}: ${l.toLowerCase()} in ${c[k]} of ${total}`)}"></span>`).join('')}</div>`;
 }
+// The measures decided earlier in 2026, beside the Nov 3 tally and never inside it.
+function earlierScoreHTML() {
+  const d = A.decided; if (!d.length) return '';
+  const c = segCounts(d), tally = c.aw === 0 ? `Restrict won all ${d.length}` : c.rw === 0 ? `Allow won all ${d.length}` : `Restrict ${c.rw} · Allow ${c.aw}`;
+  return `<div class="trow" style="flex-direction:column;gap:0"><span style="display:flex;justify-content:space-between;gap:12px"><span>Decided earlier in 2026<a class="png-skip" href="?status=earlier#races" data-status="earlier">See them ›</a></span><b>${tally}</b></span>${segBar(c, d.length, 'score:past:', 'bar thin', 'Decided earlier in 2026')}</div>`;
+}
 function renderScore() {
   const n = A.nov.length, el = $('#scorecard');
   if (A.pre) {
@@ -1453,7 +1512,7 @@ function renderScore() {
     el.innerHTML = `<div class="card-head"><h4>On the ballot · ${n} measures</h4>${pngActions('score')}</div>` + kindsByCount().map((k) => {
       const items = A.nov.filter((v) => v.kind === k); if (!items.length) return '';
       return `<div class="prow" data-pf="kind" data-pv="${k}" tabindex="0" role="button" style="grid-template-columns:minmax(0,1fr) 30px minmax(70px,120px)"><span>${KIND_LABEL[k]}</span><span class="pn">${items.length}</span><div class="pbar" style="background:none"><span class="sg-c" ${barW('pre:' + k, 100 * items.length / max)}></span></div></div>`;
-    }).join('') + `<p class="fine">${A.nov.filter((v) => v.race.yes_means === 'allow').length} of the ${n} are worded so that YES is the pro-data-center side; the tracker flips those so Restrict and Allow always mean the same thing. <span class="png-skip">Click a type to see those measures.</span></p>`;
+    }).join('') + earlierScoreHTML() + `<p class="fine">${A.nov.filter((v) => v.race.yes_means === 'allow').length} of the ${n} are worded so that YES is the pro-data-center side; the tracker flips those so Restrict and Allow always mean the same thing. <span class="png-skip">Click a type to see those measures.</span></p>`;
     return;
   }
   const c = segCounts(A.nov), rA = c.rw + c.rl, aA = c.aw + c.al;
@@ -1465,10 +1524,11 @@ function renderScore() {
     <div class="trow"><span>Too close to call</span><b>${c.t}</b></div>
     <div class="trow" style="margin-top:0"><span>No results posted</span><b>${c.n}</b></div>
     ${A.precTot ? `<div class="trow" style="margin-top:0;flex-direction:column;gap:4px"><span style="display:flex;justify-content:space-between"><span>Precincts in</span><b>${fmt(A.precRep)} of ${fmt(A.precTot)}</b></span><div class="meter" style="margin:2px 0 0;background:var(--neutral-soft)"><span style="background:var(--fg-mid)" ${barW('score:prec', 100 * A.precRep / A.precTot)}></span></div></div>` : ''}
-    <p class="fine">Leading means ahead by 2 points or more; won means a complete count (every precinct in, or the county's final count in states that count mail ballots for days). Nothing here is certified.</p>`;
+    ${earlierScoreHTML()}
+    <p class="fine">Leading means ahead by 2 points or more; won means a complete count (every precinct in, or the county's final count in states that count mail ballots for days). ${A.decided.length ? 'The measures decided earlier in 2026 are not in the Nov 3 counts. ' : ''}Nothing here is certified.</p>`;
 }
 
-// ---------- latest + storylines ----------
+// ---------- latest + storylines (TV mode only) ----------
 function eventLi(e) {
   const isNew = seen && e.t.getTime() > seen.t;
   return `<li class="${isNew ? 'new' : ''}" data-open="${e.v.race.race_id}" tabindex="0" role="button"><span class="t">${whenHTML(e.t)}</span><span><span class="k ${e.type}">${EVENT_LABEL[e.type]}</span>${e.html}</span></li>`;
@@ -1479,7 +1539,6 @@ function latestEmpty() {
   const f = A.closes[0], oh = A.closes.find((c) => c.byState.some(([s]) => s === 'OH'));
   return `<li class="empty">Nothing yet. The first polls close at ${f ? closeLabel(f.hhmm) + ' (' + andList(f.names) + ')' : '7:00 PM ET'}${oh && oh !== f ? `; Ohio's ${oh.byState.find(([s]) => s === 'OH')[1]} measures follow at ${closeLabel(oh.hhmm)}` : ''}. Complete counts and lead changes will be listed here.</li>`;
 }
-function renderLatest() { $('#feed').innerHTML = A.events.length ? A.events.slice(0, 12).map(eventLi).join('') : latestEmpty(); }
 function link(v) { return `<a href="?race=${v.race.race_id}" data-open="${v.race.race_id}">${esc(place(v))}</a>`; }
 function nightStories() {
   const rep = A.rep, out = [];
@@ -1525,8 +1584,6 @@ function preStories() {
   multi.forEach(([j, xs]) => out.push(`${esc(j)}, ${xs[0].race.state} votes on <b>${xs.length} separate questions</b>: ${esc(KIND_PLURAL[xs[0].kind])}${xs[0].kind === 'site' ? ' for data center sites' : ''}.`));
   return out;
 }
-function storiesHTML() { return (A.pre ? preStories() : nightStories()).map((s) => `<li>${s}</li>`).join(''); }
-function renderStories() { $('#storiesTitle').textContent = A.pre ? 'What to watch' : 'Storylines'; $('#stories').innerHTML = storiesHTML(); }
 
 // ---------- race list ----------
 function buildFilterOptions() {
@@ -1548,10 +1605,12 @@ function matches(v) {
   if (filters.kind && v.kind !== filters.kind) return false;
   if (filters.dir && r.yes_means !== filters.dir) return false;
   if (filters.origin && v.origin !== filters.origin) return false;
-  if (filters.status === 'changed') { if (!changed.has(r.race_id)) return false; }
-  else if (filters.status && v.group !== filters.status) return false;
+  // "earlier" picks out the measures decided earlier in 2026; every other status is a Nov 3 count state.
+  if (filters.status === 'earlier') { if (v.isNov) return false; }
+  else if (filters.status === 'changed') { if (!changed.has(r.race_id)) return false; }
+  else if (filters.status && (!v.isNov || v.group !== filters.status)) return false;
   const q = filters.q.trim().toLowerCase();
-  if (q && ![r.jurisdiction, r.county, r.state_name, r.state, r.title, r.target_project, r.summary, r.measure_label, r.proponents, KIND_LABEL[v.kind]].join(' ').toLowerCase().includes(q)) return false;
+  if (q && ![r.jurisdiction, r.county, r.state_name, r.state, r.title, r.target_project, r.summary, r.plain_summary, r.measure_label, r.proponents, KIND_LABEL[v.kind]].join(' ').toLowerCase().includes(q)) return false;
   return true;
 }
 const byName = (a, b) => ((stateRank.get(a.race.state) ?? 99) - (stateRank.get(b.race.state) ?? 99)) || a.race.jurisdiction.localeCompare(b.race.jurisdiction) || a.race.race_id.localeCompare(b.race.race_id);
@@ -1577,52 +1636,57 @@ function boardRow(v, ctx) {
   const rep = v.precTot ? `<div class="b-rep">${v.precRep}/${v.precTot} precincts<div class="meter"><span ${barW(`${k}:${id}:p`, v.pctRep)}></span></div>${quiet}</div>`
     : `<div class="b-rep">${v.has ? fmt(v.total) + ' votes' : ''}${quiet}</div>`;
   return `<div class="brow lead-${c}" data-id="${id}" tabindex="0" role="button" aria-label="${esc(place(v))}: ${esc(callText(v))}">
-    <div class="b-name"><div class="b-where">${r.state}${r.county ? ' · ' + esc(r.county) + ' County' : ''}</div><div class="b-j">${esc(r.jurisdiction)}${changed.has(id) ? '<span class="newtag" data-tip="Changed since you last looked">New</span>' : ''}</div><div class="b-t" title="${esc(r.title)}">${r.measure_label ? esc(r.measure_label) + ' · ' : ''}${esc(r.title)}</div></div>
+    <div class="b-name"><div class="b-where">${pastDate(v)}${r.state}${r.county ? ' · ' + esc(r.county) + ' County' : ''}</div><div class="b-j">${esc(r.jurisdiction)}${changed.has(id) ? '<span class="newtag" data-tip="Changed since you last looked">New</span>' : ''}</div><div class="b-t" title="${esc(r.title)}">${r.measure_label ? esc(r.measure_label) + ' · ' : ''}${esc(r.title)}</div></div>
     <div class="b-bar"><div class="rbar" data-tip="${esc(barTip(v))}">${bar}</div>${numsHTML(v)}</div>
     ${call}${rep}<div class="b-st">${statusPill(v)}${v.adv ? '<span class="pill adv">Advisory</span>' : ''}</div></div>`;
 }
 function raceCard(v) {
   const r = v.race, cc = callClass(v), id = r.race_id;
   const yesR = r.yes_means === 'restrict';
-  const where = `${r.state} · ${r.county ? esc(r.county) + ' County · ' : ''}${JT_LABEL[r.jurisdiction_type] || esc(r.level)}`;
+  const where = `${pastDate(v)}${r.state} · ${r.county ? esc(r.county) + ' County · ' : ''}${JT_LABEL[r.jurisdiction_type] || esc(r.level)}`;
   const chips = `<span class="pill ${yesR ? 'r' : 'a'}">YES = ${r.yes_means}</span>${v.adv ? '<span class="pill adv">Advisory</span>' : ''}${r.scope === 'adjacent' ? '<span class="pill adv">Related</span>' : ''}${r.status === 'pending_litigation' ? '<span class="pill n">In court</span>' : ''}${statusPill(v)}`;
   const prec = v.precRep != null && v.precTot ? `<div class="prec"><span>${v.precRep} of ${v.precTot} precincts</span><div class="meter" data-tip="${v.precRep} of ${v.precTot} precincts reporting (${pct0(v.pctRep)})${v.est != null && v.est > 0 ? `; roughly ${fmt(v.est)} votes still out` : ''}"><span ${barW(`card:${id}:p`, v.pctRep)}></span></div><span>${pct0(v.pctRep)}</span></div>` : (v.has ? `<div class="prec"><span>${fmt(v.total)} votes counted · precinct count not reported</span></div>` : '');
   const est = v.est != null && v.est > 0 && v.status !== 'final' ? `<div class="small muted">Roughly <b class="num">${fmt(v.est)}</b> votes still out (estimate)</div>` : '';
   const note = v.res.note && v.res.adapter !== 'simulated' && v.has ? srcNote(v.res.note) : '';
-  // For a count that is not complete: when to expect more (after the polls close)
-  const ex = v.isNov && v.group !== 'final' && (v.has || pollsClosed(v)) ? expectText(v) : '';
+  // For a count that is not complete: the sheet's public note, if staff wrote one (the registry's usual timing stays in the popup)
+  const ex = v.isNov && v.group !== 'final' && (v.has || pollsClosed(v)) ? v.res.public_note || '' : '';
   const side = (s) => {
     const isR = s === 'r', ballot = (isR === yesR) ? 'YES' : 'NO';
     return `<div class="side${isR ? '' : ' right'}"><span class="pct ${v.has ? s : 'none'}">${pct1(isR ? v.rPct : v.aPct)}</span><span class="what"><b>${ballot}</b> · ${isR ? 'restricts' : 'allows'} data centers</span><span class="votes">${v.has ? fmt(isR ? v.rVotes : v.aVotes) + ' votes' : '—'}</span></div>`;
   };
   return `<article class="race lead-${cc}" data-id="${id}" tabindex="0" role="button" aria-label="${esc(r.jurisdiction)} details">
     <div class="top"><div style="min-width:0"><div class="where">${where}</div><p class="name">${esc(r.jurisdiction)}${changed.has(id) ? '<span class="newtag">New</span>' : ''}</p><p class="title">${r.measure_label ? '<b>' + esc(r.measure_label) + '</b> · ' : ''}${esc(r.title)}</p></div><div class="chips">${chips}</div></div>
+    ${r.plain_summary ? `<p class="plain">${esc(r.plain_summary)}</p>` : ''}
     <div class="call ${cc === 'n' || cc === 't' ? '' : cc}">${esc(callText(v))}${v.quiet ? `<span class="quiet">${esc(quietText(v))}</span>` : ''}</div>
     <div class="bar" data-tip="${esc(barTip(v))}">${v.has ? `<span class="r" ${barW(`card:${id}:r`, v.rPct)}></span><span class="a" ${barW(`card:${id}:a`, v.aPct)}></span>` : ''}</div>
     <div class="yn">${side('r')}${side('a')}</div>
     ${prec}${est}
     ${note ? `<div class="note">${esc(note)}</div>` : ''}
-    ${ex ? `<div class="expect">${v.res.public_note ? '<b>Update:</b> ' : '<b>When to expect results:</b> '}${esc(ex)}</div>` : ''}
+    ${ex ? `<div class="expect"><b>Update:</b> ${esc(ex)}</div>` : ''}
     <div class="foot"><span>${v.has ? 'Updated ' + fmtET(v.asOf, !isToday(v.asOf)) + ' · ' + timeAgo(v.asOf) : v.isNov && pollsClosed(v) ? 'No results posted yet' : 'Polls close ' + closeLabel(r.poll_close_et)}</span><span>${r.results_page_url ? `<a href="${esc(r.results_page_url)}" target="_blank" rel="noopener">Source ›</a> ` : ''}<a href="?race=${id}" data-open="${id}">Ballot text ›</a></span></div>
   </article>`;
 }
 function renderRaces() {
   const list = filtered();
-  $('#fCount').textContent = `${list.length} of ${A.list.length} measures`;
+  // The measures decided earlier in 2026 follow the Nov 3 list as their own group, in date order, never mixed into its sort.
+  const past = A.decided.filter(matches), PAST = 'Decided earlier in 2026';
+  $('#fCount').textContent = filters.status === 'earlier' ? `${past.length} of ${A.decided.length} earlier measures` : `${list.length} of ${A.list.length} measures`;
   $('#fClear').hidden = !anyFilter();
   const board = $('#board'), grid = $('#raceGrid'), tbl = $('#raceTable');
   board.hidden = viewMode !== 'board'; grid.hidden = viewMode !== 'cards'; tbl.hidden = viewMode !== 'table';
   ['Board', 'Cards', 'Table'].forEach((m) => $('#view' + m).setAttribute('aria-pressed', String(viewMode === m.toLowerCase())));
   const none = '<p class="empty" style="padding:14px">No measures match these filters.</p>';
   if (viewMode === 'board') {
-    if (!list.length) board.innerHTML = none;
-    else if (filters.sort === 'status') board.innerHTML = GROUP_ORDER.map((g) => { const items = list.filter((v) => v.group === g); return items.length ? `<div class="bgroup">${groupLabel(g)} <span>${items.length}</span></div>` + items.map((v) => boardRow(v)).join('') : ''; }).join('');
-    else board.innerHTML = list.map((v) => boardRow(v)).join('');
+    const pastRows = past.length ? `<div class="bgroup past">${PAST} <span>${past.length}</span></div>` + past.map((v) => boardRow(v)).join('') : '';
+    if (!list.length && !past.length) board.innerHTML = none;
+    else if (filters.sort === 'status') board.innerHTML = GROUP_ORDER.map((g) => { const items = list.filter((v) => v.group === g); return items.length ? `<div class="bgroup">${groupLabel(g)} <span>${items.length}</span></div>` + items.map((v) => boardRow(v)).join('') : ''; }).join('') + pastRows;
+    else board.innerHTML = list.map((v) => boardRow(v)).join('') + pastRows;
   } else if (viewMode === 'cards') {
-    grid.innerHTML = list.length ? list.map(raceCard).join('') : none;
+    grid.innerHTML = list.length || past.length ? list.map(raceCard).join('') + (past.length ? `<h3 class="rule grid-head">${PAST} · ${past.length}</h3>` + past.map(raceCard).join('') : '') : none;
   } else {
+    const row = (v) => { const r = v.race; return `<tr class="clickable" data-id="${r.race_id}"><td>${r.state}</td><td><b>${esc(r.jurisdiction)}</b><br><span class="small muted">${pastDate(v)}${esc(r.county || '')}${r.county ? ' County' : ''}</span></td><td>${r.measure_label ? esc(r.measure_label) + ' · ' : ''}${esc(r.title)}${v.adv ? ' <span class="pill adv">Advisory</span>' : ''}</td><td class="small">${KIND_LABEL[v.kind]}</td><td><span class="pill ${r.yes_means === 'restrict' ? 'r' : 'a'}">${r.yes_means}</span></td><td class="n">${fmt(v.yes)}</td><td class="n">${fmt(v.no)}</td><td class="n">${pct1(v.rPct)}</td><td class="n">${pct1(v.aPct)}</td><td class="n">${v.precRep != null && v.precTot ? v.precRep + '/' + v.precTot : '—'}</td><td>${esc(callText(v))}</td><td class="n">${v.has ? fmtET(v.asOf, !isToday(v.asOf)) : '—'}</td><td>${r.results_page_url ? `<a href="${esc(r.results_page_url)}" target="_blank" rel="noopener">Source ›</a>` : ''}</td></tr>`; };
     tbl.innerHTML = `<table class="t"><tr><th>State</th><th>Jurisdiction</th><th>Measure</th><th>Type</th><th>YES means</th><th class="n">Yes</th><th class="n">No</th><th class="n">Restrict %</th><th class="n">Allow %</th><th class="n">Precincts</th><th>Status</th><th>Updated</th><th>Source</th></tr>
-      ${list.map((v) => { const r = v.race; return `<tr class="clickable" data-id="${r.race_id}"><td>${r.state}</td><td><b>${esc(r.jurisdiction)}</b><br><span class="small muted">${esc(r.county || '')}${r.county ? ' County' : ''}</span></td><td>${r.measure_label ? esc(r.measure_label) + ' · ' : ''}${esc(r.title)}${v.adv ? ' <span class="pill adv">Advisory</span>' : ''}</td><td class="small">${KIND_LABEL[v.kind]}</td><td><span class="pill ${r.yes_means === 'restrict' ? 'r' : 'a'}">${r.yes_means}</span></td><td class="n">${fmt(v.yes)}</td><td class="n">${fmt(v.no)}</td><td class="n">${pct1(v.rPct)}</td><td class="n">${pct1(v.aPct)}</td><td class="n">${v.precRep != null && v.precTot ? v.precRep + '/' + v.precTot : '—'}</td><td>${esc(callText(v))}</td><td class="n">${v.has ? fmtET(v.asOf, !isToday(v.asOf)) : '—'}</td><td>${r.results_page_url ? `<a href="${esc(r.results_page_url)}" target="_blank" rel="noopener">Source ›</a>` : ''}</td></tr>`; }).join('')}</table>`;
+      ${list.map(row).join('')}${past.length ? `<tr class="tgroup"><td colspan="13">${PAST} · ${past.length}</td></tr>` + past.map(row).join('') : ''}</table>`;
   }
   restyleStrip(); syncURL(); animateBars();
 }
@@ -1656,7 +1720,7 @@ function renderPatterns() {
 }
 
 // ---------- maps ----------
-let projection = null, usNodes = null, ohNodes = null, ohT = null;
+let projection = null, usNodes = null, ohNodes = null, ohT = null, mapKey = '';
 function drawMapBase() {
   const feats = topojson.feature(topo, topo.objects.states).features;
   const path = d3.geoPath();
@@ -1691,22 +1755,30 @@ function layoutDots(list, tf, coll) {
   return nodes;
 }
 function drawDots(sel, nodes, byId, r) {
-  d3.select(sel).selectAll('circle').data(nodes, (d) => d.id).join('circle')
-    .attr('cx', (d) => d.x).attr('cy', (d) => d.y).attr('r', r)
-    .attr('class', (d) => 'sdot ' + dotCls(byId.get(d.id))).attr('tabindex', 0).attr('role', 'button')
+  const g = d3.select(sel), past = (d) => !byId.get(d.id).isNov;
+  const mark = (s) => s.attr('tabindex', 0).attr('role', 'button')
     .attr('data-open', (d) => d.id).attr('data-tip', (d) => dotTip(byId.get(d.id))).attr('aria-label', (d) => `${place(byId.get(d.id))}: ${callText(byId.get(d.id))}`);
+  mark(g.selectAll('circle').data(nodes.filter((d) => !past(d)), (d) => d.id).join('circle')
+    .attr('cx', (d) => d.x).attr('cy', (d) => d.y).attr('r', r).attr('class', (d) => 'sdot ' + dotCls(byId.get(d.id))));
+  mark(g.selectAll('path').data(nodes.filter(past), (d) => d.id).join('path')
+    .attr('d', diamond(r * 1.2)).attr('transform', (d) => `translate(${d.x},${d.y})`).attr('class', (d) => 'sdot past ' + dotCls(byId.get(d.id))));
 }
 function renderMapDots() {
   const ohCount = A.nov.filter((v) => v.race.state === 'OH').length;
-  $('#mapIntro').textContent = ohT && ohCount > 2 ? `One dot per measure. Ohio has ${ohCount} of the ${A.nov.length}, so it gets its own map. Hover for the latest count; click to open the race.` : 'One dot per measure. Hover for the latest count; click to open the race.';
+  const past = A.decided.length ? ` Diamonds mark the ${A.decided.length} measures decided earlier in 2026.` : '';
+  $('#mapIntro').textContent = (ohT && ohCount > 2 ? `One dot per measure. Ohio has ${ohCount} of the ${A.nov.length}, so it gets its own map. Hover for the latest count; click to open the race.` : 'One dot per measure. Hover for the latest count; click to open the race.') + past;
   $('#mapLegend').innerHTML = legendHTML(true);
   if (!projection) return;
-  const nov = A.nov.filter((v) => v.race.lat != null && v.race.lon != null);
+  const located = (v) => v.race.lat != null && v.race.lon != null;
+  const nov = A.nov.filter(located), all = nov.concat(A.decided.filter(located));
   const hasSt = new Set(nov.map((v) => v.race.state));
   d3.selectAll('#states path').classed('has', function () { return hasSt.has(this.dataset.st); });
-  const byId = new Map(nov.map((v) => [v.race.race_id, v]));
-  if (!usNodes) usNodes = layoutDots(nov.filter((v) => !ohT || v.race.state !== 'OH'), (p) => p, 7.6);
-  if (!ohNodes && ohT) ohNodes = layoutDots(nov.filter((v) => v.race.state === 'OH'), ohT, 9);
+  const byId = new Map(all.map((v) => [v.race.race_id, v]));
+  // Laid out once per set of measures, so markers don't drift between refreshes.
+  const key = all.map((v) => v.race.race_id).join();
+  if (key !== mapKey) { usNodes = ohNodes = null; mapKey = key; }
+  if (!usNodes) usNodes = layoutDots(all.filter((v) => !ohT || v.race.state !== 'OH'), (p) => p, 7.6);
+  if (!ohNodes && ohT) ohNodes = layoutDots(all.filter((v) => v.race.state === 'OH'), ohT, 9);
   drawDots('#usdots', usNodes, byId, 6.4);
   drawDots('#ohdots', ohNodes || [], byId, 7.6);
   const oh = A.byState.find((s) => s.key === 'OH');
@@ -1732,14 +1804,7 @@ function renderTimeline() {
     return `<div class="${cls}"><div class="t">${closeLabel(c.hhmm).replace(' ET', '')}</div></div><div class="${cls}"><div class="d">${st}</div></div>`; }).join('') + `<div><div class="t" style="border:0;color:var(--fg-faint)">Later</div></div><div><div class="d" style="border:0">Most Ohio, Kansas and Illinois counties post complete unofficial counts on election night. Maine towns count their own ballots and often post the next morning. California and Nevada keep counting mail ballots for days.</div></div>`;
 }
 
-// ---------- decided / watching ----------
-function renderDecided() {
-  const dec = views.filter((v) => v.race.status === 'decided' && v.direct).sort((a, b) => a.race.election_date.localeCompare(b.race.election_date));
-  $('#decidedGrid').innerHTML = dec.map((v) => raceCard(v).replace('<div class="where">', `<div class="where">${esc(fmtDate(v.race.election_date))} · `)).join('');
-  const party = views.filter((v) => v.race.scope === 'party_advisory');
-  $('#partyTable').innerHTML = party.length ? `<div class="tscroll"><table class="t"><tr><th>Ballot</th><th>Question</th><th>YES means</th><th>Outcome</th></tr>${party.map((v) => `<tr><td><b>${esc(v.race.jurisdiction)}</b><br><span class="small muted">${esc(fmtDate(v.race.election_date))}</span></td><td class="small">${esc(v.race.ballot_text)}</td><td><span class="pill ${v.race.yes_means === 'restrict' ? 'r' : 'a'}">${v.race.yes_means}</span></td><td class="small">${esc(v.race.result_note || '—')}</td></tr>`).join('')}</table></div>` : '<p class="empty">None recorded.</p>';
-  $('#watchList').innerHTML = notOnBallot.map((w) => `<li><b>${esc(w.jurisdiction)}, ${esc(w.state)}</b> · ${esc(w.what)}. <span class="muted">${esc(w.status)}.</span> ${w.link ? `<a href="${esc(w.link)}" target="_blank" rel="noopener">More ›</a>` : ''}</li>`).join('');
-}
+// ---------- dates ----------
 function fmtDate(s) { const d = new Date(s + 'T12:00:00'); return isNaN(d) ? s : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
 
 // ---------- modal ----------
@@ -1880,7 +1945,7 @@ function pngHeading(kind) {
     if (!r) return { kicker };
     return { kicker: `${r.status === 'decided' ? 'Result' : !v.has ? 'On the ballot' : simulated ? 'Simulated results' : 'Unofficial results'} · ${fmtDate(r.election_date)}` };
   }
-  if (kind === 'line') return { kicker, title: 'How each data center measure is voting' + (BY[groupBy] || ''), dek: `Each dot is one of the ${n} measures, placed by the Restrict side's share of the vote. ${count}` };
+  if (kind === 'line') return { kicker, title: 'How each data center measure is voting' + (BY[groupBy] || ''), dek: `Each dot is one of the ${n} measures, placed by how its vote splits: Restrict winning to the left, Allow to the right.${A.decided.length ? ` Diamonds in the bottom lane are the ${A.decided.length} measures decided earlier in 2026.` : ''} ${count}` };
   if (kind === 'score') return A.pre ? { kicker, title: 'Data center measures on the ballot, by type', dek: count }
     : { kicker, title: done ? 'Who won the data center ballot measures' : 'Who is winning the data center ballot measures', dek: `${rep === n ? `All ${n}` : `${rep} of the ${n}`} measures have results${A.precTot ? `, with ${fmt(A.precRep)} of ${fmt(A.precTot)} precincts in` : ''}. ${count}` };
   if (kind.startsWith('pat-')) { const f = PAT[kind.slice(4)] || ''; return A.pre ? { kicker, title: `Data center measures on the ballot, by ${f}`, dek: count }
@@ -2091,8 +2156,8 @@ function renderTV() {
   $('#tvSim').hidden = !(sim || (results && results.simulated));
   $('#tvLive').textContent = $('#asOf').textContent;
   $('#tvHeadline').innerHTML = headlineHTML();
-  $('#tvStats').innerHTML = heroStatsHTML(); countUps($('#tvStats'));
-  if (window.d3) drawStrip($('#tvStrip'), { big: true, group: 'all' });
+  $('#tvStats').innerHTML = heroStatsHTML(); $('#tvStats').classList.toggle('split', !A.pre); countUps($('#tvStats'));
+  if (window.d3) drawStrip($('#tvStrip'), { big: true, group: 'all', earlier: false });
   $('#tvFeed').innerHTML = A.events.length ? A.events.slice(0, 8).map(eventLi).join('') : latestEmpty();
   $('#tvStoriesTitle').textContent = A.pre ? 'What to watch' : 'Storylines';
   $('#tvStories').innerHTML = (A.pre ? preStories() : nightStories()).slice(0, 4).map((s) => `<li>${s}</li>`).join('');
@@ -2173,7 +2238,7 @@ function wire() {
   $('#pat').addEventListener('mouseleave', () => { hlSet = null; restyleStrip(); });
   $('#modalBg').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(); });
   const tabs = [...document.querySelectorAll('nav.tabs a')];
-  const tabFor = { overview: '#overview', out: '#overview', night: '#overview', latest: '#latest', races: '#races', patterns: '#patterns', map: '#map', timeline: '#timeline', decided: '#decided', about: '#about' };
+  const tabFor = { overview: '#overview', out: '#overview', night: '#overview', races: '#races', patterns: '#patterns', map: '#map', timeline: '#timeline', about: '#about' };
   const obs = new IntersectionObserver((entries) => { entries.forEach((en) => { if (en.isIntersecting) tabs.forEach((t) => t.classList.toggle('active', t.getAttribute('href') === tabFor[en.target.id])); }); }, { rootMargin: '-30% 0px -60% 0px' });
   Object.keys(tabFor).forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
   const header = document.querySelector('header.site');
