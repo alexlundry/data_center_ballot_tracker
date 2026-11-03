@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T18:46:38-0500",
+  "generated_at": "2026-11-03T18:56:39-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -1022,7 +1022,7 @@
       "note": null,
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "html_table: Failed to perform HTTP request.\n\u001b[1mCaused by error in `curl::curl_fetch_memory()`:\u001b[22m\n\u001b[33m!\u001b[39m Failure when receiving data from the peer [elections.clarkcountynv.gov]:\nRecv failure: Connection reset by peer",
+      "fetch_error": "html_table: no table matched contest_pattern",
       "total_votes": null,
       "yes_pct": null,
       "no_pct": null,
