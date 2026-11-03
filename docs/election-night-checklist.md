@@ -1,9 +1,9 @@
 # Election night: where each result comes from (Nov 3, 2026)
 
-44 measures on the Nov 3 ballot:
+45 measures on the Nov 3 ballot:
 
 - **15 Ohio races from 10 county files you save into the drop folder** (section 1).
-- **12 races you key into the sheet by hand** (section 2): the 8 Maine towns, the 3 Kansas cities, and Monroeville OH.
+- **13 races you key into the sheet by hand** (section 2): the 8 Maine towns, the 4 Kansas cities, and Monroeville OH.
 - **17 races that read automatically** (section 3). Spot-check them, and key in any that stay at "No results posted" after the county has posted.
 
 The drop folder is the Google Drive folder **Data Center Tracker / Election Night Drop**. `make drop` lists which races still have no file.
@@ -72,6 +72,7 @@ Use the `manual_results` tab of the Google Sheet:
 | City | Ballot item | Where to go |
 |---|---|---|
 | Emporia (Lyon County) | Ballot Question 2 | [Lyon County 2026 General Election Results](https://www.lyoncountyks.gov/350/2026-General-Election-Results) |
+| Americus (Lyon County) | Ordinance prohibiting High Impact Data Centers and Tier 2/3 battery storage (added Nov 3) | Same Lyon County page as Emporia |
 | El Dorado (Butler County KS) | Ten-year ban on high-impact data centers and large battery storage | [Butler County election results](https://www.bucoks.gov/448/Election-Results) |
 | Ottawa (Franklin County KS) | Ban on data centers over 25 MW | [Franklin County election results](https://www.franklincoks.org/1067/Election-Results) |
 
