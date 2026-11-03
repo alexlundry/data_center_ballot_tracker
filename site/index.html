@@ -27,8 +27,8 @@
    poll-closing strip; after, a bar of where every count stands), the collapsed "Still out" list of
    measures without a complete count, the one-line overview of every measure + scorecard, the results
    board, patterns, maps (US + Ohio), count log, about. The measures decided earlier in 2026 ride along
-   as a separate layer (a lane on the line, a scorecard row, the board's last group, diamonds on the
-   map), never inside the Nov 3 counts. TV mode (?tv) is a separate full-screen layout (#tv) that
+   as a separate layer (a lane on the line, a scorecard row, the board's last group, a block under
+   each pattern card, diamonds on the map), never inside the Nov 3 counts. TV mode (?tv) is a separate full-screen layout (#tv) that
    reuses the same renderers. */
 :root {
   color-scheme: light;
@@ -221,6 +221,9 @@ table.t tr.clickable { cursor: pointer; } table.t tr.clickable:hover td { backgr
 .sdot.n { fill: var(--paper); stroke: var(--fg-mid); stroke-width: 1.5; }
 .sdot:hover, .sdot:focus-visible { stroke: var(--primary); stroke-width: 3; outline: none; }
 .sdot.dim { opacity: .15; }
+/* On the line, decided-earlier diamonds sit lighter than the Nov 3 dots (the map keeps them full strength). */
+#strip .sdot.past { stroke-width: 1.25; fill-opacity: .82; }
+#strip .sdot.past:hover, #strip .sdot.past:focus-visible, #strip .sdot.past.hl { stroke-width: 2.5; fill-opacity: 1; }
 .sdot.hl { stroke: var(--primary); stroke-width: 3; }
 .flashdot { animation: dotflash 1.6s ease; }
 @keyframes dotflash { 0% { stroke: var(--primary); stroke-width: 6; } 100% { stroke-width: 1.5; } }
@@ -307,24 +310,26 @@ section.out-sec { padding-top: 24px; }
 .empty { color: var(--fg-faint); font-size: 13px; padding: 10px 0; font-style: italic; font-family: var(--serif); }
 
 /* Filters */
-/* Three jobs, three groups: sort on a tinted block at the left, the filters in the middle, search at the right. */
-.filters { display: flex; align-items: stretch; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); margin-bottom: 14px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--header-h) + 8px); z-index: 20; }
-.filters .fg { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; padding: 10px 12px; min-width: 0; }
-.filters .fg-sort { flex: none; background: var(--panel-cream); border-right: 1px solid var(--line-strong); border-radius: var(--radius) 0 0 var(--radius); }
+/* Three jobs, three groups: sort on a tinted block at the left, the filters in the middle, search at the right.
+   Every field is a label line over a 32px control and every group has the same padding, so labels and controls
+   line up across all three; the filters share their space evenly instead of wrapping. */
+.filters { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(170px, 0.28fr); background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); margin-bottom: 14px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--header-h) + 8px); z-index: 20; }
+.filters .fg { display: flex; gap: 8px; align-items: flex-end; padding: 10px 12px; min-width: 0; }
+.filters .fg-sort { background: var(--panel-cream); border-right: 1px solid var(--line-strong); border-radius: var(--radius) 0 0 var(--radius); }
 .filters .fg-sort label { color: var(--primary-deep); }
 .filters .fg-sort label span { display: inline-flex; align-items: center; gap: 4px; }
-.filters .fg-sort select { font-weight: 600; border-color: var(--primary-soft); }
-.filters .fg-filter { flex: 1 1 auto; gap: 8px; }
-.filters .fg-search { flex: 0 1 236px; border-left: 1px solid var(--line-strong); background: var(--panel-soft); border-radius: 0 var(--radius) var(--radius) 0; }
+.filters .fg-sort select { font-weight: 600; border-color: var(--primary-soft); width: 164px; }
+.filters .fg-filter { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)) auto; }
+.filters .fg-filter select { width: 100%; }
+.filters .fg-search { border-left: 1px solid var(--line-strong); background: var(--panel-soft); border-radius: 0 var(--radius) var(--radius) 0; }
 .filters .fg-search label { flex: 1; }
 .filters select, .filters input { height: 32px; box-sizing: border-box; }
-.filters select { max-width: 134px; }
 .filters select, .filters input { font-family: var(--sans); font-size: 13px; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--paper); color: var(--fg); min-width: 0; }
 .filters .sbox { position: relative; display: block; }
 .filters .sbox svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--fg-faint); pointer-events: none; }
 .filters .sbox input { width: 100%; border-radius: 999px; padding-left: 31px; }
-.filters label, .filters .field { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-faint); font-weight: 700; display: flex; flex-direction: column; gap: 3px; }
-.filters .count { margin-left: auto; align-self: flex-end; padding-bottom: 8px; font-family: var(--mono); font-size: 11px; color: var(--fg-mid); letter-spacing: 0.04em; text-transform: uppercase; display: flex; gap: 10px; align-items: center; }
+.filters label, .filters .field { font-size: 10px; line-height: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg-faint); font-weight: 700; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.filters .count { height: 32px; font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--fg-mid); letter-spacing: 0.04em; text-transform: uppercase; display: flex; gap: 8px; align-items: center; white-space: nowrap; }
 .filters .count button { border: none; background: none; color: var(--primary-deep); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; padding: 0; text-decoration: underline; }
 .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); overflow: hidden; flex-wrap: wrap; }
 .seg button { border: none; background: transparent; padding: 5px 10px; font-size: 12px; color: var(--fg-mid); cursor: pointer; }
@@ -417,6 +422,12 @@ table.t tr.tgroup td { background: var(--panel-soft); font-size: 10px; font-weig
 .prow .pn { font-family: var(--mono); font-size: 11.5px; color: var(--fg-mid); text-align: right; }
 .prow .tal { font-family: var(--mono); font-size: 11px; text-align: right; color: var(--fg-mid); white-space: nowrap; }
 .prow .tal .r { color: var(--restrict-deep); font-weight: 600; } .prow .tal .a { color: var(--allow-deep); font-weight: 600; }
+/* Each pattern card's decided-earlier rows, below a dashed rule like the line's own lane. */
+.pat-past { margin-top: 6px; border-top: 1px dashed var(--line-strong); padding-top: 4px; }
+.pat-past-h { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); padding: 4px 6px 2px; }
+.prow:has(+ .pat-past) { border-bottom: none; }
+.prow.past { font-size: 12.5px; color: var(--fg-soft); padding-block: 5px; }
+.prow.past .pbar { height: 7px; }
 .pbar { display: flex; height: 10px; border-radius: 2px; overflow: hidden; background: var(--neutral-soft); gap: 2px; }
 .pbar span { display: block; height: 100%; transition: width .6s ease; }
 
@@ -531,12 +542,18 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
 @media (max-width: 980px) {
   .grid-3, .grid-2, .grid-2.eq, .grid-2.night, .maps { grid-template-columns: 1fr; }
   .modal .mbody { grid-template-columns: 1fr; }
-  .filters { position: static; flex-wrap: wrap; }
-  .filters .fg-filter { flex-basis: 0; }
-  .filters .fg-search { flex: 1 1 100%; border-left: none; border-top: 1px solid var(--line); border-radius: 0 0 var(--radius) var(--radius); }
-  .filters .fg-sort { border-radius: var(--radius) 0 0 0; }
+  .filters { position: static; grid-template-columns: minmax(0, 1fr); }
+  .filters .fg-sort { border-right: none; border-bottom: 1px solid var(--line); border-radius: var(--radius) var(--radius) 0 0; }
+  .filters .fg-filter { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .filters .fg-search { border-left: none; border-top: 1px solid var(--line); border-radius: 0 0 var(--radius) var(--radius); }
   .brow { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) 112px 104px; }
   .brow .b-st { display: none; }
+}
+@media (min-width: 981px) and (max-width: 1240px) {
+  /* Mid widths: sort and search give a little room back so the five filters keep their values readable. */
+  .filters { grid-template-columns: auto minmax(0, 1fr) minmax(150px, 0.2fr); }
+  .filters .fg-sort select { width: 146px; }
+  .filters .fg-filter select { padding-right: 4px; }
 }
 @media (max-width: 900px) {
   .hero .stats.split { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 14px; }
@@ -554,8 +571,6 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
   .hero-top.has-cd { grid-template-columns: 1fr; gap: 14px; }
   .countdown { text-align: left; }
   .cd-l { margin-left: 0; }
-  .filters .fg-sort { flex: 1 1 100%; border-right: none; border-bottom: 1px solid var(--line); border-radius: var(--radius) var(--radius) 0 0; }
-  .filters .fg-filter { flex: 1 1 100%; }
 }
 @media (max-width: 640px) {
   header.site .wrap { padding-top: 8px; }
@@ -582,6 +597,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
   table.t th, table.t td { padding-right: 6px; }
   .prow { grid-template-columns: minmax(0, 1fr) 24px minmax(60px, 1fr) 96px; gap: 8px; }
   .prow.pre { grid-template-columns: minmax(0, 1fr) 24px minmax(60px, 1fr); }
+  .prow .tal { white-space: normal; line-height: 1.3; }
   .card { padding: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } html { scroll-behavior: auto; } }
@@ -679,7 +695,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
         <label>YES means <select id="fDir"><option value="">Either</option><option value="restrict">Restrict data centers</option><option value="allow">Allow data centers</option></select></label>
         <label>Placed by <select id="fOrigin"><option value="">Anyone</option><option value="citizens">Citizens</option><option value="government">Governing body</option></select></label>
         <label>Status <select id="fStatus"><option value="">All</option><option value="close">Too close</option><option value="counting">Partly counted</option><option value="final">Complete (unofficial)</option><option value="none">No results posted</option><option value="changed">Changed since you last looked</option><option value="earlier">Decided earlier in 2026</option></select></label>
-        <span class="count"><span id="fCount"></span><button type="button" id="fClear" hidden>Clear</button></span>
+        <div class="field">Showing <span class="count"><span id="fCount"></span><button type="button" id="fClear" hidden>Clear</button></span></div>
       </div>
       <div class="fg fg-search">
         <label>Search <span class="sbox"><svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true"><circle cx="5.5" cy="5.5" r="4.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8.6 8.6 12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input type="search" id="fSearch" placeholder="City, county, project, company…"></span></label>
@@ -1155,7 +1171,7 @@ function focusKey() {
 function render() {
   const fk = openId ? null : focusKey();
   buildViews(); A = aggregates(); computeChanged();
-  if (filters.state && !A.states.includes(filters.state)) filters.state = '';
+  if (filters.state && !A.states.includes(filters.state) && !A.decided.some((v) => v.race.state === filters.state)) filters.state = '';
   renderStatus(); renderHero(); renderOut(); renderStrip(); renderScore();
   renderFilters(); renderRaces(); renderPatterns(); renderMapDots(); renderTimeline();
   if (document.body.classList.contains('tv')) renderTV();
@@ -1409,17 +1425,18 @@ function drawStrip(el, opts) {
   // x takes the Restrict share, reversed so Restrict wins to the left and Allow to the right, as on every bar.
   const x = d3.scaleLinear().domain([100, 0]).range([m.l, W - m.r]);
   // The measures decided earlier in 2026 get a lane of their own under the Nov 3 lanes, set off by a dashed rule.
-  // With no grouping it is labeled above its dots, so the Nov 3 line keeps the full width.
-  const PAST_GAP = 12, PR = R * 1.2;
+  // With no grouping it is labeled above its dots, so the Nov 3 line keeps the full width. Their diamonds span
+  // a dot's width (about two thirds of its area) and may overlap a little, which keeps the lane short.
+  const PAST_GAP = 10, PR = R;
   if (opts.earlier !== false && A.decided.length) lanes.push({ key: 'earlier', label: 'Earlier in 2026', items: A.decided, rep: A.decided, past: true });
   let y0 = m.t; const nodes = [];
   lanes.forEach((l) => {
     const lt = l.past ? (multi && !narrow ? 0 : 18) : labTop;
     if (l.past) y0 += PAST_GAP;
     const pts = l.rep.map((v) => ({ id: v.race.race_id, v, past: !!l.past, x: x(clamp(v.rPct, 0, 100)) }));
-    swarm(pts, (l.past ? PR : R) + GAP / 2);
+    swarm(pts, l.past ? PR * 0.8 : R + GAP / 2);
     const ext = pts.length ? Math.max(...pts.map((p) => Math.abs(p.dy))) : 0;
-    const h = Math.max(big ? 74 : (multi || l.past ? 44 : 64), 2 * ext + 2 * (l.past ? PR : R) + 14) + lt;
+    const h = Math.max(big ? 74 : l.past ? 30 : multi ? 44 : 64, 2 * ext + 2 * (l.past ? PR : R) + (l.past ? 8 : 14)) + lt;
     l.y = y0; l.h = h; l.lt = lt; l.cy = y0 + lt + (h - lt) / 2;
     pts.forEach((p) => { p.cy = l.cy + p.dy; p.r = R; nodes.push(p); });
     y0 += h;
@@ -1484,7 +1501,7 @@ function restyleStrip() {
 }
 function legendHTML(withNone) {
   const sw = (cls) => `<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle class="sdot ${cls}" cx="7" cy="7" r="5" style="cursor:default"></circle></svg>`;
-  const past = A.decided.length ? `<span><svg width="14" height="14" viewBox="-7 -7 14 14" aria-hidden="true"><path class="sdot past r won" d="${diamond(6)}" style="cursor:default"></path></svg>Decided earlier in 2026</span>` : '';
+  const past = A.decided.length ? `<span><svg width="14" height="14" viewBox="-7 -7 14 14" aria-hidden="true"><path class="sdot past r won" d="${diamond(5)}" style="cursor:default"></path></svg>Decided earlier in 2026</span>` : '';
   return `<span>${sw('r')}Restrict ahead</span><span>${sw('a')}Allow ahead</span><span>${sw('t')}Too close (under 2 pts)</span><span>${sw('r early')}Early count (under half in)</span><span>${sw('r won')}Won (complete count)</span>${withNone ? `<span>${sw('n')}No results posted</span>` : ''}${past}`;
 }
 
@@ -1588,7 +1605,9 @@ function preStories() {
 // ---------- race list ----------
 function buildFilterOptions() {
   const sel = $('#fState');
-  const sts = [...new Map(races.filter(onBallot).map((r) => [r.state, r.state_name])).entries()].sort((a, b) => (stateRank.get(a[0]) ?? 99) - (stateRank.get(b[0]) ?? 99));
+  // Nov 3 states first by number of measures, then states whose only measures were decided earlier in 2026.
+  const listed = (r) => onBallot(r) || (r.status === 'decided' && r.scope === 'direct');
+  const sts = [...new Map(races.filter(listed).map((r) => [r.state, r.state_name])).entries()].sort((a, b) => ((stateRank.get(a[0]) ?? 99) - (stateRank.get(b[0]) ?? 99)) || a[1].localeCompare(b[1]));
   sts.forEach(([k, name]) => { const o = document.createElement('option'); o.value = k; o.textContent = name; sel.appendChild(o); });
   const ks = $('#fKind');
   KIND_ORDER.forEach((k) => { const o = document.createElement('option'); o.value = k; o.textContent = KIND_LABEL[k]; ks.appendChild(o); });
@@ -1670,7 +1689,8 @@ function renderRaces() {
   const list = filtered();
   // The measures decided earlier in 2026 follow the Nov 3 list as their own group, in date order, never mixed into its sort.
   const past = A.decided.filter(matches), PAST = 'Decided earlier in 2026';
-  $('#fCount').textContent = filters.status === 'earlier' ? `${past.length} of ${A.decided.length} earlier measures` : `${list.length} of ${A.list.length} measures`;
+  // A filter that only earlier measures match (a state with no Nov 3 vote, say) counts those instead of "0 of 45".
+  $('#fCount').textContent = filters.status === 'earlier' ? `${past.length} of ${A.decided.length} earlier` : !list.length && past.length ? `${past.length} earlier` : `${list.length} of ${A.list.length}`;
   $('#fClear').hidden = !anyFilter();
   const board = $('#board'), grid = $('#raceGrid'), tbl = $('#raceTable');
   board.hidden = viewMode !== 'board'; grid.hidden = viewMode !== 'cards'; tbl.hidden = viewMode !== 'table';
@@ -1692,12 +1712,15 @@ function renderRaces() {
 }
 
 // ---------- patterns ----------
-function patternGroups() {
+// The same four cuts for any set of measures: the Nov 3 list, or the ones decided earlier in 2026.
+function patternGroups(src) {
+  const nov = src === A.nov;
+  const states = nov ? A.byState.map((s) => [s.key, s.name]) : [...new Map(src.map((v) => [v.race.state, v.race.state_name])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
   return [
-    { title: 'What a YES vote does', field: 'dir', rows: [['restrict', 'YES restricts data centers'], ['allow', 'YES allows data centers']].map(([k, l]) => ({ key: k, label: l, items: A.nov.filter((v) => v.race.yes_means === k) })) },
-    { title: 'Type of measure', field: 'kind', rows: kindsByCount().map((k) => ({ key: k, label: KIND_LABEL[k], items: A.nov.filter((v) => v.kind === k) })) },
-    { title: 'Who put it on the ballot', field: 'origin', rows: ['citizens', 'government'].map((k) => ({ key: k, label: ORIGIN_GROUP_LABEL[k], items: A.nov.filter((v) => v.origin === k) })) },
-    { title: 'State', field: 'state', rows: A.byState.map((s) => ({ key: s.key, label: s.name, items: A.nov.filter((v) => v.race.state === s.key) })) }
+    { title: 'What a YES vote does', field: 'dir', rows: [['restrict', 'YES restricts data centers'], ['allow', 'YES allows data centers']].map(([k, l]) => ({ key: k, label: l, items: src.filter((v) => v.race.yes_means === k) })) },
+    { title: 'Type of measure', field: 'kind', rows: (nov ? kindsByCount() : KIND_ORDER).map((k) => ({ key: k, label: KIND_LABEL[k], items: src.filter((v) => v.kind === k) })) },
+    { title: 'Who put it on the ballot', field: 'origin', rows: ['citizens', 'government'].map((k) => ({ key: k, label: ORIGIN_GROUP_LABEL[k], items: src.filter((v) => v.origin === k) })) },
+    { title: 'State', field: 'state', rows: states.map(([k, name]) => ({ key: k, label: name, items: src.filter((v) => v.race.state === k) })) }
   ].map((g) => ({ ...g, rows: g.rows.filter((r) => r.items.length) }));
 }
 function renderPatterns() {
@@ -1705,17 +1728,21 @@ function renderPatterns() {
   $('#patIntro').textContent = A.pre
     ? 'The 34 measures, cut the ways most likely to explain the result. Click a row to filter the race list; hover to find those measures on the line above.'.replace('34', A.nov.length)
     : 'Each side\'s record, cut by the features most likely to explain it. Click a row to filter the race list; hover to find those measures on the line above.';
-  $('#patLegend').innerHTML = A.pre ? '' : SEGS.map(([k, l]) => `<span><i class="sg-${k}"></i>${l}</span>`).join('');
-  const groups = patternGroups();
-  $('#pat').innerHTML = groups.map((g) => {
-    const max = Math.max(...g.rows.map((r) => r.items.length));
-    return `<div class="card"><div class="card-head"><h4>${g.title}</h4>${pngActions('pat-' + g.field)}</div>${g.rows.map((r) => {
-      const c = segCounts(r.items), on = filters[g.field] === r.key, rA = c.rw + c.rl, aA = c.aw + c.al;
-      const bar = A.pre ? `<div class="pbar" style="background:none"><span class="sg-c" ${barW(`pat:${g.field}:${r.key}:n`, 100 * r.items.length / max)}></span></div>`
-        : segBar(c, r.items.length, `pat:${g.field}:${r.key}:`, 'pbar', r.label);
-      const tal = A.pre ? '' : `<span class="r">R ${rA}</span> · <span class="a">A ${aA}</span>${c.t ? ` · ${c.t} close` : ''}`;
-      return `<div class="prow${on ? ' on' : ''}${A.pre ? ' pre' : ''}" data-pf="${g.field}" data-pv="${r.key}" tabindex="0" role="button" aria-pressed="${on}"><span>${esc(r.label)}</span><span class="pn">${r.items.length}</span>${bar}${A.pre ? '' : `<span class="tal">${tal}</span>`}</div>`;
-    }).join('')}</div>`;
+  $('#patIntro').textContent += A.decided.length ? ' Under each card\'s dashed line, the measures decided earlier in 2026, kept out of the Nov 3 counts.' : '';
+  $('#patLegend').innerHTML = A.pre && !A.decided.length ? '' : SEGS.map(([k, l]) => `<span><i class="sg-${k}"></i>${l}</span>`).join('');
+  const groups = patternGroups(A.nov), past = patternGroups(A.decided);
+  // past: a row for the measures decided earlier in 2026, always drawn as a result (they all have one).
+  const prow = (g, r, max, isPast) => {
+    const pre = A.pre && !isPast, c = segCounts(r.items), on = filters[g.field] === r.key, rA = c.rw + c.rl, aA = c.aw + c.al, key = `pat:${isPast ? 'past:' : ''}${g.field}:${r.key}:`;
+    const bar = pre ? `<div class="pbar" style="background:none"><span class="sg-c" ${barW(key + 'n', 100 * r.items.length / max)}></span></div>`
+      : segBar(c, r.items.length, key, 'pbar', (isPast ? 'Earlier in 2026, ' : '') + r.label);
+    const tal = pre ? '' : `<span class="r">R ${rA}</span> · <span class="a">A ${aA}</span>${c.t ? ` · ${c.t} close` : ''}`;
+    return `<div class="prow${on ? ' on' : ''}${pre ? ' pre' : ''}${isPast ? ' past' : ''}" data-pf="${g.field}" data-pv="${r.key}"${isPast ? ' data-past="1"' : ''} tabindex="0" role="button" aria-pressed="${on}"><span>${esc(r.label)}</span><span class="pn">${r.items.length}</span>${bar}${pre ? '' : `<span class="tal">${tal}</span>`}</div>`;
+  };
+  $('#pat').innerHTML = groups.map((g, i) => {
+    const max = Math.max(...g.rows.map((r) => r.items.length)), pr = past[i].rows;
+    const earlier = pr.length ? `<div class="pat-past"><div class="pat-past-h">Decided earlier in 2026 · ${A.decided.length}</div>${pr.map((r) => prow(g, r, max, true)).join('')}</div>` : '';
+    return `<div class="card"><div class="card-head"><h4>${g.title}</h4>${pngActions('pat-' + g.field)}</div>${g.rows.map((r) => prow(g, r, max, false)).join('')}${earlier}</div>`;
   }).join('');
 }
 
@@ -1949,7 +1976,7 @@ function pngHeading(kind) {
   if (kind === 'score') return A.pre ? { kicker, title: 'Data center measures on the ballot, by type', dek: count }
     : { kicker, title: done ? 'Who won the data center ballot measures' : 'Who is winning the data center ballot measures', dek: `${rep === n ? `All ${n}` : `${rep} of the ${n}`} measures have results${A.precTot ? `, with ${fmt(A.precRep)} of ${fmt(A.precTot)} precincts in` : ''}. ${count}` };
   if (kind.startsWith('pat-')) { const f = PAT[kind.slice(4)] || ''; return A.pre ? { kicker, title: `Data center measures on the ballot, by ${f}`, dek: count }
-    : { kicker, title: `Which data center measures ${done ? 'won' : 'are winning'}, by ${f}`, dek: `Each bar splits that group's measures by where the count stands. ${count}` }; }
+    : { kicker, title: `Which data center measures ${done ? 'won' : 'are winning'}, by ${f}`, dek: `Each bar splits that group's measures by where the count stands${A.decided.length ? '; below the dashed line, the measures decided earlier in 2026' : ''}. ${count}` }; }
   const o = A.byState.find((s) => s.key === 'OH') || { n: 0, rep: 0, r: 0, a: 0, t: 0 };
   if (kind === 'map-us') return { kicker, title: 'Data center ballot measures across the United States', dek: `One dot per measure${ohT && o.n > 2 ? `; Ohio's ${o.n} share one marker and have a map of their own` : ''}. ${count}` };
   if (kind === 'map-oh') {
@@ -2234,7 +2261,8 @@ function wire() {
     const pr = t.closest('.prow[data-pf]'); if (pr) { e.preventDefault(); patternPick(pr); return; }
     const op = t.closest('[data-open], .race[data-id], .brow[data-id]'); if (op) { e.preventDefault(); openFrom(op); }
   });
-  $('#pat').addEventListener('mouseover', (e) => { const pr = e.target.closest('.prow[data-pf]'); const next = pr ? pr.dataset.pf + ':' + pr.dataset.pv : null; if (next === (hlSet && hlSet.key)) return; if (!pr) { hlSet = null; restyleStrip(); return; } const f = pr.dataset.pf, val = pr.dataset.pv; hlSet = new Set(A.nov.filter((v) => (f === 'dir' ? v.race.yes_means : f === 'state' ? v.race.state : v[f]) === val).map((v) => v.race.race_id)); hlSet.key = next; restyleStrip(); });
+  // Hovering a pattern row lights up its measures on the line: the Nov 3 dots, or for an earlier row, the diamonds.
+  $('#pat').addEventListener('mouseover', (e) => { const pr = e.target.closest('.prow[data-pf]'); const next = pr ? pr.dataset.pf + ':' + pr.dataset.pv + (pr.dataset.past ? ':past' : '') : null; if (next === (hlSet && hlSet.key)) return; if (!pr) { hlSet = null; restyleStrip(); return; } const f = pr.dataset.pf, val = pr.dataset.pv; hlSet = new Set((pr.dataset.past ? A.decided : A.nov).filter((v) => (f === 'dir' ? v.race.yes_means : f === 'state' ? v.race.state : v[f]) === val).map((v) => v.race.race_id)); hlSet.key = next; restyleStrip(); });
   $('#pat').addEventListener('mouseleave', () => { hlSet = null; restyleStrip(); });
   $('#modalBg').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(); });
   const tabs = [...document.querySelectorAll('nav.tabs a')];
