@@ -1,12 +1,12 @@
 # Election night: what you need to do (Nov 3, 2026)
 
-Updated 8:40 pm ET. Of the 45 measures, the loop reads 31 on its own. This page lists only what needs you:
+Updated 8:45 pm ET. Of the 45 measures, the loop reads 33 on its own. This page lists only what needs you:
 
 1. **Save files** for 1 Ohio county (Franklin).
-2. **Enter 13 races by hand**: the 8 Maine towns, the 4 Kansas cities, and Monroeville.
+2. **Enter 11 races by hand**: the 8 Maine towns, El Dorado and Ottawa KS, and Monroeville.
 3. **Watch 6 automatic races** and enter one by hand if it stays blank after the county posts.
 4. **Check each race's first numbers once** against the county page.
-5. **Mark 10 races final** when their counts are complete, because they cannot finish on their own.
+5. **Mark 12 races final** when their counts are complete, because they cannot finish on their own.
 
 ## How to enter a race in the sheet
 
@@ -28,7 +28,7 @@ The drop folder is the Google Drive folder **Data Center Tracker / Election Nigh
 
 **No longer needed:** Adams, Ashtabula, Butler, Champaign, Clinton, Defiance, Licking, Lucas and Wyandot. The loop reads their files straight from the county (Butler's summary PDF since 8:26 pm, Lucas's precinct CSV since 8:36 pm) and uses whichever file is newer, the county's or yours. Save one only if its race stops updating.
 
-## 2. Enter by hand (13 races)
+## 2. Enter by hand (11 races)
 
 ### Maine towns (polls close 8 pm ET; town clerks count and post their own)
 
@@ -43,12 +43,12 @@ The drop folder is the Google Drive folder **Data Center Tracker / Election Nigh
 | Wells | Article 5 | [election results](https://wellstown.org/1122/Election-Results) | Usually the next day |
 | Wiscasset | Question 2 | [town clerk elections](https://www.wiscasset.gov/192/Town-Clerk-Elections) | Usually the morning after, as PDFs in the town's Document Center |
 
-### Kansas (polls close 8 pm ET; no Nov 3 results linked as of 7:20 pm)
+### Kansas (polls closed 8 pm ET)
+
+Emporia and Americus are automatic since 8:45 pm: the loop picks up the newest "Unofficial … November 3, 2026" PDF on [Lyon County's results page](https://www.lyoncountyks.gov/350/2026-General-Election-Results) each pass. If Lyon names a later file differently and the two stop updating, enter them by hand.
 
 | City | Ballot item | Where to go |
 |---|---|---|
-| Emporia (Lyon County) | Ballot Question 2 | [Lyon County 2026 General Election Results](https://www.lyoncountyks.gov/350/2026-General-Election-Results) |
-| Americus (Lyon County) | Ordinance prohibiting High Impact Data Centers and Tier 2/3 battery storage | Same Lyon County page |
 | El Dorado (Butler County KS) | Ten-year ban on high-impact data centers and large battery storage | [Butler County election results](https://www.bucoks.gov/448/Election-Results) |
 | Ottawa (Franklin County KS) | Ban on data centers over 25 MW | [Franklin County election results](https://www.franklincoks.org/1067/Election-Results) |
 
@@ -75,7 +75,7 @@ If a county posts a text PDF at a stable address, tell Claude: setting that race
 
 The first time a race shows numbers, compare its YES and NO once with the county page. The sheet's `auto_yes` and `auto_no` columns sit beside the manual columns. If they differ, type the county's numbers into the sheet.
 
-**Already checked:** Urbana, Conneaut, Defiance, Perry Village, Edgewater, Ashville and Trenton, all against the county's own file, page or feed.
+**Already checked:** Urbana, Conneaut, Defiance, Perry Village, Edgewater, Ashville, Trenton, Emporia and Americus, all against the county's own file, page or feed.
 
 **Still to check when numbers appear:**
 
@@ -101,15 +101,16 @@ The first time a race shows numbers, compare its YES and NO once with the county
 
 These races print no precinct count, or keep counting mail ballots for days, so they stay under "Still out" until you finish them. Once the county's count is complete, type its final YES and NO in the sheet and set `status = final`:
 
-- **No precinct line:** Urbana, Conneaut, Pataskala, Granville, Sprigg, Monroe Township, Edgewater, Oregon.
+- **No precinct line:** Urbana, Conneaut, Pataskala, Granville, Sprigg, Monroe Township, Edgewater, Oregon, Emporia, Americus.
 - **Late counting:** Alhambra (mail ballots for weeks) and Boulder City (mail ballots for days). Mark these final only when the county finishes.
-- **All 13 hand-entered races** (step 2), once each count is complete.
+- **All 11 hand-entered races** (step 2), once each count is complete.
 
 Any other race still showing "Partly counted" after its county says counting is done needs the same treatment.
 
 ## If something goes wrong
 
 - **A race stops updating:** check the county page. Save its file to the drop folder (Ohio), or type the numbers into the sheet.
+- **Clarity errors (Illinois and Downe):** from about 8:34 pm Clarity's own servers answered "502 Bad Gateway", in an ordinary browser too, on and off. The loop keeps each race's last numbers and catches up when Clarity recovers. If one stays stuck long after its county has counted, use the county's own site (Madison, Will, Bloomington, Cumberland) and enter it by hand.
 - **A count looks wrong:** type the county's numbers into the sheet. Your numbers win until you clear them.
 - **Direct county files misbehave:** stop the loop with Ctrl-C in its terminal, then restart it with `DCBT_DIRECT=0 Rscript R/watch.R 120`. It goes back to reading only the drop folder.
 - **The loop stops:** restart it with `caffeinate -i Rscript R/watch.R 120` from the repo folder.
