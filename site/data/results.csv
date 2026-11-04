@@ -11,8 +11,8 @@ oh-granville,OH,Village of Granville,2026-11-03,restrict,2015,429,2444,82.4,82.4
 oh-oregon,OH,City of Oregon,2026-11-03,restrict,4994,3235,8229,60.7,60.7,restrict,,,,counting,csv_generic,2026-11-04T02:51:43-0500,https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html,TRUE,csv_generic
 oh-upper-sandusky,OH,City of Upper Sandusky,2026-11-03,restrict,1893,568,2461,76.9,76.9,restrict,6,6,100,all_precincts,manual,2026-11-03T20:55:00-0500,https://www.boe.ohio.gov/wyandot/c/elecres/20261103results.pdf,TRUE,manual entry
 oh-monroeville,OH,Village of Monroeville,2026-11-03,allow,55,394,449,12.2,87.8,restrict,1,1,100,all_precincts,manual,2026-11-03T22:20:50-0500,https://www.huron.boe.ohio.gov/wp-content/uploads/Huron-County-Unofficial-Canvass-11-3-2026.pdf,TRUE,manual entry
-oh-sprigg-twp,OH,Sprigg Township,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T13:39:01-0500,https://www.boe.ohio.gov/adams/election-info/election-results/,TRUE,pdf
-oh-monroe-twp,OH,Monroe Township,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T13:39:01-0500,https://www.boe.ohio.gov/adams/election-info/election-results/,TRUE,pdf
+oh-sprigg-twp,OH,Sprigg Township,2026-11-03,restrict,330,297,627,52.6,52.6,restrict,1,1,100,all_precincts,manual,2026-11-03T23:11:45-0500,https://www.boe.ohio.gov/adams/c/elecres/20261103results.pdf,TRUE,manual entry
+oh-monroe-twp,OH,Monroe Township,2026-11-03,restrict,148,100,248,59.7,59.7,restrict,1,1,100,all_precincts,manual,2026-11-03T23:11:45-0500,https://www.boe.ohio.gov/adams/c/elecres/20261103results.pdf,TRUE,manual entry
 oh-ashville,OH,Village of Ashville,2026-11-03,allow,331,1469,1800,18.4,81.6,restrict,4,4,100,all_precincts,enhanced_voting,2026-11-03T22:22:33-0500,https://app.enhancedvoting.com/results/public/pickaway-county-oh/GE2026_20261028170048,TRUE,enhanced_voting
 oh-wilmington-1,OH,City of Wilmington (parcel 1 of 4),2026-11-03,allow,739,2885,3624,20.4,79.6,restrict,,,,final,manual,2026-11-03T22:14:58-0500,https://www.boe.ohio.gov/clinton/c/elecres/20261103results.pdf,TRUE,manual entry
 oh-wilmington-2,OH,City of Wilmington (parcel 2 of 4),2026-11-03,allow,724,2887,3611,20,80,restrict,,,,final,manual,2026-11-03T22:14:58-0500,https://www.boe.ohio.gov/clinton/c/elecres/20261103results.pdf,TRUE,manual entry
@@ -30,7 +30,7 @@ il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,602,2117,2719,22.1,77.9,rest
 il-venice-twp,IL,Venice Township,2026-11-03,allow,311,978,1289,24.1,75.9,restrict,4,4,100,all_precincts,clarity,2026-11-03T21:52:36-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-morgan-county,IL,Morgan County,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 wi-janesville,WI,City of Janesville,2026-11-03,restrict,16779,9932,26711,62.8,62.8,restrict,40,40,100,all_precincts,html_table,2026-11-04T00:02:39-0500,https://elections.co.rock.wi.us/20261103.html,TRUE,html_table
-ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,10889,2372,13261,82.1,82.1,restrict,,,,counting,json_generic,2026-11-04T02:52:39-0500,https://results.lavote.gov/election-list,TRUE,json_generic
+ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,11618,2580,14198,81.8,81.8,restrict,,,,counting,json_generic,2026-11-04T02:54:37-0500,https://results.lavote.gov/election-list,TRUE,json_generic
 nv-boulder-city,NV,Boulder City,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
 fl-edgewater,FL,City of Edgewater,2026-11-03,restrict,7875,2328,10203,77.2,77.2,restrict,,,,final,manual,2026-11-03T22:22:42-0500,https://app.enhancedvoting.com/results/public/volusia-county-fl/elections/2026GeneralElection,TRUE,manual entry
 ca-monterey-park,CA,City of Monterey Park,2026-06-02,restrict,10388,1372,11760,88.3,88.3,restrict,,,,final,manual,2026-06-26T10:25:48-0700,https://results.lavote.gov/,TRUE,manual entry
