@@ -703,7 +703,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
 <section class="block" id="races">
   <div class="wrap">
     <div class="section-head">
-      <div><h2>Every <em>measure</em></h2><p>Grouped by where the count stands, with the measures decided earlier in 2026 last. Bars always put <b>Restrict</b> on the left in blue and <b>Allow</b> on the right in orange; YES and NO mark which side each ballot answer supports. The center tick is 50 percent.</p></div>
+      <div><h2>Every <em>measure</em></h2><p>Highest Restrict share first, then the measures with no votes yet, and the measures decided earlier in 2026 last; sort <b>By status</b> to group them by where the count stands. Bars always put <b>Restrict</b> on the left in blue and <b>Allow</b> on the right in orange; YES and NO mark which side each ballot answer supports. The center tick is 50 percent.</p></div>
       <div class="seg" role="group" aria-label="View"><button type="button" id="viewBoard" aria-pressed="true">Board</button><button type="button" id="viewCards" aria-pressed="false">Cards</button><button type="button" id="viewTable" aria-pressed="false">Table</button></div>
     </div>
     <div class="filters" id="filters">
@@ -867,7 +867,8 @@ const onBallot = (r) => r.election_date === ELECTION && ['on_ballot', 'pending_l
 let races = [], results = null, views = [], topo = null, A = null;
 let sim = false, simStage = 0.55, lastFetch = null, fetchErr = null;
 let stateRank = new Map();
-const filters = { state: '', kind: '', dir: '', origin: '', status: '', sort: 'status', q: '' };
+const DEFAULT_SORT = 'restrict';
+const filters = { state: '', kind: '', dir: '', origin: '', status: '', sort: DEFAULT_SORT, q: '' };
 let viewMode = store.get('dcbt_view', 'board'); if (!['board', 'cards', 'table'].includes(viewMode)) viewMode = 'board';
 let groupBy = store.get('dcbt_group', 'all'); if (!['all', 'yes', 'kind', 'state'].includes(groupBy)) groupBy = 'all';
 let seen = null, changed = new Set(), hlSet = null;
@@ -2271,7 +2272,7 @@ function syncURL() {
   if (PREVIEW) p.set('preview', '');
   if (sim) p.set('sim', String(Math.round(simStage * 100)));
   ['state', 'kind', 'dir', 'origin', 'status', 'q'].forEach((k) => { if (filters[k]) p.set(k, filters[k]); });
-  if (filters.sort !== 'status') p.set('sort', filters.sort);
+  if (filters.sort !== DEFAULT_SORT) p.set('sort', filters.sort);
   if (openId) p.set('race', openId);
   if (document.body.classList.contains('tv')) p.set('tv', '');
   const qs = p.toString().replace(/=(?=&|$)/g, '');
