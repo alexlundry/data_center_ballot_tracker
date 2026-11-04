@@ -6,7 +6,7 @@ Updated 8:55 pm ET. Of the 45 measures, the loop reads 33 on its own. This page 
 2. **Enter 11 races by hand**: the 8 Maine towns, El Dorado and Ottawa KS, and Monroeville.
 3. **Watch 5 automatic races** and enter one by hand if it stays blank after the county posts.
 4. **Check each race's first numbers once** against the county page.
-5. **Mark 12 races final** when their counts are complete, because they cannot finish on their own.
+5. **Mark 16 races final** when their counts are complete, because they cannot finish on their own.
 
 ## How to enter a race in the sheet
 
@@ -74,7 +74,7 @@ If a county posts a text PDF at a stable address, tell Claude: setting that race
 
 The first time a race shows numbers, compare its YES and NO once with the county page. The sheet's `auto_yes` and `auto_no` columns sit beside the manual columns. If they differ, type the county's numbers into the sheet.
 
-**Already checked:** Urbana, Conneaut, Defiance, Perry Village, Edgewater, Ashville, Trenton, Emporia, Americus and Sunbury, all against the county's own file, page or feed.
+**Already checked:** Urbana, Conneaut, Defiance, Perry Village, Edgewater, Ashville, Trenton, Emporia, Americus, Sunbury, Pataskala, Granville and Wilmington parcels 1–4, all against the county's own file, page or feed. Clinton's report is a scan run through text recognition (it prints "O-26»04"), so keep comparing Wilmington's numbers on each update; each YES + NO should equal its Total row.
 
 **Still to check when numbers appear:**
 
@@ -82,7 +82,6 @@ The first time a race shows numbers, compare its YES and NO once with the county
 |---|---|
 | Sprigg, Monroe Twp (Adams) | [Adams PDF](https://www.boe.ohio.gov/adams/c/elecres/20261103results.pdf) ("For / Against the Zoning Resolution"; For is YES) |
 | Pataskala, Granville (Licking) | [Licking PDF](https://www.boe.ohio.gov/licking/c/elecres/20261103results.pdf) (Pataskala is the "Data Centers" amendment, the last of four) |
-| Wilmington parcels 1–4 (Clinton) | [Clinton PDF](https://www.boe.ohio.gov/clinton/c/elecres/20261103results.pdf) (O-26-04 is parcel 1, O-26-06 parcel 2, O-26-07 parcel 3, O-26-05 parcel 4) |
 | Oregon | [Lucas results page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html), contest 25 |
 | Grove City | The page you save in step 1 |
 | Hubbard, Upper Sandusky | The pages in step 3 |
@@ -100,7 +99,8 @@ The first time a race shows numbers, compare its YES and NO once with the county
 
 These races print no precinct count, or keep counting mail ballots for days, so they stay under "Still out" until you finish them. Once the county's count is complete, type its final YES and NO in the sheet and set `status = final`:
 
-- **No precinct line:** Urbana, Conneaut, Pataskala, Granville, Sprigg, Monroe Township, Edgewater, Oregon, Emporia, Americus.
+- **No precinct line:** Conneaut, Pataskala, Granville, Sprigg, Monroe Township, Edgewater, Oregon, Emporia, Americus, and Wilmington parcels 1–4 (Clinton's election-night report drops the precinct line).
+- **Bad precinct line:** Trenton. Butler's summary PDF printed "82 of 8" at 9:06 pm (the county's 82 of 292), so the loop now ignores any precinct count higher than the total; check Butler's page for Trenton's real precincts.
 - **Late counting:** Alhambra (mail ballots for weeks) and Boulder City (mail ballots for days). Mark these final only when the county finishes.
 - **All 11 hand-entered races** (step 2), once each count is complete.
 

@@ -130,6 +130,13 @@ fetch_one <- function(race) {
 results <- purrr::map_dfr(seq_len(nrow(races)), function(i) {
   race <- as.list(races[i, ])
   res <- fetch_one(race)
+  # More precincts in than exist is a source error, not a finished count:
+  # Butler's summary PDF printed Trenton as "82 of 8" (the county's 82 of
+  # 292) at 9:06 pm Nov 3, which would have called the race complete
+  if (isTRUE(res$precincts_reporting > res$precincts_total)) {
+    log_msg(race$race_id, ": ignoring precincts ", res$precincts_reporting, " of ", res$precincts_total)
+    res$precincts_reporting <- NA_integer_; res$precincts_total <- NA_integer_
+  }
   d <- derive_fields(res, race)
   bind_cols(tibble(race_id = race$race_id), res |> select(-any_of("override")), d)
 })
