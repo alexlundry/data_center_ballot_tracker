@@ -1,8 +1,8 @@
 # Election night: what you need to do (Nov 3, 2026)
 
-Updated 8:25 pm ET. Of the 45 measures, the loop reads 29 on its own. This page lists only what needs you:
+Updated 8:30 pm ET. Of the 45 measures, the loop reads 30 on its own. This page lists only what needs you:
 
-1. **Save files** for 3 Ohio counties.
+1. **Save files** for 2 Ohio counties.
 2. **Enter 13 races by hand**: the 8 Maine towns, the 4 Kansas cities, and Monroeville.
 3. **Watch 5 automatic races** and enter one by hand if it stays blank after the county posts.
 4. **Check each race's first numbers once** against the county page.
@@ -18,17 +18,16 @@ Use the `manual_results` tab of the Google Sheet, on the race's row:
 - Set `status = final` once the count is complete.
 - To tell readers when a count is coming (for example "Town office reopens Thursday"), type one sentence in `public_note` (column Z).
 
-## 1. Save files to the drop folder (3 Ohio counties)
+## 1. Save files to the drop folder (2 Ohio counties)
 
 The drop folder is the Google Drive folder **Data Center Tracker / Election Night Drop**. Any filename works, and the newest file wins. Save again each time the county updates. `make drop` lists races with no file yet.
 
 | County | Race | Where | What to save | Contest |
 |---|---|---|---|---|
-| Butler | Trenton | [ENR page](https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html) | Its summary PDF (`summary_24.pdf`), or the page as "Webpage, Complete" | ISSUE 17 CITY OF TRENTON |
 | Lucas | Oregon | [ENR page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html) | Wait for the contest list to load, then File > Save Page As > "Webpage, Complete" | 25. Oregon Prohibition of Construction of a Data Center |
 | Franklin | Grove City | [Franklin's 2026 page](https://vote.franklincountyohio.gov/election-info/2026), then its results link | The results page as "Webpage, Complete", or the summary PDF | Issue 28, Grove City charter amendment |
 
-**No longer needed:** Adams, Ashtabula, Champaign, Clinton, Defiance, Licking and Wyandot. The loop reads their PDFs straight from the county and uses whichever file is newer, the county's or yours. Save one only if its race stops updating.
+**No longer needed:** Adams, Ashtabula, Butler, Champaign, Clinton, Defiance, Licking and Wyandot. The loop reads their PDFs straight from the county (Butler's summary PDF since 8:26 pm) and uses whichever file is newer, the county's or yours. Save one only if its race stops updating.
 
 ## 2. Enter by hand (13 races)
 
@@ -76,7 +75,7 @@ If a county posts a text PDF at a stable address, tell Claude: setting that race
 
 The first time a race shows numbers, compare its YES and NO once with the county page. The sheet's `auto_yes` and `auto_no` columns sit beside the manual columns. If they differ, type the county's numbers into the sheet.
 
-**Already checked:** Urbana, Conneaut, Defiance, Perry Village, Edgewater and Ashville, all against the county's own file or feed.
+**Already checked:** Urbana, Conneaut, Defiance, Perry Village, Edgewater, Ashville and Trenton, all against the county's own file, page or feed.
 
 **Still to check when numbers appear:**
 
@@ -85,7 +84,7 @@ The first time a race shows numbers, compare its YES and NO once with the county
 | Sprigg, Monroe Twp (Adams) | [Adams PDF](https://www.boe.ohio.gov/adams/c/elecres/20261103results.pdf) ("For / Against the Zoning Resolution"; For is YES) |
 | Pataskala, Granville (Licking) | [Licking PDF](https://www.boe.ohio.gov/licking/c/elecres/20261103results.pdf) (Pataskala is the "Data Centers" amendment, the last of four) |
 | Wilmington parcels 1–4 (Clinton) | [Clinton PDF](https://www.boe.ohio.gov/clinton/c/elecres/20261103results.pdf) (O-26-04 is parcel 1, O-26-06 parcel 2, O-26-07 parcel 3, O-26-05 parcel 4) |
-| Trenton, Oregon, Grove City | The files you save in step 1 |
+| Oregon, Grove City | The pages you save in step 1 |
 | Hubbard, Sunbury, Upper Sandusky | The pages in step 3 |
 | Bloomington IL | [Clarity](https://results.enr.clarityelections.com/IL/Bloomington/127392/) (showing 5,083 to 1,107 at 8:10 pm; not yet checked) |
 | Joliet Township IL | [Clarity](https://results.enr.clarityelections.com/IL/Will/127394/) |
