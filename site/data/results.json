@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T21:18:44-0500",
+  "generated_at": "2026-11-03T21:20:58-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -12,7 +12,7 @@
     "mean_allow_pct": 22.9,
     "pooled_restrict_pct": 76,
     "total_votes_counted": 72203,
-    "fetch_failures": 14
+    "fetch_failures": 15
   },
   "races": [
     {
@@ -892,10 +892,10 @@
       "as_of": "2026-11-03T21:18:38-0500",
       "source_url": "https://bloomingtonelectionsil.gov/elections/pastresults/",
       "adapter": "clarity",
-      "note": null,
+      "note": "stale: last fetch failed",
       "status_override": null,
-      "fetch_ok": true,
-      "fetch_error": null,
+      "fetch_ok": false,
+      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 504 Gateway Timeout. | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 14394,
       "yes_pct": 79.51,
       "no_pct": 20.49,
