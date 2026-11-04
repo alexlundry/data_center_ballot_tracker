@@ -1,9 +1,9 @@
 race_id,state,jurisdiction,election_date,yes_means,yes_votes,no_votes,total_votes,yes_pct,restrict_pct,leader,precincts_reporting,precincts_total,pct_reporting,status,adapter,as_of,source_url,fetch_ok,feed
 oh-hubbard,OH,City of Hubbard,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-oh-urbana,OH,City of Urbana,2026-11-03,restrict,1635,597,2232,73.2,73.2,restrict,,,,counting,pdf,2026-11-03T19:58:15-0500,https://www.boe.ohio.gov/champaign/,TRUE,pdf
+oh-urbana,OH,City of Urbana,2026-11-03,restrict,2978,877,3855,77.2,77.2,restrict,8,8,100,all_precincts,pdf,2026-11-03T21:04:52-0500,https://www.boe.ohio.gov/champaign/,TRUE,pdf
 oh-sunbury,OH,City of Sunbury,2026-11-03,restrict,741,235,976,75.9,75.9,restrict,0,6,0,counting,pdf,2026-11-03T20:52:31-0500,https://vote.delawarecountyohio.gov/,TRUE,pdf
 oh-conneaut,OH,City of Conneaut,2026-11-03,restrict,643,360,1003,64.1,64.1,restrict,,,,counting,pdf,2026-11-03T20:07:13-0500,https://www.boe.ohio.gov/ashtabula/election-info/election-results,TRUE,pdf
-oh-defiance,OH,City of Defiance,2026-11-03,restrict,2118,1268,3386,62.5,62.5,restrict,0,12,0,counting,pdf,2026-11-03T19:45:15-0500,https://www.boe.ohio.gov/defiance/election-info/election-results/,TRUE,pdf
+oh-defiance,OH,City of Defiance,2026-11-03,restrict,3344,1841,5185,64.5,64.5,restrict,9,12,75,counting,pdf,2026-11-03T21:04:23-0500,https://www.boe.ohio.gov/defiance/election-info/election-results/,TRUE,pdf
 oh-trenton,OH,City of Trenton,2026-11-03,restrict,1178,344,1522,77.4,77.4,restrict,82,8,1025,all_precincts,pdf,2026-11-03T21:06:27-0500,https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html,TRUE,pdf
 oh-grove-city,OH,City of Grove City,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 oh-pataskala,OH,City of Pataskala,2026-11-03,restrict,2004,766,2770,72.3,72.3,restrict,,,,counting,pdf,2026-11-03T20:15:13-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
@@ -13,7 +13,7 @@ oh-upper-sandusky,OH,City of Upper Sandusky,2026-11-03,restrict,,,,,,none,,,,no_
 oh-monroeville,OH,Village of Monroeville,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
 oh-sprigg-twp,OH,Sprigg Township,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T13:39:01-0500,https://www.boe.ohio.gov/adams/election-info/election-results/,TRUE,pdf
 oh-monroe-twp,OH,Monroe Township,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T13:39:01-0500,https://www.boe.ohio.gov/adams/election-info/election-results/,TRUE,pdf
-oh-ashville,OH,Village of Ashville,2026-11-03,allow,84,396,480,17.5,82.5,restrict,0,4,0,counting,enhanced_voting,2026-11-03T20:26:31-0500,https://app.enhancedvoting.com/results/public/pickaway-county-oh/GE2026_20261028170048,TRUE,enhanced_voting
+oh-ashville,OH,Village of Ashville,2026-11-03,allow,201,985,1186,17,83,restrict,2,4,50,counting,enhanced_voting,2026-11-03T21:10:32-0500,https://app.enhancedvoting.com/results/public/pickaway-county-oh/GE2026_20261028170048,TRUE,enhanced_voting
 oh-wilmington-1,OH,City of Wilmington (parcel 1 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
 oh-wilmington-2,OH,City of Wilmington (parcel 2 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
 oh-wilmington-3,OH,City of Wilmington (parcel 3 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
@@ -23,7 +23,7 @@ ks-el-dorado,KS,City of El Dorado,2026-11-03,restrict,,,,,,none,,,,no_results,,,
 ks-ottawa,KS,City of Ottawa,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ks-americus,KS,City of Americus,2026-11-03,restrict,36,18,54,66.7,66.7,restrict,,,,counting,pdf,2026-11-03T20:44:34-0500,https://www.lyoncountyks.gov/350/2026-General-Election-Results,TRUE,pdf
 il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,11146,2870,14016,79.5,79.5,restrict,0,60,0,counting,clarity,2026-11-03T20:24:35-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,TRUE,clarity
-il-joliet-twp,IL,Joliet Township,2026-11-03,allow,0,0,0,,,none,0,37,0,no_results,clarity,2026-11-03T18:00:34-0500,https://www.willcountyclerk.gov/elections/election-results/,TRUE,clarity
+il-joliet-twp,IL,Joliet Township,2026-11-03,allow,1538,5369,6907,22.3,77.7,restrict,0,37,0,counting,clarity,2026-11-03T21:10:35-0500,https://www.willcountyclerk.gov/elections/election-results/,TRUE,clarity
 il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,88,432,520,16.9,83.1,restrict,0,6,0,counting,clarity,2026-11-03T21:04:35-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,1128,3439,4567,24.7,75.3,restrict,6,17,35.3,counting,clarity,2026-11-03T21:04:35-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,191,801,992,19.2,80.8,restrict,0,8,0,counting,clarity,2026-11-03T21:04:36-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
