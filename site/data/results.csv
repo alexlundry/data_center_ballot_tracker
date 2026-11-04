@@ -30,7 +30,7 @@ il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,602,2117,2719,22.1,77.9,rest
 il-venice-twp,IL,Venice Township,2026-11-03,allow,311,978,1289,24.1,75.9,restrict,4,4,100,all_precincts,clarity,2026-11-03T21:52:36-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-morgan-county,IL,Morgan County,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 wi-janesville,WI,City of Janesville,2026-11-03,restrict,16779,9932,26711,62.8,62.8,restrict,40,40,100,all_precincts,html_table,2026-11-04T00:02:39-0500,https://elections.co.rock.wi.us/20261103.html,TRUE,html_table
-ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,12339,2735,15074,81.9,81.9,restrict,,,,counting,json_generic,2026-11-04T03:48:37-0500,https://results.lavote.gov/election-list,TRUE,json_generic
+ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,12392,2749,15141,81.8,81.8,restrict,,,,counting,json_generic,2026-11-04T04:10:38-0500,https://results.lavote.gov/election-list,TRUE,json_generic
 nv-boulder-city,NV,Boulder City,2026-11-03,allow,1265,2944,4209,30,70,restrict,,,,counting,html_table,2026-11-04T03:01:09-0500,https://elections.clarkcountynv.gov/ElectionResultsTV/ENR.aspx,TRUE,html_table
 fl-edgewater,FL,City of Edgewater,2026-11-03,restrict,7875,2328,10203,77.2,77.2,restrict,,,,final,manual,2026-11-03T22:22:42-0500,https://app.enhancedvoting.com/results/public/volusia-county-fl/elections/2026GeneralElection,TRUE,manual entry
 ca-monterey-park,CA,City of Monterey Park,2026-06-02,restrict,10388,1372,11760,88.3,88.3,restrict,,,,final,manual,2026-06-26T10:25:48-0700,https://results.lavote.gov/,TRUE,manual entry
