@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T17:10:47-0500",
+  "generated_at": "2026-11-04T01:57:29-0500",
   "count": 57,
   "races": [
     {
@@ -114,7 +114,7 @@
       "results_expected": "Usually election night, from the Delaware County Board of Elections.",
       "plain_summary": "Amends Sunbury's charter to ban data centers that draw more than 25 MW. Amazon has proposed a campus of about $2 billion in the city's technology park.",
       "adapters": "pdf",
-      "source_status": "pattern"
+      "source_status": "verified"
     },
     {
       "race_id": "oh-conneaut",
@@ -265,8 +265,8 @@
       "notes": "Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: XI. Full text of the amendment fetched Oct 16 from the county's 2026 election page (docs/source-docs/grove-city-issue-28-full-text.pdf); the county link named Grove-City-Charter-Amendment-5 serves a 2017 notice of election and is unrelated.",
       "results_expected": "Usually election night, from the Franklin County Board of Elections.",
       "plain_summary": "Requires a citywide vote before any development of 50 acres or more, or one using more than 20 MW of power or 500,000 gallons of water a day, with the developer paying for the election. It is not a ban, but it would put the proposed 300-acre data center to a vote.",
-      "adapters": "ohio_enr,pdf",
-      "source_status": "pattern"
+      "adapters": "franklin_live,ohio_enr,pdf",
+      "source_status": "verified"
     },
     {
       "race_id": "oh-pataskala",
@@ -379,7 +379,7 @@
       "notes": "Issue 25 (Issues 26 and 27 on the Oregon ballot are unrelated charter changes). Council accepted the BOE certification Aug 19. Lucas County reports on the SOS-hosted ENR platform (Nov 2025 was instance 21). Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article XIII, Section 8. Full text from the city's 2026 Election for Voters page. The city's page adds: A \"YES\" vote is in support of the charter change and Prohibition (ban) of Data Centers greater than 25MW (moved out of ballot_text Nov 3).",
       "results_expected": "Usually election night, from the Lucas County Board of Elections.",
       "plain_summary": "Amends Oregon's charter to cap data centers at 25 MW. Organizers say it would steer development to brownfield and industrial sites; a data center has been proposed on farmland in the city.",
-      "adapters": "ohio_enr",
+      "adapters": "csv_generic,ohio_enr",
       "source_status": "verified"
     },
     {
@@ -760,7 +760,7 @@
       "results_expected": "Usually election night, from the Lyon County Clerk.",
       "plain_summary": "Bans data centers that draw more than 10 MW of power or 100,000 gallons of water a day from every zoning district in Emporia. If it passes, it takes effect only after a court rules on the city's challenge to the petition.",
       "adapters": "pdf",
-      "source_status": "pattern"
+      "source_status": "verified"
     },
     {
       "race_id": "ks-el-dorado",
@@ -874,7 +874,7 @@
       "results_expected": "Usually election night, from the Lyon County Clerk.",
       "plain_summary": "Bans high-impact data centers and large battery storage systems in Americus, a small town in Lyon County. The ballot does not say how big a data center must be to count as high-impact.",
       "adapters": "pdf",
-      "source_status": "pattern"
+      "source_status": "verified"
     },
     {
       "race_id": "il-bloomington",
