@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T22:36:41-0500",
+  "generated_at": "2026-11-03T22:42:40-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -10,8 +10,8 @@
     "tied": 0,
     "mean_restrict_pct": 73.4,
     "mean_allow_pct": 26.6,
-    "pooled_restrict_pct": 71.9,
-    "total_votes_counted": 158298,
+    "pooled_restrict_pct": 72,
+    "total_votes_counted": 160780,
     "fetch_failures": 7
   },
   "races": [
@@ -1090,32 +1090,32 @@
     },
     {
       "race_id": "il-joliet-twp",
-      "yes_votes": 3318,
-      "no_votes": 12207,
-      "precincts_reporting": 29,
+      "yes_votes": 3800,
+      "no_votes": 14207,
+      "precincts_reporting": 37,
       "precincts_total": 37,
-      "ballots_cast": 16058,
+      "ballots_cast": 18601,
       "registered_voters": 43102,
       "raw_contest": "JOLIET TOWNSHIP REFERENDA DATA CENTER (Vote For 1)",
-      "as_of": "2026-11-03T22:22:38-0500",
+      "as_of": "2026-11-03T22:42:35-0500",
       "source_url": "https://www.willcountyclerk.gov/elections/election-results/",
       "adapter": "clarity",
       "note": null,
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 15525,
-      "yes_pct": 21.37,
-      "no_pct": 78.63,
-      "restrict_votes": 12207,
-      "allow_votes": 3318,
-      "restrict_pct": 78.63,
-      "allow_pct": 21.37,
-      "margin_pts": 57.26,
-      "pct_reporting": 78.38,
-      "est_votes_remaining": 4282,
+      "total_votes": 18007,
+      "yes_pct": 21.1,
+      "no_pct": 78.9,
+      "restrict_votes": 14207,
+      "allow_votes": 3800,
+      "restrict_pct": 78.9,
+      "allow_pct": 21.1,
+      "margin_pts": 57.8,
+      "pct_reporting": 100,
+      "est_votes_remaining": 0,
       "leader": "restrict",
-      "status": "counting",
+      "status": "all_precincts",
       "public_note": null,
       "history": [
         {
@@ -1141,6 +1141,12 @@
           "yes": 3318,
           "no": 12207,
           "rep": 78.38
+        },
+        {
+          "t": "2026-11-03T22:42:40-0500",
+          "yes": 3800,
+          "no": 14207,
+          "rep": 100
         }
       ]
     },

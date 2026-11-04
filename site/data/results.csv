@@ -23,7 +23,7 @@ ks-el-dorado,KS,City of El Dorado,2026-11-03,restrict,,,,,,none,,,,no_results,,,
 ks-ottawa,KS,City of Ottawa,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ks-americus,KS,City of Americus,2026-11-03,restrict,274,127,401,68.3,68.3,restrict,,,,counting,pdf,2026-11-03T21:16:35-0500,https://www.lyoncountyks.gov/350/2026-General-Election-Results,TRUE,pdf
 il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,21851,6316,28167,77.6,77.6,restrict,60,60,100,all_precincts,clarity,2026-11-03T22:26:41-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,TRUE,clarity
-il-joliet-twp,IL,Joliet Township,2026-11-03,allow,3318,12207,15525,21.4,78.6,restrict,29,37,78.4,counting,clarity,2026-11-03T22:22:38-0500,https://www.willcountyclerk.gov/elections/election-results/,TRUE,clarity
+il-joliet-twp,IL,Joliet Township,2026-11-03,allow,3800,14207,18007,21.1,78.9,restrict,37,37,100,all_precincts,clarity,2026-11-03T22:42:35-0500,https://www.willcountyclerk.gov/elections/election-results/,TRUE,clarity
 il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,365,1817,2182,16.7,83.3,restrict,6,6,100,all_precincts,clarity,2026-11-03T21:54:37-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,1959,5703,7662,25.6,74.4,restrict,17,17,100,all_precincts,clarity,2026-11-03T21:52:36-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,602,2117,2719,22.1,77.9,restrict,8,8,100,all_precincts,clarity,2026-11-03T21:54:37-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
