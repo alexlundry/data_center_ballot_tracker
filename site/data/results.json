@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T22:00:40-0500",
+  "generated_at": "2026-11-03T22:02:40-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -10,8 +10,8 @@
     "tied": 0,
     "mean_restrict_pct": 74.2,
     "mean_allow_pct": 25.8,
-    "pooled_restrict_pct": 73.7,
-    "total_votes_counted": 116611,
+    "pooled_restrict_pct": 73.8,
+    "total_votes_counted": 119398,
     "fetch_failures": 7
   },
   "races": [
@@ -1035,28 +1035,28 @@
     },
     {
       "race_id": "il-joliet-twp",
-      "yes_votes": 2506,
-      "no_votes": 9106,
+      "yes_votes": 3068,
+      "no_votes": 11331,
       "precincts_reporting": 0,
       "precincts_total": 37,
-      "ballots_cast": 12040,
+      "ballots_cast": 14892,
       "registered_voters": 43102,
       "raw_contest": "JOLIET TOWNSHIP REFERENDA DATA CENTER (Vote For 1)",
-      "as_of": "2026-11-03T21:34:36-0500",
+      "as_of": "2026-11-03T22:02:35-0500",
       "source_url": "https://www.willcountyclerk.gov/elections/election-results/",
       "adapter": "clarity",
       "note": null,
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 11612,
-      "yes_pct": 21.58,
-      "no_pct": 78.42,
-      "restrict_votes": 9106,
-      "allow_votes": 2506,
-      "restrict_pct": 78.42,
-      "allow_pct": 21.58,
-      "margin_pts": 56.84,
+      "total_votes": 14399,
+      "yes_pct": 21.31,
+      "no_pct": 78.69,
+      "restrict_votes": 11331,
+      "allow_votes": 3068,
+      "restrict_pct": 78.69,
+      "allow_pct": 21.31,
+      "margin_pts": 57.38,
       "pct_reporting": 0,
       "est_votes_remaining": null,
       "leader": "restrict",
@@ -1073,6 +1073,12 @@
           "t": "2026-11-03T21:34:40-0500",
           "yes": 2506,
           "no": 9106,
+          "rep": 0
+        },
+        {
+          "t": "2026-11-03T22:02:40-0500",
+          "yes": 3068,
+          "no": 11331,
           "rep": 0
         }
       ]
