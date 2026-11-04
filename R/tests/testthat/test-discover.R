@@ -92,6 +92,23 @@ test_that("probe mode walks an id range once and then trusts the cache", {
   expect_equal(calls, 3)
 })
 
+test_that("Franklin County KS: the home page's newest 2026 General results file, never the primary's", {
+  s <- readr::read_csv(file.path(ROOT, "data/sources.csv"), show_col_types = FALSE,
+                       col_types = readr::cols(.default = readr::col_character()))
+  s <- s[s$race_id == "ks-ottawa" & s$priority == "1", ]
+  expect_match(s$api_url, "PDF_URL")
+  # the live home page's links (Nov 4), plus a later version as a full url
+  home <- paste0('<a href="/DocumentCenter/View/36384/Election-Results-2026-General_6">Unofficial 2026 General Election Results</a>',
+                 '<a href="/DocumentCenter/View/36109/Lunch-on-Us_Educational-Series_Fall-2026">Lunch on Us</a>')
+  expect_equal(discover_value(home, s$discover_pattern, s$discover_pick, base_url = s$discover_url),
+               "https://www.franklincoks.org/DocumentCenter/View/36384/Election-Results-2026-General_6")
+  later <- paste0(home, '<a href="https://www.franklincoks.org/DocumentCenter/View/36502/Official-Election-Results-2026-General_COMPLETE">Official</a>')
+  expect_equal(discover_value(later, s$discover_pattern, s$discover_pick, base_url = s$discover_url),
+               "https://www.franklincoks.org/DocumentCenter/View/36502/Official-Election-Results-2026-General_COMPLETE")
+  primary <- '<a href="https://www.franklincoks.org/DocumentCenter/View/35595/Official-Election-Results-2026-Primary_COMPLETE">2026 Primary Election</a>'
+  expect_true(is.na(discover_value(primary, s$discover_pattern, s$discover_pick)))
+})
+
 test_that("run_adapter refuses a source whose placeholder is still unfilled", {
   res <- suppressMessages(run_adapter(list(race_id = "x", adapter = "clarity", results_url = "https://e.org/",
                                            api_url = "https://results.enr.clarityelections.com/IL/Will/ELECTION_ID"), list()))

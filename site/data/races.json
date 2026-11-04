@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T01:57:29-0500",
+  "generated_at": "2026-11-04T09:38:49-0500",
   "count": 57,
   "races": [
     {
@@ -113,7 +113,7 @@
       "notes": "Delaware County Issue 9 is a different Sunbury charter amendment (council seats); confirm this measure's issue number. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file (misspelled Sunsbury) as Charter Amendment: Article XI, Section XI. Full text from the Delaware County sample ballot (Sunbury City A), printed without an issue number.",
       "results_expected": "Usually election night, from the Delaware County Board of Elections.",
       "plain_summary": "Amends Sunbury's charter to ban data centers that draw more than 25 MW. Amazon has proposed a campus of about $2 billion in the city's technology park.",
-      "adapters": "pdf",
+      "adapters": "nist_json,pdf",
       "source_status": "verified"
     },
     {
@@ -797,8 +797,8 @@
       "notes": "Polls close 7 pm Central. Results page URL unverified. The 13th Judicial District ruled in August that the ordinance is legislative and may proceed by initiative (city notice 683); the commission's Aug 26, 2026 official statement on the ballot question is in docs/source-docs/el-dorado-ks-official-statement-ballot-question-2026-08-26.pdf and says the full ordinance will be published on eldoks.gov under K.S.A. 12-3013(d). The sample ballot from the Butler County Clerk (bucoks.gov Elections) would give the verbatim question.",
       "results_expected": "Usually election night, from the Butler County Clerk.",
       "plain_summary": "Bans high-impact data centers (over 10 MW) and large battery storage systems in El Dorado. Once adopted, the city commission could not change it for ten years without a public vote.",
-      "adapters": "pdf",
-      "source_status": "pattern"
+      "adapters": "ohio_enr,pdf",
+      "source_status": "verified"
     },
     {
       "race_id": "ks-ottawa",

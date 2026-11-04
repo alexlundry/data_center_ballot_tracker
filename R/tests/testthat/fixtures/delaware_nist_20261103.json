@@ -1,0 +1,603 @@
+{
+ "reporting": "180/180",
+ "ElectionReport": {
+  "SequenceStart": "1",
+  "Status": "unofficial-partial",
+  "GeneratedDate": "2026-11-03T22:30:10.78-05:00",
+  "Format": "precinct-level",
+  "VendorApplicationId": "Tabulator",
+  "SequenceEnd": "1",
+  "GpUnitCollection": {
+   "GpUnit": [
+    {
+     "xsi:type": "ReportingUnit",
+     "Type": "other",
+     "ComposingGpUnitIds": "PRECINCT_16100 PRECINCT_16200 PRECINCT_16300 PRECINCT_16400 PRECINCT_16500 PRECINCT_16600",
+     "objectId": "DISTRICT_110",
+     "Name": "City of Sunbury"
+    },
+    {
+     "xsi:type": "ReportingUnit",
+     "Type": "other",
+     "ComposingGpUnitIds": "PRECINCT_16100",
+     "objectId": "DISTRICT_200",
+     "Name": "Sunbury A"
+    },
+    {
+     "Name": "161 Sunbury City A",
+     "objectId": "PRECINCT_16100",
+     "CountStatus": [
+      {
+       "Status": "in-process",
+       "Type": "total"
+      },
+      {
+       "Status": "in-process",
+       "Type": "election-day"
+      },
+      {
+       "Status": "in-process",
+       "Type": "absentee"
+      },
+      {
+       "Status": "in-process",
+       "Type": "early"
+      }
+     ],
+     "SummaryCounts": {
+      "Undervotes": "2191",
+      "BallotsCast": "939",
+      "Overvotes": "0"
+     },
+     "xsi:type": "ReportingUnit",
+     "VotersRegistered": "1454",
+     "Type": "precinct",
+     "VotersParticipated": "939"
+    },
+    {
+     "Name": "162 Sunbury City B",
+     "objectId": "PRECINCT_16200",
+     "CountStatus": [
+      {
+       "Status": "in-process",
+       "Type": "total"
+      },
+      {
+       "Status": "in-process",
+       "Type": "election-day"
+      },
+      {
+       "Status": "in-process",
+       "Type": "absentee"
+      },
+      {
+       "Status": "in-process",
+       "Type": "early"
+      }
+     ],
+     "SummaryCounts": {
+      "Undervotes": "946",
+      "BallotsCast": "399",
+      "Overvotes": "0"
+     },
+     "xsi:type": "ReportingUnit",
+     "VotersRegistered": "648",
+     "Type": "precinct",
+     "VotersParticipated": "399"
+    },
+    {
+     "Name": "163 Sunbury City C",
+     "objectId": "PRECINCT_16300",
+     "CountStatus": [
+      {
+       "Status": "in-process",
+       "Type": "total"
+      },
+      {
+       "Status": "in-process",
+       "Type": "election-day"
+      },
+      {
+       "Status": "in-process",
+       "Type": "absentee"
+      },
+      {
+       "Status": "in-process",
+       "Type": "early"
+      }
+     ],
+     "SummaryCounts": {
+      "Undervotes": "866",
+      "BallotsCast": "411",
+      "Overvotes": "0"
+     },
+     "xsi:type": "ReportingUnit",
+     "VotersRegistered": "671",
+     "Type": "precinct",
+     "VotersParticipated": "411"
+    },
+    {
+     "Name": "164 Sunbury City D",
+     "objectId": "PRECINCT_16400",
+     "CountStatus": [
+      {
+       "Status": "in-process",
+       "Type": "total"
+      },
+      {
+       "Status": "in-process",
+       "Type": "election-day"
+      },
+      {
+       "Status": "in-process",
+       "Type": "absentee"
+      },
+      {
+       "Status": "in-process",
+       "Type": "early"
+      }
+     ],
+     "SummaryCounts": {
+      "Undervotes": "1016",
+      "BallotsCast": "456",
+      "Overvotes": "0"
+     },
+     "xsi:type": "ReportingUnit",
+     "VotersRegistered": "724",
+     "Type": "precinct",
+     "VotersParticipated": "456"
+    },
+    {
+     "Name": "165 Sunbury City E",
+     "objectId": "PRECINCT_16500",
+     "CountStatus": [
+      {
+       "Status": "in-process",
+       "Type": "total"
+      },
+      {
+       "Status": "in-process",
+       "Type": "election-day"
+      },
+      {
+       "Status": "in-process",
+       "Type": "absentee"
+      },
+      {
+       "Status": "in-process",
+       "Type": "early"
+      }
+     ],
+     "SummaryCounts": {
+      "Undervotes": "1778",
+      "BallotsCast": "801",
+      "Overvotes": "0"
+     },
+     "xsi:type": "ReportingUnit",
+     "VotersRegistered": "1128",
+     "Type": "precinct",
+     "VotersParticipated": "801"
+    },
+    {
+     "Name": "166 Sunbury City F",
+     "objectId": "PRECINCT_16600",
+     "CountStatus": [
+      {
+       "Status": "in-process",
+       "Type": "total"
+      },
+      {
+       "Status": "in-process",
+       "Type": "election-day"
+      },
+      {
+       "Status": "in-process",
+       "Type": "absentee"
+      },
+      {
+       "Status": "in-process",
+       "Type": "early"
+      }
+     ],
+     "SummaryCounts": {
+      "Undervotes": "1368",
+      "BallotsCast": "634",
+      "Overvotes": "0"
+     },
+     "xsi:type": "ReportingUnit",
+     "VotersRegistered": "868",
+     "Type": "precinct",
+     "VotersParticipated": "634"
+    }
+   ]
+  },
+  "Election": {
+   "StartDate": "2026-11-03T00:00:00-05:00",
+   "EndDate": "2026-11-03T00:00:00-05:00",
+   "Name": {
+    "Text": {
+     "#text": "Delaware County General Election November 3, 2026",
+     "language": "EN"
+    }
+   },
+   "Type": "general",
+   "ElectionScopeId": "COUNTY_21",
+   "ContestCollection": {
+    "Contest": [
+     {
+      "BallotTitle": {
+       "Text": {
+        "#text": "City of Sunbury - Proposed Charter Amendment",
+        "language": "EN"
+       }
+      },
+      "Name": "City of Sunbury - Proposed Charter Amendment",
+      "objectId": "CONTEST_144",
+      "SummaryCounts": {
+       "Undervotes": "68",
+       "Overvotes": "0"
+      },
+      "xsi:type": "BallotMeasureContest",
+      "BallotSelection": [
+       {
+        "VoteCountsCollection": {
+         "VoteCounts": [
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "713",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "499",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "129",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "85",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16200",
+           "Count": "306",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16200",
+           "Count": "235",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16200",
+           "Count": "43",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16200",
+           "Count": "28",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16300",
+           "Count": "326",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16300",
+           "Count": "246",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16300",
+           "Count": "52",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16300",
+           "Count": "28",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16400",
+           "Count": "369",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16400",
+           "Count": "282",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16400",
+           "Count": "61",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16400",
+           "Count": "26",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16500",
+           "Count": "617",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16500",
+           "Count": "460",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16500",
+           "Count": "94",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16500",
+           "Count": "63",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16600",
+           "Count": "478",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16600",
+           "Count": "343",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16600",
+           "Count": "78",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16600",
+           "Count": "57",
+           "Type": "early"
+          }
+         ]
+        },
+        "xsi:type": "BallotMeasureSelection",
+        "Selection": {
+         "Text": {
+          "#text": "YES",
+          "language": "EN"
+         }
+        },
+        "objectId": "BS_144_154"
+       },
+       {
+        "VoteCountsCollection": {
+         "VoteCounts": [
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "212",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "135",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "43",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "34",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16200",
+           "Count": "84",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16200",
+           "Count": "68",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16200",
+           "Count": "8",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16200",
+           "Count": "8",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16300",
+           "Count": "77",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16300",
+           "Count": "50",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16300",
+           "Count": "15",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16300",
+           "Count": "12",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16400",
+           "Count": "81",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16400",
+           "Count": "60",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16400",
+           "Count": "12",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16400",
+           "Count": "9",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16500",
+           "Count": "171",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16500",
+           "Count": "125",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16500",
+           "Count": "31",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16500",
+           "Count": "15",
+           "Type": "early"
+          },
+          {
+           "GpUnitId": "PRECINCT_16600",
+           "Count": "138",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16600",
+           "Count": "86",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16600",
+           "Count": "37",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16600",
+           "Count": "15",
+           "Type": "early"
+          }
+         ]
+        },
+        "xsi:type": "BallotMeasureSelection",
+        "Selection": {
+         "Text": {
+          "#text": "NO",
+          "language": "EN"
+         }
+        },
+        "objectId": "BS_144_156"
+       }
+      ],
+      "ElectoralDistrictId": "DISTRICT_110"
+     },
+     {
+      "BallotTitle": {
+       "Text": {
+        "#text": "Sunbury City A - Sticks Table & Tap - Spirituous liquor",
+        "language": "EN"
+       }
+      },
+      "Name": "Sunbury City A - Sticks Table & Tap - Spirituous liquor",
+      "objectId": "CONTEST_142",
+      "SummaryCounts": {
+       "Undervotes": "34",
+       "Overvotes": "0"
+      },
+      "xsi:type": "BallotMeasureContest",
+      "BallotSelection": [
+       {
+        "VoteCountsCollection": {
+         "VoteCounts": [
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "765",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "526",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "143",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "96",
+           "Type": "early"
+          }
+         ]
+        },
+        "xsi:type": "BallotMeasureSelection",
+        "Selection": {
+         "Text": {
+          "#text": "YES",
+          "language": "EN"
+         }
+        },
+        "objectId": "BS_142_149"
+       },
+       {
+        "VoteCountsCollection": {
+         "VoteCounts": [
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "140",
+           "Type": "total"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "100",
+           "Type": "election-day"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "20",
+           "Type": "absentee"
+          },
+          {
+           "GpUnitId": "PRECINCT_16100",
+           "Count": "20",
+           "Type": "early"
+          }
+         ]
+        },
+        "xsi:type": "BallotMeasureSelection",
+        "Selection": {
+         "Text": {
+          "#text": "NO",
+          "language": "EN"
+         }
+        },
+        "objectId": "BS_142_151"
+       }
+      ],
+      "ElectoralDistrictId": "DISTRICT_200"
+     }
+    ]
+   }
+  }
+ }
+}

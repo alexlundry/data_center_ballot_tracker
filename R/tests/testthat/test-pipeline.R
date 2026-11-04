@@ -132,6 +132,70 @@ test_that("Enhanced Voting's 0 of 0 units before the first upload is unknown, no
   expect_true(is.na(res$precincts_reporting)); expect_true(is.na(res$precincts_total))
 })
 
+# Cut from Delaware's 10:30 pm Nov 3 feed with its real counts: Sunbury's question plus a
+# Sunbury liquor option, and only the precincts and district they name
+test_that("NIST results feed (Delaware) reads Sunbury from each precinct's total, not its parts", {
+  fetch_text <<- function(url, ...) paste(readLines(url, warn = FALSE), collapse = "\n")
+  src <- src_row("oh-sunbury"); src$api_url <- fx("delaware_nist_20261103.json")
+  expect_equal(src$adapter, "nist_json")
+  res <- adapter_nist_json(src)
+  expect_equal(res$yes_votes, 2809L); expect_equal(res$no_votes, 763L)
+  expect_equal(res$precincts_reporting, 6L); expect_equal(res$precincts_total, 6L)
+  expect_equal(res$raw_contest, "City of Sunbury - Proposed Charter Amendment")
+  expect_equal(res$as_of, "2026-11-03T22:30:10-0500")
+})
+
+test_that("NIST feed counts a precinct in once the whole county is, or once it says completed", {
+  js <- jsonlite::fromJSON(fx("delaware_nist_20261103.json"), simplifyVector = FALSE)
+  js$reporting <- "90/180"
+  f <- tempfile(fileext = ".json"); jsonlite::write_json(js, f, auto_unbox = TRUE, null = "null")
+  src <- src_row("oh-sunbury"); src$api_url <- f
+  expect_equal(adapter_nist_json(src)$precincts_reporting, 0L)
+  gp <- js$ElectionReport$GpUnitCollection$GpUnit
+  i <- which(purrr::map_chr(gp, "objectId") == "PRECINCT_16100")
+  js$ElectionReport$GpUnitCollection$GpUnit[[i]]$CountStatus[[1]] <- list(Status = "completed", Type = "total")
+  jsonlite::write_json(js, f, auto_unbox = TRUE, null = "null")
+  expect_equal(adapter_nist_json(src)$precincts_reporting, 1L)
+})
+
+# Butler County KS's livevoterturnout page as served Nov 4 (real counts)
+test_that("Butler KS ENR reads the City of El Dorado Question, not the township clerk race", {
+  src <- src_row("ks-el-dorado"); src$local_file <- fx("butlerks_enr_20261103.html")
+  expect_equal(src$adapter, "ohio_enr")
+  res <- adapter_ohio_enr(src)
+  expect_equal(res$yes_votes, 2966L); expect_equal(res$no_votes, 1183L)
+  expect_equal(res$raw_contest, "City of El Dorado Question")
+  # the page reports ballot types complete, not precincts
+  expect_true(is.na(res$precincts_reporting))
+})
+
+# Trumbull's unofficial summary of 6:48 am Nov 4 (real counts), a fixed file it overwrites
+test_that("Trumbull's summary reads Hubbard's Approval / Rejection of the data center ban", {
+  src <- src_row("oh-hubbard"); src$local_file <- fx("trumbull_20261103_summary.pdf")
+  expect_equal(src$api_url, "https://boe.co.trumbull.oh.gov/pdfs/Election%20Summary.pdf")
+  res <- adapter_pdf(src)
+  expect_equal(res$yes_votes, 2622L); expect_equal(res$no_votes, 802L)
+  expect_match(res$raw_contest, "^Hubbard City Proposed Ordinance Data Centers")
+})
+
+# Franklin County KS posts InDesign results sheets; rows 55-60 of pdf_text on its Nov 3 "_6" file
+test_that("Franklin County KS sheet: inline reads Ottawa's YES and NO from the question's own row", {
+  lines <- c(
+    "                                                                                      Kim R. Schroeder          5918      2799     Other                      Yes     No",
+    "REP Kris Kobach                     6049    REP Destry Brown                  1602",
+    "                                                                                      Lori Ann Bolton Fleming   5315      3213     Constitutional Amendment   7062   2490",
+    "DEM Chris Mann                      3676    DEM Heather Guernsey              591",
+    "                                                                                      Jacy Hurst                5011      3512     City of Ottawa Question    2882   1129",
+    "Write-In Totals                      12     Write-In Totals                     2")
+  src <- src_row("ks-ottawa")
+  expect_true(isTRUE(parse_extra(src$extra_json)$inline))
+  res <- pdf_contest_result(lines, src)
+  expect_equal(res$yes_votes, 2882L); expect_equal(res$no_votes, 1129L)
+  expect_true(is.na(res$precincts_reporting))
+  # a row without both counts is an error, never a 0
+  expect_error(pdf_contest_result(str_replace(lines, "2882   1129", "2882"), src), "inline")
+})
+
 test_that("LA County JSON walks ContestGroups to Alhambra Measure DB", {
   src <- src_row("ca-alhambra"); src$api_url <- fx("lavote_4348.json")
   res <- adapter_json_generic(src)
@@ -223,9 +287,9 @@ test_that("Hart two-column summary: columns = 2 reads a right-hand contest's own
   expect_equal(c(adapter_pdf(src)$yes_votes, adapter_pdf(src)$no_votes), c(141L, 104L))
   src$contest_pattern <- "City of Columbus\\W+Proposed Charter Amendment"
   expect_equal(c(adapter_pdf(src)$yes_votes, adapter_pdf(src)$no_votes), c(776L, 377L))
-  # Sunbury and Defiance use the option; their patterns cannot span both columns
-  expect_equal(parse_extra(src_row("oh-sunbury")$extra_json)$columns, 2)
-  expect_false(str_detect(src_row("oh-sunbury")$contest_pattern, fixed(".*")))
+  # Sunbury (its PDF, now behind the NIST feed) and Defiance use the option; their patterns cannot span both columns
+  expect_equal(parse_extra(src_row("oh-sunbury", "2")$extra_json)$columns, 2)
+  expect_false(str_detect(src_row("oh-sunbury", "2")$contest_pattern, fixed(".*")))
   de <- src_row("oh-defiance"); de$local_file <- fx("defiance_20260505_summary.pdf")
   expect_no_error(tryCatch(adapter_pdf(de), error = function(e) if (grepl("not found", conditionMessage(e))) NULL else stop(e)))
 })

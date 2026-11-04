@@ -30,6 +30,7 @@ pdf_contest_result <- function(lines, src) {
   # "stop_at_vote_for": false keeps the window open past its own "Vote For 1",
   # which sits five rows under the title
   e <- parse_extra(src$extra_json)
+  if (isTRUE(e$inline)) return(pdf_inline_result(lines[idx[1]], src))
   # "columns": 2, for Hart summary reports (Delaware, Defiance), which print
   # contests side by side; pdf_text joins both columns on one line, so a
   # right-hand contest would read the left-hand one's counts. A right-hand
@@ -76,6 +77,24 @@ pdf_contest_result <- function(lines, src) {
     contest = lines[idx[1]], choice = c("Yes", "No"),
     votes = votes,
     precincts_reporting = prec[1], precincts_total = prec[2],
+    ballots_cast = NA_integer_, registered_voters = NA_integer_
+  )
+  src2 <- src; src2$contest_pattern <- ""; src2$yes_pattern <- "^Yes$"; src2$no_pattern <- "^No$"
+  standardize_result(tbl, src2)
+}
+
+# "inline": true, for Franklin County KS's InDesign results sheets, which print
+# a question on one row under a Yes / No header, beside other boxes' columns
+# ("Jacy Hurst 5011 3512 City of Ottawa Question 2882 1129"): YES and NO are
+# the first two whole numbers after the title. The sheets give no precincts.
+pdf_inline_result <- function(line, src) {
+  at <- str_locate(line, regex(src$contest_pattern, ignore_case = TRUE))[1, 2]
+  nums <- str_extract_all(str_sub(line, at + 1), "(?<![\\d.,])\\d[\\d,]*(?![\\d.,%])")[[1]]
+  if (length(nums) < 2) stop("inline: no YES and NO counts after the title in ", line)
+  tbl <- tibble(
+    contest = str_sub(line, str_locate(line, regex(src$contest_pattern, ignore_case = TRUE))[1, 1], at),
+    choice = c("Yes", "No"), votes = parse_int(nums[1:2]),
+    precincts_reporting = NA_integer_, precincts_total = NA_integer_,
     ballots_cast = NA_integer_, registered_voters = NA_integer_
   )
   src2 <- src; src2$contest_pattern <- ""; src2$yes_pattern <- "^Yes$"; src2$no_pattern <- "^No$"

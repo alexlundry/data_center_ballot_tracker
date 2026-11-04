@@ -9,6 +9,7 @@ ADAPTERS <- list(
   ohio_enr     = function(src, ctx) adapter_ohio_enr(src),
   pdf          = function(src, ctx) adapter_pdf(src),
   franklin_live = function(src, ctx) adapter_franklin_live(src),
+  nist_json    = function(src, ctx) adapter_nist_json(src),
   sheet        = function(src, ctx) adapter_sheet(src),
   manual       = function(src, ctx) adapter_manual(src, ctx$manual_tbl)
 )
