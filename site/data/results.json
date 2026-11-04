@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T20:44:40-0500",
+  "generated_at": "2026-11-03T20:48:40-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -12,7 +12,7 @@
     "mean_allow_pct": 26.4,
     "pooled_restrict_pct": 75,
     "total_votes_counted": 39804,
-    "fetch_failures": 15
+    "fetch_failures": 16
   },
   "races": [
     {
@@ -809,10 +809,10 @@
       "as_of": "2026-11-03T20:24:35-0500",
       "source_url": "https://bloomingtonelectionsil.gov/elections/pastresults/",
       "adapter": "clarity",
-      "note": null,
+      "note": "stale: last fetch failed",
       "status_override": null,
-      "fetch_ok": true,
-      "fetch_error": null,
+      "fetch_ok": false,
+      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway. | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 14016,
       "yes_pct": 79.52,
       "no_pct": 20.48,
@@ -893,7 +893,7 @@
       "note": "stale: last fetch failed",
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway. | pdf: not a PDF; set api_url to the results PDF",
+      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 504 Gateway Timeout. | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -924,7 +924,7 @@
       "note": "stale: last fetch failed",
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway. | pdf: not a PDF; set api_url to the results PDF",
+      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 504 Gateway Timeout. | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -955,7 +955,7 @@
       "note": "stale: last fetch failed",
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway. | pdf: not a PDF; set api_url to the results PDF",
+      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 504 Gateway Timeout. | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -986,7 +986,7 @@
       "note": "stale: last fetch failed",
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway. | pdf: not a PDF; set api_url to the results PDF",
+      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 504 Gateway Timeout. | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
