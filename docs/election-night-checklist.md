@@ -1,12 +1,12 @@
 # Election night: what you need to do (Nov 3, 2026)
 
-Updated 8:30 pm ET. Of the 45 measures, the loop reads 30 on its own. This page lists only what needs you:
+Updated 8:40 pm ET. Of the 45 measures, the loop reads 31 on its own. This page lists only what needs you:
 
-1. **Save files** for 2 Ohio counties.
+1. **Save files** for 1 Ohio county (Franklin).
 2. **Enter 13 races by hand**: the 8 Maine towns, the 4 Kansas cities, and Monroeville.
-3. **Watch 5 automatic races** and enter one by hand if it stays blank after the county posts.
+3. **Watch 6 automatic races** and enter one by hand if it stays blank after the county posts.
 4. **Check each race's first numbers once** against the county page.
-5. **Mark 9 races final** when their counts are complete, because they cannot finish on their own.
+5. **Mark 10 races final** when their counts are complete, because they cannot finish on their own.
 
 ## How to enter a race in the sheet
 
@@ -18,16 +18,15 @@ Use the `manual_results` tab of the Google Sheet, on the race's row:
 - Set `status = final` once the count is complete.
 - To tell readers when a count is coming (for example "Town office reopens Thursday"), type one sentence in `public_note` (column Z).
 
-## 1. Save files to the drop folder (2 Ohio counties)
+## 1. Save files to the drop folder (1 Ohio county)
 
 The drop folder is the Google Drive folder **Data Center Tracker / Election Night Drop**. Any filename works, and the newest file wins. Save again each time the county updates. `make drop` lists races with no file yet.
 
 | County | Race | Where | What to save | Contest |
 |---|---|---|---|---|
-| Lucas | Oregon | [ENR page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html) | Wait for the contest list to load, then File > Save Page As > "Webpage, Complete" | 25. Oregon Prohibition of Construction of a Data Center |
 | Franklin | Grove City | [Franklin's 2026 page](https://vote.franklincountyohio.gov/election-info/2026), then its results link | The results page as "Webpage, Complete", or the summary PDF | Issue 28, Grove City charter amendment |
 
-**No longer needed:** Adams, Ashtabula, Butler, Champaign, Clinton, Defiance, Licking and Wyandot. The loop reads their PDFs straight from the county (Butler's summary PDF since 8:26 pm) and uses whichever file is newer, the county's or yours. Save one only if its race stops updating.
+**No longer needed:** Adams, Ashtabula, Butler, Champaign, Clinton, Defiance, Licking, Lucas and Wyandot. The loop reads their files straight from the county (Butler's summary PDF since 8:26 pm, Lucas's precinct CSV since 8:36 pm) and uses whichever file is newer, the county's or yours. Save one only if its race stops updating.
 
 ## 2. Enter by hand (13 races)
 
@@ -66,6 +65,7 @@ If a county posts a text PDF at a stable address, tell Claude: setting that race
 | Race | Where to look | Why it might not read |
 |---|---|---|
 | Sunbury OH (Delaware) | [Delaware live results](https://boeresults.delco-gis.org/) or [Delaware BOE](https://vote.delawarecountyohio.gov/) | Delaware's zero report was a scanned PDF. Its live site's data feed carries "City of Sunbury - Proposed Charter Amendment", and Claude can build a reader for it once counts appear |
+| Oregon OH (Lucas) | [Lucas results page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html) | At 8:30 pm the page still said "Updated: 10/28/2026" with every race at 0. If Lucas posts somewhere else tonight (its own site, lucascountyohiovotes.gov, is bot-checked for the loop), enter Oregon by hand |
 | Hubbard OH (Trumbull) | [Trumbull results](https://boe.co.trumbull.oh.gov/boe_results.html) | The loop finds Trumbull's PDF once it is posted; its layout is the least tested |
 | Upper Sandusky OH (Wyandot) | [Wyandot results](https://www.boe.ohio.gov/wyandot/election-info/election-results) | Read directly once posted, but the contest title is a best guess ("Charter Amendment Prohibition of a Data Center") |
 | Morgan County IL | [Morgan County clerk](https://morgancounty-il.com/wp/departments/county-clerk/) | The loop needs GBS to list the Nov 3 election |
@@ -84,7 +84,8 @@ The first time a race shows numbers, compare its YES and NO once with the county
 | Sprigg, Monroe Twp (Adams) | [Adams PDF](https://www.boe.ohio.gov/adams/c/elecres/20261103results.pdf) ("For / Against the Zoning Resolution"; For is YES) |
 | Pataskala, Granville (Licking) | [Licking PDF](https://www.boe.ohio.gov/licking/c/elecres/20261103results.pdf) (Pataskala is the "Data Centers" amendment, the last of four) |
 | Wilmington parcels 1–4 (Clinton) | [Clinton PDF](https://www.boe.ohio.gov/clinton/c/elecres/20261103results.pdf) (O-26-04 is parcel 1, O-26-06 parcel 2, O-26-07 parcel 3, O-26-05 parcel 4) |
-| Oregon, Grove City | The pages you save in step 1 |
+| Oregon | [Lucas results page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html), contest 25 |
+| Grove City | The page you save in step 1 |
 | Hubbard, Sunbury, Upper Sandusky | The pages in step 3 |
 | Bloomington IL | [Clarity](https://results.enr.clarityelections.com/IL/Bloomington/127392/) (showing 5,083 to 1,107 at 8:10 pm; not yet checked) |
 | Joliet Township IL | [Clarity](https://results.enr.clarityelections.com/IL/Will/127394/) |
@@ -100,7 +101,7 @@ The first time a race shows numbers, compare its YES and NO once with the county
 
 These races print no precinct count, or keep counting mail ballots for days, so they stay under "Still out" until you finish them. Once the county's count is complete, type its final YES and NO in the sheet and set `status = final`:
 
-- **No precinct line:** Urbana, Conneaut, Pataskala, Granville, Sprigg, Monroe Township, Edgewater.
+- **No precinct line:** Urbana, Conneaut, Pataskala, Granville, Sprigg, Monroe Township, Edgewater, Oregon.
 - **Late counting:** Alhambra (mail ballots for weeks) and Boulder City (mail ballots for days). Mark these final only when the county finishes.
 - **All 13 hand-entered races** (step 2), once each count is complete.
 

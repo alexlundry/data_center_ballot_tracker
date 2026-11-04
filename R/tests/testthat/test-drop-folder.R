@@ -213,21 +213,46 @@ test_that("a county PDF fetched directly is used when it is at least as new as t
               results_url = "https://www.boe.ohio.gov/champaign/",
               api_url = "https://www.boe.ohio.gov/champaign/c/elecres/20261103results.pdf",
               yes_pattern = NA, no_pattern = NA)
-  real <- direct_pdf; on.exit(assign("direct_pdf", real, envir = globalenv()))
+  real <- direct_file; on.exit(assign("direct_file", real, envir = globalenv()))
   stub <- function(at) function(src) list(path = live, modified = as.POSIXct(at, tz = "America/New_York"))
-  assign("direct_pdf", stub("2026-11-03 21:00"), envir = globalenv())
+  assign("direct_file", stub("2026-11-03 21:00"), envir = globalenv())
   res <- run_adapter(src, list())
   expect_equal(c(res$yes_votes, res$no_votes), c(1204L, 868L))
   expect_equal(res$as_of, "2026-11-03T21:00:00-0500")
   # an older county file loses to a newer download
-  assign("direct_pdf", stub("2026-11-03 19:00"), envir = globalenv())
+  assign("direct_file", stub("2026-11-03 19:00"), envir = globalenv())
   res <- run_adapter(src, list())
   expect_equal(c(res$yes_votes, res$no_votes), c(10L, 20L))
   # a challenge page or 404 (NULL) falls back to the drop folder
-  assign("direct_pdf", function(src) NULL, envir = globalenv())
+  assign("direct_file", function(src) NULL, envir = globalenv())
   expect_equal(run_adapter(src, list())$yes_votes, 10L)
   # a direct PDF without the contest falls back too
   other <- make_pdf(tempfile(fileext = ".pdf"), "Issue 3 Village of Elsewhere Levy", "5", "5")
-  assign("direct_pdf", function(src) list(path = other, modified = Sys.time()), envir = globalenv())
+  assign("direct_file", function(src) list(path = other, modified = Sys.time()), envir = globalenv())
   expect_equal(run_adapter(src, list())$yes_votes, 10L)
+})
+
+test_that("Lucas's precinct CSV, read directly, sums Oregon's precinct rows", {
+  d <- new_drop()
+  csv <- tempfile(fileext = ".csv")
+  writeLines(c("﻿Unofficial Election Results", "Lucas County",
+               "Precinct,Contest Name,Candidate Name,Votes,Voter Turnout",
+               '"OREGON 1","25. Oregon Prohibition of Construction of a Data Center","YES","120","40.00%"',
+               '"OREGON 1","25. Oregon Prohibition of Construction of a Data Center","NO","80","40.00%"',
+               '"OREGON 2","25. Oregon Prohibition of Construction of a Data Center","YES","1,005","38.10%"',
+               '"OREGON 2","25. Oregon Prohibition of Construction of a Data Center","NO","995","38.10%"',
+               '"OREGON 2","26. Oregon Charter Amendment","YES","7","38.10%"',
+               '"OREGON 2","26. Oregon Charter Amendment","NO","9","38.10%"'), csv)
+  s <- readr::read_csv(file.path(ROOT, "data/sources.csv"), show_col_types = FALSE,
+                       col_types = readr::cols(.default = readr::col_character()))
+  src <- as.list(s[s$race_id == "oh-oregon" & s$priority == "1", ][1, ])
+  expect_equal(src$adapter, "csv_generic")
+  real <- direct_file; on.exit(assign("direct_file", real, envir = globalenv()))
+  assign("direct_file", function(src) list(path = csv, modified = as.POSIXct("2026-11-03 21:00", tz = "America/New_York")), envir = globalenv())
+  res <- run_adapter(src, list())
+  expect_equal(c(res$yes_votes, res$no_votes), c(1125L, 1075L))
+  expect_equal(res$raw_contest, "25. Oregon Prohibition of Construction of a Data Center")
+  # a challenge page instead of the CSV falls through to the saved page (none here)
+  assign("direct_file", function(src) NULL, envir = globalenv())
+  expect_true(inherits(run_adapter(src, list()), "adapter_error"))
 })

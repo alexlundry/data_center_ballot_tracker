@@ -23,12 +23,12 @@ run_adapter <- function(src, ctx) {
     # (R/adapters/drop_folder.R) and date the result by that file. The url is
     # never requested, so an unfilled ELECTION_ID in it does not matter.
     if (needs_drop(src)) {
-      # Nov 3 evening: boe.ohio.gov began serving the county results PDFs to
-      # plain requests (no-store, straight from the county), though its pages
+      # Nov 3 evening: boe.ohio.gov began serving the county results PDFs (and
+      # Lucas its precinct CSV) to plain requests (no-store, straight from the county), though its pages
       # still answer with a bot challenge. Ask once for the file itself and use
       # it when it is a real PDF holding the contest and is at least as new as
       # the newest dropped file; otherwise the drop folder, as before.
-      direct <- direct_pdf(src)
+      direct <- direct_file(src)
       dropped <- tryCatch(find_drop_file(src), error = function(e) NULL)
       if (!is.null(direct) && (is.null(dropped) || file.info(dropped)$mtime <= direct$modified)) {
         res <- tryCatch(fn(modifyList(src, list(local_file = direct$path)), ctx), error = function(e) NULL)

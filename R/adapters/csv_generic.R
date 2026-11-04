@@ -14,7 +14,7 @@
 
 adapter_csv_generic <- function(src) {
   e <- parse_extra(src$extra_json)
-  path <- fetch_file(src$api_url %||% src$results_url, ext = ".csv")
+  path <- src$local_file %||% fetch_file(src$api_url %||% src$results_url, ext = ".csv")
   df <- readr::read_csv(path, skip = e$skip %||% 0, show_col_types = FALSE,
                         col_types = readr::cols(.default = readr::col_character()))
   contest_col <- find_col(df, e$contest_col %||% "Contest")
