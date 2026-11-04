@@ -117,11 +117,18 @@ nav.tabs a:hover, nav.tabs a.active { color: var(--fg); border-bottom-color: var
 .banner input[type=range] { width: 160px; accent-color: var(--allow); }
 
 /* Hero */
-.hero { background: linear-gradient(120deg, var(--navy-1) 0%, var(--navy-2) 50%, var(--navy-3) 100%); color: var(--fg-on-dark); position: relative; overflow: hidden; }
+/* clip, not just hidden: the glows below stick out past the edge, and a hidden-overflow box can still be
+   scrolled sideways (focus or find-in-page on the summary's buttons slid the whole hero over) */
+.hero { background: linear-gradient(120deg, var(--navy-1) 0%, var(--navy-2) 50%, var(--navy-3) 100%); color: var(--fg-on-dark); position: relative; overflow: hidden; overflow: clip; }
 .hero::before { content: ''; position: absolute; top: -40%; right: -10%; width: 420px; height: 420px; background: radial-gradient(circle, rgba(169,49,120,0.22), transparent 70%); pointer-events: none; }
 .hero::after { content: ''; position: absolute; bottom: -50%; left: -5%; width: 360px; height: 360px; background: radial-gradient(circle, rgba(162,56,56,0.12), transparent 70%); pointer-events: none; }
 .hero .wrap { padding-block: 26px 22px; position: relative; z-index: 1; }
 .hero .eyebrow { color: var(--primary-bright); letter-spacing: 0.2em; margin-bottom: 10px; }
+/* The eyebrow shares its line with the summary's Copy image / Download buttons, restyled for the navy */
+.hero-eyebrow { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 16px; margin-bottom: 10px; }
+.hero-eyebrow .eyebrow { margin-bottom: 0; }
+.hero .png-actions button { background: transparent; border-color: rgba(245,241,232,0.3); color: var(--fg-on-dark-dim); }
+.hero .png-actions button:hover, .hero .png-actions button:focus-visible { color: #fff; border-color: #fff; }
 .hero-top { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: end; }
 .hero-top.has-cd { grid-template-columns: minmax(0, 1fr) auto; }
 .hero h2.lead { color: #fff; font-family: var(--serif); font-size: 21px; font-weight: 400; line-height: 1.42; margin: 0; max-width: 780px; font-variation-settings: 'opsz' 24; }
@@ -658,7 +665,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
 
 <section class="hero" id="overview">
   <div class="wrap">
-    <div class="eyebrow">November 3, 2026 · Local ballot measures on data centers · United States</div>
+    <div class="hero-eyebrow"><div class="eyebrow">November 3, 2026 · Local ballot measures on data centers · United States</div><span class="png-actions" data-png="hero"><button type="button" data-png-act="copy" title="Copy this summary as an image">Copy image</button><button type="button" data-png-act="download" title="Download this summary as a PNG">Download</button></span></div>
     <div class="hero-top" id="heroTop">
       <div><h2 class="lead" id="headline">Loading the race list…</h2><p class="precedent" id="precedent"></p></div>
       <div class="countdown" id="countdown" hidden><div class="cd-n" id="cdN"></div><div class="cd-l" id="cdL"></div></div>
@@ -1092,7 +1099,8 @@ function countUps(root) {
     prevStat.set(key, to);
     if (REDUCED || from === to) return;
     const t0 = performance.now(), dur = 750;
-    const step = (now) => { const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(from + (to - from) * e); if (p < 1) requestAnimationFrame(step); };
+    // An image export settles the count (settleMarks); stop there rather than write an in-between number back
+    const step = (now) => { if (el.dataset.settled) return; const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(from + (to - from) * e); if (p < 1) requestAnimationFrame(step); };
     el.textContent = fmt(from); requestAnimationFrame(step);
   });
 }
@@ -1236,7 +1244,7 @@ function renderStatus() {
 function precedentHTML() {
   const dec = A.decided; if (!dec.length) return '';
   const rw = dec.filter((v) => v.leader === 'restrict'), sh = rw.map((v) => v.rPct);
-  const tail = ' <a href="?status=earlier#races" data-status="earlier">See them ›</a>';
+  const tail = ' <a class="png-skip" href="?status=earlier#races" data-status="earlier">See them ›</a>';
   if (rw.length === dec.length) return `Before Nov 3: <b>Restrict won all ${dec.length}</b> data center measures decided earlier in 2026, with ${pct0(Math.min(...sh))} to ${pct0(Math.max(...sh))} of the vote.${tail}`;
   return `Before Nov 3: <b>Restrict won ${rw.length} of ${dec.length}</b> data center measures decided earlier in 2026.${tail}`;
 }
@@ -2008,6 +2016,10 @@ async function buildFontCSS() {
 // What each button exports; patterns and maps get their legend, which sits outside the card.
 function pngTarget(kind) {
   if (kind === 'race') return { node: $('#modal'), extras: [], name: 'race-' + openId };
+  // The hero's content column, given the section's navy gradient: the section itself spans the whole window.
+  // The image keeps each box's on-page height, and on a phone the buttons and the "See them" link take lines
+  // of their own, so the hero is measured with them in place (fullHeight) or its last lines would be cut off.
+  if (kind === 'hero') return { node: $('#overview .wrap'), extras: [], name: 'summary', bg: getComputedStyle($('#overview')).backgroundImage, fullHeight: true };
   if (kind === 'line') return { node: $('#strip').closest('.card'), extras: [], name: 'overview-line-' + groupBy };
   if (kind === 'score') return { node: $('#scorecard'), extras: [], name: A.pre ? 'on-the-ballot' : 'scorecard' };
   if (kind === 'map-us') return { node: $('#mapCard'), extras: [$('#mapLegend')], name: 'map-us' };
@@ -2025,6 +2037,8 @@ function pngHeading(kind) {
     : done ? `Complete unofficial counts: Restrict won ${A.rWon}, Allow won ${A.aWon}.` : `Complete counts so far: Restrict won ${A.rWon}, Allow won ${A.aWon}. Still open: ${andList(open)}.`;
   const BY = { all: '', yes: ', by what a YES vote does', kind: ', by type of measure', state: ', by state' };
   const PAT = { dir: 'what a YES vote does', kind: 'type of measure', origin: 'who put them on the ballot', state: 'state' };
+  // The summary carries its own eyebrow and headline
+  if (kind === 'hero') return { kicker };
   if (kind === 'race') {
     const v = views.find((x) => x.race.race_id === openId), r = v && v.race;
     if (!r) return { kicker };
@@ -2065,10 +2079,12 @@ function pinLines(roots) {
   }));
   return () => pinned.forEach(([el, ws]) => { el.style.whiteSpace = ws; });
 }
-// Bars and dots still easing into place (just after a refresh or a regroup) jump to where they are headed.
+// Bars and dots still easing into place (just after a refresh or a regroup) jump to where they are headed,
+// and the summary's counting-up numbers to their totals.
 function settleMarks(roots) {
   document.documentElement.classList.add('png-busy');
   roots.filter(Boolean).forEach((root) => root.querySelectorAll('[data-w]').forEach((el) => { el.style.width = el.dataset.w + '%'; el.removeAttribute('data-w'); }));
+  roots.filter(Boolean).forEach((root) => root.querySelectorAll('[data-count]').forEach((el) => { el.dataset.settled = '1'; el.textContent = fmt(+el.dataset.count); }));
   if (window.d3) d3.selectAll('#strip circle.sdot').interrupt().attr('cx', (d) => d.x).attr('cy', (d) => d.cy).attr('r', (d) => d.r);
   return () => document.documentElement.classList.remove('png-busy');
 }
@@ -2088,10 +2104,10 @@ async function renderPNG(kind) {
   if (fontCSS == null) fontCSS = await buildFontCSS().catch(() => '');
   // style resets the exported root: the race card's centering margins would otherwise be copied as fixed offsets.
   const pr = 2, opts = { pixelRatio: pr, fontEmbedCSS: fontCSS, style: { margin: '0' }, filter: (n) => !(n.classList && PNG_SKIP.some((c) => n.classList.contains(c))) };
-  const unsettle = settleMarks([t.node]), h = contentHeight(t.node), unpin = pinLines([t.node, ...t.extras]), extras = [];
+  const unsettle = settleMarks([t.node]), h = t.fullHeight ? Math.ceil(t.node.getBoundingClientRect().height) : contentHeight(t.node), unpin = pinLines([t.node, ...t.extras]), extras = [];
   let main;
   try {
-    main = await lib.toCanvas(t.node, { ...opts, height: h, backgroundColor: '#ffffff' });
+    main = await lib.toCanvas(t.node, { ...opts, height: h, ...(t.bg ? { backgroundColor: '#1f2c4a', style: { ...opts.style, backgroundImage: t.bg, borderRadius: '6px' } } : { backgroundColor: '#ffffff' }) });
     // A legend wider than its chart (the map legend under the Ohio card) re-wraps to the chart's width.
     for (const el of t.extras) {
       if (!el || !el.textContent.trim()) continue;
