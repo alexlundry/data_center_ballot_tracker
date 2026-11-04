@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T20:30:47-0500",
+  "generated_at": "2026-11-03T20:32:43-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -12,7 +12,7 @@
     "mean_allow_pct": 24.3,
     "pooled_restrict_pct": 76.1,
     "total_votes_counted": 37158,
-    "fetch_failures": 15
+    "fetch_failures": 12
   },
   "races": [
     {
@@ -845,10 +845,10 @@
       "as_of": "2026-11-03T18:00:34-0500",
       "source_url": "https://www.willcountyclerk.gov/elections/election-results/",
       "adapter": "clarity",
-      "note": "stale: last fetch failed",
+      "note": null,
       "status_override": null,
-      "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway.",
+      "fetch_ok": true,
+      "fetch_error": null,
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -876,10 +876,10 @@
       "as_of": "2026-10-31T15:51:26-0400",
       "source_url": "https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php",
       "adapter": "clarity",
-      "note": "stale: last fetch failed",
+      "note": null,
       "status_override": null,
-      "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway. | pdf: not a PDF; set api_url to the results PDF",
+      "fetch_ok": true,
+      "fetch_error": null,
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -1697,10 +1697,10 @@
       "as_of": "2026-10-31T15:51:39-0400",
       "source_url": "https://cumberlandcountyclerknj.gov/election-information/election-results/",
       "adapter": "clarity",
-      "note": "stale: last fetch failed",
+      "note": null,
       "status_override": null,
-      "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway.",
+      "fetch_ok": true,
+      "fetch_error": null,
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
