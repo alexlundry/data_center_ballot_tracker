@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T11:00:55-0500",
+  "generated_at": "2026-11-04T12:08:49-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -2305,10 +2305,10 @@
       "registered_voters": 3996,
       "raw_contest": "manual entry",
       "as_of": "2026-11-04T10:53:00-0500",
-      "source_url": "https://www.townofnorthberwick.org/355/Town-Meeting-Elections",
+      "source_url": "https://www.townofnorthberwick.org/DocumentCenter/View/1639/2026-Election--Town-Results",
       "adapter": "manual",
-      "note": "entered by Alex (by phone); entered by Claude: By phone from the North Berwick town office, Nov 4: Question 2 (Proposed Zoning Ordinance Amendment to Define and Prohibit Data Centers), YES 2,114 / NO 582; YES enacts the ban. Blanks and total ballots not given. The town says the results are on its Facebook page (facebook.com/northberwicktownoffice), which needs a Facebook login to view; no return in the town's Document Center as of 10:55 am. One polling place (North Berwick Elementary School), so 1 of 1.",
-      "status_override": null,
+      "note": "entered by Alex (by phone); source swapped by Claude: Town of North Berwick, November 2026 Referendum, OFFICIAL RESULTS, certified 11/3/2026 by Town Clerk Christine M. Dudley (scan posted 12:01 am Nov 4 as DocumentCenter 1639, '2026 Election- Town Results'; the same file is also 1636, 'Town Referendum Results'): Question #2, Proposed Zoning Ordinance Amendment to Define and Prohibit Data Centers, Yes 2,114 / No 582. Matches the count Alex got by phone from the town office. One polling place, so 1 of 1.",
+      "status_override": "final",
       "fetch_ok": true,
       "fetch_error": null,
       "total_votes": 2696,
@@ -2322,7 +2322,7 @@
       "pct_reporting": 100,
       "est_votes_remaining": 0,
       "leader": "restrict",
-      "status": "all_precincts",
+      "status": "final",
       "public_note": null,
       "history": [
         {
