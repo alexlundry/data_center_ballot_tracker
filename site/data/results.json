@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T06:16:43-0500",
+  "generated_at": "2026-11-04T09:22:46-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -319,7 +319,7 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "counting",
-      "public_note": null,
+      "public_note": "Every precinct is counted; Franklin County still lists its count as unofficial.",
       "history": [
         {
           "t": "2026-11-03T22:20:48-0500",
@@ -499,7 +499,7 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "counting",
-      "public_note": null,
+      "public_note": "Lucas County's results (updated 2:51 am Nov 4) list absentee ballots as partially reported.",
       "history": [
         {
           "t": "2026-11-04T01:46:39-0500",
@@ -1045,7 +1045,7 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "counting",
-      "public_note": null,
+      "public_note": "Franklin County's unofficial results give no precinct count, so the count is not yet confirmed complete.",
       "history": [
         {
           "t": "2026-11-04T00:04:37-0500",
@@ -1499,7 +1499,7 @@
       "est_votes_remaining": null,
       "leader": "none",
       "status": "no_results",
-      "public_note": null,
+      "public_note": "Morgan County had posted no results as of 9:15 am Nov 4.",
       "history": []
     },
     {
@@ -2490,7 +2490,7 @@
       "est_votes_remaining": null,
       "leader": "restrict",
       "status": "counting",
-      "public_note": null,
+      "public_note": "Cumberland County's results have not updated since 11:58 pm Nov 3.",
       "history": [
         {
           "t": "2026-11-03T20:50:41-0500",
