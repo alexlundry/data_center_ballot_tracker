@@ -8,6 +8,7 @@ ADAPTERS <- list(
   ohio_sos     = function(src, ctx) adapter_ohio_sos(src, ctx$ohio_cache),
   ohio_enr     = function(src, ctx) adapter_ohio_enr(src),
   pdf          = function(src, ctx) adapter_pdf(src),
+  franklin_live = function(src, ctx) adapter_franklin_live(src),
   sheet        = function(src, ctx) adapter_sheet(src),
   manual       = function(src, ctx) adapter_manual(src, ctx$manual_tbl)
 )

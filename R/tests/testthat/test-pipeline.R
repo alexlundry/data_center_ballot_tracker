@@ -242,3 +242,12 @@ test_that("older numbers never replace newer published ones", {
   expect_false(older_than_published(list(as_of = NA), pub))
   expect_false(older_than_published(list(as_of = "2026-11-03T14:31:52-0500"), NULL))
 })
+
+test_that("Franklin's live viewer JSON: Grove City's #28 sums its precinct totals", {
+  src <- src_row("oh-grove-city", "0"); src$local_file <- fx("franklin_live_20261103.json")
+  expect_equal(src$adapter, "franklin_live")
+  res <- adapter_franklin_live(src)
+  expect_equal(c(res$yes_votes, res$no_votes), c(7694L, 6432L))
+  expect_equal(res$raw_contest, "#28 Proposed Charter Amendment City of Grove City")
+  expect_true(is.na(res$precincts_reporting))
+})
