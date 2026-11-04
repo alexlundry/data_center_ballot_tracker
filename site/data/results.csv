@@ -32,7 +32,7 @@ il-venice-twp,IL,Venice Township,2026-11-03,allow,311,978,1289,24.1,75.9,restric
 il-morgan-county,IL,Morgan County,2026-11-03,restrict,9413,1250,10663,88.3,88.3,restrict,,,,final,manual,2026-11-04T10:59:00-0500,https://morgancounty-il.com/wp/departments/county-clerk/,TRUE,manual entry
 wi-janesville,WI,City of Janesville,2026-11-03,restrict,16779,9932,26711,62.8,62.8,restrict,40,40,100,all_precincts,html_table,2026-11-04T00:02:39-0500,https://elections.co.rock.wi.us/20261103.html,TRUE,html_table
 ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,12496,2772,15268,81.8,81.8,restrict,,,,counting,json_generic,2026-11-04T06:16:38-0500,https://results.lavote.gov/election-list,TRUE,json_generic
-nv-boulder-city,NV,Boulder City,2026-11-03,allow,1973,4726,6699,29.4,70.6,restrict,,,,counting,html_table,2026-11-04T05:56:42-0500,https://elections.clarkcountynv.gov/ElectionResultsTV/ENR.aspx,TRUE,html_table
+nv-boulder-city,NV,Boulder City,2026-11-03,allow,1973,4726,6699,29.4,70.6,restrict,,,,counting,html_table,2026-11-04T05:56:42-0500,https://elections.clarkcountynv.gov/ElectionResultsTV/ENR.aspx,FALSE,html_table
 fl-edgewater,FL,City of Edgewater,2026-11-03,restrict,7875,2328,10203,77.2,77.2,restrict,,,,final,manual,2026-11-03T22:22:42-0500,https://app.enhancedvoting.com/results/public/volusia-county-fl/elections/2026GeneralElection,TRUE,manual entry
 ca-monterey-park,CA,City of Monterey Park,2026-06-02,restrict,10388,1372,11760,88.3,88.3,restrict,,,,final,manual,2026-06-26T10:25:48-0700,https://results.lavote.gov/,TRUE,manual entry
 wi-port-washington,WI,City of Port Washington,2026-04-07,restrict,2710,1371,4081,66.4,66.4,restrict,,,,final,manual,2026-04-08T09:00:00-0500,https://www.ozaukeepress.com/content/port-tif-referendum-approved-landslide,TRUE,manual entry
@@ -44,13 +44,13 @@ ga-glynn-gop,GA,Glynn County (Republican primary),2026-05-19,allow,,,,,,none,,,,
 ga-dekalb-dem,GA,DeKalb County (Democratic primary),2026-05-19,restrict,138816,8182,146998,94.4,94.4,restrict,191,191,100,final,manual,2026-06-05T08:35:12-0400,https://results.sos.ga.gov/,TRUE,manual entry
 ga-columbia-dem,GA,Columbia County (Democratic primary),2026-05-19,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 ga-glynn-dem,GA,Glynn County (Democratic primary),2026-05-19,allow,,,,,,none,,,,no_results,,,,TRUE,none yet
-oh-perry-village,OH,Village of Perry,2026-11-03,restrict,946,140,1086,87.1,87.1,restrict,1,1,100,all_precincts,pdf,2026-11-03T22:00:39-0500,https://www.lakecountyohio.gov/boe/election-results/,TRUE,pdf
+oh-perry-village,OH,Village of Perry,2026-11-03,restrict,946,140,1086,87.1,87.1,restrict,1,1,100,all_precincts,pdf,2026-11-03T22:00:39-0500,https://www.lakecountyohio.gov/boe/election-results/,FALSE,pdf
 me-north-berwick,ME,Town of North Berwick,2026-11-03,restrict,2114,582,2696,78.4,78.4,restrict,1,1,100,final,manual,2026-11-04T10:53:00-0500,https://www.townofnorthberwick.org/DocumentCenter/View/1639/2026-Election--Town-Results,TRUE,manual entry
 me-peru,ME,Town of Peru,2026-11-03,restrict,578,182,760,76,76,restrict,1,1,100,all_precincts,manual,2026-11-03T22:30:00-0500,https://www.sunjournal.com/2026/11/03/peru-backs-food-sovereignty-data-center-ballot-questions/,TRUE,manual entry
 me-wells,ME,Town of Wells,2026-11-03,restrict,5818,1282,7100,81.9,81.9,restrict,1,1,100,all_precincts,manual,2026-11-03T23:08:41-0500,https://www.wellstown.org/DocumentCenter/View/8557,TRUE,manual entry
 me-wiscasset,ME,Town of Wiscasset,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
-nd-harwood,ND,City of Harwood,2026-11-03,restrict,105,325,430,24.4,24.4,allow,1,1,100,all_precincts,json_generic,2026-11-04T00:20:37-0500,https://resultsnd.sos.nd.gov/#election=348,TRUE,json_generic
-nj-downe-twp,NJ,Downe Township,2026-11-03,allow,62,425,487,12.7,87.3,restrict,,,,counting,clarity,2026-11-03T23:58:40-0500,https://cumberlandcountyclerknj.gov/election-information/election-results/,TRUE,clarity
+nd-harwood,ND,City of Harwood,2026-11-03,restrict,105,325,430,24.4,24.4,allow,1,1,100,all_precincts,json_generic,2026-11-04T00:20:37-0500,https://resultsnd.sos.nd.gov/#election=348,FALSE,json_generic
+nj-downe-twp,NJ,Downe Township,2026-11-03,allow,62,425,487,12.7,87.3,restrict,,,,counting,clarity,2026-11-03T23:58:40-0500,https://cumberlandcountyclerknj.gov/election-information/election-results/,FALSE,clarity
 nj-belvidere,NJ,Town of Belvidere,2026-11-03,restrict,711,240,951,74.8,74.8,restrict,,,,final,manual,2026-11-03T22:19:00-0500,https://www.warrencountyvotes.com/home/showpublisheddocument/15033/639293406695852871,TRUE,manual entry
 nh-canterbury,NH,Town of Canterbury,2026-03-10,restrict,322,63,385,83.6,83.6,restrict,,,,final,manual,2026-03-11T09:00:00-0400,https://www.canterburynh.gov/wp-content/uploads/2026/03/Town-Meeting-Election-Results-3_10_26.pdf,TRUE,manual entry
 nh-nottingham,NH,Town of Nottingham,2026-09-08,restrict,1335,143,1478,90.3,90.3,restrict,,,,final,manual,2026-09-09T09:00:00-0400,https://www.nottingham-nh.gov/sites/g/files/vyhlif3611/f/pages/2026_nottingham_special_town_election_results.pdf,TRUE,manual entry
