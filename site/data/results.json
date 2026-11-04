@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T23:48:42-0500",
+  "generated_at": "2026-11-03T23:50:42-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -11,7 +11,7 @@
     "mean_restrict_pct": 74,
     "mean_allow_pct": 26,
     "pooled_restrict_pct": 72.1,
-    "total_votes_counted": 190933,
+    "total_votes_counted": 190999,
     "fetch_failures": 7
   },
   "races": [
@@ -2117,28 +2117,28 @@
     },
     {
       "race_id": "nd-harwood",
-      "yes_votes": 77,
-      "no_votes": 244,
+      "yes_votes": 92,
+      "no_votes": 295,
       "precincts_reporting": 0,
       "precincts_total": 1,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "1844",
-      "as_of": "2026-11-03T23:10:46-0500",
+      "as_of": "2026-11-03T23:50:42-0500",
       "source_url": "https://resultsnd.sos.nd.gov/#election=348",
       "adapter": "json_generic",
       "note": null,
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 321,
-      "yes_pct": 23.99,
-      "no_pct": 76.01,
-      "restrict_votes": 77,
-      "allow_votes": 244,
-      "restrict_pct": 23.99,
-      "allow_pct": 76.01,
-      "margin_pts": -52.02,
+      "total_votes": 387,
+      "yes_pct": 23.77,
+      "no_pct": 76.23,
+      "restrict_votes": 92,
+      "allow_votes": 295,
+      "restrict_pct": 23.77,
+      "allow_pct": 76.23,
+      "margin_pts": -52.46,
       "pct_reporting": 0,
       "est_votes_remaining": null,
       "leader": "allow",
@@ -2167,6 +2167,12 @@
           "t": "2026-11-03T23:10:46-0500",
           "yes": 77,
           "no": 244,
+          "rep": 0
+        },
+        {
+          "t": "2026-11-03T23:50:42-0500",
+          "yes": 92,
+          "no": 295,
           "rep": 0
         }
       ]
