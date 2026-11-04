@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T22:32:41-0500",
+  "generated_at": "2026-11-03T22:36:41-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -12,7 +12,7 @@
     "mean_allow_pct": 26.6,
     "pooled_restrict_pct": 71.9,
     "total_votes_counted": 158298,
-    "fetch_failures": 6
+    "fetch_failures": 7
   },
   "races": [
     {
@@ -102,10 +102,10 @@
       "as_of": "2026-11-03T21:28:33-0500",
       "source_url": "https://vote.delawarecountyohio.gov/",
       "adapter": "pdf",
-      "note": null,
+      "note": "stale: last fetch failed",
       "status_override": null,
-      "fetch_ok": true,
-      "fetch_error": null,
+      "fetch_ok": false,
+      "fetch_error": "pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 983,
       "yes_pct": 75.69,
       "no_pct": 24.31,
