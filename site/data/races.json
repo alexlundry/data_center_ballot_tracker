@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-04T09:38:49-0500",
-  "count": 57,
+  "generated_at": "2026-11-04T09:57:15-0500",
+  "count": 58,
   "races": [
     {
       "race_id": "oh-hubbard",
@@ -721,6 +721,44 @@
       "notes": "Ordinance number confirmed as O-26-05 from the Clinton County sample ballot. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Zoning Ordinance O-26-05. Full text from the Clinton County sample ballot (Wilmington 1-A), which prints the referendums by ordinance number without issue numbers.",
       "results_expected": "Usually election night, from the Clinton County Board of Elections.",
       "plain_summary": "A YES vote keeps the council's rezoning of 65 acres at 1957 SR 730 from rural residential to light industrial for data center use; a NO vote overturns it. It is one of four Wilmington rezoning votes covering about 546 acres.",
+      "adapters": "pdf",
+      "source_status": "verified"
+    },
+    {
+      "race_id": "oh-piqua",
+      "state": "OH",
+      "state_name": "Ohio",
+      "jurisdiction": "City of Piqua",
+      "jurisdiction_type": "city",
+      "county": "Miami",
+      "level": "municipal",
+      "scope": "direct",
+      "election_date": "2026-11-03",
+      "measure_label": null,
+      "title": "Charter amendment banning data centers over 25 MW",
+      "measure_type": "charter_amendment",
+      "binding": "binding",
+      "origin": "citizen_petition",
+      "yes_means": "restrict",
+      "threshold_mw": 25,
+      "target_project": "Meta's planned campus on about 607 acres at the Piqua I-75 Business and Industrial Park (two buildings, about 700,000 sq ft), approved by the city commission Nov 3, 2025",
+      "proponents": "Save Piqua (citizen petition; the group reported more than 1,250 signatures)",
+      "opponents": null,
+      "summary": "Adds Section 138, Prohibition of Construction of a Data Center, to the charter's Miscellaneous Provisions: data center construction is prohibited where aggregate monthly demand or peak load exceeds 25 MW from any energy source or combination; self-executing. The same model language as the 25 MW bans in Trenton and Sunbury. Save Piqua filed it Aug 11 with recall petitions against the mayor and two commissioners; the board of elections questioned whether it met the Aug 5 filing deadline, but it appeared on the Nov 3 ballot. Its effect on the Meta project the city had already approved is unclear.",
+      "ballot_text": "Proposed Charter Amendment, City of Piqua. Be it Resolved by the People of the City of Piqua that the Charter of the City of Piqua is hereby amended to add Section 138 to Miscellaneous Provisions to read as follows: Section 138 Prohibition of Construction of a Data Center (A) The construction of a data center is hereby prohibited. (B) As used in this Section, \"construction\" shall mean the erection of one or more buildings, infrastructure, facilities, and related activities, which include preparations and modifications for same, for a common purpose. (C) As used in this Section, \"data center\" shall mean one or more buildings or physical facilities or infrastructure, located on a single real property parcel or on contiguous, adjacent, or otherwise aggregated real property parcels that: (1) Are used primarily or exclusively for digital information services such as the management, storage, processing, and dissemination of electronic data and information through the use of computer systems, servers, networking equipment, and related components, including equipment cooling systems; and (2) Has an aggregate monthly demand or peak load of greater than twenty-five (25) megawatts, however derived from any energy source, or a combination thereof. (D) This Section is self-executing.",
+      "ballot_text_verbatim": "TRUE",
+      "status": "on_ballot",
+      "lat": 40.1448,
+      "lon": -84.2424,
+      "ballot_text_url": "https://github.com/alexlundry/data_center_ballot_tracker/blob/main/docs/source-docs/miami-county-ballot-piqua-charter-amendment-section-138.txt",
+      "ballotpedia_url": null,
+      "news_url": "https://www.daytondailynews.com/local/charter-amendment-banning-large-data-centers-wins-approval/article_d4cf4dc3-b418-58b1-8523-9348694b561b.html",
+      "results_page_url": "https://www.boe.ohio.gov/miami/c/elecres/20261103results.pdf",
+      "poll_close_et": "19:30",
+      "result_note": null,
+      "notes": "Added Nov 4, 2026, after a reader's email: it had sat in not_on_ballot.csv as moved to a Feb 2, 2027 special election, which was wrong for this question. Full text from Miami County's ballot display (precincts Piqua 1-A to 16, contest 20 of 20; docs/source-docs/miami-county-ballot-piqua-charter-amendment-section-138.txt), printed without an issue number. Listed on the Ohio Secretary of State's Nov 3, 2026 Local Questions and Issues file as Charter Amendment: Article 138. A separate, broader charter amendment from an individual resident (no MW threshold; covers crypto mining and permits) was in signature verification in September; its election date is unconfirmed. The recalls of the mayor and two commissioners ran the same day as a separate special election and are not ballot measures.",
+      "results_expected": "Usually election night, from the Miami County Board of Elections.",
+      "plain_summary": "Amends Piqua's charter to ban building data centers that draw more than 25 MW. Residents petitioned for it after the city approved a Meta data center campus.",
       "adapters": "pdf",
       "source_status": "verified"
     },
@@ -2170,14 +2208,6 @@
     }
   ],
   "not_on_ballot": [
-    {
-      "jurisdiction": "Piqua (city), Miami County",
-      "state": "OH",
-      "what": "Charter amendments banning data centers and crypto mining; referendum on the AES Ohio franchise ordinance tied to Meta's ~1,400 MW project",
-      "status": "Moved to a Feb 2, 2027 special election by the commission on Oct 6, 2026 (recalls of three commissioners are on Nov 3). The Ohio SOS questions-and-issues file dated Sept 18 still lists a Piqua charter amendment (Article 138) for Nov 3; it predates the move.",
-      "date": "2027-02-02",
-      "link": "https://www.daytondailynews.com/local/piqua-voters-could-see-two-data-center-charter-amendments-on-november-ballot/article_53bbb626-cbfb-590e-bd09-a5c2760804bf.html"
-    },
     {
       "jurisdiction": "Sidney (city), Shelby County",
       "state": "OH",

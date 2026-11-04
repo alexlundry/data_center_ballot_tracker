@@ -1,0 +1,19 @@
+Miami County Board of Elections, ballot display (accessible view), read Nov 4, 2026
+https://lookup.boe.ohio.gov/vtrapp/miami/xmlview.aspx?bpty=x&elec=20261103g&prsid=001___1&lang=en
+(Ballots > 11/3/2026 General Election > CITIES > CITY OF PIQUA; precinct PIQUA 1-A, style NonPartisan, contest 20 of 20.
+The same county list shows Piqua ballot styles for precincts 001 through 016. The printed-ballot link downloads a file and was not saved.)
+
+OFFICIAL GENERAL ELECTION BALLOT
+NOVEMBER 3, 2026
+MIAMI COUNTY, OHIO
+
+Proposed Charter Amendment
+City of Piqua
+Be it Resolved by the People of the City of Piqua that the Charter of the City of Piqua is hereby amended to add Section 138 to Miscellaneous Provisions to read as follows:
+Section 138 Prohibition of Construction of a Data Center
+(A) The construction of a data center is hereby prohibited.
+(B) As used in this Section, "construction" shall mean the erection of one or more buildings, infrastructure, facilities, and related activities, which include preparations and modifications for same, for a common purpose.
+(C) As used in this Section, "data center" shall mean one or more buildings or physical facilities or infrastructure, located on a single real property parcel or on contiguous, adjacent, or otherwise aggregated real property parcels that: (1) Are used primarily or exclusively for digital information services such as the management, storage, processing, and dissemination of electronic data and information through the use of computer systems, servers, networking equipment, and related components, including equipment cooling systems; and (2) Has an aggregate monthly demand or peak load of greater than twenty-five (25) megawatts, however derived from any energy source, or a combination thereof.
+(D) This Section is self-executing.
+YES
+NO

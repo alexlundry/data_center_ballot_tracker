@@ -1,6 +1,6 @@
 # After election night: what still needs you (Nov 4, 2026)
 
-Updated 9:15 am ET Nov 4. Of the 45 measures, **34 are complete, 6 are partly counted and 5 have no results yet** (four Maine towns and Morgan County IL). The results loop is still running on the Mac. This page lists only what still needs you:
+Updated 9:15 am ET Nov 4. Of the 46 measures, **35 are complete, 6 are partly counted and 5 have no results yet** (four Maine towns and Morgan County IL). The results loop is still running on the Mac. This page lists only what still needs you:
 
 1. **Enter 5 races by hand** when their counts appear: North Berwick, Wiscasset, Brownfield and Freedom ME, and Morgan County IL.
 2. **Mark 4 races final** once their counties say the count is done: Grove City, Oregon, Ottawa and Downe.
@@ -75,11 +75,11 @@ The Still out list shows each race's `public_note`, or else the registry's expec
 | Morgan County | Morgan County had posted no results as of 9:15 am Nov 4. |
 | Downe | Cumberland County's results have not updated since 11:58 pm Nov 3. |
 
-## Done (no action): 34 complete
+## Done (no action): 35 complete
 
 - **Complete on their own (13):** Bloomington, Joliet Township, the Chouteau, Granite City, Nameoki and Venice townships, Ashville, Defiance, Perry Village, Trenton, Urbana, Janesville and Harwood ND.
 - **Entered by hand (9):** Upper Sandusky, Monroeville, Sunbury, Sprigg and Monroe townships in Ohio (from county scans and Delaware's results feed), and Eliot, Wells, Sabattus and Peru in Maine. Sprigg is the closest race on the page: For leads 330 to 297, 33 votes.
-- **Marked final (12):** Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater.
+- **Marked final (13):** Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater, plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027).
 
 Hand-entered numbers stay pinned until you clear them. Ohio adds provisional and late mail ballots at its official canvass later in November; retype a race then if you want the certified count.
 

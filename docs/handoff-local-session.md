@@ -98,7 +98,7 @@ On the night, run the loop under `launchd` and keep a Claude Code session open i
 
 ## Do not redo
 
-- The registry research is done; Ballotpedia's 21 Ohio measures in 18 jurisdictions reconcile with the registry once Piqua is set aside. Do not re-research the list.
+- The registry research is done; Ballotpedia's 21 Ohio measures in 18 jurisdictions reconcile with the registry now that Piqua is in it (added Nov 4: its data center ban was on the Nov 3 ballot after all). Do not re-research the list.
 - Documents already in `docs/source-docs/` are applied; their statuses are in `docs/research/documents-to-fetch.md`.
 - The sheet's structure, formulas and instructions are final unless a column is added at the end.
 - Do not try headers, user agents or retries against the Ohio hosts; only a browser passes.

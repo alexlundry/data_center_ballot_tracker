@@ -178,6 +178,15 @@ test_that("Trumbull's summary reads Hubbard's Approval / Rejection of the data c
   expect_match(res$raw_contest, "^Hubbard City Proposed Ordinance Data Centers")
 })
 
+# Miami County's unofficial canvass of 9:50 pm Nov 3 (real counts; 87 of 87 precincts county-wide)
+test_that("Miami's canvass reads Piqua's charter amendment, not a neighbouring contest", {
+  src <- src_row("oh-piqua"); src$local_file <- fx("miami_20261103_unofficial.pdf")
+  expect_equal(src$api_url, "https://www.boe.ohio.gov/miami/c/elecres/20261103results.pdf")
+  res <- adapter_pdf(src)
+  expect_equal(res$yes_votes, 4061L); expect_equal(res$no_votes, 2027L)
+  expect_match(res$raw_contest, "^Piqua City Charter Amendment - Data Centers")
+})
+
 # Franklin County KS posts InDesign results sheets; rows 55-60 of pdf_text on its Nov 3 "_6" file
 test_that("Franklin County KS sheet: inline reads Ottawa's YES and NO from the question's own row", {
   lines <- c(
