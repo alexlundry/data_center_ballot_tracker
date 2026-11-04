@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-11-04T09:40:50-0500",
+  "generated_at": "2026-11-04T09:56:48-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
-    "measures_nov3": 45,
-    "with_results": 40,
-    "restrict_leading": 39,
+    "measures_nov3": 46,
+    "with_results": 41,
+    "restrict_leading": 40,
     "allow_leading": 1,
     "tied": 0,
-    "mean_restrict_pct": 73.1,
-    "mean_allow_pct": 26.9,
-    "pooled_restrict_pct": 72.1,
-    "total_votes_counted": 234341,
+    "mean_restrict_pct": 72.9,
+    "mean_allow_pct": 27.1,
+    "pooled_restrict_pct": 72,
+    "total_votes_counted": 240429,
     "fetch_failures": 1
   },
   "races": [
@@ -925,6 +925,44 @@
           "t": "2026-11-03T22:22:43-0500",
           "yes": 732,
           "no": 2886,
+          "rep": null
+        }
+      ]
+    },
+    {
+      "race_id": "oh-piqua",
+      "yes_votes": 4061,
+      "no_votes": 2027,
+      "precincts_reporting": null,
+      "precincts_total": null,
+      "ballots_cast": null,
+      "registered_voters": 12551,
+      "raw_contest": "manual entry",
+      "as_of": "2026-11-03T21:50:26-0500",
+      "source_url": "https://www.boe.ohio.gov/miami/c/elecres/20261103results.pdf",
+      "adapter": "manual",
+      "note": "entered by Claude, for Alex: Miami County Unofficial Canvass (21:50:26 Nov 3, 87 of 87 precincts county-wide): Piqua City Charter Amendment - Data Centers, YES 4,061 (66.70%) / NO 2,027 (33.30%); 6,242 ballots, 12,551 registered voters. Matches the Dayton Daily News. Added Nov 4 (it had been listed as moved to Feb 2027). Marked final for election night.",
+      "status_override": "final",
+      "fetch_ok": true,
+      "fetch_error": null,
+      "total_votes": 6088,
+      "yes_pct": 66.7,
+      "no_pct": 33.3,
+      "restrict_votes": 4061,
+      "allow_votes": 2027,
+      "restrict_pct": 66.7,
+      "allow_pct": 33.3,
+      "margin_pts": 33.4,
+      "pct_reporting": null,
+      "est_votes_remaining": null,
+      "leader": "restrict",
+      "status": "final",
+      "public_note": null,
+      "history": [
+        {
+          "t": "2026-11-04T09:56:48-0500",
+          "yes": 4061,
+          "no": 2027,
           "rep": null
         }
       ]
