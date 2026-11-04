@@ -6,8 +6,8 @@ oh-conneaut,OH,City of Conneaut,2026-11-03,restrict,643,360,1003,64.1,64.1,restr
 oh-defiance,OH,City of Defiance,2026-11-03,restrict,3823,2083,5906,64.7,64.7,restrict,12,12,100,all_precincts,pdf,2026-11-03T21:22:29-0500,https://www.boe.ohio.gov/defiance/election-info/election-results/,TRUE,pdf
 oh-trenton,OH,City of Trenton,2026-11-03,restrict,1178,344,1522,77.4,77.4,restrict,,,,counting,pdf,2026-11-03T21:06:27-0500,https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html,TRUE,pdf
 oh-grove-city,OH,City of Grove City,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-oh-pataskala,OH,City of Pataskala,2026-11-03,restrict,607,165,772,78.6,78.6,restrict,,,,counting,pdf,2026-11-03T21:46:13-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
-oh-granville,OH,Village of Granville,2026-11-03,restrict,923,176,1099,84,84,restrict,,,,counting,pdf,2026-11-03T21:46:13-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
+oh-pataskala,OH,City of Pataskala,2026-11-03,restrict,5418,1941,7359,73.6,73.6,restrict,,,,counting,pdf,2026-11-03T21:50:52-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
+oh-granville,OH,Village of Granville,2026-11-03,restrict,2015,429,2444,82.4,82.4,restrict,,,,counting,pdf,2026-11-03T21:50:52-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
 oh-oregon,OH,City of Oregon,2026-11-03,restrict,0,0,0,,,none,,,,no_results,csv_generic,2026-10-28T14:25:34-0400,https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html,TRUE,csv_generic
 oh-upper-sandusky,OH,City of Upper Sandusky,2026-11-03,restrict,1893,568,2461,76.9,76.9,restrict,6,6,100,all_precincts,manual,2026-11-03T20:55:00-0500,https://www.boe.ohio.gov/wyandot/c/elecres/20261103results.pdf,TRUE,manual entry
 oh-monroeville,OH,Village of Monroeville,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
@@ -25,9 +25,9 @@ ks-americus,KS,City of Americus,2026-11-03,restrict,274,127,401,68.3,68.3,restri
 il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,15506,4174,19680,78.8,78.8,restrict,23,60,38.3,counting,clarity,2026-11-03T21:50:40-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,TRUE,clarity
 il-joliet-twp,IL,Joliet Township,2026-11-03,allow,2506,9106,11612,21.6,78.4,restrict,0,37,0,counting,clarity,2026-11-03T21:34:36-0500,https://www.willcountyclerk.gov/elections/election-results/,TRUE,clarity
 il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,260,1317,1577,16.5,83.5,restrict,4,6,66.7,counting,clarity,2026-11-03T21:42:37-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
-il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,1861,5363,7224,25.8,74.2,restrict,15,17,88.2,counting,clarity,2026-11-03T21:40:35-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
+il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,1959,5703,7662,25.6,74.4,restrict,17,17,100,all_precincts,clarity,2026-11-03T21:52:36-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,528,1832,2360,22.4,77.6,restrict,6,8,75,counting,clarity,2026-11-03T21:34:36-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
-il-venice-twp,IL,Venice Township,2026-11-03,allow,246,818,1064,23.1,76.9,restrict,3,4,75,counting,clarity,2026-11-03T21:40:35-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
+il-venice-twp,IL,Venice Township,2026-11-03,allow,311,978,1289,24.1,75.9,restrict,4,4,100,all_precincts,clarity,2026-11-03T21:52:36-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-morgan-county,IL,Morgan County,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 wi-janesville,WI,City of Janesville,2026-11-03,restrict,7972,4973,12945,61.6,61.6,restrict,0,40,0,counting,html_table,2026-11-03T21:44:39-0500,https://elections.co.rock.wi.us/20261103.html,TRUE,html_table
 ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,0,0,0,,,none,,,,no_results,json_generic,2026-11-03T13:32:12-0500,https://results.lavote.gov/election-list,TRUE,json_generic
