@@ -1,12 +1,11 @@
 # After election night: what still needs you (Nov 4, 2026)
 
-Updated 9:15 am ET Nov 4, plus Piqua, Freedom and North Berwick since. Of the 46 measures, **37 are complete, 6 are partly counted and 3 have no results yet** (Wiscasset and Brownfield ME, and Morgan County IL). The results loop is still running on the Mac. This page lists only what still needs you:
+Updated 9:15 am ET Nov 4, plus Piqua, Freedom, North Berwick and Morgan County since. Of the 46 measures, **38 are complete, 6 are partly counted and 2 have no results yet** (Wiscasset and Brownfield ME). The results loop is still running on the Mac. This page lists only what still needs you:
 
-1. **Enter 3 races by hand** when their counts appear: Wiscasset and Brownfield ME, and Morgan County IL.
+1. **Enter 2 races by hand** when their counts appear: Wiscasset and Brownfield ME.
 2. **Mark 4 races final** once their counties say the count is done: Grove City, Oregon, Ottawa and Downe.
 3. **Swap 1 news count for the official one:** Peru (Sun Journal).
 4. **Leave 2 late-counting races alone:** Boulder City and Alhambra update on their own for days.
-5. **Optional: tell readers why 5 races are still open.** The dashboard's Still out list now says "Usually election night" for races that didn't finish on election night.
 
 ## How to enter a race in the sheet
 
@@ -18,7 +17,7 @@ Use the `manual_results` tab of the [Google Sheet](https://docs.google.com/sprea
 - Set `status = final` once the count is complete. To mark an automatic race final, type its current numbers into its row too; it then stays pinned there.
 - To tell readers when a count is coming, type one sentence in `public_note` (column Z).
 
-## 1. Enter by hand (3 races)
+## 1. Enter by hand (2 races)
 
 ### Maine towns
 
@@ -30,10 +29,6 @@ Nothing had posted at 9:15 am: not on the town sites, not in their Document Cent
 | Brownfield | Question 1 | [town warrants and reports](https://www.brownfieldmaine.gov/1196/Past-Town-Warrants-Reports) | The town office is closed Wed Nov 4 and reopens Thu Nov 5 at 9 am; call 207-935-2007 then (no past ballot result is online) |
 
 The papers sometimes beat the towns: the Wiscasset Newspaper and Lincoln County News (Wiscasset), Seacoast Online and the York County Coast Star (North Berwick), and the Bangor Daily News, which previewed all eight Maine votes.
-
-### Morgan County IL
-
-Nothing posted anywhere as of 9:15 am. GBS, the county's results site, still lists the March 17 primary as its newest election, the [county clerk's page](https://morgancounty-il.com/wp/departments/county-clerk/) has no results link, and no outlet has reported a count. Call the clerk's office or check WLDS and the Journal-Courier. Advisory question; YES = restrict. The question is countywide, so enter the precinct count with the numbers or mark it final.
 
 ## 2. Mark final when the county says it's done (4 races)
 
@@ -61,23 +56,13 @@ Hubbard is done: Trumbull's own report (6:48 am Nov 4, linked from its home page
 
 GitHub's hourly run (Nov 5–13) keeps both moving if you stop the loop on the Mac. Downe's Clarity feed answers only the Mac, so keep the loop running until Downe is settled or hand-entered.
 
-## 5. Optional: say why a race is still open
+Each open race's `public_note` (column Z) tells readers why it is still open; update the note when a race moves.
 
-The Still out list shows each race's `public_note`, or else the registry's expectation, which reads "Usually election night" for these five. Suggested `public_note` sentences:
-
-| Race | Suggested note |
-|---|---|
-| Grove City | Every precinct is counted; Franklin County still lists its count as unofficial. |
-| Oregon | Lucas County's results (updated 2:51 am Nov 4) list absentee ballots as partially reported. |
-| Ottawa | Franklin County's unofficial results give no precinct count, so the count is not yet confirmed complete. |
-| Morgan County | Morgan County had posted no results as of 9:15 am Nov 4. |
-| Downe | Cumberland County's results have not updated since 11:58 pm Nov 3. |
-
-## Done (no action): 37 complete
+## Done (no action): 38 complete
 
 - **Complete on their own (13):** Bloomington, Joliet Township, the Chouteau, Granite City, Nameoki and Venice townships, Ashville, Defiance, Perry Village, Trenton, Urbana, Janesville and Harwood ND.
 - **Entered by hand (11):** Upper Sandusky, Monroeville, Sunbury, Sprigg and Monroe townships in Ohio (from county scans and Delaware's results feed), and Eliot, Wells, Sabattus, Peru, Freedom and North Berwick in Maine. Freedom came by phone from the town clerk, Cindy Abbott (331 to 115, 24 blank); her written return or sample ballot would still confirm its ballot wording. North Berwick came by phone from the town office (2,114 to 582); the town says it posted the result on Facebook, which needs a login, so swap in its scanned return when one appears in its Document Center. Sprigg is the closest race on the page: For leads 330 to 297, 33 votes.
-- **Marked final (13):** Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater, plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027).
+- **Marked final (14):** Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater, plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027) and Morgan County IL (by phone from the clerk's office: 9,413 to 1,250, unofficial; Illinois has two weeks to make it official, so retype it then).
 
 Hand-entered numbers stay pinned until you clear them. Ohio adds provisional and late mail ballots at its official canvass later in November; retype a race then if you want the certified count.
 
