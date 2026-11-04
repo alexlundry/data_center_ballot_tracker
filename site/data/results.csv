@@ -23,7 +23,7 @@ ks-el-dorado,KS,City of El Dorado,2026-11-03,restrict,,,,,,none,,,,no_results,,,
 ks-ottawa,KS,City of Ottawa,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ks-americus,KS,City of Americus,2026-11-03,restrict,36,18,54,66.7,66.7,restrict,,,,counting,pdf,2026-11-03T20:44:34-0500,https://www.lyoncountyks.gov/350/2026-General-Election-Results,TRUE,pdf
 il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,11146,2870,14016,79.5,79.5,restrict,0,60,0,counting,clarity,2026-11-03T20:24:35-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,TRUE,clarity
-il-joliet-twp,IL,Joliet Township,2026-11-03,allow,0,0,0,,,none,0,37,0,no_results,clarity,2026-11-03T18:00:34-0500,https://www.willcountyclerk.gov/elections/election-results/,FALSE,clarity
+il-joliet-twp,IL,Joliet Township,2026-11-03,allow,0,0,0,,,none,0,37,0,no_results,clarity,2026-11-03T18:00:34-0500,https://www.willcountyclerk.gov/elections/election-results/,TRUE,clarity
 il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,88,432,520,16.9,83.1,restrict,0,6,0,counting,clarity,2026-11-03T21:04:35-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,1128,3439,4567,24.7,75.3,restrict,6,17,35.3,counting,clarity,2026-11-03T21:04:35-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,191,801,992,19.2,80.8,restrict,0,8,0,counting,clarity,2026-11-03T21:04:36-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
@@ -49,7 +49,7 @@ me-peru,ME,Town of Peru,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none
 me-wells,ME,Town of Wells,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 me-wiscasset,ME,Town of Wiscasset,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 nd-harwood,ND,City of Harwood,2026-11-03,restrict,0,0,0,,,none,0,1,0,no_results,json_generic,2026-10-31T15:51:39-0400,https://resultsnd.sos.nd.gov/#election=348,TRUE,json_generic
-nj-downe-twp,NJ,Downe Township,2026-11-03,allow,4,68,72,5.6,94.4,restrict,,,,counting,clarity,2026-11-03T20:50:41-0500,https://cumberlandcountyclerknj.gov/election-information/election-results/,FALSE,clarity
+nj-downe-twp,NJ,Downe Township,2026-11-03,allow,4,68,72,5.6,94.4,restrict,,,,counting,clarity,2026-11-03T20:50:41-0500,https://cumberlandcountyclerknj.gov/election-information/election-results/,TRUE,clarity
 nh-canterbury,NH,Town of Canterbury,2026-03-10,restrict,322,63,385,83.6,83.6,restrict,,,,final,manual,2026-03-11T09:00:00-0400,https://www.canterburynh.gov/wp-content/uploads/2026/03/Town-Meeting-Election-Results-3_10_26.pdf,TRUE,manual entry
 nh-nottingham,NH,Town of Nottingham,2026-09-08,restrict,1335,143,1478,90.3,90.3,restrict,,,,final,manual,2026-09-09T09:00:00-0400,https://www.nottingham-nh.gov/sites/g/files/vyhlif3611/f/pages/2026_nottingham_special_town_election_results.pdf,TRUE,manual entry
 me-brownfield,ME,Town of Brownfield,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet

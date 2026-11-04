@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T21:06:40-0500",
+  "generated_at": "2026-11-03T21:08:42-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -12,7 +12,7 @@
     "mean_allow_pct": 23.8,
     "pooled_restrict_pct": 74.9,
     "total_votes_counted": 49503,
-    "fetch_failures": 10
+    "fetch_failures": 8
   },
   "races": [
     {
@@ -878,10 +878,10 @@
       "as_of": "2026-11-03T18:00:34-0500",
       "source_url": "https://www.willcountyclerk.gov/elections/election-results/",
       "adapter": "clarity",
-      "note": "stale: last fetch failed",
+      "note": null,
       "status_override": null,
-      "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway.",
+      "fetch_ok": true,
+      "fetch_error": null,
       "total_votes": 0,
       "yes_pct": null,
       "no_pct": null,
@@ -1758,10 +1758,10 @@
       "as_of": "2026-11-03T20:50:41-0500",
       "source_url": "https://cumberlandcountyclerknj.gov/election-information/election-results/",
       "adapter": "clarity",
-      "note": "stale: last fetch failed",
+      "note": null,
       "status_override": null,
-      "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway.",
+      "fetch_ok": true,
+      "fetch_error": null,
       "total_votes": 72,
       "yes_pct": 5.56,
       "no_pct": 94.44,
