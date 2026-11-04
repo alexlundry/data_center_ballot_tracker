@@ -4,7 +4,7 @@ oh-urbana,OH,City of Urbana,2026-11-03,restrict,1635,597,2232,73.2,73.2,restrict
 oh-sunbury,OH,City of Sunbury,2026-11-03,restrict,741,235,976,75.9,75.9,restrict,0,6,0,counting,pdf,2026-11-03T20:52:31-0500,https://vote.delawarecountyohio.gov/,TRUE,pdf
 oh-conneaut,OH,City of Conneaut,2026-11-03,restrict,643,360,1003,64.1,64.1,restrict,,,,counting,pdf,2026-11-03T20:07:13-0500,https://www.boe.ohio.gov/ashtabula/election-info/election-results,TRUE,pdf
 oh-defiance,OH,City of Defiance,2026-11-03,restrict,2118,1268,3386,62.5,62.5,restrict,0,12,0,counting,pdf,2026-11-03T19:45:15-0500,https://www.boe.ohio.gov/defiance/election-info/election-results/,TRUE,pdf
-oh-trenton,OH,City of Trenton,2026-11-03,restrict,1178,344,1522,77.4,77.4,restrict,0,8,0,counting,pdf,2026-11-03T20:03:18-0500,https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html,TRUE,pdf
+oh-trenton,OH,City of Trenton,2026-11-03,restrict,1178,344,1522,77.4,77.4,restrict,82,8,1025,all_precincts,pdf,2026-11-03T21:06:27-0500,https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html,TRUE,pdf
 oh-grove-city,OH,City of Grove City,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 oh-pataskala,OH,City of Pataskala,2026-11-03,restrict,2004,766,2770,72.3,72.3,restrict,,,,counting,pdf,2026-11-03T20:15:13-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
 oh-granville,OH,Village of Granville,2026-11-03,restrict,938,205,1143,82.1,82.1,restrict,,,,counting,pdf,2026-11-03T20:15:13-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
@@ -49,7 +49,7 @@ me-peru,ME,Town of Peru,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none
 me-wells,ME,Town of Wells,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 me-wiscasset,ME,Town of Wiscasset,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 nd-harwood,ND,City of Harwood,2026-11-03,restrict,0,0,0,,,none,0,1,0,no_results,json_generic,2026-10-31T15:51:39-0400,https://resultsnd.sos.nd.gov/#election=348,TRUE,json_generic
-nj-downe-twp,NJ,Downe Township,2026-11-03,allow,4,68,72,5.6,94.4,restrict,,,,counting,clarity,2026-11-03T20:50:41-0500,https://cumberlandcountyclerknj.gov/election-information/election-results/,TRUE,clarity
+nj-downe-twp,NJ,Downe Township,2026-11-03,allow,4,68,72,5.6,94.4,restrict,,,,counting,clarity,2026-11-03T20:50:41-0500,https://cumberlandcountyclerknj.gov/election-information/election-results/,FALSE,clarity
 nh-canterbury,NH,Town of Canterbury,2026-03-10,restrict,322,63,385,83.6,83.6,restrict,,,,final,manual,2026-03-11T09:00:00-0400,https://www.canterburynh.gov/wp-content/uploads/2026/03/Town-Meeting-Election-Results-3_10_26.pdf,TRUE,manual entry
 nh-nottingham,NH,Town of Nottingham,2026-09-08,restrict,1335,143,1478,90.3,90.3,restrict,,,,final,manual,2026-09-09T09:00:00-0400,https://www.nottingham-nh.gov/sites/g/files/vyhlif3611/f/pages/2026_nottingham_special_town_election_results.pdf,TRUE,manual entry
 me-brownfield,ME,Town of Brownfield,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet

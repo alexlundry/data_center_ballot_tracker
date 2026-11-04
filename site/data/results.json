@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T21:04:40-0500",
+  "generated_at": "2026-11-03T21:06:40-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -12,7 +12,7 @@
     "mean_allow_pct": 23.8,
     "pooled_restrict_pct": 74.9,
     "total_votes_counted": 49503,
-    "fetch_failures": 9
+    "fetch_failures": 10
   },
   "races": [
     {
@@ -202,12 +202,12 @@
       "race_id": "oh-trenton",
       "yes_votes": 1178,
       "no_votes": 344,
-      "precincts_reporting": 0,
+      "precincts_reporting": 82,
       "precincts_total": 8,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "ISSUE 17 CITY OF TRENTON",
-      "as_of": "2026-11-03T20:03:18-0500",
+      "as_of": "2026-11-03T21:06:27-0500",
       "source_url": "https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html",
       "adapter": "pdf",
       "note": null,
@@ -222,10 +222,10 @@
       "restrict_pct": 77.4,
       "allow_pct": 22.6,
       "margin_pts": 54.8,
-      "pct_reporting": 0,
-      "est_votes_remaining": null,
+      "pct_reporting": 1025,
+      "est_votes_remaining": -1374,
       "leader": "restrict",
-      "status": "counting",
+      "status": "all_precincts",
       "public_note": null,
       "history": [
         {
@@ -233,6 +233,12 @@
           "yes": 1178,
           "no": 344,
           "rep": 0
+        },
+        {
+          "t": "2026-11-03T21:06:40-0500",
+          "yes": 1178,
+          "no": 344,
+          "rep": 1025
         }
       ]
     },
@@ -1752,10 +1758,10 @@
       "as_of": "2026-11-03T20:50:41-0500",
       "source_url": "https://cumberlandcountyclerknj.gov/election-information/election-results/",
       "adapter": "clarity",
-      "note": null,
+      "note": "stale: last fetch failed",
       "status_override": null,
-      "fetch_ok": true,
-      "fetch_error": null,
+      "fetch_ok": false,
+      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway.",
       "total_votes": 72,
       "yes_pct": 5.56,
       "no_pct": 94.44,
