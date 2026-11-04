@@ -5,7 +5,7 @@ oh-sunbury,OH,City of Sunbury,2026-11-03,restrict,2809,763,3572,78.6,78.6,restri
 oh-conneaut,OH,City of Conneaut,2026-11-03,restrict,2301,1218,3519,65.4,65.4,restrict,,,,final,manual,2026-11-03T23:23:50-0500,https://www.boe.ohio.gov/ashtabula/c/elecres/20261103results.pdf,TRUE,manual entry
 oh-defiance,OH,City of Defiance,2026-11-03,restrict,3823,2083,5906,64.7,64.7,restrict,12,12,100,all_precincts,pdf,2026-11-03T21:22:29-0500,https://www.boe.ohio.gov/defiance/election-info/election-results/,TRUE,pdf
 oh-trenton,OH,City of Trenton,2026-11-03,restrict,3541,903,4444,79.7,79.7,restrict,8,8,100,all_precincts,pdf,2026-11-03T23:08:22-0500,https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html,TRUE,pdf
-oh-grove-city,OH,City of Grove City,2026-11-03,restrict,11305,9397,20702,54.6,54.6,restrict,,,,final,manual,2026-11-03T22:50:32-0500,https://vote.franklincountyohio.gov/elections,TRUE,manual entry
+oh-grove-city,OH,City of Grove City,2026-11-03,restrict,11317,9411,20728,54.6,54.6,restrict,,,,counting,franklin_live,2026-11-04T00:06:34-0500,https://vote.franklincountyohio.gov/elections,TRUE,franklin_live
 oh-pataskala,OH,City of Pataskala,2026-11-03,restrict,5418,1941,7359,73.6,73.6,restrict,,,,final,manual,2026-11-03T21:50:52-0500,https://www.boe.ohio.gov/licking/c/elecres/20261103results.pdf,TRUE,manual entry
 oh-granville,OH,Village of Granville,2026-11-03,restrict,2015,429,2444,82.4,82.4,restrict,,,,final,manual,2026-11-03T21:50:52-0500,https://www.boe.ohio.gov/licking/c/elecres/20261103results.pdf,TRUE,manual entry
 oh-oregon,OH,City of Oregon,2026-11-03,restrict,0,0,0,,,none,,,,no_results,csv_generic,2026-10-28T14:25:34-0400,https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html,TRUE,csv_generic
