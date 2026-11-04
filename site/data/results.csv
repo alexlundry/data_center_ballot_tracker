@@ -2,7 +2,7 @@ race_id,state,jurisdiction,election_date,yes_means,yes_votes,no_votes,total_vote
 oh-hubbard,OH,City of Hubbard,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 oh-urbana,OH,City of Urbana,2026-11-03,restrict,2978,877,3855,77.2,77.2,restrict,8,8,100,all_precincts,pdf,2026-11-03T21:04:52-0500,https://www.boe.ohio.gov/champaign/,TRUE,pdf
 oh-sunbury,OH,City of Sunbury,2026-11-03,restrict,744,239,983,75.7,75.7,restrict,0,6,0,counting,pdf,2026-11-03T21:28:33-0500,https://vote.delawarecountyohio.gov/,FALSE,pdf
-oh-conneaut,OH,City of Conneaut,2026-11-03,restrict,643,360,1003,64.1,64.1,restrict,,,,counting,pdf,2026-11-03T20:07:13-0500,https://www.boe.ohio.gov/ashtabula/election-info/election-results,TRUE,pdf
+oh-conneaut,OH,City of Conneaut,2026-11-03,restrict,2301,1218,3519,65.4,65.4,restrict,,,,counting,pdf,2026-11-03T23:23:50-0500,https://www.boe.ohio.gov/ashtabula/election-info/election-results,TRUE,pdf
 oh-defiance,OH,City of Defiance,2026-11-03,restrict,3823,2083,5906,64.7,64.7,restrict,12,12,100,all_precincts,pdf,2026-11-03T21:22:29-0500,https://www.boe.ohio.gov/defiance/election-info/election-results/,TRUE,pdf
 oh-trenton,OH,City of Trenton,2026-11-03,restrict,3541,903,4444,79.7,79.7,restrict,8,8,100,all_precincts,pdf,2026-11-03T23:08:22-0500,https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html,TRUE,pdf
 oh-grove-city,OH,City of Grove City,2026-11-03,restrict,11305,9397,20702,54.6,54.6,restrict,,,,counting,franklin_live,2026-11-03T22:50:32-0500,https://vote.franklincountyohio.gov/elections,TRUE,franklin_live

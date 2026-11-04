@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T23:20:41-0500",
+  "generated_at": "2026-11-03T23:26:40-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -10,8 +10,8 @@
     "tied": 0,
     "mean_restrict_pct": 74,
     "mean_allow_pct": 26,
-    "pooled_restrict_pct": 72.7,
-    "total_votes_counted": 176831,
+    "pooled_restrict_pct": 72.6,
+    "total_votes_counted": 179347,
     "fetch_failures": 7
   },
   "races": [
@@ -136,28 +136,28 @@
     },
     {
       "race_id": "oh-conneaut",
-      "yes_votes": 643,
-      "no_votes": 360,
+      "yes_votes": 2301,
+      "no_votes": 1218,
       "precincts_reporting": null,
       "precincts_total": null,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "10 Conn City Charter Amend",
-      "as_of": "2026-11-03T20:07:13-0500",
+      "as_of": "2026-11-03T23:23:50-0500",
       "source_url": "https://www.boe.ohio.gov/ashtabula/election-info/election-results",
       "adapter": "pdf",
       "note": null,
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 1003,
-      "yes_pct": 64.11,
-      "no_pct": 35.89,
-      "restrict_votes": 643,
-      "allow_votes": 360,
-      "restrict_pct": 64.11,
-      "allow_pct": 35.89,
-      "margin_pts": 28.22,
+      "total_votes": 3519,
+      "yes_pct": 65.39,
+      "no_pct": 34.61,
+      "restrict_votes": 2301,
+      "allow_votes": 1218,
+      "restrict_pct": 65.39,
+      "allow_pct": 34.61,
+      "margin_pts": 30.78,
       "pct_reporting": null,
       "est_votes_remaining": null,
       "leader": "restrict",
@@ -168,6 +168,12 @@
           "t": "2026-11-03T20:12:53-0500",
           "yes": 643,
           "no": 360,
+          "rep": null
+        },
+        {
+          "t": "2026-11-03T23:26:40-0500",
+          "yes": 2301,
+          "no": 1218,
           "rep": null
         }
       ]
