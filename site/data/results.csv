@@ -46,7 +46,7 @@ ga-glynn-dem,GA,Glynn County (Democratic primary),2026-05-19,allow,,,,,,none,,,,
 oh-perry-village,OH,Village of Perry,2026-11-03,restrict,946,140,1086,87.1,87.1,restrict,1,1,100,all_precincts,pdf,2026-11-03T22:00:39-0500,https://www.lakecountyohio.gov/boe/election-results/,TRUE,pdf
 me-north-berwick,ME,Town of North Berwick,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 me-peru,ME,Town of Peru,2026-11-03,restrict,578,182,760,76,76,restrict,1,1,100,all_precincts,manual,2026-11-03T22:30:00-0500,https://www.sunjournal.com/2026/11/03/peru-backs-food-sovereignty-data-center-ballot-questions/,TRUE,manual entry
-me-wells,ME,Town of Wells,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
+me-wells,ME,Town of Wells,2026-11-03,restrict,5818,1282,7100,81.9,81.9,restrict,1,1,100,all_precincts,manual,2026-11-03T23:08:41-0500,https://www.wellstown.org/DocumentCenter/View/8557,TRUE,manual entry
 me-wiscasset,ME,Town of Wiscasset,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 nd-harwood,ND,City of Harwood,2026-11-03,restrict,105,325,430,24.4,24.4,allow,1,1,100,all_precincts,json_generic,2026-11-04T00:20:37-0500,https://resultsnd.sos.nd.gov/#election=348,TRUE,json_generic
 nj-downe-twp,NJ,Downe Township,2026-11-03,allow,62,425,487,12.7,87.3,restrict,,,,counting,clarity,2026-11-03T23:58:40-0500,https://cumberlandcountyclerknj.gov/election-information/election-results/,TRUE,clarity
