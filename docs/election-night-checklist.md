@@ -1,6 +1,6 @@
 # After election night: what still needs you (Nov 4, 2026)
 
-Updated 9:15 am ET Nov 4, plus Piqua, Freedom, North Berwick and Morgan County since. Of the 46 measures, **38 are complete, 6 are partly counted and 2 have no results yet** (Wiscasset and Brownfield ME). The results loop is still running on the Mac. This page lists only what still needs you:
+Updated 9:15 am ET Nov 4, plus Piqua, Freedom, North Berwick, Morgan County and Belvidere NJ since. Of the 47 measures, **39 are complete, 6 are partly counted and 2 have no results yet** (Wiscasset and Brownfield ME). The results loop is still running on the Mac. This page lists only what still needs you:
 
 1. **Enter 2 races by hand** when their counts appear: Wiscasset and Brownfield ME.
 2. **Mark 4 races final** once their counties say the count is done: Grove City, Oregon, Ottawa and Downe.
@@ -58,11 +58,11 @@ GitHub's hourly run (Nov 5–13) keeps both moving if you stop the loop on the M
 
 Each open race's `public_note` (column Z) tells readers why it is still open; update the note when a race moves.
 
-## Done (no action): 38 complete
+## Done (no action): 39 complete
 
 - **Complete on their own (13):** Bloomington, Joliet Township, the Chouteau, Granite City, Nameoki and Venice townships, Ashville, Defiance, Perry Village, Trenton, Urbana, Janesville and Harwood ND.
 - **Entered by hand (11):** Upper Sandusky, Monroeville, Sunbury, Sprigg and Monroe townships in Ohio (from county scans and Delaware's results feed), and Eliot, Wells, Sabattus, Peru, Freedom and North Berwick in Maine. Freedom came by phone from the town clerk, Cindy Abbott (331 to 115, 24 blank); her written return or sample ballot would still confirm its ballot wording. North Berwick came by phone from the town office (2,114 to 582); the town says it posted the result on Facebook, which needs a login, so swap in its scanned return when one appears in its Document Center. Sprigg is the closest race on the page: For leads 330 to 297, 33 votes.
-- **Marked final (14):** Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater, plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027) and Morgan County IL (by phone from the clerk's office: 9,413 to 1,250, unofficial; Illinois has two weeks to make it official, so retype it then).
+- **Marked final (15):** Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater, plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027) and Morgan County IL (by phone from the clerk's office: 9,413 to 1,250, unofficial; Illinois has two weeks to make it official, so retype it then), and Belvidere NJ (added Nov 4 from Warren County's unofficial summary: 711 to 240; the county's site blocks scripts, so retype it when Warren certifies).
 
 Hand-entered numbers stay pinned until you clear them. Ohio adds provisional and late mail ballots at its official canvass later in November; retype a race then if you want the certified count.
 

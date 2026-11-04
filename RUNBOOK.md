@@ -15,7 +15,7 @@
 
 ## Election day
 - 6:00 pm ET: start `Rscript R/watch.R 120` on the Mac (push access, drop folder synced). It is the main loop, not a fallback: only it reads the drop folder (16 Ohio sources) and Clarity (Illinois's six and Downe NJ), and GitHub ran the 5-minute cron just twice between midnight and 1:30 pm ET on Nov 3. The `Update results` workflow stays on as a backup for the other feeds and the sheet; `gh workflow run update-results.yml` starts one by hand.
-- 7:00 pm ET: Volusia County (Edgewater) opens. 7:30 pm: all 21 Ohio measures. 8:00 pm: Maine (8), Illinois (7), Kansas (3), Downe Township NJ, Harwood ND. 9:00 pm: Rock County WI. 10:00 pm: Clark County NV. 11:00 pm: LA County CA.
+- 7:00 pm ET: Volusia County (Edgewater) opens. 7:30 pm: all 21 Ohio measures. 8:00 pm: Maine (8), Illinois (7), Kansas (3), Downe Township and Belvidere NJ, Harwood ND. 9:00 pm: Rock County WI. 10:00 pm: Clark County NV. 11:00 pm: LA County CA.
 - Wall screen: https://datacentersontheballot.com/?tv (Escape or Exit TV mode to leave). To point someone at one race, open it and use Copy link (`?race=<race_id>`).
 - As each county's first numbers post, open its page and compare to the dashboard row. If the row still says "Not yet":
   1. Look at the Action log (or `watch.R` output) for that `race_id`. "no contest matched" means the `contest_pattern` regex is wrong: copy the exact contest name from the page into `sources.csv`. "could not map choices" means the choice labels are not Yes/No: set `yes_pattern` / `no_pattern`.

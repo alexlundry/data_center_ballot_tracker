@@ -1,0 +1,33 @@
+Warren County Clerk (NJ), UNOFFICIAL summary results report, November 3, 2026 General Election, read Nov 4, 2026
+https://www.warrencountyvotes.com/home/showpublisheddocument/15033/639293406695852871
+(file name "2026 General Summary Report Unofficial  VBM EV  ED 11326  Updated 2.pdf", 18 pages, linked from
+https://www.warrencountyvotes.com/elections/past-election-results as "Click here for the UNOFFICIAL summary results report of
+the November 3, 2026 General Election. This report has all Election Day, all Early Voting and Vote by Mail results. This is
+the final report of the evening." Read in the desktop app's browser and its text layer extracted with pdf.js; the site serves
+an Akamai "Access Denied" page to curl and to the pipeline's R client, so the PDF itself was not saved. Excerpts below.)
+
+Page 1 header:
+VBM, Early Voting & Election Day
+UNOFFICIAL RESULTS Summary Results Report
+Warren General Election
+November 3rd, 2026
+Statistics   TOTAL
+Election Day Precincts Reporting   86 of 86
+Precincts Complete   0 of 86
+Precincts Partially Reported   86 of 86
+Absentee/ Early Precincts Reporting   86 of 86
+Registered Voters - Total   0
+41,383 Ballots Cast - Total
+
+Page 18 (the last page; text-layer order):
+TOTAL
+Vote For 1
+Town of Belvidere Question Belvidere
+YES   711
+NO   240
+Total Votes Cast   951
+Overvotes   0
+Undervotes   75
+Contest Totals   1,026
+
+Footer (as the text layer gives it): Election Summary - 11/03/2026 10:19PM   18 Page 18 of
