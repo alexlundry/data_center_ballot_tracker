@@ -51,6 +51,7 @@ me-wells,ME,Town of Wells,2026-11-03,restrict,5818,1282,7100,81.9,81.9,restrict,
 me-wiscasset,ME,Town of Wiscasset,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 nd-harwood,ND,City of Harwood,2026-11-03,restrict,105,325,430,24.4,24.4,allow,1,1,100,all_precincts,json_generic,2026-11-04T00:20:37-0500,https://resultsnd.sos.nd.gov/#election=348,TRUE,json_generic
 nj-downe-twp,NJ,Downe Township,2026-11-03,allow,62,425,487,12.7,87.3,restrict,,,,counting,clarity,2026-11-03T23:58:40-0500,https://cumberlandcountyclerknj.gov/election-information/election-results/,TRUE,clarity
+nj-belvidere,NJ,Town of Belvidere,2026-11-03,restrict,711,240,951,74.8,74.8,restrict,,,,final,manual,2026-11-03T22:19:00-0500,https://www.warrencountyvotes.com/home/showpublisheddocument/15033/639293406695852871,TRUE,manual entry
 nh-canterbury,NH,Town of Canterbury,2026-03-10,restrict,322,63,385,83.6,83.6,restrict,,,,final,manual,2026-03-11T09:00:00-0400,https://www.canterburynh.gov/wp-content/uploads/2026/03/Town-Meeting-Election-Results-3_10_26.pdf,TRUE,manual entry
 nh-nottingham,NH,Town of Nottingham,2026-09-08,restrict,1335,143,1478,90.3,90.3,restrict,,,,final,manual,2026-09-09T09:00:00-0400,https://www.nottingham-nh.gov/sites/g/files/vyhlif3611/f/pages/2026_nottingham_special_town_election_results.pdf,TRUE,manual entry
 me-brownfield,ME,Town of Brownfield,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet

@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-11-04T12:08:49-0500",
+  "generated_at": "2026-11-04T12:41:02-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
-    "measures_nov3": 46,
-    "with_results": 44,
-    "restrict_leading": 43,
+    "measures_nov3": 47,
+    "with_results": 45,
+    "restrict_leading": 44,
     "allow_leading": 1,
     "tied": 0,
-    "mean_restrict_pct": 73.4,
-    "mean_allow_pct": 26.6,
+    "mean_restrict_pct": 73.5,
+    "mean_allow_pct": 26.5,
     "pooled_restrict_pct": 72.8,
-    "total_votes_counted": 254234,
+    "total_votes_counted": 255185,
     "fetch_failures": 0
   },
   "races": [
@@ -2560,6 +2560,44 @@
           "t": "2026-11-03T23:58:40-0500",
           "yes": 62,
           "no": 425,
+          "rep": null
+        }
+      ]
+    },
+    {
+      "race_id": "nj-belvidere",
+      "yes_votes": 711,
+      "no_votes": 240,
+      "precincts_reporting": null,
+      "precincts_total": null,
+      "ballots_cast": null,
+      "registered_voters": 2143,
+      "raw_contest": "manual entry",
+      "as_of": "2026-11-03T22:19:00-0500",
+      "source_url": "https://www.warrencountyvotes.com/home/showpublisheddocument/15033/639293406695852871",
+      "adapter": "manual",
+      "note": "entered by Claude, for Alex: Warren County Clerk UNOFFICIAL Summary Results Report (vote by mail, early voting and Election Day; 'Election Summary - 11/03/2026 10:19PM', posted as the final report of the evening; Election Day and absentee/early precincts 86 of 86 county-wide): Town of Belvidere Question, YES 711 / NO 240 (74.8%), 75 undervotes. Added Nov 4 (found on Semafor's map; Ballotpedia does not list it). Read in the desktop app's browser because the site blocks scripts. Marked final for election night.",
+      "status_override": "final",
+      "fetch_ok": true,
+      "fetch_error": null,
+      "total_votes": 951,
+      "yes_pct": 74.76,
+      "no_pct": 25.24,
+      "restrict_votes": 711,
+      "allow_votes": 240,
+      "restrict_pct": 74.76,
+      "allow_pct": 25.24,
+      "margin_pts": 49.52,
+      "pct_reporting": null,
+      "est_votes_remaining": null,
+      "leader": "restrict",
+      "status": "final",
+      "public_note": null,
+      "history": [
+        {
+          "t": "2026-11-04T12:41:02-0500",
+          "yes": 711,
+          "no": 240,
           "rep": null
         }
       ]
