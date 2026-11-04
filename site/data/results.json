@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T23:50:42-0500",
+  "generated_at": "2026-11-03T23:52:41-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -11,7 +11,7 @@
     "mean_restrict_pct": 74,
     "mean_allow_pct": 26,
     "pooled_restrict_pct": 72.1,
-    "total_votes_counted": 190999,
+    "total_votes_counted": 191025,
     "fetch_failures": 7
   },
   "races": [
@@ -280,28 +280,28 @@
     },
     {
       "race_id": "oh-grove-city",
-      "yes_votes": 11305,
-      "no_votes": 9397,
+      "yes_votes": 11317,
+      "no_votes": 9411,
       "precincts_reporting": null,
       "precincts_total": null,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "#28 Proposed Charter Amendment City of Grove City",
-      "as_of": "2026-11-03T22:50:32-0500",
+      "as_of": "2026-11-03T23:52:33-0500",
       "source_url": "https://vote.franklincountyohio.gov/elections",
       "adapter": "franklin_live",
       "note": null,
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 20702,
-      "yes_pct": 54.61,
-      "no_pct": 45.39,
-      "restrict_votes": 11305,
-      "allow_votes": 9397,
-      "restrict_pct": 54.61,
-      "allow_pct": 45.39,
-      "margin_pts": 9.22,
+      "total_votes": 20728,
+      "yes_pct": 54.6,
+      "no_pct": 45.4,
+      "restrict_votes": 11317,
+      "allow_votes": 9411,
+      "restrict_pct": 54.6,
+      "allow_pct": 45.4,
+      "margin_pts": 9.2,
       "pct_reporting": null,
       "est_votes_remaining": null,
       "leader": "restrict",
@@ -324,6 +324,12 @@
           "t": "2026-11-03T22:50:40-0500",
           "yes": 11305,
           "no": 9397,
+          "rep": null
+        },
+        {
+          "t": "2026-11-03T23:52:41-0500",
+          "yes": 11317,
+          "no": 9411,
           "rep": null
         }
       ]
