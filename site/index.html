@@ -331,7 +331,7 @@ section.out-sec { padding-top: 24px; }
 .filters .fg-sort label { color: var(--primary-deep); }
 .filters .fg-sort label span { display: inline-flex; align-items: center; gap: 4px; }
 .filters .fg-sort select { font-weight: 600; border-color: var(--primary-soft); width: 164px; }
-.filters .fg-filter { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)) auto; }
+.filters .fg-filter { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)) auto; }
 .filters .fg-filter select { width: 100%; }
 .filters .fg-search { border-left: 1px solid var(--line-strong); background: var(--panel-soft); border-radius: 0 var(--radius) var(--radius) 0; }
 .filters .fg-search label { flex: 1; }
@@ -575,7 +575,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
   .brow .b-st { display: none; }
 }
 @media (min-width: 981px) and (max-width: 1240px) {
-  /* Mid widths: sort and search give a little room back so the five filters keep their values readable. */
+  /* Mid widths: sort and search give a little room back so the six filters keep their values readable. */
   .filters { grid-template-columns: auto minmax(0, 1fr) minmax(150px, 0.2fr); }
   .filters .fg-sort select { width: 146px; }
   .filters .fg-filter select { padding-right: 4px; }
@@ -722,6 +722,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
         <label>Type <select id="fKind"><option value="">All types</option></select></label>
         <label>YES means <select id="fDir"><option value="">Either</option><option value="restrict">Restrict data centers</option><option value="allow">Allow data centers</option></select></label>
         <label>Placed by <select id="fOrigin"><option value="">Anyone</option><option value="citizens">Citizens</option><option value="government">Governing body</option></select></label>
+        <label>Ballot text <select id="fWording"><option value="">Any wording</option><option value="names">Data center</option><option value="rezoning">Rezoning</option><option value="broader">Broader</option></select></label>
         <label>Status <select id="fStatus"><option value="">All</option><option value="close">Too close</option><option value="counting">Partly counted</option><option value="final">Complete (unofficial)</option><option value="none">No results posted</option><option value="changed">Changed since you last looked</option><option value="earlier">Decided earlier in 2026</option></select></label>
         <div class="field">Showing <span class="count"><span id="fCount"></span><button type="button" id="fClear" hidden>Clear</button></span></div>
       </div>
@@ -784,6 +785,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
           <dt>Complete, partly counted, no results</dt><dd>A count is complete when every precinct is in and one side leads by 2 points or more; in states that count mail ballots for days, such as California and Nevada, only when the county calls its count final. Partly counted means some votes are in. When a partial count has not moved for three hours, the page says when it last changed. Nothing here is certified.</dd>
           <dt>Leading, early, won</dt><dd>Leading means ahead by 2 points or more. An early count has under half the precincts in. Won means a complete count.</dd>
           <dt>Too close</dt><dd>Margin under 2 points, however much is counted.</dd>
+          <dt>Ballot text</dt><dd>Whether the ballot text on file uses the words "data center" (a paraphrase where the official wording could not be found). The measures that don't are split into referendums on rezoning land for a known project, such as Wilmington's four, and broader rules on zoning or large development that would cover other projects too.</dd>
           <dt>Typical share</dt><dd>The median of the Restrict side's percentage across measures with votes, so a small village counts the same as a city. The pooled figure adds up raw votes instead.</dd>
           <dt>Votes remaining</dt><dd>A rough estimate that assumes unreported precincts are the same size as reported ones. Treat it as a hint, not a projection.</dd>
           <dt>Changed since you last looked</dt><dd>Your browser remembers the counts from when you last left the page for more than a few minutes (or closed it) and marks what moved since. Nothing is sent anywhere.</dd>
@@ -857,6 +859,11 @@ const KIND_LABEL = { ban: 'Outright ban', cap: 'Megawatt cap', consent: 'Voter-a
 const KIND_PLURAL = { ban: 'outright bans', cap: 'megawatt caps', consent: 'voter-approval requirements', site: 'zoning and site decisions', advisory: 'advisory questions', other: 'other measures' };
 const ORIGIN_GROUP = { citizen_petition: 'citizens', court_ordered: 'citizens', electors_meeting: 'citizens', council_referred: 'government', charter_commission: 'government' };
 const ORIGIN_GROUP_LABEL = { citizens: 'Citizens, by petition or town meeting', government: 'The council, board or charter commission' };
+// Whether the ballot text itself says "data center". The ones that don't split two ways: a referendum on rezoning land
+// for a known project (Wilmington's four on Nov 3), or a broader rule on development that covers other projects too.
+const NAMES_DC = /data[ -]?cent(er|re)|datacent/i;
+const WORDING_ORDER = ['names', 'rezoning', 'broader'];
+const WORDING_LABEL = { names: 'Yes, it names data centers', rezoning: 'No: rezoning votes', broader: 'No: broader development rules' };
 const GROUP_ORDER = ['close', 'counting', 'final', 'none'];
 const GROUP_IDX = { close: 0, counting: 1, final: 2, none: 3 };
 const GROUP_LABEL = { close: 'Too close to call', counting: 'Partly counted', final: 'Complete (unofficial)', none: 'No results posted' };
@@ -875,7 +882,7 @@ let races = [], results = null, views = [], topo = null, A = null;
 let sim = false, simStage = 0.55, lastFetch = null, fetchErr = null;
 let stateRank = new Map();
 const DEFAULT_SORT = 'restrict';
-const filters = { state: '', kind: '', dir: '', origin: '', status: '', sort: DEFAULT_SORT, q: '' };
+const filters = { state: '', kind: '', dir: '', origin: '', wording: '', status: '', sort: DEFAULT_SORT, q: '' };
 let viewMode = store.get('dcbt_view', 'board'); if (!['board', 'cards', 'table'].includes(viewMode)) viewMode = 'board';
 let groupBy = store.get('dcbt_group', 'all'); if (!['all', 'yes', 'kind', 'state'].includes(groupBy)) groupBy = 'all';
 let seen = null, changed = new Set(), hlSet = null;
@@ -883,7 +890,7 @@ let openId = null, lastFocus = null;
 const prevW = new Map(), prevStat = new Map(), prevTotals = new Map(), prevSig = new Map();
 
 // Deep links: ?race=<race_id>, filters, ?tv; ?preview shows the Simulate button (?preview&sim=55 starts it).
-const VALID = { kind: KIND_ORDER, dir: ['restrict', 'allow'], origin: ['citizens', 'government'], status: ['close', 'counting', 'final', 'none', 'changed', 'earlier'], sort: ['status', 'margin', 'state', 'reporting', 'updated', 'votes', 'restrict', 'allow'] };
+const VALID = { kind: KIND_ORDER, dir: ['restrict', 'allow'], origin: ['citizens', 'government'], wording: WORDING_ORDER, status: ['close', 'counting', 'final', 'none', 'changed', 'earlier'], sort: ['status', 'margin', 'state', 'reporting', 'updated', 'votes', 'restrict', 'allow'] };
 Object.keys(VALID).forEach((k) => { const val = params.get(k); if (val && VALID[k].includes(val)) filters[k] = val; });
 if (params.get('state')) filters.state = params.get('state').toUpperCase().slice(0, 2);
 if (params.get('q')) filters.q = params.get('q').slice(0, 80);
@@ -996,6 +1003,7 @@ function kindOf(r) {
   if (/\bban|prohibit|capping|\bcap\b/.test(t)) return r.threshold_mw ? 'cap' : 'ban';
   return 'other';
 }
+function wordingOf(r) { return NAMES_DC.test(r.ballot_text || '') ? 'names' : r.measure_type === 'zoning_referendum' ? 'rezoning' : 'broader'; }
 // Where the count stands. Won = final, or every precinct in with a 2+ point margin.
 function outcome(v) {
   if (!v.has) return { side: null, tier: 'none' };
@@ -1025,7 +1033,7 @@ function makeView(race, res) {
     rVotes: has ? (race.yes_means === 'restrict' ? yes : no) : null, aVotes: has ? (race.yes_means === 'restrict' ? no : yes) : null,
     asOf: parseISO(res.as_of), stale: res.fetch_ok === false && has, history: Array.isArray(res.history) ? res.history : [],
     isNov: onBallot(race), direct: race.scope === 'direct', adv: race.binding === 'advisory',
-    kind: kindOf(race), origin: ORIGIN_GROUP[race.origin] || 'citizens' };
+    kind: kindOf(race), origin: ORIGIN_GROUP[race.origin] || 'citizens', wording: wordingOf(race) };
   v.out = outcome(v);
   // Grouped by the call, not the county's status: in California "all precincts in" still leaves mail ballots to count.
   v.group = !has ? 'none' : v.out.tier === 'close' ? 'close' : v.out.tier === 'won' ? 'final' : 'counting';
@@ -1539,7 +1547,7 @@ function restyleStrip() {
   const note = $('#sfilter');
   note.hidden = !f;
   if (!f) return;
-  const label = [['fState', 'state'], ['fKind', 'kind'], ['fDir', 'dir'], ['fOrigin', 'origin'], ['fStatus', 'status']].filter(([, k]) => filters[k])
+  const label = [['fState', 'state'], ['fKind', 'kind'], ['fDir', 'dir'], ['fOrigin', 'origin'], ['fWording', 'wording'], ['fStatus', 'status']].filter(([, k]) => filters[k])
     .map(([id, k]) => ($('#' + id).selectedOptions[0] || {}).textContent || filters[k]).concat(filters.q.trim() ? [`“${filters.q.trim()}”`] : []).join(', ');
   const lit = dots.filter((d) => matches(d.v)).size();
   note.innerHTML = `<span>Filtered to ${lit} of ${dots.size()} measures on this line (${esc(label)}).</span><button type="button" data-clear>Show all</button>`;
@@ -1659,16 +1667,17 @@ function buildFilterOptions() {
 }
 function renderFilters() {
   $('#fState').value = filters.state; $('#fKind').value = filters.kind; $('#fDir').value = filters.dir; $('#fOrigin').value = filters.origin;
-  $('#fStatus').value = filters.status; $('#fSort').value = filters.sort;
+  $('#fWording').value = filters.wording; $('#fStatus').value = filters.status; $('#fSort').value = filters.sort;
   if ($('#fSearch').value !== filters.q) $('#fSearch').value = filters.q;
 }
-function anyFilter() { return !!(filters.state || filters.kind || filters.dir || filters.origin || filters.status || filters.q.trim()); }
+function anyFilter() { return !!(filters.state || filters.kind || filters.dir || filters.origin || filters.wording || filters.status || filters.q.trim()); }
 function matches(v) {
   const r = v.race;
   if (filters.state && r.state !== filters.state) return false;
   if (filters.kind && v.kind !== filters.kind) return false;
   if (filters.dir && r.yes_means !== filters.dir) return false;
   if (filters.origin && v.origin !== filters.origin) return false;
+  if (filters.wording && v.wording !== filters.wording) return false;
   // "earlier" picks out the measures decided earlier in 2026; every other status is a Nov 3 count state.
   if (filters.status === 'earlier') { if (v.isNov) return false; }
   else if (filters.status === 'changed') { if (!changed.has(r.race_id)) return false; }
@@ -1760,13 +1769,18 @@ function renderRaces() {
 }
 
 // ---------- patterns ----------
-// The same four cuts for any set of measures: the Nov 3 list, or the ones decided earlier in 2026.
+// The same five cuts for any set of measures: the Nov 3 list, or the ones decided earlier in 2026.
 function patternGroups(src) {
   const nov = src === A.nov;
   const states = nov ? A.byState.map((s) => [s.key, s.name]) : [...new Map(src.map((v) => [v.race.state, v.race.state_name])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
   return [
     { title: 'What a YES vote does', field: 'dir', rows: [['restrict', 'YES restricts data centers'], ['allow', 'YES allows data centers']].map(([k, l]) => ({ key: k, label: l, items: src.filter((v) => v.race.yes_means === k) })) },
     { title: 'Type of measure', field: 'kind', rows: (nov ? kindsByCount() : KIND_ORDER).map((k) => ({ key: k, label: KIND_LABEL[k], items: src.filter((v) => v.kind === k) })) },
+    // A row from a single place names it ("No: rezoning votes in Wilmington").
+    { title: 'Does the ballot say “data center”?', field: 'wording', rows: WORDING_ORDER.map((k) => {
+      const items = src.filter((v) => v.wording === k), at = [...new Set(items.map((v) => v.race.jurisdiction.replace(/ \(.*\)$/, '').replace(/^(City|Town|Village) of /, '')))];
+      return { key: k, label: WORDING_LABEL[k] + (k !== 'names' && at.length === 1 ? ' in ' + at[0] : ''), items };
+    }) },
     { title: 'Who put it on the ballot', field: 'origin', rows: ['citizens', 'government'].map((k) => ({ key: k, label: ORIGIN_GROUP_LABEL[k], items: src.filter((v) => v.origin === k) })) },
     { title: 'State', field: 'state', rows: states.map(([k, name]) => ({ key: k, label: name, items: src.filter((v) => v.race.state === k) })) }
   ].map((g) => ({ ...g, rows: g.rows.filter((r) => r.items.length) }));
@@ -2036,7 +2050,7 @@ function pngHeading(kind) {
   const count = A.pre ? (waiting() ? `Polls have closed in ${andList(closedNames())}; no county has posted a count yet.` : `${n} measures in ${A.states.length} states: ${A.binding} binding, ${n - A.binding} advisory.`)
     : done ? `Complete unofficial counts: Restrict won ${A.rWon}, Allow won ${A.aWon}.` : `Complete counts so far: Restrict won ${A.rWon}, Allow won ${A.aWon}. Still open: ${andList(open)}.`;
   const BY = { all: '', yes: ', by what a YES vote does', kind: ', by type of measure', state: ', by state' };
-  const PAT = { dir: 'what a YES vote does', kind: 'type of measure', origin: 'who put them on the ballot', state: 'state' };
+  const PAT = { dir: 'what a YES vote does', kind: 'type of measure', wording: 'whether the ballot says “data center”', origin: 'who put them on the ballot', state: 'state' };
   // The summary carries its own eyebrow and headline
   if (kind === 'hero') return { kicker };
   if (kind === 'race') {
@@ -2296,7 +2310,7 @@ function syncURL() {
   const p = new URLSearchParams();
   if (PREVIEW) p.set('preview', '');
   if (sim) p.set('sim', String(Math.round(simStage * 100)));
-  ['state', 'kind', 'dir', 'origin', 'status', 'q'].forEach((k) => { if (filters[k]) p.set(k, filters[k]); });
+  ['state', 'kind', 'dir', 'origin', 'wording', 'status', 'q'].forEach((k) => { if (filters[k]) p.set(k, filters[k]); });
   if (filters.sort !== DEFAULT_SORT) p.set('sort', filters.sort);
   if (openId) p.set('race', openId);
   if (document.body.classList.contains('tv')) p.set('tv', '');
@@ -2322,9 +2336,9 @@ function wire() {
   const showChanged = () => { setFilter('status', 'changed'); document.getElementById('races').scrollIntoView(); };
   $('#sinceLink').addEventListener('click', showChanged);
   $('#sinceLink').addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showChanged(); } });
-  [['fState', 'state'], ['fKind', 'kind'], ['fDir', 'dir'], ['fOrigin', 'origin'], ['fStatus', 'status'], ['fSort', 'sort']].forEach(([id, f]) => $('#' + id).addEventListener('change', (e) => setFilter(f, e.target.value)));
+  [['fState', 'state'], ['fKind', 'kind'], ['fDir', 'dir'], ['fOrigin', 'origin'], ['fWording', 'wording'], ['fStatus', 'status'], ['fSort', 'sort']].forEach(([id, f]) => $('#' + id).addEventListener('change', (e) => setFilter(f, e.target.value)));
   $('#fSearch').addEventListener('input', (e) => { filters.q = e.target.value; renderRaces(); });
-  $('#fClear').addEventListener('click', () => { Object.assign(filters, { state: '', kind: '', dir: '', origin: '', status: '', q: '' }); renderFilters(); renderRaces(); renderPatterns(); animateBars(); });
+  $('#fClear').addEventListener('click', () => { Object.assign(filters, { state: '', kind: '', dir: '', origin: '', wording: '', status: '', q: '' }); renderFilters(); renderRaces(); renderPatterns(); animateBars(); });
   $('#sfilter').addEventListener('click', (e) => { if (e.target.closest('[data-clear]')) $('#fClear').click(); });
   ['Board', 'Cards', 'Table'].forEach((m) => $('#view' + m).addEventListener('click', () => { viewMode = m.toLowerCase(); store.set('dcbt_view', viewMode); renderRaces(); }));
   $('#groupSeg').addEventListener('click', (e) => { const b = e.target.closest('button[data-g]'); if (!b) return; groupBy = b.dataset.g; store.set('dcbt_group', groupBy); renderStrip(); });
