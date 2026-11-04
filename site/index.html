@@ -665,7 +665,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
 
 <section class="hero" id="overview">
   <div class="wrap">
-    <div class="hero-eyebrow"><div class="eyebrow">November 3, 2026 · Local ballot measures on data centers · United States</div><span class="png-actions" data-png="hero"><button type="button" data-png-act="copy" title="Copy this summary as an image">Copy image</button><button type="button" data-png-act="download" title="Download this summary as a PNG">Download</button></span></div>
+    <div class="hero-eyebrow"><div class="eyebrow">November 3, 2026 · Local ballot measures on data centers · United States</div><span class="png-actions" data-png="hero"><button type="button" id="heroTextBtn" title="Copy this summary as one short paragraph, for a post or a message">Copy text</button><button type="button" data-png-act="copy" title="Copy this summary as an image">Copy image</button><button type="button" data-png-act="download" title="Download this summary as a PNG">Download</button></span></div>
     <div class="hero-top" id="heroTop">
       <div><h2 class="lead" id="headline">Loading the race list…</h2><p class="precedent" id="precedent"></p></div>
       <div class="countdown" id="countdown" hidden><div class="cd-n" id="cdN"></div><div class="cd-l" id="cdL"></div></div>
@@ -2195,6 +2195,15 @@ async function copyText(text, btn, done) {
     document.body.removeChild(ta);
   }
 }
+// The hero summary as one short paragraph for a post or a message (the top bar's Copy summary is the full
+// report): the headline's own words, naming what the measures are about, then when the count stands and the site.
+function heroText() {
+  const d = document.createElement('div'); d.innerHTML = headlineHTML();
+  const head = d.textContent.trim(), gen = results && parseISO(results.generated_at);
+  const named = /data center/.test(head) ? head : head.replace(/ measures\b/, ' data center ballot measures');
+  const when = sim || (results && results.simulated) ? 'Simulated, not real results' : A.pre ? '' : `Unofficial, as of ${gen ? fmtET(gen, true) : '—'}`;
+  return `${named}${when ? ` (${when})` : ''} datacentersontheballot.com`;
+}
 function summaryText() {
   const n = A.nov.length;
   const gen = results && parseISO(results.generated_at);
@@ -2307,6 +2316,7 @@ function wire() {
   $('#simStage').value = Math.round(simStage * 100); $('#simStageLabel').textContent = Math.round(simStage * 100) + '%';
   $('#simStage').addEventListener('input', (e) => { simStage = +e.target.value / 100; $('#simStageLabel').textContent = e.target.value + '%'; render(); });
   $('#copyBtn').addEventListener('click', () => copyText(summaryText(), $('#copyBtn'), 'Copied'));
+  $('#heroTextBtn').addEventListener('click', () => copyText(heroText(), $('#heroTextBtn'), 'Copied'));
   $('#tvExit').addEventListener('click', exitTV);
   $('#sinceSeen').addEventListener('click', () => { saveSeen(); if (filters.status === 'changed') filters.status = ''; render(); });
   const showChanged = () => { setFilter('status', 'changed'); document.getElementById('races').scrollIntoView(); };
