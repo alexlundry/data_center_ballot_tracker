@@ -1,33 +1,33 @@
 race_id,state,jurisdiction,election_date,yes_means,yes_votes,no_votes,total_votes,yes_pct,restrict_pct,leader,precincts_reporting,precincts_total,pct_reporting,status,adapter,as_of,source_url,fetch_ok,feed
 oh-hubbard,OH,City of Hubbard,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-oh-urbana,OH,City of Urbana,2026-11-03,restrict,0,0,0,,,none,0,8,0,no_results,pdf,2026-11-03T14:31:08-0500,https://www.boe.ohio.gov/champaign/,FALSE,pdf
+oh-urbana,OH,City of Urbana,2026-11-03,restrict,0,0,0,,,none,0,8,0,no_results,pdf,2026-11-03T14:31:08-0500,https://www.boe.ohio.gov/champaign/,TRUE,pdf
 oh-sunbury,OH,City of Sunbury,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-oh-conneaut,OH,City of Conneaut,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T14:29:35-0500,https://www.boe.ohio.gov/ashtabula/election-info/election-results,FALSE,pdf
-oh-defiance,OH,City of Defiance,2026-11-03,restrict,0,0,0,,,none,0,12,0,no_results,pdf,2026-11-03T14:31:26-0500,https://www.boe.ohio.gov/defiance/election-info/election-results/,FALSE,pdf
-oh-trenton,OH,City of Trenton,2026-11-03,restrict,0,0,0,,,none,0,8,0,no_results,pdf,2026-11-03T14:30:32-0500,https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html,FALSE,pdf
+oh-conneaut,OH,City of Conneaut,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T14:29:35-0500,https://www.boe.ohio.gov/ashtabula/election-info/election-results,TRUE,pdf
+oh-defiance,OH,City of Defiance,2026-11-03,restrict,0,0,0,,,none,0,12,0,no_results,pdf,2026-11-03T14:31:26-0500,https://www.boe.ohio.gov/defiance/election-info/election-results/,TRUE,pdf
+oh-trenton,OH,City of Trenton,2026-11-03,restrict,0,0,0,,,none,0,8,0,no_results,pdf,2026-11-03T14:30:32-0500,https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html,TRUE,pdf
 oh-grove-city,OH,City of Grove City,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-oh-pataskala,OH,City of Pataskala,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T14:31:52-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,FALSE,pdf
-oh-granville,OH,Village of Granville,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T14:31:52-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,FALSE,pdf
+oh-pataskala,OH,City of Pataskala,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T14:31:52-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
+oh-granville,OH,Village of Granville,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T14:31:52-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
 oh-oregon,OH,City of Oregon,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 oh-upper-sandusky,OH,City of Upper Sandusky,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 oh-monroeville,OH,Village of Monroeville,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
-oh-sprigg-twp,OH,Sprigg Township,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T13:39:01-0500,https://www.boe.ohio.gov/adams/election-info/election-results/,FALSE,pdf
-oh-monroe-twp,OH,Monroe Township,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T13:39:01-0500,https://www.boe.ohio.gov/adams/election-info/election-results/,FALSE,pdf
+oh-sprigg-twp,OH,Sprigg Township,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T13:39:01-0500,https://www.boe.ohio.gov/adams/election-info/election-results/,TRUE,pdf
+oh-monroe-twp,OH,Monroe Township,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T13:39:01-0500,https://www.boe.ohio.gov/adams/election-info/election-results/,TRUE,pdf
 oh-ashville,OH,Village of Ashville,2026-11-03,allow,0,0,0,,,none,0,4,0,no_results,enhanced_voting,2026-11-03T13:32:06-0500,https://app.enhancedvoting.com/results/public/pickaway-county-oh/GE2026_20261028170048,TRUE,enhanced_voting
-oh-wilmington-1,OH,City of Wilmington (parcel 1 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,FALSE,pdf
-oh-wilmington-2,OH,City of Wilmington (parcel 2 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,FALSE,pdf
-oh-wilmington-3,OH,City of Wilmington (parcel 3 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,FALSE,pdf
-oh-wilmington-4,OH,City of Wilmington (parcel 4 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,FALSE,pdf
+oh-wilmington-1,OH,City of Wilmington (parcel 1 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
+oh-wilmington-2,OH,City of Wilmington (parcel 2 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
+oh-wilmington-3,OH,City of Wilmington (parcel 3 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
+oh-wilmington-4,OH,City of Wilmington (parcel 4 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
 ks-emporia,KS,City of Emporia,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ks-el-dorado,KS,City of El Dorado,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ks-ottawa,KS,City of Ottawa,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ks-americus,KS,City of Americus,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,0,0,0,,,none,0,60,0,no_results,clarity,2026-11-03T18:00:34-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,FALSE,clarity
-il-joliet-twp,IL,Joliet Township,2026-11-03,allow,0,0,0,,,none,0,37,0,no_results,clarity,2026-11-03T18:00:34-0500,https://www.willcountyclerk.gov/elections/election-results/,FALSE,clarity
-il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,0,0,0,,,none,0,6,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,FALSE,clarity
-il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,0,0,0,,,none,0,17,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,FALSE,clarity
-il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,0,0,0,,,none,0,8,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,FALSE,clarity
-il-venice-twp,IL,Venice Township,2026-11-03,allow,0,0,0,,,none,0,4,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,FALSE,clarity
+il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,0,0,0,,,none,0,60,0,no_results,clarity,2026-11-03T18:00:34-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,TRUE,clarity
+il-joliet-twp,IL,Joliet Township,2026-11-03,allow,0,0,0,,,none,0,37,0,no_results,clarity,2026-11-03T18:00:34-0500,https://www.willcountyclerk.gov/elections/election-results/,TRUE,clarity
+il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,0,0,0,,,none,0,6,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
+il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,0,0,0,,,none,0,17,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
+il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,0,0,0,,,none,0,8,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
+il-venice-twp,IL,Venice Township,2026-11-03,allow,0,0,0,,,none,0,4,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-morgan-county,IL,Morgan County,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 wi-janesville,WI,City of Janesville,2026-11-03,restrict,0,0,0,,,none,0,40,0,no_results,html_table,2026-11-03T13:32:11-0500,https://elections.co.rock.wi.us/20261103.html,TRUE,html_table
 ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,0,0,0,,,none,,,,no_results,json_generic,2026-11-03T13:32:12-0500,https://results.lavote.gov/election-list,TRUE,json_generic
@@ -49,7 +49,7 @@ me-peru,ME,Town of Peru,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none
 me-wells,ME,Town of Wells,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 me-wiscasset,ME,Town of Wiscasset,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 nd-harwood,ND,City of Harwood,2026-11-03,restrict,0,0,0,,,none,0,1,0,no_results,json_generic,2026-10-31T15:51:39-0400,https://resultsnd.sos.nd.gov/#election=348,TRUE,json_generic
-nj-downe-twp,NJ,Downe Township,2026-11-03,allow,0,0,0,,,none,,,,no_results,clarity,2026-10-31T15:51:39-0400,https://cumberlandcountyclerknj.gov/election-information/election-results/,FALSE,clarity
+nj-downe-twp,NJ,Downe Township,2026-11-03,allow,0,0,0,,,none,,,,no_results,clarity,2026-10-31T15:51:39-0400,https://cumberlandcountyclerknj.gov/election-information/election-results/,TRUE,clarity
 nh-canterbury,NH,Town of Canterbury,2026-03-10,restrict,322,63,385,83.6,83.6,restrict,,,,final,manual,2026-03-11T09:00:00-0400,https://www.canterburynh.gov/wp-content/uploads/2026/03/Town-Meeting-Election-Results-3_10_26.pdf,TRUE,manual entry
 nh-nottingham,NH,Town of Nottingham,2026-09-08,restrict,1335,143,1478,90.3,90.3,restrict,,,,final,manual,2026-09-09T09:00:00-0400,https://www.nottingham-nh.gov/sites/g/files/vyhlif3611/f/pages/2026_nottingham_special_town_election_results.pdf,TRUE,manual entry
 me-brownfield,ME,Town of Brownfield,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
