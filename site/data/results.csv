@@ -55,5 +55,5 @@ nh-canterbury,NH,Town of Canterbury,2026-03-10,restrict,322,63,385,83.6,83.6,res
 nh-nottingham,NH,Town of Nottingham,2026-09-08,restrict,1335,143,1478,90.3,90.3,restrict,,,,final,manual,2026-09-09T09:00:00-0400,https://www.nottingham-nh.gov/sites/g/files/vyhlif3611/f/pages/2026_nottingham_special_town_election_results.pdf,TRUE,manual entry
 me-brownfield,ME,Town of Brownfield,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 me-eliot,ME,Town of Eliot,2026-11-03,restrict,2965,909,3874,76.5,76.5,restrict,1,1,100,all_precincts,manual,2026-11-03T22:41:08-0500,https://www.eliotme.gov/DocumentCenter/View/3997,TRUE,manual entry
-me-freedom,ME,Town of Freedom,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
+me-freedom,ME,Town of Freedom,2026-11-03,restrict,331,115,446,74.2,74.2,restrict,1,1,100,all_precincts,manual,2026-11-04T10:45:00-0500,https://www.freedomme.org/,TRUE,manual entry
 me-sabattus,ME,Town of Sabattus,2026-11-03,restrict,1565,791,2356,66.4,66.4,restrict,1,1,100,all_precincts,manual,2026-11-04T02:54:36-0500,https://storage.googleapis.com/juniper-media-library/571/2026/11/Sabattus%20-%20Clerk%20Return%20of%20Votes%20-%20Municipal%20Election.pdf,TRUE,manual entry
