@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T00:00:41-0500",
+  "generated_at": "2026-11-04T00:02:42-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -1433,12 +1433,12 @@
       "race_id": "wi-janesville",
       "yes_votes": 16779,
       "no_votes": 9932,
-      "precincts_reporting": 32,
+      "precincts_reporting": 40,
       "precincts_total": 40,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "Development Referendum City of Janesville Vote For 1 Votes",
-      "as_of": "2026-11-03T23:48:40-0500",
+      "as_of": "2026-11-04T00:02:39-0500",
       "source_url": "https://elections.co.rock.wi.us/20261103.html",
       "adapter": "html_table",
       "note": null,
@@ -1453,10 +1453,10 @@
       "restrict_pct": 62.82,
       "allow_pct": 37.18,
       "margin_pts": 25.64,
-      "pct_reporting": 80,
-      "est_votes_remaining": 6678,
+      "pct_reporting": 100,
+      "est_votes_remaining": 0,
       "leader": "restrict",
-      "status": "counting",
+      "status": "all_precincts",
       "public_note": null,
       "history": [
         {
@@ -1482,6 +1482,12 @@
           "yes": 16779,
           "no": 9932,
           "rep": 80
+        },
+        {
+          "t": "2026-11-04T00:02:41-0500",
+          "yes": 16779,
+          "no": 9932,
+          "rep": 100
         }
       ]
     },
