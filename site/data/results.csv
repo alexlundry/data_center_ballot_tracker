@@ -32,7 +32,7 @@ il-morgan-county,IL,Morgan County,2026-11-03,restrict,,,,,,none,,,,no_results,,,
 wi-janesville,WI,City of Janesville,2026-11-03,restrict,0,0,0,,,none,0,40,0,no_results,html_table,2026-11-03T13:32:11-0500,https://elections.co.rock.wi.us/20261103.html,TRUE,html_table
 ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,0,0,0,,,none,,,,no_results,json_generic,2026-11-03T13:32:12-0500,https://results.lavote.gov/election-list,TRUE,json_generic
 nv-boulder-city,NV,Boulder City,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
-fl-edgewater,FL,City of Edgewater,2026-11-03,restrict,7201,2079,9280,77.6,77.6,restrict,,,,counting,enhanced_voting,2026-11-03T19:46:37-0500,https://app.enhancedvoting.com/results/public/volusia-county-fl/elections/2026GeneralElection,TRUE,enhanced_voting
+fl-edgewater,FL,City of Edgewater,2026-11-03,restrict,7856,2317,10173,77.2,77.2,restrict,,,,counting,enhanced_voting,2026-11-03T19:54:37-0500,https://app.enhancedvoting.com/results/public/volusia-county-fl/elections/2026GeneralElection,TRUE,enhanced_voting
 ca-monterey-park,CA,City of Monterey Park,2026-06-02,restrict,10388,1372,11760,88.3,88.3,restrict,,,,final,manual,2026-06-26T10:25:48-0700,https://results.lavote.gov/,TRUE,manual entry
 wi-port-washington,WI,City of Port Washington,2026-04-07,restrict,2710,1371,4081,66.4,66.4,restrict,,,,final,manual,2026-04-08T09:00:00-0500,https://www.ozaukeepress.com/content/port-tif-referendum-approved-landslide,TRUE,manual entry
 wi-wrightstown,WI,Village of Wrightstown,2026-08-11,allow,151,1033,1184,12.8,87.2,restrict,,,,final,manual,2026-08-12T09:00:00-0500,https://www.wbay.com/2026/08/12/wrightstown-residents-vote-no-data-center-referendum/,TRUE,manual entry
