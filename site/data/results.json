@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T21:20:58-0500",
+  "generated_at": "2026-11-03T21:22:42-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -895,7 +895,7 @@
       "note": "stale: last fetch failed",
       "status_override": null,
       "fetch_ok": false,
-      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 504 Gateway Timeout. | pdf: not a PDF; set api_url to the results PDF",
+      "fetch_error": "clarity: \u001b[1m\u001b[22mHTTP 502 Bad Gateway. | pdf: not a PDF; set api_url to the results PDF",
       "total_votes": 14394,
       "yes_pct": 79.51,
       "no_pct": 20.49,
