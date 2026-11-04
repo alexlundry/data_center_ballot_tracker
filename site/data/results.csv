@@ -43,7 +43,7 @@ ga-glynn-gop,GA,Glynn County (Republican primary),2026-05-19,allow,,,,,,none,,,,
 ga-dekalb-dem,GA,DeKalb County (Democratic primary),2026-05-19,restrict,138816,8182,146998,94.4,94.4,restrict,191,191,100,final,manual,2026-06-05T08:35:12-0400,https://results.sos.ga.gov/,TRUE,manual entry
 ga-columbia-dem,GA,Columbia County (Democratic primary),2026-05-19,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 ga-glynn-dem,GA,Glynn County (Democratic primary),2026-05-19,allow,,,,,,none,,,,no_results,,,,TRUE,none yet
-oh-perry-village,OH,Village of Perry,2026-11-03,restrict,374,59,433,86.4,86.4,restrict,0,1,0,counting,pdf,2026-11-03T19:50:40-0500,https://www.lakecountyohio.gov/boe/election-results/,TRUE,pdf
+oh-perry-village,OH,Village of Perry,2026-11-03,restrict,946,140,1086,87.1,87.1,restrict,1,1,100,all_precincts,pdf,2026-11-03T22:00:39-0500,https://www.lakecountyohio.gov/boe/election-results/,TRUE,pdf
 me-north-berwick,ME,Town of North Berwick,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 me-peru,ME,Town of Peru,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
 me-wells,ME,Town of Wells,2026-11-03,restrict,,,,,,none,,,,no_results,,,,TRUE,none yet
