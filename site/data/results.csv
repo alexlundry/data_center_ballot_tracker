@@ -6,8 +6,8 @@ oh-conneaut,OH,City of Conneaut,2026-11-03,restrict,643,360,1003,64.1,64.1,restr
 oh-defiance,OH,City of Defiance,2026-11-03,restrict,2118,1268,3386,62.5,62.5,restrict,0,12,0,counting,pdf,2026-11-03T19:45:15-0500,https://www.boe.ohio.gov/defiance/election-info/election-results/,TRUE,pdf
 oh-trenton,OH,City of Trenton,2026-11-03,restrict,0,0,0,,,none,0,8,0,no_results,pdf,2026-11-03T14:30:32-0500,https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html,TRUE,pdf
 oh-grove-city,OH,City of Grove City,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-oh-pataskala,OH,City of Pataskala,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T14:31:52-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
-oh-granville,OH,Village of Granville,2026-11-03,restrict,0,0,0,,,none,,,,no_results,pdf,2026-11-03T14:31:52-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
+oh-pataskala,OH,City of Pataskala,2026-11-03,restrict,2004,766,2770,72.3,72.3,restrict,,,,counting,pdf,2026-11-03T20:15:13-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
+oh-granville,OH,Village of Granville,2026-11-03,restrict,938,205,1143,82.1,82.1,restrict,,,,counting,pdf,2026-11-03T20:15:13-0500,https://www.boe.ohio.gov/licking/election-info/election-results/,TRUE,pdf
 oh-oregon,OH,City of Oregon,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 oh-upper-sandusky,OH,City of Upper Sandusky,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 oh-monroeville,OH,Village of Monroeville,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
