@@ -277,6 +277,10 @@ section.out-sec { padding-top: 24px; }
 .st-none { font-family: var(--serif); font-style: italic; font-size: 12px; fill: var(--fg-faint); }
 .strip-empty { margin: 4px 0 0; font-family: var(--serif); font-style: italic; color: var(--fg-mid); font-size: 13.5px; }
 .strip-note { font-size: 12px; color: var(--fg-mid); margin: 10px 0 0; }
+/* Shown while a race-list filter dims the line, so a pale chart always says why */
+.strip-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 8px 0 0; padding: 6px 10px; border-radius: 3px; background: var(--primary-bg); color: var(--primary-deep); font-size: 12.5px; }
+.strip-filter[hidden] { display: none; }
+.strip-filter button { border: none; background: none; padding: 0; color: var(--primary-deep); font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; }
 
 /* Scorecard */
 .tally { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
@@ -686,6 +690,7 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
         <div class="strip-head"><h4>Every measure on one line</h4>
           <div class="seg" id="groupSeg" role="group" aria-label="Group the line by"><button type="button" data-g="all">All</button><button type="button" data-g="yes">What YES does</button><button type="button" data-g="kind">Type</button><button type="button" data-g="state">State</button></div>
           <span class="png-actions" data-png="line"><button type="button" data-png-act="copy" title="Copy this chart as an image">Copy image</button><button type="button" data-png-act="download" title="Download this chart as a PNG">Download</button></span></div>
+        <p class="strip-filter png-skip" id="sfilter" hidden></p>
         <div id="strip"></div>
         <div class="legend" id="slegend"></div>
         <p class="strip-note">Each dot is one measure, placed by how its vote splits: left of center, Restrict is winning; right of center, Allow is. Group by <b>What YES does</b> to see whether voters are choosing to restrict data centers or just voting no. Diamonds in the bottom lane are the measures decided earlier in 2026, shown for comparison and not in the Nov 3 counts.</p>
@@ -1519,7 +1524,16 @@ function renderStrip() {
 function restyleStrip() {
   if (!window.d3) return;
   const f = anyFilter();
-  d3.select('#strip').selectAll('.sdot').classed('dim', (d) => (f && !matches(d.v)) || (!!hlSet && !hlSet.has(d.id))).classed('hl', (d) => !!hlSet && hlSet.has(d.id));
+  const dots = d3.select('#strip').selectAll('.sdot');
+  dots.classed('dim', (d) => (f && !matches(d.v)) || (!!hlSet && !hlSet.has(d.id))).classed('hl', (d) => !!hlSet && hlSet.has(d.id));
+  // A race-list filter (Patterns click, Status menu, the header's "changed" link, a ?state= link) also dims the line; say which, with a way out
+  const note = $('#sfilter');
+  note.hidden = !f;
+  if (!f) return;
+  const label = [['fState', 'state'], ['fKind', 'kind'], ['fDir', 'dir'], ['fOrigin', 'origin'], ['fStatus', 'status']].filter(([, k]) => filters[k])
+    .map(([id, k]) => ($('#' + id).selectedOptions[0] || {}).textContent || filters[k]).concat(filters.q.trim() ? [`“${filters.q.trim()}”`] : []).join(', ');
+  const lit = dots.filter((d) => matches(d.v)).size();
+  note.innerHTML = `<span>Filtered to ${lit} of ${dots.size()} measures on this line (${esc(label)}).</span><button type="button" data-clear>Show all</button>`;
 }
 function legendHTML(withNone) {
   const sw = (cls) => `<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle class="sdot ${cls}" cx="7" cy="7" r="5" style="cursor:default"></circle></svg>`;
@@ -2284,6 +2298,7 @@ function wire() {
   [['fState', 'state'], ['fKind', 'kind'], ['fDir', 'dir'], ['fOrigin', 'origin'], ['fStatus', 'status'], ['fSort', 'sort']].forEach(([id, f]) => $('#' + id).addEventListener('change', (e) => setFilter(f, e.target.value)));
   $('#fSearch').addEventListener('input', (e) => { filters.q = e.target.value; renderRaces(); });
   $('#fClear').addEventListener('click', () => { Object.assign(filters, { state: '', kind: '', dir: '', origin: '', status: '', q: '' }); renderFilters(); renderRaces(); renderPatterns(); animateBars(); });
+  $('#sfilter').addEventListener('click', (e) => { if (e.target.closest('[data-clear]')) $('#fClear').click(); });
   ['Board', 'Cards', 'Table'].forEach((m) => $('#view' + m).addEventListener('click', () => { viewMode = m.toLowerCase(); store.set('dcbt_view', viewMode); renderRaces(); }));
   $('#groupSeg').addEventListener('click', (e) => { const b = e.target.closest('button[data-g]'); if (!b) return; groupBy = b.dataset.g; store.set('dcbt_group', groupBy); renderStrip(); });
   const openFrom = (el) => { const id = el.dataset.open || el.dataset.id; const v = views.find((x) => x.race.race_id === id); if (v) openModal(v); };
