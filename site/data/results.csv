@@ -22,7 +22,7 @@ ks-emporia,KS,City of Emporia,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FAL
 ks-el-dorado,KS,City of El Dorado,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ks-ottawa,KS,City of Ottawa,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ks-americus,KS,City of Americus,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,5083,1107,6190,82.1,82.1,restrict,0,60,0,counting,clarity,2026-11-03T20:10:44-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,TRUE,clarity
+il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,6837,1697,8534,80.1,80.1,restrict,0,60,0,counting,clarity,2026-11-03T20:22:33-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,TRUE,clarity
 il-joliet-twp,IL,Joliet Township,2026-11-03,allow,0,0,0,,,none,0,37,0,no_results,clarity,2026-11-03T18:00:34-0500,https://www.willcountyclerk.gov/elections/election-results/,TRUE,clarity
 il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,0,0,0,,,none,0,6,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,0,0,0,,,none,0,17,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
