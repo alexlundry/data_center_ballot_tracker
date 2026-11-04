@@ -1,8 +1,8 @@
 # After election night: what still needs you (Nov 4, 2026)
 
-Updated 9:15 am ET Nov 4. Of the 46 measures, **35 are complete, 6 are partly counted and 5 have no results yet** (four Maine towns and Morgan County IL). The results loop is still running on the Mac. This page lists only what still needs you:
+Updated 9:15 am ET Nov 4, plus Piqua, Freedom and North Berwick since. Of the 46 measures, **37 are complete, 6 are partly counted and 3 have no results yet** (Wiscasset and Brownfield ME, and Morgan County IL). The results loop is still running on the Mac. This page lists only what still needs you:
 
-1. **Enter 5 races by hand** when their counts appear: North Berwick, Wiscasset, Brownfield and Freedom ME, and Morgan County IL.
+1. **Enter 3 races by hand** when their counts appear: Wiscasset and Brownfield ME, and Morgan County IL.
 2. **Mark 4 races final** once their counties say the count is done: Grove City, Oregon, Ottawa and Downe.
 3. **Swap 1 news count for the official one:** Peru (Sun Journal).
 4. **Leave 2 late-counting races alone:** Boulder City and Alhambra update on their own for days.
@@ -18,7 +18,7 @@ Use the `manual_results` tab of the [Google Sheet](https://docs.google.com/sprea
 - Set `status = final` once the count is complete. To mark an automatic race final, type its current numbers into its row too; it then stays pinned there.
 - To tell readers when a count is coming, type one sentence in `public_note` (column Z).
 
-## 1. Enter by hand (5 races)
+## 1. Enter by hand (3 races)
 
 ### Maine towns
 
@@ -26,10 +26,8 @@ Nothing had posted at 9:15 am: not on the town sites, not in their Document Cent
 
 | Town | Ballot item | Where to go | What to expect |
 |---|---|---|---|
-| North Berwick | Question 2 | [town meeting and elections](https://www.townofnorthberwick.org/355/Town-Meeting-Elections) | A scanned return, usually the morning after |
 | Wiscasset | Question 2 | [town clerk elections](https://www.wiscasset.gov/192/Town-Clerk-Elections) | Unofficial PDFs on that page and in a news flash, usually the morning after |
-| Brownfield | Question 1 | [town warrants and reports](https://www.brownfieldmaine.gov/1196/Past-Town-Warrants-Reports) | No past ballot result is online; call 207-935-2007 |
-| Freedom | Temporary moratorium on data centers | [town site](https://www.freedomme.org/) | No results page; call the clerk, Cindy Abbott, 207-382-6177 |
+| Brownfield | Question 1 | [town warrants and reports](https://www.brownfieldmaine.gov/1196/Past-Town-Warrants-Reports) | The town office is closed Wed Nov 4 and reopens Thu Nov 5 at 9 am; call 207-935-2007 then (no past ballot result is online) |
 
 The papers sometimes beat the towns: the Wiscasset Newspaper and Lincoln County News (Wiscasset), Seacoast Online and the York County Coast Star (North Berwick), and the Bangor Daily News, which previewed all eight Maine votes.
 
@@ -75,10 +73,10 @@ The Still out list shows each race's `public_note`, or else the registry's expec
 | Morgan County | Morgan County had posted no results as of 9:15 am Nov 4. |
 | Downe | Cumberland County's results have not updated since 11:58 pm Nov 3. |
 
-## Done (no action): 35 complete
+## Done (no action): 37 complete
 
 - **Complete on their own (13):** Bloomington, Joliet Township, the Chouteau, Granite City, Nameoki and Venice townships, Ashville, Defiance, Perry Village, Trenton, Urbana, Janesville and Harwood ND.
-- **Entered by hand (9):** Upper Sandusky, Monroeville, Sunbury, Sprigg and Monroe townships in Ohio (from county scans and Delaware's results feed), and Eliot, Wells, Sabattus and Peru in Maine. Sprigg is the closest race on the page: For leads 330 to 297, 33 votes.
+- **Entered by hand (11):** Upper Sandusky, Monroeville, Sunbury, Sprigg and Monroe townships in Ohio (from county scans and Delaware's results feed), and Eliot, Wells, Sabattus, Peru, Freedom and North Berwick in Maine. Freedom came by phone from the town clerk, Cindy Abbott (331 to 115, 24 blank); her written return or sample ballot would still confirm its ballot wording. North Berwick came by phone from the town office (2,114 to 582); the town says it posted the result on Facebook, which needs a login, so swap in its scanned return when one appears in its Document Center. Sprigg is the closest race on the page: For leads 330 to 297, 33 votes.
 - **Marked final (13):** Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater, plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027).
 
 Hand-entered numbers stay pinned until you clear them. Ohio adds provisional and late mail ballots at its official canvass later in November; retype a race then if you want the certified count.
