@@ -18,11 +18,11 @@ oh-wilmington-1,OH,City of Wilmington (parcel 1 of 4),2026-11-03,allow,0,0,0,,,n
 oh-wilmington-2,OH,City of Wilmington (parcel 2 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
 oh-wilmington-3,OH,City of Wilmington (parcel 3 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
 oh-wilmington-4,OH,City of Wilmington (parcel 4 of 4),2026-11-03,allow,0,0,0,,,none,0,10,0,no_results,pdf,2026-11-03T14:31:18-0500,https://www.boe.ohio.gov/clinton/election-info/election-results/,TRUE,pdf
-ks-emporia,KS,City of Emporia,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
+ks-emporia,KS,City of Emporia,2026-11-03,restrict,1548,1044,2592,59.7,59.7,restrict,,,,counting,pdf,2026-11-03T20:44:33-0500,https://www.lyoncountyks.gov/350/2026-General-Election-Results,TRUE,pdf
 ks-el-dorado,KS,City of El Dorado,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
 ks-ottawa,KS,City of Ottawa,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-ks-americus,KS,City of Americus,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,11146,2870,14016,79.5,79.5,restrict,0,60,0,counting,clarity,2026-11-03T20:24:35-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,FALSE,clarity
+ks-americus,KS,City of Americus,2026-11-03,restrict,36,18,54,66.7,66.7,restrict,,,,counting,pdf,2026-11-03T20:44:34-0500,https://www.lyoncountyks.gov/350/2026-General-Election-Results,TRUE,pdf
+il-bloomington,IL,City of Bloomington Township,2026-11-03,restrict,11146,2870,14016,79.5,79.5,restrict,0,60,0,counting,clarity,2026-11-03T20:24:35-0500,https://bloomingtonelectionsil.gov/elections/pastresults/,TRUE,clarity
 il-joliet-twp,IL,Joliet Township,2026-11-03,allow,0,0,0,,,none,0,37,0,no_results,clarity,2026-11-03T18:00:34-0500,https://www.willcountyclerk.gov/elections/election-results/,FALSE,clarity
 il-chouteau-twp,IL,Chouteau Township,2026-11-03,allow,0,0,0,,,none,0,6,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,FALSE,clarity
 il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,0,0,0,,,none,0,17,0,no_results,clarity,2026-10-31T15:51:26-0400,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,FALSE,clarity
