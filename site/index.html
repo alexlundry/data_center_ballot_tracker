@@ -695,12 +695,12 @@ body.tv #tv { position: fixed; inset: 0; z-index: 80; background: var(--bg); dis
     <div class="grid-2 night">
       <div class="card">
         <div class="strip-head"><h4>Every measure on one line</h4>
-          <div class="seg" id="groupSeg" role="group" aria-label="Group the line by"><button type="button" data-g="all">All</button><button type="button" data-g="yes">What YES does</button><button type="button" data-g="kind">Type</button><button type="button" data-g="state">State</button></div>
+          <div class="seg" id="groupSeg" role="group" aria-label="Group the line by"><button type="button" data-g="all">All</button><button type="button" data-g="yes">What YES does</button><button type="button" data-g="kind">Type</button><button type="button" data-g="state">State</button><button type="button" data-g="wording">Ballot text</button></div>
           <span class="png-actions" data-png="line"><button type="button" data-png-act="copy" title="Copy this chart as an image">Copy image</button><button type="button" data-png-act="download" title="Download this chart as a PNG">Download</button></span></div>
         <p class="strip-filter png-skip" id="sfilter" hidden></p>
         <div id="strip"></div>
         <div class="legend" id="slegend"></div>
-        <p class="strip-note">Each dot is one measure, placed by how its vote splits: left of center, Restrict is winning; right of center, Allow is. Group by <b>What YES does</b> to see whether voters are choosing to restrict data centers or just voting no. Diamonds in the bottom lane are the measures decided earlier in 2026, shown for comparison and not in the Nov 3 counts.</p>
+        <p class="strip-note">Each dot is one measure, placed by how its vote splits: left of center, Restrict is winning; right of center, Allow is. Group by <b>What YES does</b> to see whether voters are choosing to restrict data centers or just voting no, or by <b>Ballot text</b> to compare ballots that name data centers with those that don't. Diamonds in the bottom lane are the measures decided earlier in 2026, shown for comparison and not in the Nov 3 counts.</p>
       </div>
       <div class="card" id="scorecard"></div>
     </div>
@@ -864,6 +864,7 @@ const ORIGIN_GROUP_LABEL = { citizens: 'Citizens, by petition or town meeting', 
 const NAMES_DC = /data[ -]?cent(er|re)|datacent/i;
 const WORDING_ORDER = ['names', 'rezoning', 'broader'];
 const WORDING_LABEL = { names: 'Yes, it names data centers', rezoning: 'No: rezoning votes', broader: 'No: broader development rules' };
+const WORDING_LANE = { names: 'Yes, names data centers', rezoning: 'No: rezoning', broader: 'No: broader rules' };
 const GROUP_ORDER = ['close', 'counting', 'final', 'none'];
 const GROUP_IDX = { close: 0, counting: 1, final: 2, none: 3 };
 const GROUP_LABEL = { close: 'Too close to call', counting: 'Partly counted', final: 'Complete (unofficial)', none: 'No results posted' };
@@ -884,7 +885,7 @@ let stateRank = new Map();
 const DEFAULT_SORT = 'restrict';
 const filters = { state: '', kind: '', dir: '', origin: '', wording: '', status: '', sort: DEFAULT_SORT, q: '' };
 let viewMode = store.get('dcbt_view', 'board'); if (!['board', 'cards', 'table'].includes(viewMode)) viewMode = 'board';
-let groupBy = store.get('dcbt_group', 'all'); if (!['all', 'yes', 'kind', 'state'].includes(groupBy)) groupBy = 'all';
+let groupBy = store.get('dcbt_group', 'all'); if (!['all', 'yes', 'kind', 'state', 'wording'].includes(groupBy)) groupBy = 'all';
 let seen = null, changed = new Set(), hlSet = null;
 let openId = null, lastFocus = null;
 const prevW = new Map(), prevStat = new Map(), prevTotals = new Map(), prevSig = new Map();
@@ -1004,6 +1005,11 @@ function kindOf(r) {
   return 'other';
 }
 function wordingOf(r) { return NAMES_DC.test(r.ballot_text || '') ? 'names' : r.measure_type === 'zoning_referendum' ? 'rezoning' : 'broader'; }
+// A "No" group from a single place names it ("No: rezoning votes in Wilmington").
+function wordingLabel(k, items, labels) {
+  const at = [...new Set(items.map((v) => v.race.jurisdiction.replace(/ \(.*\)$/, '').replace(/^(City|Town|Village) of /, '')))];
+  return labels[k] + (k !== 'names' && at.length === 1 ? ' in ' + at[0] : '');
+}
 // Where the count stands. Won = final, or every precinct in with a 2+ point margin.
 function outcome(v) {
   if (!v.has) return { side: null, tier: 'none' };
@@ -1436,6 +1442,8 @@ function stripLanes(nov, by) {
   const byCount = (lanes) => lanes.filter((l) => l.items.length).sort((a, b) => b.items.length - a.items.length);
   if (by === 'yes') return byCount([['restrict', 'Where YES restricts'], ['allow', 'Where YES allows']].map(([k, l]) => ({ key: k, label: l, items: nov.filter((v) => v.race.yes_means === k) })));
   if (by === 'kind') return byCount(KIND_ORDER.map((k) => ({ key: k, label: KIND_LABEL[k], items: nov.filter((v) => v.kind === k) })));
+  // In the Patterns card's order, not by count, so the measures that name data centers come first.
+  if (by === 'wording') return WORDING_ORDER.map((k) => ({ key: k, label: wordingLabel(k, nov.filter((v) => v.wording === k), WORDING_LANE), items: nov.filter((v) => v.wording === k) })).filter((l) => l.items.length);
   if (by === 'state') {
     const big = A.byState.filter((s) => s.n >= 3), keys = new Set(big.map((s) => s.key));
     return byCount(big.map((s) => ({ key: s.key, label: s.name, items: nov.filter((v) => v.race.state === s.key) })))
@@ -1776,11 +1784,7 @@ function patternGroups(src) {
   return [
     { title: 'What a YES vote does', field: 'dir', rows: [['restrict', 'YES restricts data centers'], ['allow', 'YES allows data centers']].map(([k, l]) => ({ key: k, label: l, items: src.filter((v) => v.race.yes_means === k) })) },
     { title: 'Type of measure', field: 'kind', rows: (nov ? kindsByCount() : KIND_ORDER).map((k) => ({ key: k, label: KIND_LABEL[k], items: src.filter((v) => v.kind === k) })) },
-    // A row from a single place names it ("No: rezoning votes in Wilmington").
-    { title: 'Does the ballot say “data center”?', field: 'wording', rows: WORDING_ORDER.map((k) => {
-      const items = src.filter((v) => v.wording === k), at = [...new Set(items.map((v) => v.race.jurisdiction.replace(/ \(.*\)$/, '').replace(/^(City|Town|Village) of /, '')))];
-      return { key: k, label: WORDING_LABEL[k] + (k !== 'names' && at.length === 1 ? ' in ' + at[0] : ''), items };
-    }) },
+    { title: 'Does the ballot say “data center”?', field: 'wording', rows: WORDING_ORDER.map((k) => { const items = src.filter((v) => v.wording === k); return { key: k, label: wordingLabel(k, items, WORDING_LABEL), items }; }) },
     { title: 'Who put it on the ballot', field: 'origin', rows: ['citizens', 'government'].map((k) => ({ key: k, label: ORIGIN_GROUP_LABEL[k], items: src.filter((v) => v.origin === k) })) },
     { title: 'State', field: 'state', rows: states.map(([k, name]) => ({ key: k, label: name, items: src.filter((v) => v.race.state === k) })) }
   ].map((g) => ({ ...g, rows: g.rows.filter((r) => r.items.length) }));
@@ -2049,7 +2053,7 @@ function pngHeading(kind) {
   const open = [A.tc ? `${A.tc} too close to call` : '', A.partial ? `${A.partial} partly counted` : '', A.none ? `${A.none} with no results posted` : ''].filter(Boolean);
   const count = A.pre ? (waiting() ? `Polls have closed in ${andList(closedNames())}; no county has posted a count yet.` : `${n} measures in ${A.states.length} states: ${A.binding} binding, ${n - A.binding} advisory.`)
     : done ? `Complete unofficial counts: Restrict won ${A.rWon}, Allow won ${A.aWon}.` : `Complete counts so far: Restrict won ${A.rWon}, Allow won ${A.aWon}. Still open: ${andList(open)}.`;
-  const BY = { all: '', yes: ', by what a YES vote does', kind: ', by type of measure', state: ', by state' };
+  const BY = { all: '', yes: ', by what a YES vote does', kind: ', by type of measure', state: ', by state', wording: ', by whether the ballot says “data center”' };
   const PAT = { dir: 'what a YES vote does', kind: 'type of measure', wording: 'whether the ballot says “data center”', origin: 'who put them on the ballot', state: 'state' };
   // The summary carries its own eyebrow and headline
   if (kind === 'hero') return { kicker };
