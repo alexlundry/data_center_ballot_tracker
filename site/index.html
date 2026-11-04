@@ -1309,6 +1309,9 @@ function renderHero() {
     sub = first ? `Polls close first at ${closeLabel(first.hhmm)} (${andList(first.names)}) and last at ${closeLabel(last.hhmm)} (${andList(last.names)}). Each result is added when the county or town posts it; some Maine towns post the next morning, and California and Nevada count mail ballots for days.` : '';
   } else {
     sub = `${A.finals} of ${n} counts are complete. Pooled across all ${fmt(A.votes)} votes counted, Restrict has ${pct1(A.pooledR)}. Every result here is unofficial until the county certifies it.`;
+    // Maine towns count and post their own results, usually a day or more later; say so while any are open
+    const me = A.nov.filter((v) => v.race.state === 'ME'), meOpen = me.filter((v) => ['close', 'counting', 'none'].includes(v.group)).length;
+    if (meOpen) sub += ` ${meOpen === me.length ? `All ${me.length}` : `${meOpen} of the ${me.length}`} Maine towns count their own ballots and post results themselves, usually a day or more after the polls close.`;
   }
   $('#heroSub').textContent = sub;
   $('#heroStats').innerHTML = heroStatsHTML();
