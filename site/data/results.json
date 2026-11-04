@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T12:41:02-0500",
+  "generated_at": "2026-11-04T12:45:21-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -2576,7 +2576,7 @@
       "as_of": "2026-11-03T22:19:00-0500",
       "source_url": "https://www.warrencountyvotes.com/home/showpublisheddocument/15033/639293406695852871",
       "adapter": "manual",
-      "note": "entered by Claude, for Alex: Warren County Clerk UNOFFICIAL Summary Results Report (vote by mail, early voting and Election Day; 'Election Summary - 11/03/2026 10:19PM', posted as the final report of the evening; Election Day and absentee/early precincts 86 of 86 county-wide): Town of Belvidere Question, YES 711 / NO 240 (74.8%), 75 undervotes. Added Nov 4 (found on Semafor's map; Ballotpedia does not list it). Read in the desktop app's browser because the site blocks scripts. Marked final for election night.",
+      "note": "entered by Claude, for Alex: Warren County Clerk unofficial summary results report (vote by mail, early voting and Election Day; 10:19 pm Nov 3, the county's final report of the night; 86 of 86 precincts county-wide): Town of Belvidere Question, YES 711 / NO 240 (74.8%), 75 undervotes. Marked final for election night.",
       "status_override": "final",
       "fetch_ok": true,
       "fetch_error": null,
