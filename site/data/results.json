@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T00:12:38-0500",
+  "generated_at": "2026-11-04T00:20:37-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -2201,12 +2201,12 @@
       "race_id": "nd-harwood",
       "yes_votes": 105,
       "no_votes": 325,
-      "precincts_reporting": 0,
+      "precincts_reporting": 1,
       "precincts_total": 1,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "1844",
-      "as_of": "2026-11-04T00:10:38-0500",
+      "as_of": "2026-11-04T00:20:37-0500",
       "source_url": "https://resultsnd.sos.nd.gov/#election=348",
       "adapter": "json_generic",
       "note": null,
@@ -2221,10 +2221,10 @@
       "restrict_pct": 24.42,
       "allow_pct": 75.58,
       "margin_pts": -51.16,
-      "pct_reporting": 0,
-      "est_votes_remaining": null,
+      "pct_reporting": 100,
+      "est_votes_remaining": 0,
       "leader": "allow",
-      "status": "counting",
+      "status": "all_precincts",
       "public_note": null,
       "history": [
         {
@@ -2262,6 +2262,12 @@
           "yes": 105,
           "no": 325,
           "rep": 0
+        },
+        {
+          "t": "2026-11-04T00:20:37-0500",
+          "yes": 105,
+          "no": 325,
+          "rep": 100
         }
       ]
     },
