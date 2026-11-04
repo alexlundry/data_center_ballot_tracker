@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T22:50:40-0500",
+  "generated_at": "2026-11-03T23:08:44-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -11,7 +11,7 @@
     "mean_restrict_pct": 73.4,
     "mean_allow_pct": 26.6,
     "pooled_restrict_pct": 71.9,
-    "total_votes_counted": 161560,
+    "total_votes_counted": 161580,
     "fetch_failures": 7
   },
   "races": [
@@ -224,28 +224,28 @@
     },
     {
       "race_id": "oh-trenton",
-      "yes_votes": 3522,
-      "no_votes": 902,
+      "yes_votes": 3541,
+      "no_votes": 903,
       "precincts_reporting": 8,
       "precincts_total": 8,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "ISSUE 17 CITY OF TRENTON",
-      "as_of": "2026-11-03T22:03:09-0500",
+      "as_of": "2026-11-03T23:08:22-0500",
       "source_url": "https://liveresults.boe.ohio.gov/ENR/butlerohenr/24/en/Index_24.html",
       "adapter": "pdf",
       "note": null,
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 4424,
-      "yes_pct": 79.61,
-      "no_pct": 20.39,
-      "restrict_votes": 3522,
-      "allow_votes": 902,
-      "restrict_pct": 79.61,
-      "allow_pct": 20.39,
-      "margin_pts": 59.22,
+      "total_votes": 4444,
+      "yes_pct": 79.68,
+      "no_pct": 20.32,
+      "restrict_votes": 3541,
+      "allow_votes": 903,
+      "restrict_pct": 79.68,
+      "allow_pct": 20.32,
+      "margin_pts": 59.36,
       "pct_reporting": 100,
       "est_votes_remaining": 0,
       "leader": "restrict",
@@ -262,6 +262,12 @@
           "t": "2026-11-03T22:04:41-0500",
           "yes": 3522,
           "no": 902,
+          "rep": 100
+        },
+        {
+          "t": "2026-11-03T23:08:44-0500",
+          "yes": 3541,
+          "no": 903,
           "rep": 100
         }
       ]
