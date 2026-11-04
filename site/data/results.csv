@@ -29,7 +29,7 @@ il-granite-city-twp,IL,Granite City Township,2026-11-03,allow,1861,5363,7224,25.
 il-nameoki-twp,IL,Nameoki Township,2026-11-03,allow,528,1832,2360,22.4,77.6,restrict,6,8,75,counting,clarity,2026-11-03T21:34:36-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-venice-twp,IL,Venice Township,2026-11-03,allow,246,818,1064,23.1,76.9,restrict,3,4,75,counting,clarity,2026-11-03T21:40:35-0500,https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php,TRUE,clarity
 il-morgan-county,IL,Morgan County,2026-11-03,restrict,,,,,,none,,,,no_results,,,,FALSE,none yet
-wi-janesville,WI,City of Janesville,2026-11-03,restrict,1136,637,1773,64.1,64.1,restrict,0,40,0,counting,html_table,2026-11-03T21:26:39-0500,https://elections.co.rock.wi.us/20261103.html,TRUE,html_table
+wi-janesville,WI,City of Janesville,2026-11-03,restrict,7972,4973,12945,61.6,61.6,restrict,0,40,0,counting,html_table,2026-11-03T21:44:39-0500,https://elections.co.rock.wi.us/20261103.html,TRUE,html_table
 ca-alhambra,CA,City of Alhambra,2026-11-03,restrict,0,0,0,,,none,,,,no_results,json_generic,2026-11-03T13:32:12-0500,https://results.lavote.gov/election-list,TRUE,json_generic
 nv-boulder-city,NV,Boulder City,2026-11-03,allow,,,,,,none,,,,no_results,,,,FALSE,none yet
 fl-edgewater,FL,City of Edgewater,2026-11-03,restrict,7856,2317,10173,77.2,77.2,restrict,,,,counting,enhanced_voting,2026-11-03T19:54:37-0500,https://app.enhancedvoting.com/results/public/volusia-county-fl/elections/2026GeneralElection,TRUE,enhanced_voting
