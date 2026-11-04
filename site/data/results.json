@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T22:22:43-0500",
+  "generated_at": "2026-11-03T22:26:46-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -10,8 +10,8 @@
     "tied": 0,
     "mean_restrict_pct": 73.4,
     "mean_allow_pct": 26.6,
-    "pooled_restrict_pct": 72.2,
-    "total_votes_counted": 149821,
+    "pooled_restrict_pct": 72.3,
+    "total_votes_counted": 153588,
     "fetch_failures": 6
   },
   "races": [
@@ -998,32 +998,32 @@
     },
     {
       "race_id": "il-bloomington",
-      "yes_votes": 18986,
-      "no_votes": 5414,
-      "precincts_reporting": 45,
+      "yes_votes": 21851,
+      "no_votes": 6316,
+      "precincts_reporting": 60,
       "precincts_total": 60,
-      "ballots_cast": 25232,
+      "ballots_cast": 29115,
       "registered_voters": 53070,
       "raw_contest": "ADVISORY DATA CENTER MORATORIUM (Vote For 1)",
-      "as_of": "2026-11-03T22:20:43-0500",
+      "as_of": "2026-11-03T22:26:41-0500",
       "source_url": "https://bloomingtonelectionsil.gov/elections/pastresults/",
       "adapter": "clarity",
       "note": null,
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 24400,
-      "yes_pct": 77.81,
-      "no_pct": 22.19,
-      "restrict_votes": 18986,
-      "allow_votes": 5414,
-      "restrict_pct": 77.81,
-      "allow_pct": 22.19,
-      "margin_pts": 55.62,
-      "pct_reporting": 75,
-      "est_votes_remaining": 8133,
+      "total_votes": 28167,
+      "yes_pct": 77.58,
+      "no_pct": 22.42,
+      "restrict_votes": 21851,
+      "allow_votes": 6316,
+      "restrict_pct": 77.58,
+      "allow_pct": 22.42,
+      "margin_pts": 55.16,
+      "pct_reporting": 100,
+      "est_votes_remaining": 0,
       "leader": "restrict",
-      "status": "counting",
+      "status": "all_precincts",
       "public_note": null,
       "history": [
         {
@@ -1073,6 +1073,12 @@
           "yes": 18986,
           "no": 5414,
           "rep": 75
+        },
+        {
+          "t": "2026-11-03T22:26:46-0500",
+          "yes": 21851,
+          "no": 6316,
+          "rep": 100
         }
       ]
     },
