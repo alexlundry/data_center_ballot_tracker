@@ -71,6 +71,13 @@ prev_row <- function(id) {
   if (nrow(r) == 0) NULL else as_tibble(r)
 }
 
+older_than_published <- function(res, pr) {
+  if (is.null(pr) || is.na(pr$as_of %||% NA) || is.na(res$as_of %||% NA)) return(FALSE)
+  if (sum(as.numeric(c(pr$yes_votes, pr$no_votes)), na.rm = TRUE) == 0) return(FALSE)
+  t <- function(x) as.POSIXct(x, format = "%Y-%m-%dT%H:%M:%S%z", tz = "UTC")
+  isTRUE(t(res$as_of) < t(pr$as_of))
+}
+
 fetch_one <- function(race) {
   id <- race$race_id
   manual <- adapter_manual(list(race_id = id, results_url = race$results_page_url), ctx$manual_tbl)
@@ -85,6 +92,14 @@ fetch_one <- function(race) {
     res <- run_adapter(src, ctx)
     if (inherits(res, "adapter_error")) { errors <- c(errors, paste0(src$adapter, ": ", res$error)); next }
     if (!is.null(res) && nrow(res) == 1) {
+      # Never let older numbers replace newer published ones: when a county's
+      # own file goes missing or wrong for a pass (Licking's PDF held
+      # Tuscarawas County's report at 8:48 pm Nov 3), a drop-folder race would
+      # otherwise fall back to an older saved file
+      if (older_than_published(res, prev_row(id))) {
+        errors <- c(errors, paste0(src$adapter, ": result dated ", res$as_of, " is older than the published one"))
+        next
+      }
       log_msg(id, ": ok via ", src$adapter, " (", res$yes_votes, " yes / ", res$no_votes, " no)")
       if (!"status_override" %in% names(res)) res$status_override <- NA_character_
       return(res |> mutate(fetch_ok = TRUE, fetch_error = NA_character_))

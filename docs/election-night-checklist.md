@@ -1,10 +1,10 @@
 # Election night: what you need to do (Nov 3, 2026)
 
-Updated 8:45 pm ET. Of the 45 measures, the loop reads 33 on its own. This page lists only what needs you:
+Updated 8:55 pm ET. Of the 45 measures, the loop reads 33 on its own. This page lists only what needs you:
 
 1. **Save files** for 1 Ohio county (Franklin).
 2. **Enter 11 races by hand**: the 8 Maine towns, El Dorado and Ottawa KS, and Monroeville.
-3. **Watch 6 automatic races** and enter one by hand if it stays blank after the county posts.
+3. **Watch 5 automatic races** and enter one by hand if it stays blank after the county posts.
 4. **Check each race's first numbers once** against the county page.
 5. **Mark 12 races final** when their counts are complete, because they cannot finish on their own.
 
@@ -64,7 +64,6 @@ If a county posts a text PDF at a stable address, tell Claude: setting that race
 
 | Race | Where to look | Why it might not read |
 |---|---|---|
-| Sunbury OH (Delaware) | [Delaware live results](https://boeresults.delco-gis.org/) or [Delaware BOE](https://vote.delawarecountyohio.gov/) | Delaware's zero report was a scanned PDF. Its live site's data feed carries "City of Sunbury - Proposed Charter Amendment", and Claude can build a reader for it once counts appear |
 | Oregon OH (Lucas) | [Lucas results page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html) | At 8:30 pm the page still said "Updated: 10/28/2026" with every race at 0. If Lucas posts somewhere else tonight (its own site, lucascountyohiovotes.gov, is bot-checked for the loop), enter Oregon by hand |
 | Hubbard OH (Trumbull) | [Trumbull results](https://boe.co.trumbull.oh.gov/boe_results.html) | The loop finds Trumbull's PDF once it is posted; its layout is the least tested |
 | Upper Sandusky OH (Wyandot) | [Wyandot results](https://www.boe.ohio.gov/wyandot/election-info/election-results) | Read directly once posted, but the contest title is a best guess ("Charter Amendment Prohibition of a Data Center") |
@@ -75,7 +74,7 @@ If a county posts a text PDF at a stable address, tell Claude: setting that race
 
 The first time a race shows numbers, compare its YES and NO once with the county page. The sheet's `auto_yes` and `auto_no` columns sit beside the manual columns. If they differ, type the county's numbers into the sheet.
 
-**Already checked:** Urbana, Conneaut, Defiance, Perry Village, Edgewater, Ashville, Trenton, Emporia and Americus, all against the county's own file, page or feed.
+**Already checked:** Urbana, Conneaut, Defiance, Perry Village, Edgewater, Ashville, Trenton, Emporia, Americus and Sunbury, all against the county's own file, page or feed.
 
 **Still to check when numbers appear:**
 
@@ -86,7 +85,7 @@ The first time a race shows numbers, compare its YES and NO once with the county
 | Wilmington parcels 1–4 (Clinton) | [Clinton PDF](https://www.boe.ohio.gov/clinton/c/elecres/20261103results.pdf) (O-26-04 is parcel 1, O-26-06 parcel 2, O-26-07 parcel 3, O-26-05 parcel 4) |
 | Oregon | [Lucas results page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html), contest 25 |
 | Grove City | The page you save in step 1 |
-| Hubbard, Sunbury, Upper Sandusky | The pages in step 3 |
+| Hubbard, Upper Sandusky | The pages in step 3 |
 | Bloomington IL | [Clarity](https://results.enr.clarityelections.com/IL/Bloomington/127392/) (showing 5,083 to 1,107 at 8:10 pm; not yet checked) |
 | Joliet Township IL | [Clarity](https://results.enr.clarityelections.com/IL/Will/127394/) |
 | Chouteau, Granite City, Nameoki, Venice Twps IL | [Madison County results](https://www.madisoncountyil.gov/departments/county_clerk/elections/election_results.php) |

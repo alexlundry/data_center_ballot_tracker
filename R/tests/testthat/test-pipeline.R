@@ -229,3 +229,16 @@ test_that("Hart two-column summary: columns = 2 reads a right-hand contest's own
   de <- src_row("oh-defiance"); de$local_file <- fx("defiance_20260505_summary.pdf")
   expect_no_error(tryCatch(adapter_pdf(de), error = function(e) if (grepl("not found", conditionMessage(e))) NULL else stop(e)))
 })
+
+test_that("older numbers never replace newer published ones", {
+  # fetch_results.R defines older_than_published next to fetch_one; read it from there
+  src <- readLines(file.path(ROOT, "R/fetch_results.R"))
+  a <- grep("^older_than_published <- function", src); b <- a + which(src[(a + 1):length(src)] == "}")[1]
+  eval(parse(text = src[a:b]))
+  pub <- list(yes_votes = 2004, no_votes = 766, as_of = "2026-11-03T20:15:13-0500")
+  expect_true(older_than_published(list(as_of = "2026-11-03T14:31:52-0500"), pub))   # zero report from the drop folder
+  expect_false(older_than_published(list(as_of = "2026-11-03T20:48:30-0500"), pub))  # a newer county file
+  expect_false(older_than_published(list(as_of = "2026-11-03T14:31:52-0500"), list(yes_votes = 0, no_votes = 0, as_of = "2026-11-03T20:15:13-0500")))  # nothing published yet
+  expect_false(older_than_published(list(as_of = NA), pub))
+  expect_false(older_than_published(list(as_of = "2026-11-03T14:31:52-0500"), NULL))
+})
