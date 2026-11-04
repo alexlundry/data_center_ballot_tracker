@@ -15,6 +15,7 @@
 #
 # Environment:
 #   DCBT_DROP_DIR    folder to read (default ~/Downloads/dcbt_drop)
+#   DCBT_DIRECT      0 = never request a blocked host's PDF directly (see direct_pdf)
 #   DCBT_DROP_SINCE  ignore files modified before this date or datetime,
 #                    Eastern (default: election day once it arrives, so a
 #                    leftover May PDF is never read as a Nov 3 result)
@@ -107,4 +108,30 @@ resolve_drop_file <- function(src) {
   log_msg(src$race_id, ": drop file ", basename(path), " (", age, " min old)")
   src$local_file <- path
   src
+}
+
+# One plain request for a pdf source's own file on a blocked host (see
+# run_adapter). Returns list(path, modified) when the answer is a PDF, else NULL; no
+# retries, and each url is asked once per pass however many races share it.
+.direct_cache <- new.env()
+direct_pdf <- function(src) {
+  # DCBT_DIRECT=0 turns this off (the tests do; so can a worried operator)
+  if (identical(Sys.getenv("DCBT_DIRECT"), "0")) return(NULL)
+  url <- src$api_url %||% NA_character_
+  if (!identical(src$adapter, "pdf") || is.na(url) || !grepl("^https?://", url)) return(NULL)
+  if (exists(url, envir = .direct_cache, inherits = FALSE)) return(get(url, envir = .direct_cache))
+  path <- tempfile(fileext = ".pdf")
+  out <- tryCatch({
+    resp <- base_request(url, timeout = 20, tries = 1) |>
+      httr2::req_error(is_error = function(r) FALSE) |>
+      httr2::req_perform(path = path)
+    if (httr2::resp_status(resp) == 200 && identical(readBin(path, "raw", 5), charToRaw("%PDF-"))) {
+      # dated by the county's Last-Modified, like a dropped file by its mtime
+      lm <- httr2::resp_header(resp, "last-modified")
+      t <- if (is.null(lm)) NA else as.POSIXct(lm, format = "%a, %d %b %Y %H:%M:%S", tz = "GMT")
+      list(path = path, modified = if (is.na(t)) Sys.time() else t)
+    } else NULL
+  }, error = function(e) NULL)
+  assign(url, out, envir = .direct_cache)
+  out
 }

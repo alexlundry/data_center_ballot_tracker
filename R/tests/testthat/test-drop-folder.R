@@ -20,7 +20,7 @@ touch_at <- function(path, t) Sys.setFileTime(path, as.POSIXct(t, tz = "America/
 
 new_drop <- function() {
   d <- tempfile("drop"); dir.create(d)
-  withr::local_envvar(DCBT_DROP_DIR = d, DCBT_DROP_SINCE = "2026-01-01", .local_envir = parent.frame())
+  withr::local_envvar(DCBT_DROP_DIR = d, DCBT_DROP_SINCE = "2026-01-01", DCBT_DIRECT = "0", .local_envir = parent.frame())
   drop_cache_clear()
   d
 }
@@ -202,4 +202,32 @@ test_that("Franklin's Electionware summary PDF reads (Grove City fallback)", {
   r <- adapter_pdf(list(race_id = "t", adapter = "pdf", results_url = "x", yes_pattern = NA, no_pattern = NA,
                         contest_pattern = "Southwest Public Library", local_file = fx("franklin_20260505_summary.pdf")))
   expect_equal(c(r$yes_votes, r$no_votes, r$precincts_reporting, r$precincts_total), c(10164L, 8126L, 110L, 110L))
+})
+
+test_that("a county PDF fetched directly is used when it is at least as new as the dropped file", {
+  d <- new_drop()
+  dropped <- make_pdf(file.path(d, "results.pdf"), "Issue 8 City of Urbana Charter Amendment", "10", "20")
+  touch_at(dropped, "2026-11-03 20:00")
+  live <- make_pdf(tempfile(fileext = ".pdf"), "Issue 8 City of Urbana Charter Amendment", "1,204", "868")
+  src <- list(race_id = "oh-urbana", adapter = "pdf", contest_pattern = "Urbana.*charter",
+              results_url = "https://www.boe.ohio.gov/champaign/",
+              api_url = "https://www.boe.ohio.gov/champaign/c/elecres/20261103results.pdf",
+              yes_pattern = NA, no_pattern = NA)
+  real <- direct_pdf; on.exit(assign("direct_pdf", real, envir = globalenv()))
+  stub <- function(at) function(src) list(path = live, modified = as.POSIXct(at, tz = "America/New_York"))
+  assign("direct_pdf", stub("2026-11-03 21:00"), envir = globalenv())
+  res <- run_adapter(src, list())
+  expect_equal(c(res$yes_votes, res$no_votes), c(1204L, 868L))
+  expect_equal(res$as_of, "2026-11-03T21:00:00-0500")
+  # an older county file loses to a newer download
+  assign("direct_pdf", stub("2026-11-03 19:00"), envir = globalenv())
+  res <- run_adapter(src, list())
+  expect_equal(c(res$yes_votes, res$no_votes), c(10L, 20L))
+  # a challenge page or 404 (NULL) falls back to the drop folder
+  assign("direct_pdf", function(src) NULL, envir = globalenv())
+  expect_equal(run_adapter(src, list())$yes_votes, 10L)
+  # a direct PDF without the contest falls back too
+  other <- make_pdf(tempfile(fileext = ".pdf"), "Issue 3 Village of Elsewhere Levy", "5", "5")
+  assign("direct_pdf", function(src) list(path = other, modified = Sys.time()), envir = globalenv())
+  expect_equal(run_adapter(src, list())$yes_votes, 10L)
 })

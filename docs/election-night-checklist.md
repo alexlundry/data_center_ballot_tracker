@@ -22,6 +22,8 @@ For each county:
 - **PDF counties.** The county page links its file as `…/c/elecres/20261103results.pdf`. The direct links below are the same files; if one gives "page not found", use the county page.
 - **Results-site counties (Butler, Lucas, Franklin).** For Butler, save the summary PDF its results site links (`summary_24.pdf`), or save the page itself. For Lucas and Franklin, wait until the contest list has loaded, then use File > Save Page As > "Webpage, Complete".
 
+**Direct county files (from 8:10 pm):** boe.ohio.gov now serves the county result PDFs to plain requests (its pages are still bot-checked), so the loop fetches Adams, Ashtabula, Champaign, Clinton, Defiance and Licking itself, and Wyandot once posted, and uses whichever is newer: the county's file or the one you saved. Keep saving files anyway; they are the fallback if the county blocks the file again. Butler, Lucas and Franklin (pages) and Huron (scans) still need you. To turn direct fetching off, restart the loop with `DCBT_DIRECT=0`.
+
 **Zero reports checked at 2:45 pm:** Adams, Ashtabula, Butler, Champaign, Clinton, Defiance and Licking were in the folder, and all 12 of their races read correctly. Franklin, Lucas and Wyandot were still to get.
 
 | County | Races in the file | Where to get it | Contest to look for |
