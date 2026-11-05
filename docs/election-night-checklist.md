@@ -1,8 +1,8 @@
 # After election night: what still needs you (Nov 5, 2026)
 
-Updated 1:10 pm ET Nov 5. Of the 47 measures, **43 are complete and 4 are partly counted**; every measure has results. The results loop on the Mac stopped at 1:34 am Nov 5, and GitHub's results job keeps the page current (see section 3). This page lists only what still needs you:
+Updated 1:20 pm ET Nov 5. Of the 47 measures, **44 are complete and 3 are partly counted**; every measure has results. The results loop on the Mac stopped at 1:34 am Nov 5, and GitHub's results job keeps the page current (see section 3). This page lists only what still needs you:
 
-1. **Mark 2 races final** once their counties say the count is done: Grove City and Oregon.
+1. **Mark 1 race final** once its county says the count is done: Oregon.
 2. **Swap 1 news count for the official one:** Wiscasset (Boothbay Register).
 3. **Leave 2 late-counting races alone:** Boulder City and Alhambra update on their own for days.
 
@@ -16,12 +16,11 @@ Use the `manual_results` tab of the [Google Sheet](https://docs.google.com/sprea
 - Set `status = final` once the count is complete. To mark an automatic race final, type its current numbers into its row too; it then stays pinned there.
 - To tell readers when a count is coming, type one sentence in `public_note` (column Z).
 
-## 1. Mark final when the county says it's done (2 races)
+## 1. Mark final when the county says it's done (1 race)
 
 | Race | Now | What to look for |
 |---|---|---|
-| Grove City OH | 11,317 to 9,411 (Restrict 54.6%), unchanged since 11:52 pm Nov 3 | Every precinct is in. Franklin's feed still labels the count unofficial, as Ohio counties do until the canvass, and it hasn't moved in nearly a day. Marking it final now is reasonable: its row is blank (it reads the feed), so type 11,317 and 9,411 with `status = final` |
-| Oregon OH | 4,994 to 3,235 (Restrict 60.7%) | Lucas's [results page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html) (updated 2:51 am) still says "Absentee Ballots: Partially Reported". The loop adds new ballots by itself; mark final when that line says fully reported |
+| Oregon OH | 4,994 to 3,235 (Restrict 60.7%) | Lucas's [results page](https://liveresults.boe.ohio.gov/ENR/lucasohenr/23/en/Index_23.html) (last updated 2:51:41 am Nov 4) still said "Absentee Ballots: Partially Reported" at 1:15 pm Nov 5. It opens in an ordinary browser (scripts get a bot check). Neither GitHub nor the stopped Mac loop can read Lucas, so if the count moves, retype it in the sheet or restart the loop; mark final when that line says fully reported, or at the November canvass |
 
 ## 2. Swap the news count for the official one
 
@@ -42,11 +41,11 @@ The Mac loop stopped at 1:34 am Nov 5, so GitHub's results job now keeps both mo
 
 Each open race's `public_note` (column Z) tells readers why it is still open; update the note when a race moves.
 
-## Done (no action): 43 complete
+## Done (no action): 44 complete
 
 - **Complete on their own (13):** Bloomington, Joliet Township, the Chouteau, Granite City, Nameoki and Venice townships, Ashville, Defiance, Perry Village, Trenton, Urbana, Janesville and Harwood ND.
 - **Entered by hand (13):** Upper Sandusky, Monroeville, Sunbury, Sprigg and Monroe townships in Ohio (from county scans and Delaware's results feed), and Eliot, Wells, Sabattus, Peru, Freedom, North Berwick, Wiscasset and Brownfield in Maine. Brownfield is the town's own signed tally sheet (posted 12:16 pm Nov 5 as [Referendum Results](https://www.brownfieldmaine.gov/DocumentCenter/View/1000/Referendum-Results)): YES 671, NO 191, 862 ballots. Freedom came by phone from the town clerk, Cindy Abbott (331 to 115, 24 blank); her written return or sample ballot would still confirm its ballot wording. North Berwick came by phone from the town office (2,114 to 582); the town says it posted the result on Facebook, which needs a login, so swap in its scanned return when one appears in its Document Center. Sprigg is the closest race on the page: For leads 330 to 297, 33 votes.
-- **Marked final (17):** Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater; Ottawa KS (2,882 to 1,129) and Downe Township NJ (62 to 425), both confirmed final by phone with their county clerks on Nov 5 (Downe's Clarity page still shows 0% of districts reporting, so its row stays pinned); plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027) and Morgan County IL (by phone from the clerk's office: 9,413 to 1,250, unofficial; Illinois has two weeks to make it official, so retype it then), and Belvidere NJ (added Nov 4 from Warren County's unofficial summary: 711 to 240; the county's site blocks scripts, so retype it when Warren certifies).
+- **Marked final (18):** Grove City OH (11,317 to 9,411, unchanged since 11:52 pm Nov 3; Franklin calls it unofficial until the canvass), Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater; Ottawa KS (2,882 to 1,129) and Downe Township NJ (62 to 425), both confirmed final by phone with their county clerks on Nov 5 (Downe's Clarity page still shows 0% of districts reporting, so its row stays pinned); plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027) and Morgan County IL (by phone from the clerk's office: 9,413 to 1,250, unofficial; Illinois has two weeks to make it official, so retype it then), and Belvidere NJ (added Nov 4 from Warren County's unofficial summary: 711 to 240; the county's site blocks scripts, so retype it when Warren certifies).
 
 Hand-entered numbers stay pinned until you clear them. Ohio adds provisional and late mail ballots at its official canvass later in November; retype a race then if you want the certified count.
 
