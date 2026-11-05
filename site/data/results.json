@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T13:02:03-0500",
+  "generated_at": "2026-11-05T13:16:45-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -298,13 +298,13 @@
       "precincts_reporting": null,
       "precincts_total": null,
       "ballots_cast": null,
-      "registered_voters": null,
-      "raw_contest": "#28 Proposed Charter Amendment City of Grove City",
+      "registered_voters": 32186,
+      "raw_contest": "manual entry",
       "as_of": "2026-11-04T00:06:34-0500",
       "source_url": "https://vote.franklincountyohio.gov/elections",
-      "adapter": "franklin_live",
-      "note": null,
-      "status_override": null,
+      "adapter": "manual",
+      "note": "entered by Claude, for Alex: Franklin County OH live results (vote.franklincountyohio.gov, the feed the loop reads): #28 Proposed Charter Amendment City of Grove City, YES 11,317 / NO 9,411 (54.6%), every precinct counted, unchanged since 11:52 pm Nov 3 and still the same on GitHub's 1:02 pm Nov 5 read. Franklin labels the count unofficial until the official canvass (provisionals and late mail ballots), as every Ohio county does. Marked final for election night on Alex's go-ahead, Nov 5, like the other Ohio finals. History: briefly entered final at 11,305 / 9,397 just after midnight Nov 4, then handed back to the feed when it moved to 11,317 / 9,411.",
+      "status_override": "final",
       "fetch_ok": true,
       "fetch_error": null,
       "total_votes": 20728,
@@ -318,8 +318,8 @@
       "pct_reporting": null,
       "est_votes_remaining": null,
       "leader": "restrict",
-      "status": "counting",
-      "public_note": "Every precinct is counted; Franklin County still lists its count as unofficial.",
+      "status": "final",
+      "public_note": null,
       "history": [
         {
           "t": "2026-11-03T22:20:48-0500",
