@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T01:34:31-0500",
+  "generated_at": "2026-11-05T10:25:42-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -11,7 +11,7 @@
     "mean_restrict_pct": 73.3,
     "mean_allow_pct": 26.7,
     "pooled_restrict_pct": 72.8,
-    "total_votes_counted": 258201,
+    "total_votes_counted": 258513,
     "fetch_failures": 11
   },
   "races": [
@@ -1853,28 +1853,28 @@
     },
     {
       "race_id": "nv-boulder-city",
-      "yes_votes": 1973,
-      "no_votes": 4726,
+      "yes_votes": 2064,
+      "no_votes": 4947,
       "precincts_reporting": null,
       "precincts_total": null,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "VOTE FOR 1 | CITY OF BOULDER CITY QUESTION NUM 1 | CITY OF BOULDER CITY QUESTION NUM 1",
-      "as_of": "2026-11-04T05:56:42-0500",
+      "as_of": "2026-11-05T10:25:41-0500",
       "source_url": "https://elections.clarkcountynv.gov/ElectionResultsTV/ENR.aspx",
       "adapter": "html_table",
       "note": null,
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 6699,
-      "yes_pct": 29.45,
-      "no_pct": 70.55,
-      "restrict_votes": 4726,
-      "allow_votes": 1973,
-      "restrict_pct": 70.55,
-      "allow_pct": 29.45,
-      "margin_pts": 41.1,
+      "total_votes": 7011,
+      "yes_pct": 29.44,
+      "no_pct": 70.56,
+      "restrict_votes": 4947,
+      "allow_votes": 2064,
+      "restrict_pct": 70.56,
+      "allow_pct": 29.44,
+      "margin_pts": 41.12,
       "pct_reporting": null,
       "est_votes_remaining": null,
       "leader": "restrict",
@@ -1897,6 +1897,12 @@
           "t": "2026-11-04T05:56:43-0500",
           "yes": 1973,
           "no": 4726,
+          "rep": null
+        },
+        {
+          "t": "2026-11-05T10:25:42-0500",
+          "yes": 2064,
+          "no": 4947,
           "rep": null
         }
       ]
