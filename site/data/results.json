@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T22:35:29-0500",
+  "generated_at": "2026-11-04T22:37:23-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -11,7 +11,7 @@
     "mean_restrict_pct": 73.3,
     "mean_allow_pct": 26.7,
     "pooled_restrict_pct": 72.8,
-    "total_votes_counted": 258195,
+    "total_votes_counted": 258201,
     "fetch_failures": 0
   },
   "races": [
@@ -1019,28 +1019,28 @@
     },
     {
       "race_id": "ks-el-dorado",
-      "yes_votes": 2966,
+      "yes_votes": 2972,
       "no_votes": 1183,
       "precincts_reporting": null,
       "precincts_total": null,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "manual entry",
-      "as_of": "2026-11-03T22:33:26-0500",
+      "as_of": "2026-11-04T14:39:53-0500",
       "source_url": "https://www.livevoterturnout.com/ENR/butlerksenr/4/en/Index_4.html",
       "adapter": "manual",
-      "note": "entered by Claude, for Alex: Butler County KS results (livevoterturnout.com ENR, updated 9:33:26 pm CST; absentee and in-person ballots both Complete): City of El Dorado Question, Yes 2,966 (71.49%) / No 1,183. KSN reported the ban passed with more than two-thirds. Marked final for election night.",
+      "note": "entered by Claude, for Alex: Butler County KS results (livevoterturnout.com ENR, updated 1:39:53 pm CST Nov 4; absentee and in-person ballots both Complete): City of El Dorado Question, Yes 2,972 / No 1,183 (71.5%). Up 6 Yes from the election-night count entered first (2,966 / 1,183 at 9:33 pm CST Nov 3). KSN reported the ban passed with more than two-thirds. Marked final for election night.",
       "status_override": "final",
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 4149,
-      "yes_pct": 71.49,
-      "no_pct": 28.51,
-      "restrict_votes": 2966,
+      "total_votes": 4155,
+      "yes_pct": 71.53,
+      "no_pct": 28.47,
+      "restrict_votes": 2972,
       "allow_votes": 1183,
-      "restrict_pct": 71.49,
-      "allow_pct": 28.51,
-      "margin_pts": 42.98,
+      "restrict_pct": 71.53,
+      "allow_pct": 28.47,
+      "margin_pts": 43.06,
       "pct_reporting": null,
       "est_votes_remaining": null,
       "leader": "restrict",
@@ -1062,6 +1062,12 @@
         {
           "t": "2026-11-04T17:45:12-0500",
           "yes": 2966,
+          "no": 1183,
+          "rep": null
+        },
+        {
+          "t": "2026-11-04T22:37:23-0500",
+          "yes": 2972,
           "no": 1183,
           "rep": null
         }
