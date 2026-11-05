@@ -1037,10 +1037,13 @@ function makeView(race, res) {
   const est = num(res.est_votes_remaining) ?? ((pctRep > 0 && has && status !== 'final') ? Math.round(total / (pctRep / 100) - total) : null);
   const v = { race, res, yes, no, total, has, yesPct, noPct, rPct, aPct, margin, precRep, precTot, pctRep, status, leader, est,
     rVotes: has ? (race.yes_means === 'restrict' ? yes : no) : null, aVotes: has ? (race.yes_means === 'restrict' ? no : yes) : null,
-    asOf: parseISO(res.as_of), stale: res.fetch_ok === false && has, history: Array.isArray(res.history) ? res.history : [],
+    asOf: parseISO(res.as_of), history: Array.isArray(res.history) ? res.history : [],
     isNov: onBallot(race), direct: race.scope === 'direct', adv: race.binding === 'advisory',
     kind: kindOf(race), origin: ORIGIN_GROUP[race.origin] || 'citizens', wording: wordingOf(race) };
   v.out = outcome(v);
+  // A failed refetch matters only while the count is open; a complete count stands even when its feed can't be reached
+  // (GitHub's runner can't read Clarity or Ohio's county files, so those races fail there every pass).
+  v.stale = res.fetch_ok === false && has && v.out.tier !== 'won';
   // Grouped by the call, not the county's status: in California "all precincts in" still leaves mail ballots to count.
   v.group = !has ? 'none' : v.out.tier === 'close' ? 'close' : v.out.tier === 'won' ? 'final' : 'counting';
   v.quiet = v.group === 'counting' && !!v.asOf && Date.now() - v.asOf.getTime() > QUIET_MS && !sim;
@@ -1098,7 +1101,8 @@ function dotTip(v) {
 const diamond = (s) => `M0,${-s}L${s},0L0,${s}L${-s},0Z`;
 // The date that leads a decided measure's location line.
 const pastDate = (v) => v.isNov ? '' : esc(fmtDate(v.race.election_date)) + ' · ';
-const srcNote = (s) => String(s || '').replace(/^entered by [^:]*:\s*/i, '').replace(/^entered by \S+$/i, '');
+// The pipeline's own "stale: last fetch failed" marker is dropped; v.stale says it in the page's words, and only for open counts.
+const srcNote = (s) => String(s || '').replace(/^entered by [^:]*:\s*/i, '').replace(/^entered by \S+$/i, '').replace(/^stale: last fetch failed$/i, '');
 // Bars grow from their previous width to the new one (from 0 on first draw).
 function barW(key, w) { const to = w == null ? 0 : w; const from = REDUCED ? to : (prevW.has(key) ? prevW.get(key) : 0); prevW.set(key, to); return `style="width:${from}%" data-w="${to}"`; }
 function animateBars() {

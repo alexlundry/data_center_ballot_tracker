@@ -1,11 +1,10 @@
-# After election night: what still needs you (Nov 4, 2026)
+# After election night: what still needs you (Nov 5, 2026)
 
-Updated 10:40 pm ET Nov 4. Of the 47 measures, **40 are complete, 6 are partly counted and 1 has no results yet** (Brownfield ME). The results loop is still running on the Mac. This page lists only what still needs you:
+Updated 12:20 pm ET Nov 5. Of the 47 measures, **41 are complete and 6 are partly counted**; every measure now has results. The results loop on the Mac stopped at 1:34 am Nov 5, and GitHub's results job keeps the page current (see section 3). This page lists only what still needs you:
 
-1. **Enter 1 race by hand** when its count appears: Brownfield ME.
-2. **Mark 4 races final** once their counties say the count is done: Grove City, Oregon, Ottawa and Downe.
-3. **Swap 2 news counts for the official ones:** Peru (Sun Journal) and Wiscasset (Boothbay Register).
-4. **Leave 2 late-counting races alone:** Boulder City and Alhambra update on their own for days.
+1. **Mark 4 races final** once their counties say the count is done: Grove City, Oregon, Ottawa and Downe.
+2. **Swap 2 news counts for the official ones:** Peru (Sun Journal) and Wiscasset (Boothbay Register).
+3. **Leave 2 late-counting races alone:** Boulder City and Alhambra update on their own for days.
 
 ## How to enter a race in the sheet
 
@@ -17,19 +16,7 @@ Use the `manual_results` tab of the [Google Sheet](https://docs.google.com/sprea
 - Set `status = final` once the count is complete. To mark an automatic race final, type its current numbers into its row too; it then stays pinned there.
 - To tell readers when a count is coming, type one sentence in `public_note` (column Z).
 
-## 1. Enter by hand (1 race)
-
-### Brownfield ME
-
-Nothing has posted. The town votes as one precinct, so enter it as 1 of 1.
-
-| Town | Ballot item | Where to go | What to expect |
-|---|---|---|---|
-| Brownfield | Question 1 | [town warrants and reports](https://www.brownfieldmaine.gov/1196/Past-Town-Warrants-Reports) | The town office is closed Wed Nov 4 and reopens Thu Nov 5 at 9 am; call 207-935-2007 then (no past ballot result is online) |
-
-The Bangor Daily News previewed all eight Maine votes and may report it first.
-
-## 2. Mark final when the county says it's done (4 races)
+## 1. Mark final when the county says it's done (4 races)
 
 | Race | Now | What to look for |
 |---|---|---|
@@ -38,7 +25,7 @@ The Bangor Daily News previewed all eight Maine votes and may report it first.
 | Ottawa KS | 2,882 to 1,129 (Restrict 71.9%) | Franklin County KS's graphic (version _6, read at midnight) gives no precinct count, and the county has posted nothing newer. Confirm with the county clerk that the count is complete, then set `status = final` (the numbers are already in its row). A September court order stays the ordinance regardless of the outcome |
 | Downe Township NJ | 62 to 425 (NO = restrict, 87.3%), unchanged since 11:58 pm Nov 3 | Clarity shows 0% of districts reporting; it stalled the same way in Nov 2025. The clerk's [results page](https://cumberlandcountyclerknj.gov/election-information/election-results/) still lists only the June primary (10:30 pm Nov 4). When it posts, enter the clerk's count with `status = final` |
 
-## 3. Swap the news count for the official one
+## 2. Swap the news count for the official one
 
 | Race | Entered from | Replace when |
 |---|---|---|
@@ -47,21 +34,21 @@ The Bangor Daily News previewed all eight Maine votes and may report it first.
 
 Hubbard is done: Trumbull's own report (6:48 am Nov 4, linked from its home page rather than its results page) has the same 2,622 to 802, and the sheet now cites it.
 
-## 4. Late counting: no action until the counties finish
+## 3. Late counting: no action until the counties finish
 
 | Race | Now | When it's done |
 |---|---|---|
 | Boulder City NV | NO leads 4,726 to 1,973 (NO = restrict, 70.5%) | Updates on its own. Nevada counts mail ballots arriving through Nov 7 and cures through Nov 9; mark final only when Clark finishes |
 | Alhambra CA | 13,314 to 2,889 (Restrict 82.2%), after LA County's 7:33 pm Nov 4 update | Updates on its own. LA County adds mail ballots in scheduled updates for weeks; mark final at certification |
 
-GitHub's hourly run (Nov 5–13) keeps both moving if you stop the loop on the Mac. Downe's Clarity feed answers only the Mac, so keep the loop running until Downe is settled or hand-entered.
+The Mac loop stopped at 1:34 am Nov 5, so GitHub's results job now keeps both moving. It is scheduled hourly through Nov 13 but has run only every 5 to 9 hours (1:32 am and 10:23 am ET Nov 5). For a sheet edit you want on the page right away, run it by hand: Actions > Update results > Run workflow on GitHub, or `gh workflow run update-results.yml` from the repo folder (about two minutes). Downe's Clarity feed answers only the Mac, so restart the loop (below) if Clarity starts moving, or hand-enter the clerk's count.
 
 Each open race's `public_note` (column Z) tells readers why it is still open; update the note when a race moves.
 
-## Done (no action): 40 complete
+## Done (no action): 41 complete
 
 - **Complete on their own (13):** Bloomington, Joliet Township, the Chouteau, Granite City, Nameoki and Venice townships, Ashville, Defiance, Perry Village, Trenton, Urbana, Janesville and Harwood ND.
-- **Entered by hand (12):** Upper Sandusky, Monroeville, Sunbury, Sprigg and Monroe townships in Ohio (from county scans and Delaware's results feed), and Eliot, Wells, Sabattus, Peru, Freedom, North Berwick and Wiscasset in Maine. Freedom came by phone from the town clerk, Cindy Abbott (331 to 115, 24 blank); her written return or sample ballot would still confirm its ballot wording. North Berwick came by phone from the town office (2,114 to 582); the town says it posted the result on Facebook, which needs a login, so swap in its scanned return when one appears in its Document Center. Sprigg is the closest race on the page: For leads 330 to 297, 33 votes.
+- **Entered by hand (13):** Upper Sandusky, Monroeville, Sunbury, Sprigg and Monroe townships in Ohio (from county scans and Delaware's results feed), and Eliot, Wells, Sabattus, Peru, Freedom, North Berwick, Wiscasset and Brownfield in Maine. Brownfield is the town's own signed tally sheet (posted 12:16 pm Nov 5 as [Referendum Results](https://www.brownfieldmaine.gov/DocumentCenter/View/1000/Referendum-Results)): YES 671, NO 191, 862 ballots. Freedom came by phone from the town clerk, Cindy Abbott (331 to 115, 24 blank); her written return or sample ballot would still confirm its ballot wording. North Berwick came by phone from the town office (2,114 to 582); the town says it posted the result on Facebook, which needs a login, so swap in its scanned return when one appears in its Document Center. Sprigg is the closest race on the page: For leads 330 to 297, 33 votes.
 - **Marked final (15):** Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater, plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027) and Morgan County IL (by phone from the clerk's office: 9,413 to 1,250, unofficial; Illinois has two weeks to make it official, so retype it then), and Belvidere NJ (added Nov 4 from Warren County's unofficial summary: 711 to 240; the county's site blocks scripts, so retype it when Warren certifies).
 
 Hand-entered numbers stay pinned until you clear them. Ohio adds provisional and late mail ballots at its official canvass later in November; retype a race then if you want the certified count.
