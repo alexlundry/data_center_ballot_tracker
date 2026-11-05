@@ -11,7 +11,7 @@
 - [ ] `make reset` so `results.json` has no simulated data, then `make build`, commit, push.
 - [ ] Preview the night on the live site: open https://datacentersontheballot.com/?preview&sim=55 and drag the Night progress slider from 0 to 100. Open TV mode (https://datacentersontheballot.com/?tv) on whatever screen the war room will use and check it fits.
 - [ ] Run `Rscript R/fetch_results.R` once against the live pre-election pages. Every source should fail cleanly (no contest yet) rather than crash. Fix anything that throws.
-- [ ] Check the link preview before posting: paste https://datacentersontheballot.com/ into a draft post (or LinkedIn's Post Inspector) and confirm the card reads "November 3, 2026 · Results" (`site/assets/og-card.png`, source `docs/og-card.html`). Platforms cache the card by URL, so a changed card needs a new file name.
+- [ ] Check the link preview before posting: paste https://datacentersontheballot.com/ into a draft post (or LinkedIn's Post Inspector) and confirm the card reads "November 3, 2026 · Results" (`site/assets/og-card-v2.png`, source `docs/og-card.html`; Restrict on the left). Platforms cache the card by URL, so a changed card needs a new file name.
 
 ## Election day
 - 6:00 pm ET: start `Rscript R/watch.R 120` on the Mac (push access, drop folder synced). It is the main loop, not a fallback: only it reads the drop folder (16 Ohio sources) and Clarity (Illinois's six and Downe NJ), and GitHub ran the 5-minute cron just twice between midnight and 1:30 pm ET on Nov 3. The `Update results` workflow stays on as a backup for the other feeds and the sheet; `gh workflow run update-results.yml` starts one by hand.

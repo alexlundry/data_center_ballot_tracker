@@ -1,8 +1,9 @@
 <!doctype html>
-<!-- The social card (site/assets/og-card.png, 1200 x 630). To re-render after editing:
+<!-- The social card (site/assets/og-card-v2.png, 1200 x 630). To re-render after editing:
      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
-       --window-size=1200,630 --virtual-time-budget=8000 --screenshot=site/assets/og-card.png docs/og-card.html
-     Platforms cache the image by URL, so a changed card needs a new file name (and the og:image tag updated). -->
+       --window-size=1200,630 --virtual-time-budget=8000 --screenshot=site/assets/og-card-v2.png docs/og-card.html
+     Platforms cache the image by URL, so a changed card needs a new file name (and the og:image tag updated).
+     v2 (Nov 5) put Restrict on the left; og-card.png, the URL shared before then, holds the same image. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -21,7 +22,7 @@
   .strip .line { position: absolute; left: 0; right: 0; top: 40px; height: 2px; background: rgba(245,241,232,0.25); }
   .strip .mid { position: absolute; left: 50%; top: 16px; width: 2px; height: 50px; background: rgba(245,241,232,0.6); }
   .strip .cap { position: absolute; top: 0; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 15px; letter-spacing: 0.12em; }
-  .strip .cap.a { left: 0; color: #d9772e; } .strip .cap.r { right: 0; color: #4d97d6; }
+  .strip .cap.r { left: 0; color: #4d97d6; } .strip .cap.a { right: 0; color: #d9772e; }
   .strip i { position: absolute; width: 22px; height: 22px; border-radius: 50%; transform: translate(-50%, -50%); border: 2px solid #1f2c4a; }
   .foot { display: flex; justify-content: space-between; align-items: baseline; margin-top: 30px; font-family: 'IBM Plex Mono', monospace; font-size: 22px; }
   .foot b { color: #fff; font-weight: 700; } .foot span { color: rgba(245,241,232,0.7); font-weight: 500; }
@@ -32,14 +33,15 @@
   <div class="kick"><img src="../site/assets/redbud-logo-mark.png" alt="">November 3, 2026 · Results</div>
   <h1>Data Centers <em>on the Ballot</em></h1>
   <p>Results for every local data center ballot measure in the United States, including the ones still being counted.</p>
-  <div class="strip" id="strip"><div class="line"></div><div class="mid"></div><span class="cap a">◂ ALLOW</span><span class="cap r">RESTRICT ▸</span></div>
+  <div class="strip" id="strip"><div class="line"></div><div class="mid"></div><span class="cap r">◂ RESTRICT</span><span class="cap a">ALLOW ▸</span></div>
   <div class="foot"><b>datacentersontheballot.com</b><span>Redbud Consulting</span></div>
 </div>
 <script>
-  // Illustrative dots only (not results): placed by share, blue right of center, orange left.
-  const xs = [[30, 1], [35, 0], [40, 1], [44, 0], [47, 1], [55, 0], [58, 1], [61, 0], [63, 1], [66, 0], [69, 1], [72, 0], [75, 1], [79, 0]];
+  // Illustrative dots only (not results): placed by share. Restrict (blue) left of center,
+  // allow (orange) right, matching the dashboard, whose bars always put Restrict on the left.
+  const xs = [[21, 0], [25, 1], [28, 0], [31, 1], [34, 0], [37, 1], [39, 0], [42, 1], [45, 0], [53, 1], [56, 0], [60, 1], [65, 0], [70, 1]];
   const s = document.getElementById('strip');
-  xs.forEach(([x, up]) => { const i = document.createElement('i'); i.style.left = x + '%'; i.style.top = (up ? 30 : 52) + 'px'; i.style.background = x < 50 ? '#d9772e' : '#4d97d6'; s.appendChild(i); });
+  xs.forEach(([x, up]) => { const i = document.createElement('i'); i.style.left = x + '%'; i.style.top = (up ? 30 : 52) + 'px'; i.style.background = x < 50 ? '#4d97d6' : '#d9772e'; s.appendChild(i); });
 </script>
 </body>
 </html>
