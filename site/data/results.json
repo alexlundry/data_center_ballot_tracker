@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T12:30:37-0500",
+  "generated_at": "2026-11-05T13:02:03-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -12,7 +12,7 @@
     "mean_allow_pct": 26.6,
     "pooled_restrict_pct": 72.8,
     "total_votes_counted": 260177,
-    "fetch_failures": 11
+    "fetch_failures": 10
   },
   "races": [
     {
@@ -1085,8 +1085,8 @@
       "as_of": "2026-11-04T00:03:00-0500",
       "source_url": "https://www.franklincoks.org/DocumentCenter/View/36384/Election-Results-2026-General_6",
       "adapter": "manual",
-      "note": "entered by Claude, for Alex: Franklin County KS 'November 3, 2026 Unofficial Results' graphic (version _6), Special Questions > Other: City of Ottawa Question, Yes 2,882 / No 1,129. The graphic gives no precinct count or time (as_of is when it was read). Not marked final. A September court order stays the ordinance regardless of the outcome.",
-      "status_override": null,
+      "note": "entered by Claude, for Alex; final confirmed by Alex (by phone): Franklin County KS 'November 3, 2026 Unofficial Results' graphic (version _6), Special Questions > Other: City of Ottawa Question, Yes 2,882 / No 1,129. The graphic gives no precinct count or time (as_of is when it was read). Alex confirmed by phone with the Franklin County Clerk's office on Nov 5 that this count is final and is the one on the county's website, so marked final. A September court order stays the ordinance regardless of the outcome.",
+      "status_override": "final",
       "fetch_ok": true,
       "fetch_error": null,
       "total_votes": 4011,
@@ -1100,8 +1100,8 @@
       "pct_reporting": null,
       "est_votes_remaining": null,
       "leader": "restrict",
-      "status": "counting",
-      "public_note": "Franklin County's unofficial results give no precinct count, so the count is not yet confirmed complete.",
+      "status": "final",
+      "public_note": null,
       "history": [
         {
           "t": "2026-11-04T00:04:37-0500",
@@ -2391,9 +2391,9 @@
       "registered_voters": 1089,
       "raw_contest": "manual entry",
       "as_of": "2026-11-03T22:30:00-0500",
-      "source_url": "https://www.sunjournal.com/2026/11/03/peru-backs-food-sovereignty-data-center-ballot-questions/",
+      "source_url": "https://townofperumaine.org/election-results-for-november-3-2026/",
       "adapter": "manual",
-      "note": "entered by Claude, for Alex: From the Sun Journal / Rumford Falls Times (Bruce Farrin, posted 10:30 pm Nov 3): the 180-day data center moratorium passed 578-182. A newspaper's count, not yet the town's own return; the town office reopens Thu Nov 5. Replace with the town's numbers when it posts. Peru votes at one polling place.",
+      "note": "entered by Alex (by phone); source swapped by Claude: Town of Peru 'Election Results for November 03, 2026' (image posted 7:59 am Nov 5 on the town site, Elections): Referendum, Article 2, Data Center Moratorium, Yes 578 / No 182; 774 total voters. Same count the Sun Journal reported at 10:30 pm Nov 3 (entered first), and the town office confirmed it to Alex by phone on Nov 5. Peru votes at one polling place, so 1 of 1.",
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
@@ -2575,16 +2575,16 @@
       "no_votes": 425,
       "precincts_reporting": null,
       "precincts_total": null,
-      "ballots_cast": 521,
+      "ballots_cast": null,
       "registered_voters": 1079,
-      "raw_contest": "Downe Township Referendum Question (Vote For 1)",
+      "raw_contest": "manual entry",
       "as_of": "2026-11-03T23:58:40-0500",
-      "source_url": "https://cumberlandcountyclerknj.gov/election-information/election-results/",
-      "adapter": "clarity",
-      "note": "stale: last fetch failed",
-      "status_override": null,
-      "fetch_ok": false,
-      "fetch_error": "clarity: ELECTION_ID not discovered yet",
+      "source_url": "https://results.enr.clarityelections.com/NJ/Cumberland/127562/web.345435/#/summary",
+      "adapter": "manual",
+      "note": "entered by Alex (by phone); entered by Claude: Cumberland County Clarity results (the county's election-night reporting site), read Nov 5: Downe Township Referendum Question, YES 62 / NO 425 (YES = supports data centers, so NO = restrict); 521 ballots. Unchanged since 11:58 pm Nov 3, and Clarity still shows 0% of districts reporting, so the feed alone would never read as complete. Alex confirmed by phone with the Cumberland County Clerk's office on Nov 5 that this count is final and is the one on its website, so it is pinned here with status final.",
+      "status_override": "final",
+      "fetch_ok": true,
+      "fetch_error": null,
       "total_votes": 487,
       "yes_pct": 12.73,
       "no_pct": 87.27,
@@ -2596,8 +2596,8 @@
       "pct_reporting": null,
       "est_votes_remaining": null,
       "leader": "restrict",
-      "status": "counting",
-      "public_note": "Cumberland County's results have not updated since 11:58 pm Nov 3.",
+      "status": "final",
+      "public_note": null,
       "history": [
         {
           "t": "2026-11-03T20:50:41-0500",
