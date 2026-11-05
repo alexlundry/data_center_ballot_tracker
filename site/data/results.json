@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T19:37:08-0500",
+  "generated_at": "2026-11-04T19:39:08-0500",
   "election_date": "2026-11-03",
   "simulated": false,
   "summary": {
@@ -11,7 +11,7 @@
     "mean_restrict_pct": 73.5,
     "mean_allow_pct": 26.5,
     "pooled_restrict_pct": 72.8,
-    "total_votes_counted": 255185,
+    "total_votes_counted": 256120,
     "fetch_failures": 0
   },
   "races": [
@@ -1623,28 +1623,28 @@
     },
     {
       "race_id": "ca-alhambra",
-      "yes_votes": 12496,
-      "no_votes": 2772,
+      "yes_votes": 13314,
+      "no_votes": 2889,
       "precincts_reporting": null,
       "precincts_total": null,
       "ballots_cast": null,
       "registered_voters": null,
       "raw_contest": "CITY OF ALHAMBRA SPECIAL MUNICIPAL ELECTION - MEASURE DB",
-      "as_of": "2026-11-04T19:37:03-0500",
+      "as_of": "2026-11-04T19:39:03-0500",
       "source_url": "https://results.lavote.gov/election-list",
       "adapter": "json_generic",
       "note": null,
       "status_override": null,
       "fetch_ok": true,
       "fetch_error": null,
-      "total_votes": 15268,
-      "yes_pct": 81.84,
-      "no_pct": 18.16,
-      "restrict_votes": 12496,
-      "allow_votes": 2772,
-      "restrict_pct": 81.84,
-      "allow_pct": 18.16,
-      "margin_pts": 63.68,
+      "total_votes": 16203,
+      "yes_pct": 82.17,
+      "no_pct": 17.83,
+      "restrict_votes": 13314,
+      "allow_votes": 2889,
+      "restrict_pct": 82.17,
+      "allow_pct": 17.83,
+      "margin_pts": 64.34,
       "pct_reporting": null,
       "est_votes_remaining": null,
       "leader": "restrict",
@@ -1835,6 +1835,12 @@
           "t": "2026-11-04T19:37:08-0500",
           "yes": 12496,
           "no": 2772,
+          "rep": null
+        },
+        {
+          "t": "2026-11-04T19:39:08-0500",
+          "yes": 13314,
+          "no": 2889,
           "rep": null
         }
       ]
