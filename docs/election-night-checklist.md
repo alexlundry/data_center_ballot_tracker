@@ -1,9 +1,10 @@
-# After election night: what still needs you (Nov 5, 2026)
+# After the election: what still needs you (updated Nov 10, 2026)
 
-Updated 5:15 pm ET Nov 5. Of the 47 measures, **45 are complete and 2 are partly counted**, both in late-counting states; every measure has results, and every hand-entered count is now the town's or county's own. The results loop on the Mac stopped at 1:34 am Nov 5, and GitHub's results job keeps the page current (see section 1). Nothing needs a call. What's left:
+Updated 9:30 am ET Nov 10, a week after the election. Of the 47 measures, **29 are final, 16 are complete with every precinct in but await their county's official canvass, and 2 are still counting** (Boulder City NV and Alhambra CA). Nothing needs a call. What's left, in date order:
 
-1. **Leave 2 late-counting races alone:** Boulder City and Alhambra update on their own for days.
-2. **Retype certified counts later in November** if you want them on the page (see the note under Done).
+1. **Nov 13: mark Boulder City final** once its City Council canvasses the returns (section 1).
+2. **Through Nov 24: enter official counts as counties certify** (section 2). Ohio, Illinois, North Dakota and Wisconsin are still canvassing; Adams County OH was first, on Nov 9, and its canvass moved Sprigg from 330 to 297 to 332 to 301.
+3. **Nov 27: mark Alhambra final** when Los Angeles County certifies (section 1).
 
 ## How to enter a race in the sheet
 
@@ -12,27 +13,39 @@ Use the `manual_results` tab of the [Google Sheet](https://docs.google.com/sprea
 - Type `yes_votes` and `no_votes` exactly as the county or town labels them. Never flip them; the dashboard works out restrict and allow.
 - Fill `as_of`, `source_url` and `entered_by`, plus the precincts if given. A one-precinct town entered as 1 of 1 shows as complete.
 - `override` is already TRUE on every row, so your numbers replace the feed on the next pass (about two minutes). To hand a race back to the feed, clear its numbers and status.
-- Set `status = final` once the count is complete. To mark an automatic race final, type its current numbers into its row too; it then stays pinned there.
+- Set `status = final` once the count is complete. A status takes effect only on a row with YES and NO numbers, so to mark an automatic race final, type its current numbers into its row too; it then stays pinned there and the feed no longer updates it.
 - To tell readers when a count is coming, type one sentence in `public_note` (column Z).
 
-## 1. Late counting: no action until the counties finish
+## 1. Still counting
 
 | Race | Now | When it's done |
 |---|---|---|
-| Boulder City NV | NO leads 4,947 to 2,064 (NO = restrict, 70.6%), after Clark County's 10:25 am Nov 5 update | Updates on its own. Nevada counts mail ballots arriving through Nov 7 and cures through Nov 9; mark final only when Clark finishes |
-| Alhambra CA | 14,038 to 2,967 (Restrict 82.6%), after LA County's 12:30 pm Nov 5 update | Updates on its own. LA County adds mail ballots in scheduled updates for weeks; mark final at certification |
+| Boulder City NV | NO leads 5,216 to 2,161 (NO = restrict, 70.7%): Clark County's count posted 6:46 pm Nov 9, after the 5 pm signature-cure deadline | Mail ballots had to arrive by Nov 7. The City Council canvasses the returns and declares the result on Nov 13 (recount demands close Nov 18). Type the canvassed count into its row with `status = final` then |
+| Alhambra CA | 18,886 to 3,620 (Restrict 83.9%), after LA County's Nov 9 update | LA County updates daily through Nov 13, then on Nov 17, 19, 25 and 27, and is scheduled to certify on Nov 27 (its countywide estimate on Nov 8 was 53,000 ballots left). The feed keeps it current; mark it final at certification |
 
-The Mac loop stopped at 1:34 am Nov 5, so GitHub's results job now keeps both moving. It is scheduled hourly through Nov 13 but has run only every 5 to 9 hours (1:32 am, 10:23 am and 4:58 pm ET Nov 5). For a sheet edit you want on the page right away, run it by hand: Actions > Update results > Run workflow on GitHub, or `gh workflow run update-results.yml` from the repo folder (about two minutes). If GitHub's job stalls (on Nov 5 one run sat six minutes installing R and was cancelled), do one pass on the Mac instead: `Rscript R/fetch_results.R`, then commit and push `site/data/results.json`, `site/data/results.csv` and `data/history.csv` (this is what the loop does each pass). The races that read Clarity or Ohio's county files can't refresh from GitHub; the page keeps their last count and flags "Stale feed" only while a count is still open, and every one of those races is now complete or pinned in the sheet.
+Both rows' `public_note` now tells readers these dates; update it if a date moves.
 
-Each open race's `public_note` (column Z) tells readers why it is still open; update the note when a race moves.
+GitHub's results job is scheduled hourly through Nov 13 but has run only every few hours. For a sheet edit you want on the page right away, do one pass on the Mac: `git pull --rebase`, `Rscript R/fetch_results.R`, then commit and push `site/data/results.json`, `site/data/results.csv` and `data/history.csv` with the message `results <UTC time>` (this is what the loop did each pass). `gh workflow run update-results.yml` also works, but GitHub can't read Clarity, so it marks the six Illinois township feeds as failed until the next Mac pass (the page hides that for complete counts). By Nov 10, boe.ohio.gov had put its county result files back behind its bot check, so even the Mac can't read Urbana, Defiance or Trenton; their Nov 3 counts stay on the page. The desktop app's browser still opens the county pages, but its PDF links download instead of opening.
 
-## Done (no action): 45 complete
+## 2. Official canvasses: where each certified count will come from
 
-- **Complete on their own (13):** Bloomington, Joliet Township, the Chouteau, Granite City, Nameoki and Venice townships, Ashville, Defiance, Perry Village, Trenton, Urbana, Janesville and Harwood ND.
-- **Entered by hand (13):** Upper Sandusky, Monroeville, Sunbury, Sprigg and Monroe townships in Ohio (from county scans and Delaware's results feed), and Eliot, Wells, Sabattus, Peru, Freedom, North Berwick, Wiscasset and Brownfield in Maine. Wiscasset (1,363 to 712) was entered from the Boothbay Register's 11:45 pm Nov 3 story, "in numbers received from the town", and the town clerk's office confirmed the same count to Alex by phone on Nov 5; the sheet still links the Register story until the town posts its unofficial PDF on its [town clerk elections](https://www.wiscasset.gov/192/Town-Clerk-Elections) page. Peru's own results post (7:59 am Nov 5) has the same 578 to 182 as the Sun Journal, and Hubbard's count (marked final, below) matches Trumbull's own 6:48 am Nov 4 report. Brownfield is the town's own signed tally sheet (posted 12:16 pm Nov 5 as [Referendum Results](https://www.brownfieldmaine.gov/DocumentCenter/View/1000/Referendum-Results)): YES 671, NO 191, 862 ballots. Freedom came by phone from the town clerk, Cindy Abbott (331 to 115, 24 blank); her written return or sample ballot would still confirm its ballot wording. North Berwick came by phone from the town office (2,114 to 582); the town says it posted the result on Facebook, which needs a login, so swap in its scanned return when one appears in its Document Center. Sprigg is the closest race on the page: For leads 330 to 297, 33 votes.
-- **Marked final (19):** Grove City OH (11,317 to 9,411, unchanged since 11:52 pm Nov 3; Franklin calls it unofficial until the canvass) and Oregon OH (4,994 to 3,235; Lucas's page, last updated 2:51 am Nov 4, still lists absentee ballots as partially reported, which the canvass settles), Hubbard, El Dorado, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Emporia, Americus and Edgewater; Ottawa KS (2,882 to 1,129) and Downe Township NJ (62 to 425), both confirmed final by phone with their county clerks on Nov 5 (Downe's Clarity page still shows 0% of districts reporting, so its row stays pinned); plus Piqua OH (added Nov 4 from Miami County's canvass: 4,061 to 2,027) and Morgan County IL (by phone from the clerk's office: 9,413 to 1,250, unofficial; Illinois has two weeks to make it official, so retype it then), and Belvidere NJ (added Nov 4 from Warren County's unofficial summary: 711 to 240; the county's site blocks scripts, so retype it when Warren certifies).
+| Races | Status on the page | Canvass |
+|---|---|---|
+| Urbana (Champaign), Defiance, Trenton (Butler), Upper Sandusky (Wyandot), Monroeville (Huron), Sunbury (Delaware), Ashville (Pickaway), Perry Village (Lake) | Complete, unofficial | Ohio boards canvass Nov 8 to 24 and add provisionals and late mail ballots then. On Nov 10, Champaign's, Defiance's and Wyandot's files were unchanged since election night. Adams replaced its `/adams/c/elecres/20261103results.pdf` with the certified report (headed "Official Canvass", with the board's signed certification form on page 1); watch the same address in the other counties |
+| Grove City, Oregon, Hubbard, Conneaut, Pataskala, Granville, Wilmington parcels 1–4, Piqua | Final on the unofficial count | Same Ohio canvass; retype each certified count. Clinton's and Licking's re-posted files (Nov 5 and Nov 4) still held the election-night counts on Nov 10, with zero provisionals |
+| Bloomington, Joliet Township, the Chouteau, Granite City, Nameoki and Venice townships | Complete, unofficial (Clarity feed) | Illinois counts mail ballots postmarked by Nov 3 through Nov 17 and canvasses by Nov 24. Clarity was unchanged on Nov 10. A Mac pass picks up a new count if the county posts it to the same page |
+| Morgan County IL | Final on the unofficial count (by phone) | Same Illinois canvass; retype the certified count |
+| Harwood ND | Complete, unofficial (state feed) | Cass County's canvassing board meets on the 13th day, about Nov 16, and counts absentee ballots that arrive before then; the state feed updates on its own |
+| Janesville WI | Complete, unofficial | Rock County's page still read "Unofficial Results" (10:56 pm Nov 3) on Nov 10 |
+| El Dorado, Emporia, Americus, Ottawa KS; Downe and Belvidere NJ; Edgewater FL | Final on the unofficial count | Retype when each county certifies (Warren County NJ's site blocks scripts; open it in a browser) |
 
-Hand-entered numbers stay pinned until you clear them. Ohio adds provisional and late mail ballots at its official canvass later in November; retype a race then if you want the certified count.
+## Done: 29 final
+
+- **Final on certified counts (2):** Sprigg Township (For 332, Against 301, so For won by 31; election night had 330 to 297) and Monroe Township (149 to 102; election night had 148 to 100), from Adams County's Official Canvass, certified by its board on Nov 9. The scan has no text; Claude read it page by page in the desktop app's browser.
+- **Final, every ballot counted (8, Maine):** North Berwick (the clerk's certified return), Peru, Wells, Wiscasset, Brownfield, Eliot, Freedom and Sabattus. Maine towns count every ballot on election night (absentee ballots had to reach the clerk by 8 pm Nov 3), so seven were marked final on Nov 10. Wiscasset still links the Boothbay Register story: the town had posted no results by Nov 10, and its clerk's office confirmed the same 1,363 to 712 by phone on Nov 5. Freedom came by phone from the town clerk, Cindy Abbott (331 to 115, 24 blank); her written return or sample ballot would still confirm its ballot wording.
+- **Final on the election-night count (19):** Grove City, Oregon, Hubbard, Conneaut, Pataskala, Granville, Wilmington parcels 1–4 and Piqua in Ohio; El Dorado, Emporia, Americus and Ottawa in Kansas; Downe Township and Belvidere in New Jersey; Edgewater FL; and Morgan County IL. Ottawa and Downe were confirmed final by phone with their county clerks on Nov 5 (Downe's Clarity page still shows 0% of districts reporting, so its row stays pinned). Section 2 says where each certified count will come from.
+
+Hand-entered numbers stay pinned until you clear them.
 
 ## Feeds behind the hand entries
 
